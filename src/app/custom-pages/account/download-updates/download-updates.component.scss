@@ -1,0 +1,203 @@
+@import "../../../shared/styles/variables.scss";
+@import "../../../shared/styles/fontSize.scss";
+@import "../statements/statements.component.scss";
+
+.date-div {
+  width: 418px;
+}
+
+.search-div {
+  width: 491px;
+  margin-left: 15px;
+}
+
+.searchbox .form-control {
+  width: 491px !important;
+}
+
+.topHeading {
+  position: relative;
+}
+
+.fa-search,
+.search {
+  right: 57rem !important;
+  top: 9rem !important;
+}
+
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+  padding-left: 95px !important;
+}
+.desk-new-btn {
+  display: flex;
+  justify-content: right;
+  z-index: 9;
+}
+.mob-new-btn {
+  display: flex;
+  justify-content: right;
+  margin-top: 30px;
+  z-index: 9;
+}
+.confirmBtn {
+  background-color: #009de0!important;
+  color: #fff;
+  border: 1px solid #009de0;
+  float: right;
+  width: 50%;
+  font-size: var(--fontsize20);
+  font-family: NiveauGroteskBold,sans-serif,Arial!important;
+}
+.heading-row {
+  // z-index: 0;
+  background: none !important;
+}
+.custom-width-grid table .edit {
+  width: 20px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+.custom-width-grid table .delete {
+  width: 16px;
+  cursor: pointer;
+}
+.my_statements table td {
+  cursor: auto;
+}
+// for 125%
+@media screen and (max-width: 1600px) and (min-width: 1401px) {
+  .fa-search,
+  .search {
+    right: 51rem !important;
+    top: 9.3rem !important;
+  }
+}
+// for 150%
+@media screen and (max-width: 1400px) and (min-width: 901px) {
+  .fa-search,
+  .search {
+    right: 37rem !important;
+    top: 9.3rem !important;
+  }
+}
+@media screen and (max-width:$mobileScreenPotrait) {
+  .container
+  {
+    max-width: 100%;
+  }
+  .heading
+  {
+      font-size: var(--fontsize20);
+      padding-left: 2px;
+  }
+  .heading-row
+  {
+      padding: 0.75rem 0.938rem;
+      width:100%;
+  }
+  .custom-width-navigation
+  {
+      margin-top: 0rem !important;
+      margin-left: 0px;
+      margin-right: 0px;
+      max-width: 100%;
+      min-width: 100% !important;
+      padding-right: 15px;
+  }
+  .my_statements
+  {
+      margin: 0 auto;
+  }
+  .background-list
+  {
+      background-color:$white-color;
+      margin: 20px 0px;
+      padding:0px 15px 10px;
+      .m-icons{
+        justify-content: end;
+        // padding-right: 15px;
+        img{
+          margin-right: 15px;
+        }
+      }
+  }
+  .custom-width-grid
+  {
+      max-width: 100% !important;
+      padding-left: 15px;
+      margin-top: 45px;
+  }
+  .leftlist
+{
+    font-size: var(--fontsize18)!important;
+    font-family: 'NiveauGrotesk' ;
+    color:$pdp-font-color;
+    line-height: 1;
+}
+.rightlist
+{
+    font-size: var(--fontsize18)!important;
+    font-family: 'NiveauGroteskBold' ;
+    color:$pdp-font-color;
+    line-height: 1;
+}
+.headmob
+{
+    font-size: var(--fontsize19)!important;
+    font-family: 'NiveauGroteskBold';
+    padding-top: 10px;
+    color:$pdp-font-color;
+    margin-bottom: 7px;
+}
+.marginhr
+{
+  margin-top:0px;
+}
+.view-more
+{
+    background-color:$white-color !important;
+    color:$pdp-font-color !important;  
+    border:1px solid $pdp-font-color;
+    width:100%;
+    border-radius: 25px !important;
+    padding: 5px 0px;
+    margin-bottom: 40px;
+    font-size: var(--fontsize18)!important;
+    font-family: 'NiveauGroteskBold';
+}
+.background-list:first-child
+{
+  margin-top: 0px;
+}
+.searchbox .form-control
+{
+  width:100% !important;
+  height: 40px;
+}
+.search-div{
+  padding: 0px 15px;
+  width: 100% !important;
+  margin-left: 0px;
+}
+.fa-search, .search {
+  right: 1.5rem !important;
+  top: 0.7rem!important;
+  font-size: var(--fontsize26);
+}
+.searchbox-row {
+  margin-top: 0rem !important;
+}
+::placeholder {
+font-size: var(--fontsize17);
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ font-size: var(--fontsize17);
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+font-size: var(--fontsize17);
+ }
+}

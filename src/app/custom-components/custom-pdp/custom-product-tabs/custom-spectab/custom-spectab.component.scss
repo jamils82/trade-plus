@@ -1,0 +1,42 @@
+@import '../../../../shared/styles/variables.scss';
+
+.container {
+    max-width: 100%;
+    margin: 0 25px;
+    table tr {
+        display: flex;
+        flex-direction: column;
+        td {
+            font-size: var(--fontsize18);
+            font-family: 'NiveauGrotesk';
+            color: $pdp-font-color;
+            video {
+                outline: none;
+            }
+        }
+        .key {
+            font-family: 'NiveauGroteskBold';
+        }
+    }
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    .container {
+        margin: 0;
+        table tr {
+            td {
+                min-width: 250px;
+                video {
+                    width: 135px;
+                    height: 80px;
+                }
+                .box {
+                    img {
+                        width: 30px;
+                        height: 38px;
+                    }
+                }
+            }
+        }
+    }
+}

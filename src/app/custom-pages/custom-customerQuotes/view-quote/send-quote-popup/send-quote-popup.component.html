@@ -1,0 +1,107 @@
+
+<div class=" modal-header modal-head container">   
+    <button type="button" class="close" *ngIf="!niceJobDivShow" aria-label="Close" (click)="cancelModalPopup()">
+        <span aria-hidden="true">×</span>
+    </button>
+    <button type="button" class="close" *ngIf="niceJobDivShow" aria-label="Close" (click)="cancelSuccessPopup()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-12 col-md-12" *ngIf="niceJobDivShow==false">
+            <h1>{{sendToquoteConstants.sendQuote}}</h1>
+            <div>
+                <div class="pdf-status">
+                    <span class="loading" *ngIf="loader &&loaderErrorState">
+                        <img src="../../../../../assets/images/loader.gif">
+                        {{sendToquoteConstants.PDFbeingGeneratedTxt}}
+                    </span>
+                    <span class="success" *ngIf="loader==false">
+                        {{jobName}} {{sendToquoteConstants.successMsg}}
+                    </span>
+                    <span class="error" *ngIf="loaderErrorState==false">
+                        <span class="err-icon"></span>
+                        {{sendToquoteConstants.failureMsg}}
+                        <span (click)="generatePdfReport(quoteId)" class="try-again">{{sendToquoteConstants.tryAgain}}</span>
+                    </span>
+                </div>
+                
+                <form  [formGroup]="sendQuoteFrom" class="lo_sensitive">
+                    <div >
+                        <mat-form-field  class="email-list toEmailAddress form-group">
+                            <label for="toAddress">{{sendToquoteConstants.to}}</label>
+                            <span class="cc-show" *ngIf="showCcField==false" (click)="showCC()">Cc</span>
+                            <mat-chip-list #chipList formArrayName="toAddress" >
+                              <mat-chip class="emailInput"
+                                *ngFor="let email of sendQuoteFrom.get('toAddress').controls; let i=index;let last=last;"
+                                [removable]="removable"
+                                (removed)="remove(sendQuoteFrom, i,last,'toAddress')"
+                                >
+                                <div class="email">
+                                {{email.value}}
+                                <mat-icon matChipRemove *ngIf="removable" class="remove"></mat-icon>
+                                </div>
+                              </mat-chip>
+                              <input [disabled]="invalidEmail"
+                                [matChipInputFor]="chipList"
+                                [matChipInputAddOnBlur]="addOnBlur"
+                                (matChipInputTokenEnd)="add($event, sendQuoteFrom,'toAddress')">
+                            </mat-chip-list>
+                            <mat-error *ngIf="chipList.errorState && invalidEmail" class="error">{{quoteConstants.errorMsgEmail}}</mat-error>
+                          </mat-form-field>
+                        <div class="form-group" *ngIf="showCcField">
+                            <mat-form-field  class="email-list ccEmailAddress">
+                                <label for="ccAddress">{{sendToquoteConstants.cc}}</label>
+                                <mat-chip-list #chipListCCAddress formArrayName="ccAddress">
+                                  <mat-chip 
+                                    *ngFor="let ccEmail of sendQuoteFrom.get('ccAddress').controls; let i=index;let last=last;"
+                                    [removable]="removable"
+                                    (removed)="remove(sendQuoteFrom, i,last,'ccAddress')"
+                                    >
+                                    <div class="email">
+                                        {{ccEmail.value}}
+                                        <mat-icon matChipRemove *ngIf="removable" class="remove"></mat-icon>
+                                    </div>
+                                  </mat-chip>
+                                  <input [disabled]="invalidCCEmail"
+                                    [matChipInputFor]="chipListCCAddress"
+                                    [matChipInputAddOnBlur]="addOnBlur"
+                                    (matChipInputTokenEnd)="add($event, sendQuoteFrom,'ccAddress')">
+                                </mat-chip-list>
+                                <mat-error *ngIf="chipListCCAddress.errorState && invalidCCEmail" class="error">{{quoteConstants.errorMsgEmail}}</mat-error>
+                              </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">{{sendToquoteConstants.subjectLine}}</label>
+                            <input type="text"  formControlName="subject" required class="form-control"  placeholder="" maxlength="255">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="body">{{sendToquoteConstants.yourMsg}}</label>
+                        <textarea class="form-control"  formControlName="body" placeholder="" ></textarea>
+                    </div>
+                    <div class="form-group btn-wrapper">
+                        <button type="button" class="btn btn-cancel" aria-label="Close" (click)="cancelModalPopup()" >
+                            {{quoteConstants.cancelText}}
+                        </button>
+                        <button  class="btn btn-blue" (click)="onSubmit()" [disabled]="!sendQuoteFrom.valid || loader">
+                            {{sendToquoteConstants.send}}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="nicejob-msg" *ngIf="niceJobDivShow">
+            <img src="../../../../../assets/images/nice-job.svg" alt="Nice Job">
+            <h1>{{sendToquoteConstants.niceJob}}</h1>
+            <p class="nice-job-info">{{sendToquoteConstants.successMsgInfo}}</p>
+            <p>{{sendToquoteConstants.successMsgSubInfo}}</p>
+            <div class="links">
+                <button (click)="redirectToQuotePage()" class="btn btn-blue">{{sendToquoteConstants.returnToQuotePage}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,937 @@
+@import "../../../shared/styles/variables.scss";
+@import "../../../shared/styles/fontSize.scss";
+.underline {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+::ng-deep .modal-content {
+    color: #545859;
+    //  border-radius: 5px;
+    // border: 3rem solid rgba(84, 88, 89, 0.7);
+}
+
+.form-row {
+    align-items: center;
+    // font-size: 14px;
+    font-family: "NiveauGrotesk";
+}
+
+.cls-btn {
+    text-align: right;
+}
+
+.form-text{
+	position:relative;
+    margin-top: 0;
+    width: 100%;
+    input {
+	    padding:5px 5px 5px 21px;
+    }
+    .static-value {
+    	position:absolute;
+	    left:10px;
+    	font-size:var(--fontsize20);
+	    top:8px;
+    }
+}
+
+.cls-icon {
+    cursor: pointer;
+    color: #778893;
+    width: 18px;
+    height: 18px;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.phone-code {
+    width: 60px;
+    text-align: center;
+    background-color: white;
+    border-right: none;
+    display: flex;
+    align-items: center;
+}
+
+// .phone-no-css{
+//     border-left: none;
+// }
+.phone-no-css{
+   position: relative;
+}
+.phone-no-css.ng-invalid.ng-dirty, .phone-no-css.ng-invalid.ng-touched
+        {
+            margin-bottom: 20px;
+        }
+
+    .err-message
+    {
+        position: absolute;
+        top:50px;
+        left: 5px;
+        color: #db0002;
+        font-size: var(--fontsize18);
+        font-family: 'NiveauGrotesk';
+    }
+.pageHeading {
+    font-family: "NiveauGroteskBold";
+    font-weight: bolder;
+    color: #495A64;
+    font-size: var(--fontsize24);
+    padding: 0px;
+}
+
+.daterange-segment {
+    width: 62%;
+}
+
+.confirmBtn {
+    float: right;
+    background-color: #003D7A;
+    color: $white-color !important;
+    outline: none;
+    border: 1px solid #003D7A;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    min-height: var(--buttonHeight60);
+    font-size: var(--fontsize24);
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+    &:hover {
+        color: $white-color !important;
+    }
+}
+
+.btngrp {
+    padding: 0;
+}
+
+.requiredFields {
+    color: #973937;
+    font-size: var(--fontsize16);
+    margin: 10px 0;
+    font-family: 'NiveauGroteskBold';
+}
+.requiredTextAmount{
+    color: #973937;
+    font-size: var(--fontsize16);
+    margin: 10px 0;
+    font-family: 'NiveauGrotesk';
+}
+
+.form-check .form-check-label {
+    color: #495A64;
+    .permissions {
+        top: 0px !important;
+    }
+}
+
+.cancelBtn {
+    background-color: #77889380;
+    color: #495A64;
+    outline: none;
+    border: 1px solid #77889380;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    min-height: var(--buttonHeight60);
+    font-size: var(--fontsize24);
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.close-pos {
+    padding: 20px 25px;
+    z-index: 9;
+}
+
+.close-icon {
+    cursor: pointer;
+    right: 0;
+    position: absolute;
+    top: 0;
+}
+
+.permissionsHeading {
+    padding: 10px 0;
+    border-bottom: 1px solid #E3E4E5;
+}
+
+.form-check.permissions {
+    margin-bottom: 10px;
+    margin-left: 15px;
+    width: 100%;
+}
+
+.form-check-input {
+    margin-inline-start: -1.8rem;
+}
+
+.select-col {
+    position: relative;
+    .select.icon {
+        position: absolute;
+        background-color: #F1F3F5;
+        right: 0;
+    }
+}
+
+.dateRange {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 15px;
+    .dateRangeLabel {
+        font-size: var(--fontsize18);
+        font-family: "NiveauGrotesk";
+    }
+    .dateRangeField {
+        width: 70%;
+    }
+}
+
+.row.accordion {
+    margin: 0;
+    padding: 0px 15px;
+    .col-md-10,
+    .col-md-2 {
+        padding: 10px 0;
+        border-bottom: 1px solid #E3E4E5;
+    }
+}
+
+.row.buttons {
+    margin: 0;
+    padding: 40px 15px 0px 15px;
+    .btn {
+        font-family: 'NiveauGroteskBold';
+        padding: 3px 40px;
+    }
+}
+
+.row.isPlaceOrder {
+    margin: 0;
+    padding: 20px 15px;
+    color: #495A64;
+}
+
+.isPlaceOrderForm {
+    margin: 0;
+}
+
+::-webkit-input-placeholder { /* Edge */
+    opacity: 0.5;
+    color: #92a2ad;
+    font-family: 'NiveauGrotesk' !important;
+    font-weight: 200 !important;
+  }
+
+  :-ms-input-placeholder { /* Internet Explorer */
+    opacity: 0.5;
+    color: #92a2ad;
+    font-family: 'NiveauGrotesk' !important;
+    font-weight: 200 !important;
+  }
+
+  ::placeholder {
+      opacity: 0.5;
+    color: #92a2ad;
+    font-family: 'NiveauGrotesk' !important;
+    font-weight: 100 !important;
+    font-size: var(--fontsize18) !important;
+  }
+  .opacityOnDisable{
+      opacity: 0.6;
+  }
+
+
+@media screen and (max-width: $mobileScreenPotrait) {
+     ::ng-deep .modal-backdrop {
+        width: 100%;
+        height: 100%;
+    }
+    .closeIcon {
+        right: 26px !important;
+        top: 9px !important;
+        height: 5px !important;
+        width: 5px !important;
+        img {
+            max-width: 1rem;
+        }
+    }
+    .btn {
+        max-width: 6rem;
+        height: auto;
+    }
+}
+
+// Accoridon
+
+/* Accordion styles */
+
+.tabs {
+    margin: 0;
+    padding: 0 15px;
+}
+
+.tab {
+    width: 100%;
+    color: white;
+    overflow: hidden;
+}
+
+.tab-label.child::after {
+    display: none;
+}
+
+.tab-label {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    // padding: 5px 0;
+    margin-bottom: 0px;
+    color: #495A64;
+    font-weight: bold;
+    cursor: pointer;
+    /* Icon */
+}
+
+// .tab-label:hover {
+//    background: #f1f3f5;
+//     color:#627079;
+// }
+// .tab-label::after {
+//     content: "";
+//   position: absolute;
+//   top: 1.5em;
+//   right: 1.2em;
+//     border: solid black;
+//     border-width: 0 2px 2px 0;
+//     display: inline-block;
+//     padding: 3px;
+//     transform: rotate(45deg);
+//     -webkit-transform: rotate(45deg);
+//     width: 5px;
+//     height: 5px;
+//     text-align: center;
+//     transition: all 0.35s;
+// }
+.heading {
+    width: 70%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.child.heading {
+    padding-left: 25px;
+}
+
+.heading1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    font-family: 'NiveauGroteskBold';
+    //  color: #495A64
+}
+
+.heading2 {
+    // font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    text-align: left;
+    font-weight: 300;
+    font-family: 'NiveauGrotesk';
+}
+
+.lblcolor {
+    color: #495A64;
+}
+
+.inner-heading1 {
+    padding-left: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: 'NiveauGrotesk';
+    font-weight: 300;
+    color: #495A64
+}
+
+.inner-heading2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: 300;
+    font-family: 'NiveauGrotesk';
+}
+
+.tab-content {
+    max-height: 0;
+    padding: 0 1em;
+    color: #2c3e50;
+    background: white;
+}
+
+.tab-close {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1em;
+    // font-size: 0.75em;
+    background: #f1f3f5;
+    cursor: pointer;
+}
+
+.tab input[type=checkbox] {
+    display: none;
+}
+
+.tab-close:hover {
+    background: #f1f3f5;
+}
+
+input:checked+.tab-label::after {
+    transform: rotate(-135deg);
+}
+
+input:checked~.tab-content {
+    max-height: 100vh;
+    padding: 1em;
+}
+
+input:checked~.inner-tab-content {
+    max-height: 100vh;
+    padding: 0em 15px;
+}
+
+select {
+    // font-size: 14px;
+    font-family: "NiveauGrotesk";
+}
+
+.form-control {
+    outline: none;
+    border-radius: 2px;
+    min-height: var(--buttonHeight60);
+    font-size: var(--fontsize20);
+}
+
+.form-check input[type=checkbox] {
+    float: right;
+}
+
+.form-check input[type=radio]:checked::after {
+    visibility: visible;
+    background-color: #495A64;
+    width: 6px;
+    height: 6px;
+    left: 4px;
+    top: 3px;
+}
+
+.ml-35 {
+    margin-left: 35px;
+}
+
+input[type=radio]:checked {
+    border-color: #495A64 !important;
+}
+
+.form-check input[type=radio] {
+    outline: none;
+    width: 18px;
+    height: 18px;
+    margin-top: 9px;
+}
+
+.form-check input[type=radio]::after {
+    visibility: hidden;
+    margin-top: 1px !important;
+}
+
+
+/* Toggle Checkbox */
+
+@at-root .switch {
+    position: relative;
+    display: inline-block;
+    width: 68px;
+    height: 30px;
+    float: right;
+    .sliderTick {
+        position: absolute;
+        display: inline-block;
+        transform: rotate(45deg);
+        right: 15px;
+        top: 8px;
+        height: 10px;
+        width: 6px;
+        border-bottom: 2px solid $white-color;
+        border-right: 2px solid $white-color;
+        z-index: 1;
+    }
+    .sliderTickLeft {
+        position: absolute;
+        display: inline-block;
+        transform: rotate(45deg);
+        left: 15px;
+        top: 8px;
+        height: 10px;
+        width: 6px;
+        border-bottom: 2px solid $white-color;
+        border-right: 2px solid $white-color;
+        z-index: 1;
+    }
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #778893;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 6px;
+    top: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #00AFE2;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #00AFE2;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(35px);
+    -ms-transform: translateX(35px);
+    transform: translateX(35px);
+}
+
+
+/* Rounded sliders */
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.ability {
+    padding: 0 15px;
+    margin: 0;
+    .abilityLabel,
+    .abilityCheckbox {
+        padding: 15px 0 10px 18px;
+        font-size: var(--fontsize18);
+        color: #495A64;
+        font-family: 'NiveauGroteskBold';
+        border-bottom: 1px solid #E3E4E5;
+        border-top: 1px solid #E3E4E5;
+    }
+}
+
+.l-15 {
+    left: 15px;
+}
+
+.pl-15 {
+    padding-left: 15px;
+}
+
+select {
+    outline: none;
+}
+
+.selectdiv {
+    position: relative;
+}
+
+
+/* IE11 hide native button (thanks Matt!) */
+
+select::-ms-expand {
+    display: none;
+}
+
+// .selectdiv:after {
+    // content: "";
+    // background-image: url('../../../../assets/images/Icon\ ionic-ios-arrow-down\ \(2\).svg');
+    // background-repeat: no-repeat;
+    // background-size: 15px;
+    // background-position: center;
+    // transform: rotate(0deg);
+    // right: 0px;
+    // width: 48px;
+    // position: absolute;
+    // height: 48px;
+    // background-color: #F1F3F5;
+    // border: 1px solid #BCC4CA;
+    // border-left: 0;
+    // z-index: 1;
+// }
+
+// .selectdiv select {
+//     -webkit-appearance: none;
+//     -moz-appearance: none;
+//     appearance: none;
+//     /* Add some styling */
+//     float: right;
+//     position: relative;
+//     z-index: 2;
+//     &:not(:focus) {
+//         background: #0000!important;
+//     }
+//     &:not(:focus) + .selectdiv:after {
+//         z-index: 1;
+//     }
+//     &:focus + .selectdiv:after{
+//         z-index: 2;
+//     }
+// }
+
+.selectdiv select {
+    min-height: 35px;
+    width: 100%;
+    border: 1px solid #77889380;
+    font-size: var(--fontsize20);
+    font-family: 'NiveauGrotesk';
+    color: $pdp-font-color;
+    padding-left: 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    z-index: 1;
+    line-height: 1;
+    &:not(:focus) {
+        background: #0000!important;
+    }
+    &:focus {
+        background: #0000!important;
+    }
+}
+
+.selectdiv:after {
+    content: "";
+    background-image: url('../../../../assets/images/Icon\ ionic-ios-arrow-down\ \(2\).svg');
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: center;
+    transform: rotate(0deg);
+    right: 0px;
+    width: 56px;
+    top: 0;
+    position: absolute;
+    height: 48px;
+    background-color: #F1F3F5;
+    border: 0px solid #BCC4CA;
+    border-left: 0;
+}
+
+.heading {
+    .heading1 {
+        img {
+            height: 15px;
+            margin-bottom: 3px;
+        }
+    }
+}
+
+.classic {
+    border: 1px solid #BCC4CA;
+    background-color: #fff;
+}
+
+.daterangeColor {
+    color: #A4ACB1;
+}
+
+.mandate {
+    color: #973937;
+}
+
+label {
+    color: #495A64;
+    font-size: var(--fontsize18);
+}
+
+.label-color {
+    color: #495A64;
+}
+
+.placeholder-color {
+    color: #778893;
+}
+
+::placeholder {
+    color: #92a2ad;
+    font-family: 'NiveauGrotesk' !important;
+    font-weight: 200 !important;
+    /* Firefox */
+}
+
+.cls-btn i.fa.fa-times {
+    color: #b5bec3;
+}
+
+.modal-body {
+    padding-top: 0px !important;
+}
+
+@media screen and (max-width: $Largescreen-1600) and (min-width: $ipadScreen-768) {
+    .selectdiv:after {
+        font: 24px "Consolas", monospace;
+        width: 48px;
+        height: 48px;
+        padding-top: 7px;
+    }
+    .form-text{
+        input {
+            padding:5px 5px 5px 18px;
+        }
+        .static-value {
+            position:absolute;
+            left:10px;
+            font-size:var(--fontsize18);
+            top:12px;
+        }
+    }
+}
+
+@media screen and (max-width: $mobileScreenPotrait)
+{
+    form{
+        margin-bottom: 50px;
+    }
+    .row.buttons {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+    }
+    .form-control
+    {
+        line-height: 1;
+        padding:0.5rem 0.75rem;
+    }
+    .phone-code
+    {
+        width:45px;
+    }
+    .switch
+    {
+        width: 45px;
+        height: 20px;
+        margin-bottom: 0px;
+        .sliderTick
+        {
+            top: 5px;
+            height: 8px;
+            width: 5px;
+            right:10px;
+        }
+        .sliderTickLeft
+        {
+            top: 5px;
+            height: 8px;
+            width: 5px;
+            left:10px;
+        }
+    }
+    .form-text{
+        input {
+            padding:5px 5px 5px 17px;
+        }
+        .static-value {
+            position:absolute;
+            left:10px;
+            font-size:var(--fontsize18);
+            top:6px;
+        }
+    }
+    .slider:before
+    {
+        left: 4px;
+        top: 2.5px;
+        height: 14px;
+        width: 14px;
+    }
+    .form-check input:checked + .slider::before {
+        left: -8px !important;
+    }
+
+    ::placeholder,select {
+        color: $placeholder-color; /* Firefox */
+        font-size: var(--fontsize16);
+      }
+
+      :-ms-input-placeholder { /* Internet Explorer 10-11 */
+       color: $placeholder-color;
+       font-size: var(--fontsize16);
+      }
+
+      ::-ms-input-placeholder { /* Microsoft Edge */
+       color:$placeholder-color;
+       font-size: var(--fontsize16);
+      }
+      .form-control{
+          height:35px;
+          font-size: var(--fontsize18);
+          min-height: 35px;
+      }
+      .selectdiv select {
+        font-size: var(--fontsize16);
+      }
+        .selectdiv:after
+        {
+          height: 35px;
+          background-size: 12px;
+        }
+
+      .form-control.phone-code
+      {
+          font-size: var(--fontsize18);
+          color: $pdp-font-color;
+          border-right: 0px;
+      }
+      // .form-control:disabled,.form-control[readonly]
+      // {
+      //     background-color: $white-color;
+      // }
+
+      label,.dateRange .dateRangeLabel {
+        font-size: var(--fontsize17);
+    }
+    .daterange-segment {
+        width: 65%;
+    }
+    .dateRangeLabel
+    {
+        width:35%;
+    }
+    .ability{
+        .abilityCheckbox,.abilityLabel
+        {
+            font-size: var(--fontsize17);
+        }
+    }
+
+    .form-row>[class*=col-] {
+        padding-right: 0px;
+        padding-left: 5px;
+    }
+    .pdmob
+    {
+        .form-group
+        {
+            margin-bottom: 0px !important;
+        }
+    }
+    .dateRange
+    {
+        margin-top: 0px;
+    }
+    .form-check.permissions:last-child
+    {
+        margin-bottom: 5px;
+    }
+    .inner-heading1,.inner-heading2
+    {
+        overflow:visible;
+    }
+    .placemob
+    {
+        padding-right: 0px !important;
+        .form-row > [class*=col-]
+        {
+            padding-left: 0px !important;
+            line-height: 1.3;
+        }
+    }
+    .offset-3 {
+        margin-left: 25% !important;
+    }
+    .pageHeading {
+        font-size: var(--fontsize20);
+    }
+    .close-pos {
+        padding: 10px 25px 20px;
+      }
+      .ability
+      {
+          .abilityCheckbox, .abilityLabel {
+             padding: 12px 15px 10px 18px;
+          }
+      }
+      .vertalign
+      {
+          display:flex;
+          align-items: center;
+      }
+      .cls-icon {
+            width: 12px;
+            height: 12px;
+        }
+        label{
+            margin-bottom: 0px;
+        }
+        .require
+        {
+            font-family: 'NiveauGroteskBold' !important;
+            font-size: var(--fontsize18) !important;
+        }
+        .err-message{
+            top: 38px;
+            font-size: var(--fontsize14);
+            line-height: 1.2;
+        }
+}
+@media screen and (max-width:$smallmobileScreenPotrait568) {
+    label,.dateRange .dateRangeLabel {
+        font-size: var(--fontsize16);
+    }
+    .ability{
+        .abilityCheckbox,.abilityLabel
+        {
+            font-size: var(--fontsize16);
+        }
+    }
+    .permissions label{
+        font-size: var(--fontsize18);
+    }
+
+}

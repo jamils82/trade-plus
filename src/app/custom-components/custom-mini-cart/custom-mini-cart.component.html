@@ -1,0 +1,135 @@
+<div class="header-content">
+    <!--  <div class="customer-service"> -->
+         <!-- <img class="customer-service-icon" src="../../../assets/images/Icon ionic-ios-help-circle.svg"> -->
+         <!-- <app-help-support></app-help-support> -->
+     <!-- </div> -->
+ 
+ 
+     <!-- <div class="settings" (click)="navigateToAccount()">
+         <img class="settings-icon" src="../../../assets/images/Icon ionic-ios-settings.svg">
+     </div> -->
+ 
+     <div class="miniCartStyle d-flex align-items-center justify-content-center align-middle">
+         <a *ngIf="!isMobile" class="d-flex align-items-center justify-content-center align-middle cart-link"
+             (mouseout)="mouseoutFunction()" (mouseover)="toggleMenu()" >
+             <cx-icon (mouseover)="toggleMenu()" *ngIf="!isMobile"><img class="cart-icon"
+                     src="../../../assets/images/Icon material-shopping-cart.svg" (mouseover)="toggleMenu()"
+                     (click)="openCart()"></cx-icon>
+             <img src="../../../assets/images/Icon material-shopping-cart.svg" alt="Search Icon" *ngIf="isMobile"
+                 class="m-cartIcon" (click)="mobileToggleMenu(data)" />
+             <span class="quantity" *ngIf="quantity$ | async as quantity">
+                <i class="fas fa-circles"> {{ quantity }}</i>
+             </span>
+             
+ 
+             <!-- <span class="totalPrice" *ngIf="!isMobile">
+                 {{totalPriceFormat?totalPriceFormat: '$ 0.00'}}
+             </span> -->
+         </a>
+         <div *ngIf="isMobile" class="d-flex align-items-center justify-content-center align-middle cart-link">
+             <img src="../../../assets/images/Icon material-shopping-cart.svg" alt="Search Icon" *ngIf="isMobile"
+                 class="m-cartIcon" (click)="mobileToggleMenu(data)" />
+             <span class="quantity badge" *ngIf="quantity$ | async as quantity">
+                <i class="fas fa-circles">  {{ quantity }}</i>
+             </span>
+           
+         </div>
+         <div class="cart-preview" *ngIf="!isMobile" (mouseout)="mouseoutFunction()" (mouseover)="toggleMenu()"
+             [class]="isShowMenu ? 'show-menu' : 'hide-menu'">
+             <div class="arrow-up" *ngIf="quantity$ | async as quantity"></div>
+             <div class="container" *ngIf="quantity$ | async as quantity">
+                 <div class="cart-preview-header">
+                     <span class="cart-summary-label"><img class="fas fa-shopping-cart"
+                             src="../../../assets/images/cart-shopping-fast.svg"> Cart Summary</span>
+                     <span class="cart-summary-quantity" *ngIf="quantity$ | async as quantity">{{ quantity }} {{quantity
+                         ==
+                         '1'? 'item': 'items'}} in
+                         cart</span>
+                 </div>
+                 <ul class="cart-list">
+                     <li class="cart-list-items" *ngFor="let p of items">
+                         <div class="items-container">
+                             <div class="item d-flex">
+                                 <!-- <div><img src="{{p.product.images.PRIMARY.cartIcon.url}}"></div> -->
+                                 <!-- {{p.product.images.PRIMARY.url}}; -->
+                                 <div class="image-container">
+                                     <cx-media [container]="p.product.images?.PRIMARY" format="thumbnail"
+                                         role="presentation"></cx-media>
+                                     <!-- <img src="{{p?.product?.images?.PRIMARY?.cartIcon?.url}}"> -->
+                                 </div>
+ 
+                                 <div class="d-md-flex d-block w-100 justify-content-between pl-3 pl-md-0">
+                                     <div class="pl-4">
+                                         <span class="productName" title={{p.product.name}}>{{p.product.name}}</span>
+                                         <p class="itemCode">Item Code : {{p.product.code}}</p>
+                                         <!-- <p  class="mb-0">Customer Product Code {{p.product.code}}</p> -->
+                                         <!-- <label>Qty:</label> <span>{{p.quantity}}</span> -->
+ 
+ 
+                                         <!-- <span><p class="remove">Remove</p></span> -->
+                                     </div>
+                                     <div class="item-total-price">
+                                         <span>{{p?.totalPrice?.formattedValue}}</span>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </li>
+                 </ul>
+                 <div class="cart-preview-footer">
+                     <div class="cart-preview-subTotal">
+                         <span class="cart-subTotal-label">Subtotal <span>(excl. GST)</span></span>
+                         <span class="cart-subTotal-price">{{totalPriceFormat}}</span>
+                     </div>
+                     <div class="buttons-container d-flex p-4">
+                         <a class="checkout-achor" (click)="openCart()">
+                             <button class="btn checkout-btn" (click)="toggleMenu()">
+                                 Checkout
+                             </button>
+                         </a>
+                         <a class="continue-shopping-achor" (click)="continueShop()">
+                             <button class="btn continue-shopping-btn" (click)="toggleMenu()">
+                                 Continue Shopping
+                             </button>
+                         </a>
+                     </div>
+                 </div>
+             </div>
+ 
+             <!------------------------------- empty Cart message container ----------------------------------->
+ 
+             <!-- <ng-template #empty_cart>
+         <div class="container">
+             <div class="empty-cart">
+                 <span class="empty-cart-label">Your cart is empty!</span>
+                 </div>
+                 </div>
+             </ng-template> -->
+ 
+             <!------------------------------------------------------------------------------------------------>
+         </div>
+     </div>
+ </div>
+ <div class="globalSarchMobile" *ngIf="isMobile">
+     <!--<button (click)="openSearch(searchComp)" class="search-button">Search</button>-->
+     <label class="searchbox search-button">
+         <input class="searchBox-input" [placeholder]="searchPlaceHolder" (click)="openSearch(searchComp)" readonly />
+         <div role="presentation" class="search">
+             <cx-icon [type]="iconTypes.SEARCH"></cx-icon>
+         </div>
+     </label>
+     <!-- <span class="pl-3 pr-3" (click)="openSearch()"> <i class="fa fa-search"></i> </span> -->
+     <!-- <div class="totalMenuContainer" *ngIf="showSearch">
+         <app-m-product-search (searchvalueChange)="searchtext($event)" [searchVal]="'12'"></app-m-product-search>
+     </div> -->
+ 
+ </div>
+ <ng-template #data let-modal>
+     <app-custom-mini-cart-mobile [items]="items" [totalPriceFormat]="totalPriceFormat" [quantity$]="quantity$">
+     </app-custom-mini-cart-mobile>
+ </ng-template>
+ 
+ 
+ <ng-template #searchComp let-modal>
+     <app-m-product-search (searchvalueChange)="searchtext($event)" [searchVal]="'12'"></app-m-product-search>
+ </ng-template>

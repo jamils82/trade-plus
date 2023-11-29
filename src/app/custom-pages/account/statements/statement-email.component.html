@@ -1,0 +1,62 @@
+<button mat-icon-button style="top: -10px;right: -15px;" class="close-button" [mat-dialog-close]="true">
+	<mat-icon class="close-icon">close</mat-icon>
+</button>
+<div id="statement-email-popup" style="padding: 25px 40px;">
+	<h1 mat-dialog-title style="font-size: 1.5em;margin-top: 25px;">EMAIL SELECTED</h1>
+	<div mat-dialog-content class="fields">
+		<form name="form" [formGroup]="sendEmailForm" (ngSubmit)="emailSend()">
+			<div class="form-container">
+				<div class="row">
+					<div class="col-sm-2 col-3 verti-center">
+						<label for="to" class="form-label job-ref custom-contact-dialog ">To </label>
+					</div>
+					<div class="col-sm-10 col-9">
+						<input type="text" class="form-control" id="to" placeholder="Email Address" [(ngModel)]="to"
+							formControlName="toAddress"
+							[ngClass]="{ 'is-invalid': submitted && formValid.toAddress.errors }" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2 col-3 verti-center">
+						<label for="cc" class="form-label job-ref custom-contact-dialog ">CC </label>
+					</div>
+					<div class="col-sm-10 col-9">
+						<input type="text" class="form-control" id="cc" placeholder="Email Address" [(ngModel)]="cc"
+							formControlName="ccAddress"
+							[ngClass]="{ 'is-invalid': submitted && formValid.ccAddress.errors }" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2 col-3 verti-center">
+						<label for="Subject" class="form-label job-ref custom-contact-dialog ">Subject </label>
+					</div>
+					<div class="col-sm-10 col-9">
+						<input type="text" class="form-control" id="Subject" placeholder="Subject" [(ngModel)]="sub"
+							formControlName="sub" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2 col-3 verti-center"
+						style="align-items: flex-start !important;margin-top: 1.5%;">
+						<label for="createContact" class="form-label job-ref custom-contact-dialog ">Message </label>
+					</div>
+					<div class="col-sm-10 col-9">
+						<textarea style="resize: none;" class="form-control" placeholder="Enter Text" rows="4"
+							[(ngModel)]="msg" formControlName="msg"></textarea>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- <div mat-dialog-actions> -->
+	<div class="row">
+		<div class='col-sm-6 col-6'>
+			<button mat-button class="cancel-btn" (click)="close()">Cancel</button>
+		</div>
+		<div class='col-sm-6 col-6'>
+			<button mat-button class="send-email_button" (click)="emailSend()" cdkFocusInitial>Send Email</button>
+		</div>
+	</div>
+	<!-- </div> -->
+	<div id="snackbar">Email sent successfully</div>
+</div>

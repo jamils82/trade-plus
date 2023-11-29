@@ -1,0 +1,382 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12 close-pos">
+            <div class="cls-btn" (click)="closePopup()">
+                <img class="cls-icon fa fa-times" src='../../../../assets/images/close-icon.PNG'>
+            </div>
+        </div>
+        <!-- <div class="col-md-12">
+    <h2 class="pageHeading">{{ popUpTitle }}</h2>
+  </div> -->
+    </div>
+    <div class="modal-body ">
+        <div class="row-content">
+            <div class="col-md-12">
+                <h2 class="pageHeading">{{ popUpTitle }}</h2>
+            </div>
+            <div class="col-md-12 requiredFields">
+                <span class="requiredFields require">*Required Fields</span>
+            </div>
+            <form [formGroup]="teamMember">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-row form-group">
+                        <div class="col-md-2 col-3">
+                            <label>Name<span class="mandate">*</span></label>
+                        </div>
+                        <div class="col-md-5 col-9">
+                            <input type="text" id="fname" class="form-control lo_sensitive" placeholder="First Name" required
+                                formControlName="fname" [disableControl]="isEdit"
+                                [ngClass]="{ 'is-invalid': submitted && f.fname.errors }" />
+                            <!-- <div *ngIf="submitted && f.fname.errors" class="invalid-feedback">
+                      <div *ngIf="f.fname.errors.required">First Name is required</div>
+                   </div> -->
+                            <!-- <div *ngIf="teamMember.get('fname').invalid && (teamMember.get('fname').dirty || teamMember.get('fname').touched)">
+                    <div *ngIf="teamMember.controls['fname'].errors.required">
+                      First Name is required.
+                      </div>
+                   </div> -->
+                        </div>
+                        <div class="col-md-5 offset-md-0 offset-3 col-9">
+                            <input type="text" class="form-control lo_sensitive" id="lname" formControlName="lname"
+                                placeholder="Last Name" [disableControl]="isEdit"
+                                [ngClass]="{ 'is-invalid': submitted && f.lname.errors }" required />
+                            <!-- <div *ngIf="submitted && f.lname.errors" class="invalid-feedback">
+                <div *ngIf="f.lname.error.required">Last Name is required</div>
+            </div> -->
+                            <!-- <div *ngIf="teamMember.get('lname').invalid && (teamMember.get('lname').dirty || teamMember.get('lname').touched)">
+                    <div *ngIf="teamMember.get('lname').errors.required">
+                      Last Name is required.
+                    </div>
+
+                  </div> -->
+                            <!-- <div *ngIf="submitted && teamMember.controls['lname'].errors" class="invalid-feedback">
+                    <div *ngIf="teamMember.controls['lname'].error.required">First Name is required</div>
+                </div> -->
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col-md-2 col-3">
+                            <label>Email Address<span class="mandate">*</span></label>
+                        </div>
+                        <div class="col-md-10 col-9">
+                            <input type="text" class="form-control lo_sensitive" placeholder="Email Address" formControlName="email"
+                                [disableControl]="isEdit" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                                required>
+                            <!-- <div *ngIf="submitted && teamMember.controls['email'].errors" class="invalid-feedback">
+                <div *ngIf="teamMember.controls['email'].error.required">First Name is required</div>
+            </div> -->
+                            <!-- <div *ngIf="teamMember.get('email').invalid && (teamMember.get('email').dirty || teamMember.get('email').touched)">
+                    <div *ngIf="teamMember.get('email').errors.required">
+                      Email is required.
+                    </div>
+
+                  </div> -->
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col-md-2 col-3">
+                            <label>Mobile<span class="mandate">*</span></label>
+                        </div>
+                        <div class="col-md-10 col-9 display-flex">
+
+                            <div class="form-control phone-code" type="text" value="+61" disabled>+61</div>
+                            <!-- <input type="text" class="form-control phone-no-css" placeholder="Mobile Number"
+                                formControlName="mobile" [disableControl]="isEdit"
+                                [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" required> -->
+                                <div class="form-text">
+                                    <input type=text placeholder="0 of 0" class="form-control phone-no-css lo_sensitive" placeholder="Mobile Number"
+                                    formControlName="mobile" [disableControl]="isEdit"
+                                    [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" required id="youridhere"/>
+                                    <label for="youridhere" class="static-value">0</label>
+                                  </div> 
+                            <span class="err-message"
+                                *ngIf="teamMember.controls['mobile'].invalid && (teamMember.controls['mobile'].dirty || teamMember.controls['mobile'].touched)">Enter
+                                valid mobile number with no spaces or special characters</span>
+                            <!-- <div *ngIf="submitted && teamMember.controls['mobile'].errors" class="invalid-feedback">
+                <div *ngIf="teamMember.controls['mobile'].error.required">First Name is required</div>
+            </div> -->
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col-md-2 col-3">
+                            <label>Role</label>
+                        </div>
+                        <div class="col-md-5 col-9 select-col">
+                            <!-- <ng-select>
+       </ng-select> -->
+                            <div class="selectdiv">
+                                <label>
+                                    <select class="form-control classic" (change)="onChange($event.target.value )"
+                                        formControlName="role">
+                                        <option selected [ngValue]="2">Admin</option>
+                                        <option [ngValue]="1">Team Supervisor</option>
+                                        <option [ngValue]="0">Team Member</option>
+                                        <option [ngValue]="3">Tradesperson</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h2 class="pageHeading permissionsHeading">PERMISSIONS</h2>
+                </div>
+                <div class="row pdmob">
+                    <div class="col-md-4">
+                        <div class="form-row form-group">
+                            <div class="form-check permissions">
+                                <input class="form-check-input" (click)="permanentAccessClicked()" type="radio"
+                                    name="permanentAccess" id="permanentAccess" [checked]="!isTemproryAccess">
+                                <label class="form-check-label permissions" for="exampleRadios1">
+                                    Permanent Access
+                                </label>
+                            </div>
+                            <div class="form-check permissions">
+                                <input name="temproryAccess" class="form-check-input" (click)="permanentAccessClicked()"
+                                    type="radio" name="isTemproryAccess" id="isTemproryAccess"
+                                    [checked]="isTemproryAccess">
+                                <label class="form-check-label permissions" for="exampleRadios2">
+                                    Temporary Access
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 dateRange">
+                        <label class="form-check-label dateRangeLabel"
+                            [ngClass]="{ 'daterangeColor' : !isTemproryAccess}">Date Range</label>
+                        <div class="daterange-segment">
+                            <app-ngb-date-rangepicker [startDate]="startDate" [pageName]="currentPage"
+                                [endDate]="endDate" [disableDate]="!isTemproryAccess"
+                                (rangeSelected)="setDateRange($event);"></app-ngb-date-rangepicker>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ability">
+                    <!-- <div class="row">            -->
+
+                    <div class="col-md-10 col-10 abilityLabel vertalign">Ability to Add Other Team Members
+                    </div>
+                    <div class="col-md-2 col-2 abilityCheckbox">
+                        <div class="form-check">
+                            <label class="switch">
+                                <div class="sliderTickLeft"></div>
+                                <div class="sliderTick"></div>
+                                <input type="checkbox" [checked]="isAccess" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="isAccess" [disabled]="  isAccessDisabled  "
+                                    (change)="managePermissionList({permission: isAccess, permissionName: 'createInviteGroup'})">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+
+                <div class="row accordion">
+                    <!-- <div class="tabs"> -->
+                    <div class="col-md-10 col-10 vertalign">
+                        <div class="tab">
+                            <input type="checkbox" name="radioCheck" id=0>
+                            <label (click)="accountManagementClick()" class="tab-label checkbox-inline" for=0>
+                                <div class="heading">
+                                    <span class="heading1">
+                                        <!-- <i [ngClass]="accountManagementIcon? 'fa fa-plus-circle':'fa fa-minus-circle'"></i>  -->
+                                        <img
+                                            [src]="accountManagementIcon? './../../assets/images/Icon-plus-circle.svg':'./../../assets/images/Icon-minus-circle.svg'" />
+                                        Account Management
+                                    </span>
+                                </div>
+                            </label>
+                            <div class="tab-content inner-tab-content">
+                                <label class="tab-label checkbox-inline innerCheckbox" for="chck1">
+                                    <div class="heading">
+                                        <span class="inner-heading1">View Account Dashboard</span>
+                                        <span class="inner-heading1">View Payments</span>
+                                        <!-- <span class="inner-heading1">View Invoices, Adjustments & Statements</span> -->
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-2">
+                        <div class="form-check">
+                            <!-- <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> -->
+                            <label class="switch">
+                                <div class="sliderTickLeft"></div>
+                                <div class="sliderTick"></div>
+                                <input type="checkbox" [checked]="isAccMgmt" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="isAccMgmt"
+                                    (change)="managePermissionList({permission: isAccMgmt, permissionName: 'accountManagementGroup'})">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- Start of WN-408 -->
+                    <div class="col-md-10 col-10 vertalign">
+                        <div class="tab">
+                            <input type="checkbox" name="radioCheck" id=2>
+                            <label class="tab-label checkbox-inline" for=2>
+                                <div class="heading">
+                                    <span class="heading1 pl-15">View Statements, Invoices & Adjustments</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-2">
+                        <div class="form-check">
+                            <label class="switch">
+                                <div class="sliderTickLeft"></div>
+                                <div class="sliderTick"></div>
+                                <input type="checkbox" [checked]="isAccMgmtInvoice" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="isAccMgmtInvoice"
+                                    (change)="managePermissionList({permission: isAccMgmtInvoice, permissionName: 'accountManagementGroupInvoice'})">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- End of WN-408 -->
+                    <div class="col-md-10 col-10 vertalign">
+                        <div class="tab">
+                            <input type="checkbox" name="radioCheck" id=1>
+                            <label (click)="pricingAccordionClick()" class="tab-label checkbox-inline" for=1>
+                                <div class="heading">
+                                    <span class="heading1">
+                                        <img
+                                            [src]="pricingAccordionIcon? './../../assets/images/Icon-plus-circle.svg':'./../../assets/images/Icon-minus-circle.svg'" />
+                                        Pricing
+                                    </span>
+                                </div>
+
+                            </label>
+                            <div class="tab-content inner-tab-content">
+                                <label class="tab-label checkbox-inline innerCheckbox" for="chck1">
+                                    <div class="heading">
+                                        <span class="inner-heading1">Displays 'My Price'</span>
+                                        <span class="inner-heading1">Ability to Download Price Files</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-2">
+                        <div class="form-check">
+                            <!-- <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> -->
+                            <label class="switch">
+                                <div class="sliderTickLeft"></div>
+                                <div class="sliderTick"></div>
+                                <input type="checkbox" [checked]="isPricing" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="isPricing"
+                                    (change)="managePermissionList({permission: isPricing, permissionName: 'tradelinkPricingGroup'})">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-10 col-10 vertalign">
+                        <div class="tab">
+                            <input type="checkbox" name="radioCheck" id=2>
+                            <label class="tab-label checkbox-inline" for=2>
+                                <div class="heading">
+                                    <span class="heading1 pl-15">View Orders & Deliveries</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-2">
+                        <div class="form-check">
+                            <!-- <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> -->
+                            <label class="switch">
+                                <div class="sliderTickLeft"></div>
+                                <div class="sliderTick"></div>
+                                <input type="checkbox" [checked]="isViewOrders" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="isViewOrders"
+                                    (change)="managePermissionList({permission: isViewOrders, permissionName: 'viewOrdersGroup'})">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-10 col-10 vertalign">
+                        <div class="tab">
+                            <input type="checkbox" name="radioCheck" id=3>
+                            <label (click)="placeOrdersAccordionClick()" class="tab-label checkbox-inline" for=3>
+                                <div class="heading">
+                                    <span class="heading1">
+                                        <!-- <i [ngClass]="placeOrdersAccordionIcon? 'fa fa-plus-circle':'fa fa-minus-circle'"></i> -->
+                                        <img
+                                            [src]="placeOrdersAccordionIcon? './../../assets/images/Icon-plus-circle.svg':'./../../assets/images/Icon-minus-circle.svg'" />
+
+
+                                        Place Orders & View
+                                        Quotes
+                                    </span>
+                                </div>
+
+                            </label>
+                            <div class="tab-content inner-tab-content">
+                                <label class="tab-label checkbox-inline innerCheckbox" for="chck1">
+                                    <div class="heading">
+                                        <span class="inner-heading1">1. Create Orders</span>
+                                        <span class="inner-heading1">2. View Quotes</span>
+                                        <span class="inner-heading1">3. Request Quotes</span>
+                                    </div>
+
+                                </label>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-2">
+                        <div class="form-check">
+                            <!-- <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> -->
+                            <label class="switch">
+                                <div class="sliderTickLeft"></div>
+                                <div class="sliderTick"></div>
+                                <input type="checkbox" [checked]="isPlaceOrders" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="isPlaceOrders"
+                                    (change)="managePermissionList({permission: isPlaceOrders, permissionName: 'placeOrdersGroup'})">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row isPlaceOrder" *ngIf="!placeOrdersAccordionIcon">
+                    <div class="col-md-12 placemob">
+                        <div class="form-row form-group isPlaceOrderForm">
+                            <div
+                                [ngClass]="!isPricing ? 'col-md-3 col-3 heading opacityOnDisable' : 'col-md-3 col-3 heading'">
+                                <label>Order Limit (Optional)</label>
+                            </div>
+                            <div [ngClass]="!isPricing ? 'col-md-8 col-9 opacityOnDisable' : 'col-md-8 col-9'">
+                                <input type="text" class="form-control" placeholder="Enter Amount"
+                                    (focus)="$event.stopPropagation();reFormatValue()" (focusout)="negativeConverter()"
+                                    [disableControl]="!isPlaceOrders || !isPricing" maxlength="9"
+                                    formControlName="orderLimit">
+                            </div>
+                            <div class="col"></div>
+                            <div class="col-md-3 heading"></div>
+                            <div class="col-md-9 col-9 offset-3 requiredTextAmount">
+                                <span class="requiredTextAmount">No Order Limit can be set when Pricing is
+                                    disabled.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row buttons">
+                    <div class="col-md-12 btngrp">
+                        <button class="btn cancelBtn" (click)="closePopup()">
+                            Cancel
+                        </button>
+                        <button class="btn confirmBtn" *ngIf="!isEdit" type="submit" (click)="sendInvite()">
+                            Send Invite
+                        </button>
+                        <button class="btn confirmBtn" *ngIf="isEdit" type="submit" (click)="saveInvite()">
+                            Save Changes
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,167 @@
+@import '../../../shared/styles/variables.scss';
+::ng-deep .plp-list .cx-product-image img {
+    max-width: 164px;
+    max-height: 164px;
+}
+
+.plp-list {
+    margin: 0px 0px 20px 0px;
+    .plp-list-image-col {
+        padding: 0px 0px 0px 40px;
+        background-color: $white-color;
+        max-width: 20%;
+        input {
+            margin: 0;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+            width: 15px;
+            height: 15px;
+        }
+    }
+    .plp-list-container-col {
+        padding: 0px;
+        background-color: $white-color;
+        display: flex;
+        border-top-right-radius: 27px;
+        border-bottom-right-radius: 27px;
+        min-width: 80%;
+        .product-details {
+            display: block;
+            padding: 10px 20px 20px 10px;
+            max-width: 40%;
+            width: 100%;
+            .product-manufacturer {
+                font-size: var(--fontsize24);
+                color: #778893;
+                font-family: 'NiveauGrotesk';
+                height: 38px;
+            }
+            .product-heading {
+                font-size: var(--fontsize24);
+                color: $pdp-font-color;
+                font-family: 'NiveauGroteskBold';
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .itemCode {
+                font-size: var(--fontsize18);
+                color: $pdp-font-color;
+                font-family: 'NiveauGrotesk';
+                line-height: 1;
+            }
+        }
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+app-product-price {
+    padding: 20px 20px 20px 0px;
+    width: 40%;
+    border-right: 2px solid #F5F6FA;
+}
+
+app-custom-addtocart {
+    padding: 20px 20px 20px 20px;
+    width: 30%;
+}
+
+///////////////////////////////////////// custom checkbox CSS - START ////////////////////////////////////////
+input.checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    height: 20px;
+    width: 20px;
+    background-color: $white-color;
+    border: 3px solid #778893;
+    border-radius: 4px;
+}
+
+.checkmark.terms {
+    width: 18px;
+    height: 18px;
+    top: 4px;
+}
+
+.checkmark.terms.disable {
+    opacity: 0.5;
+}
+
+
+/* On mouse-over, add a grey background color */
+
+.check-container:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+.check-container:hover input~.checkmark.disable {
+    background-color: #fff;
+}
+
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+/* Show the checkmark when checked */
+
+.check-container input:checked~.checkmark:after {
+    display: block;
+}
+
+
+/* Style the checkmark/indicator */
+
+.check-container {
+    margin: 0;
+    .checkmark:after {
+        left: 4px;
+        top: 0px;
+        width: 6px;
+        height: 11px;
+        border: solid $pdp-font-color;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+}
+
+.check-container .checkmark.terms:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+}
+
+@media (min-width: 1400px) and (max-width: 1950px){
+    .itemCode {
+        padding-bottom: 35px;
+    }
+}
+@media (min-width: 1960px) and (max-width: 9050px){
+    .plp-list .product-heading{line-height: 1.1;}
+    .plp-list .itemCode{margin-bottom: 35px;}
+
+}
+
+///////////////////////////////////////// custom checkbox CSS - END ////////////////////////////////////////

@@ -1,0 +1,35 @@
+
+<div class="heading-container container">
+    <div class="row">
+    <div class="col-md-12">
+        <div class="close-icon" (click)="closePopUp()">
+            <img class="cls-icon fa fa-times" src='../../../../assets/images/close-icon.PNG'>
+        </div>
+        </div>
+        <div class="col-md-12 heading">
+            <div class="pageHeading">CHANGE ACCOUNT
+        </div>
+    </div>
+   </div>
+</div>
+
+<div class="modal-body ">
+    <div class="row-content">
+        <div class="description col-md-12 col-sm-12 col-xs-12">
+            <p class="desc">If you change the Account now, items in your Cart will be cleared. If you wish to save these items for later use, please select the <strong>‘Save as List’</strong>  button in your Cart, and add these to an existing list or create a new one.</p>
+        </div>
+            <div class="col-md-12 btngrp">
+                <button class="btn" class="cancelBtn" (click)="closePopUp();">
+                    Cancel
+                </button>
+
+                <button class="btn" class="confirmBtn" (click)="onClick(true)">
+                    Confirm
+                </button>
+
+            </div>
+        
+        </div>
+
+    </div>
+

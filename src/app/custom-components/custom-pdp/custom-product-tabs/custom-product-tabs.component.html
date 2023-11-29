@@ -1,0 +1,28 @@
+<ng-container *ngIf="components$ | async as components">
+  <div class="container input-icons">
+    <div class="row">
+      <div class="col">
+        <div class="tabs">
+          <div *ngFor="let component of components; let i = index" class="tab">
+            <input type="checkbox" class="accordion-radio" name="radioCheck" [checked]="(i === 0)" id=p{{i}}>
+            <label class="tab-label checkbox-inline" for=p{{i}}>
+              <div class="heading">
+                {{
+                component.name
+                }}
+              </div>
+            </label>
+            <div class="tab-content inner-tab-content">
+              <div class="inner-heading">
+                <ng-template [cxOutlet]="component.flexType" [cxOutletContext]="{}">
+
+                  <ng-container [cxComponentWrapper]="component"></ng-container>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

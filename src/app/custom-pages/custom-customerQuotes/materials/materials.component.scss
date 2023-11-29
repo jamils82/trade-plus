@@ -1,0 +1,646 @@
+@import '../quotes.component.scss';
+@import '../job-detail/job-detail.component.scss';
+@import '../../../shared/styles/variables.scss';
+
+ .quotes-container{
+     .row-container{
+        .sidebar_tp {
+            margin-top: -5rem;
+        }
+        .sidebar p{
+        height: auto;
+        min-height: 67px;  
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+            span {
+                display: block;
+                line-height: 21px;
+                word-break: break-all;
+                &.sub-title {
+                    color:$grey;
+                    font-size: 12px;
+                    line-height: 16px;
+                    @include font-NiveauGrotesk();
+                }
+            }
+        }
+        .tick-icon {
+            background: #50B085;
+            margin-bottom: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 100%;
+            padding: 0;
+            position: relative;
+            float: left;
+            margin: 2px 4px 0 4px;
+            &:before {
+                content: "";
+                position: absolute;
+                top: 1px;
+                left: 4px;
+                width: 7px;
+                height: 11px;
+                border: 0px solid #ffffff;
+                border-width: 0 2px 2px 0;
+                -webkit-transform: rotate(45deg);           
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+        }
+
+        .container-sec {
+            width: 77%;
+            padding: 19px;
+            min-height: 50vh;
+            background-color: white;
+            border-radius: 3px;
+            h1 {
+                color: #495A64;
+                font-size: var(--fontsize24);
+                border-bottom: 3px solid #E0E1E2;
+                padding-bottom: 12px;
+                margin-bottom: 24px;
+            }
+            .list-title {
+                font-size: 16px;
+                color: $grey;
+                @include font-NiveauGroteskBold();
+                border-bottom: 1px solid grey;
+                margin-top: 35px;
+                padding-bottom: 10px;
+            }
+            .materials-landing-page {
+                display: flex;
+                clear: both;
+                overflow: hidden;
+                font-size: 18px;
+                @include font-NiveauGrotesk();
+
+                .addProduct {
+                 //   background: #F5F5F5 url('../../../../assets/images/search-icon.svg') no-repeat 25px center;
+                    padding:8px 20px 8px 55px;
+                    color:$grey;
+                    display: block;
+                    width: 100%;
+                    text-align: left;
+                    border: 0;
+                    border-radius: 8px;
+                    margin: 24px 0;
+                    
+                }
+            }
+        }
+        .right-container {
+            display: flex;
+            width: 77%;
+        }
+        .container-three {
+            width: 29%;
+            background-color: white;
+            margin-left: 9px;
+            border-radius: 3px;
+            padding: 19px;
+            h1 {
+                color: #495A64;
+                font-size: var(--fontsize24);
+                border-bottom: 3px solid #495A64;
+                padding-bottom: 12px;
+                margin-bottom: 13px;
+            }
+            .materialDataSection {
+                
+            }
+        }
+    }
+    .materialSearch {
+        width: 54.7%;
+        margin-left: 24%;
+        margin-bottom: 13px;
+        .materials-landing-page {
+            display: flex;
+            justify-content: space-between;
+            .addProduct {
+                display: flex;
+                height: 60px;
+                width: 48%;
+                padding: 13px;
+                align-items: center;
+                border: 1px solid #77889380;
+                background-color: #ffffff;
+                border-radius: 3px;
+                padding-top: 15px;
+                p {
+                    margin-bottom: 0;
+                    @include font-NiveauGrotesk();
+                    font-size: var(--fontsize18);
+                    color: #495A64;
+                    opacity: 0.5;
+                }
+                .search-icon {
+                    color: #003D7A;
+                    margin-right: 13px;
+                    font-size: 19px;
+                }
+            }
+        }
+    }
+    .addOwnProduct {
+        color: #2F519B;
+        cursor: pointer;
+        display: flex;
+        padding: 4px 7px;
+        border: 1px solid #2F519B;
+        align-items: center;
+        width: 32%;
+        justify-content: center;
+        @include font-NiveauGroteskBold();
+        border-radius: 7px;
+        height: 60px;
+        span {
+            font-size: 42px;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 60px;
+            font-family: "NiveauGrotesk";
+            margin-right: 7px;
+            margin-top: -7px;
+        }
+        p {
+            font-size: 20px;
+        }
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+.cost-summary {
+    bottom: 100px;
+    width: 100%;
+    padding-right: 0px;
+    background-color: #ffffff;
+    float: left;
+    @media screen and (min-width:1024px) and (max-width:1336px) {
+        width: 215px;
+    }
+    &.fix-section {
+        position: fixed;
+    }
+}
+h4.cost-title {
+    font-size: 16px;
+    color: #000000;
+    @include font-NiveauGroteskBold();
+    line-height: 21px;    
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+    margin-bottom: 0px;
+}
+.cost-detail {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 14px;
+    margin-bottom: 12px;
+}
+.cost-detail table tr td {
+    font-size: var(--fontsize18);
+    line-height: 22px;
+    color: #495A64;
+    @include font-NiveauGrotesk();
+}
+.cost-detail table tr td:nth-child(2) {
+    text-align: right;
+}
+.cost-detail table {
+    width: 100%;
+}
+.cost-sub-total span {
+    width: 50%;
+    display: inline-block;
+    font-size: var(--fontsize18);
+    line-height: 21px;
+    color: #495A64;
+    @include font-NiveauGroteskBold();
+}
+.cost-sub-total span:nth-child(2) {
+    text-align: right;
+    overflow-wrap: break-word;
+}
+.cost-detail table tr:nth-child(1) td {
+    padding-bottom: 10px;
+}
+.review-quote-btn {
+    background-color: $blue-color;
+    color: $white-color;
+    width: 30%;
+    height: 45px;
+    border: none;
+    border-radius: 7px;
+    @include font-NiveauGroteskBold();
+    margin-top: 0rem;
+    float: right;
+    font-size: var(--fontsize20);
+    margin-left: 2% !important;
+    // margin-right: 2%;
+}
+.labourbtn{
+    background-color: $blue-color;
+    color: $white-color;
+    width: 45%;
+    height: 45px;
+    border: none;
+    border-radius: 7px;
+    @include font-NiveauGroteskBold();
+    margin-top: 0rem;
+    float: right;
+    font-size: var(--fontsize20);
+    // margin-left: 0 !important;
+    // margin-right: 2%;
+}
+
+::ng-deep .editMarkup {
+ .modal-dialog.modal-lg {
+    min-width: 683px !important;
+    max-width: 683px !important;
+    }
+    .modal-body {
+        padding: 0 57px 52px !important;
+    }
+}
+.review-quote-btn_con{
+    width: 60% !important;
+}
+.edit-materialLine {
+    background-color: #E0E1E2;
+    margin-top: 2.3rem;
+    margin-bottom: 1rem;
+}
+.materialProductsListItem {
+    min-height: 19vh;
+}
+.product-footerSection {
+    display: flex;
+    justify-content: flex-end;
+    .add-markup {
+        border: 1px solid #2F519B;
+        @include font-NiveauGrotesk();
+        font-size: var(--fontsize18);
+        display: flex;
+        height: 51px;
+        span {
+        font-size: 42px;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 60px;
+        font-family: "NiveauGrotesk";
+        margin-right: 7px;
+        margin-top: -7px;
+        color: #2f519b;
+        }
+        p {
+            color: #2F519B;
+            font-size: 18px;
+            font-weight: bold;
+            @include font-NiveauGroteskBold();
+        }
+    }
+    .reprice-btn {
+        width: 159px;
+        background-color: #ffffff;
+        border-radius: 7px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        height: 51px;
+        border: 1px solid #2F519B;
+        position: relative;
+        margin-right: 2rem;
+        .updateLatestPriceLoader {
+            display: none;
+            margin-top: 16px;
+            left: 40%;
+        }
+        p {
+            @include font-NiveauGroteskBold();
+            font-size: 19px;
+            margin-bottom: 0;
+            color: #2F519B;
+        }
+        span {
+            width: 100%;
+            font-size: 12px;
+            color: #2F519B;
+            @include font-NiveauGrotesk();
+            position: relative;
+            bottom: 7px;
+        
+        }
+    }
+    .editProductFooter-rightSection {
+        display: flex;
+        justify-content: flex-end;
+        .totalPriceLabel, .price {
+            @include font-NiveauGroteskBold();
+            font-size: var(--fontsize28);
+            color: #495A64;
+        }
+        .materialTotalCost {
+            // position: relative;
+            display: flex;
+            bottom: 7px;
+        }
+        .materialPriceTotal {
+            display: flex;
+            margin-right: 10px;
+            align-items: baseline;
+            .sublabel {
+                @include font-NiveauGrotesk();
+                color: #495A64;
+                font-size: 14px;
+                margin-left: 4px;
+                margin-top: 9px;
+            }
+        }
+        .price {
+            text-align: right;
+            // position: relative;
+            bottom: 7px;
+        }
+    }
+    .materialPriceFullSection {
+        width: 100%;
+    }
+}
+.allProducts_returnJobDetails_Section {
+    width: 100%;
+    height: 60px;
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: end;
+    .productButtons {
+        width: 35%;
+        display: flex;
+        justify-content: space-between;
+        @include font-NiveauGroteskBold();
+        .materialAllProducts {
+            width: 32%;
+            background-color:#00AFE2;
+            height: 75%;
+            border-radius: 5px;
+            color: #ffffff;
+            border: none;
+            font-size: var(--fontsize20);
+            margin-right: 2%;
+        }
+        .returnTojobDetails {
+            width: 40%;
+            height: 75%;
+            border-radius: 5px;
+            background-color: #77889380;
+            margin-left: 10%;
+            font-size: var(--fontsize20);
+            color:#495A64;
+            border: none;
+            margin-right: 2%;
+        
+        }
+        
+    }
+    button[disabled] {
+        opacity: 0.4;
+    }
+}
+
+.add-markup {
+    border: 1px solid #2F519B;
+    @include font-NiveauGrotesk();
+    font-size: var(--fontsize18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    span {
+        font-size: 42px;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 60px;
+        font-family: "NiveauGrotesk";
+        margin-right: 7px;
+        margin-top: -7px;
+        color: #2f519b;
+    }
+    p {
+        color: #2F519B;
+        font-size: 20px;
+        font-weight: bold;
+        @include font-NiveauGroteskBold();
+    }
+}
+
+.container-fluid.material{width: 96%;}
+@media screen and (max-width:$mobileScreenPotrait) {
+    .productButtons{
+        button{
+            height: 45px;
+        }
+    }
+    .quotes-container
+    {
+    .quotes-header
+    {
+        margin-bottom: 15px;
+    }
+}
+    .add-markup{float: none;margin: 0 auto;}
+    .product-footerSection,.product-footerSection .editProductFooter-rightSection{
+    display: block;
+    justify-content: space-between;
+    }
+    .product-footerSection .add-markup{
+        margin-bottom: 20px;
+    }
+    .product-footerSection .reprice-btn{
+        width: 180px;
+    }
+
+    .product-footerSection .editProductFooter-rightSection .materialPriceTotal{
+        display: block;
+    text-align: right;
+    }
+    .cost-summary{float: none;}
+    .review-quote-btn,.allProducts_returnJobDetails_Section .productButtons .materialAllProducts{height: 45px !important;margin-bottom: 20px;}
+    .quotes-container{margin-bottom: 200px;}
+    .allProducts_returnJobDetails_Section{display: inline;}
+    .container-three{    margin: 20px 0;    margin-left: 0px !important;}
+    .quotes-container .row-container .sidebar_tp{margin-top: 0px;}
+    .quotes-container .materialSearch{margin-left: 0px;}
+    .quotes-container .materialSearch .materials-landing-page,.quotes-container .materialSearch,.quotes-container .addOwnProduct,.quotes-container .row-container .right-container,.allProducts_returnJobDetails_Section .productButtons,.review-quote-btn,.quotes-container .materialSearch .materials-landing-page .addProduct{display: block;width: 100%;}
+   .quotes-container .row-container .container-sec,.quotes-container .row-container .container-three,.allProducts_returnJobDetails_Section .productButtons .returnTojobDetails,.allProducts_returnJobDetails_Section .productButtons .materialAllProducts {display: block;width: 100%;}
+   .quotes-container .addOwnProduct{display: flex;margin: 20px 0px;}
+   .quotes-container .materialSearch .materials-landing-page .addProduct p{font-size: 12px;}
+   .allProducts_returnJobDetails_Section .productButtons .returnTojobDetails{margin-left: 0px;margin-bottom: 20px;height: 45px;}
+}
+
+@media (min-width: 1100px) and (max-width: 1300px){
+
+    .quotes-container{
+        
+        .addOwnProduct {
+           
+       p {
+            font-size: 14px;
+        }
+    }
+}
+
+.materials-landing-page{
+
+    .addProduct{
+        height: 45px !important;
+        p{
+            font-size: var(--fontsize16) !important;
+        }
+    }
+}
+
+.addOwnProduct{
+    height: 45px !important;
+    span{
+
+        font-size: 44px !important;
+    }
+}
+
+.add-markup{
+    height: 45px !important;
+    span{
+        font-size: 44px !important;
+    }
+    p{
+        font-size: 14px;
+
+    }
+}
+
+}
+
+@media (min-width: 1400px) and (max-width: 1500px){
+    .materials-landing-page .addProduct{
+        width: 44% !important;
+    }
+
+}
+
+
+@media (min-width: 1601px) and (max-width: 1700px){
+    .add-markup{
+
+        p{
+
+            font-size: 20px;
+        }
+    }
+    .materials-landing-page{
+
+        .addProduct{
+            p{
+                font-size: var(--fontsize16) !important;
+            }
+        }
+    }
+    .addOwnProduct span,.add-markup span{ font-size: 60px !important;} 
+
+    .addOwnProduct,.add-markup,.materials-landing-page .addProduct{
+        height: 55px !important;
+        
+    }
+
+}
+
+@media (min-width: 1800px) and (max-width: 1950px){
+    .review-quote-btn_con{width: 55%!important;}
+    .add-markup{
+
+        span{
+            // font-size: 22px;
+        }
+    }
+
+    .add-markup{
+
+        p{
+
+            font-size: 20px;
+        }
+    }
+
+    .productButtons{
+
+        .returnTojobDetails{
+
+            height: 94% !important;
+        }
+
+        .materialAllProducts{
+            height: 94%  !important;
+
+        }
+
+    }
+    .review-quote-btn{
+        height: 55px;
+        margin: 0;
+    }
+
+    .materialPriceTotal {
+        .sublabel {
+            margin-top: 13px !important;
+        }
+    }
+    .container-sec {
+        min-height: 40vh !important;
+    }
+
+}
+
+@media (min-width: 1650px) and (max-width: 1750px){
+    .container-sec {
+        min-height: 40vh !important;
+    }
+    .materials-landing-page{
+        
+        .addProduct{
+             p{
+                font-size: 14px !important;
+        }
+    }
+}
+.quotes-container{ 
+    .materialSearch{ 
+    .materials-landing-page {
+    .addProduct{
+        width: 44%;
+}
+}
+}
+}
+
+}
+
+@media (min-width: 1900px) and (max-width: 1950px){
+    .labourbtn{
+        height: 55px;
+        width: 45%;
+    }
+}
+@media (min-width: 1600px) and (max-width: 1700px){
+    .allProducts_returnJobDetails_Section{
+    .productButtons{
+        width: 43%;
+    }
+}
+}
+.productButtons.review-quote-btn_con .labourbtn {background:#00AFE2}
+
+

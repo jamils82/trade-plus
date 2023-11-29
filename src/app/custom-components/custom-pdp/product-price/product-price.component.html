@@ -1,0 +1,88 @@
+<!-- <ng-container *ngIf="isPricingPermission"> -->
+<div *ngIf="screenName == 'plpList'" class="price-section plpList">
+    <ng-container *ngIf="isPricingPermission">
+        <div class="col-md-6 price">
+            <div class="price-heading">My Price</div>
+            <div style="min-height: 15px;">
+                <div *ngIf="!showEmptyPrice" class="price-value">{{ myPrice != '$0.00' ? myPrice : "POA"}} <span *ngIf="myPrice != 'POA'" class="EA">{{myPrice != '$0.00' ? unit : ''}}</span></div>
+            </div>
+            <div *ngIf="myPrice != 'POA'" class="price-gst-section">{{ myPrice != '$0.00' ? "(excl. GST)" : ''}}</div>
+        </div>
+    </ng-container>
+    <div class="col-md-6 retailPrice">
+        <div class="price-heading">Retail Price</div>
+        <div style="min-height: 15px;">
+            <div *ngIf="!showEmptyPrice" class="price-value">{{ retailPrice != '$0.00' ? retailPrice : "POA"}} <span *ngIf="retailPrice != 'POA'" class="EA">{{retailPrice != '$0.00' ? unit : ''}}</span></div>
+        </div>
+        <div *ngIf="retailPrice != 'POA'" class="price-gst-section">{{retailPrice != '$0.00' ? "(excl. GST)" : ''}}</div>
+    </div>
+</div>
+
+<div *ngIf="screenName == 'plpGrid'" class="price-section plpGrid">
+    <ng-container *ngIf="isPricingPermission">
+        <div class="col-md-6 price plpGrid">
+            <div class="price-heading plpGrid">My Price</div>
+            <div style="min-height: 15px;">
+                <div *ngIf="!showEmptyPrice" class="price-value plpGrid">{{ myPrice != '$0.00' ? myPrice : "POA"}} <span *ngIf="myPrice != 'POA'" class="EA">{{myPrice != '$0.00' ? unit : ''}}</span></div>
+            </div>
+            <div *ngIf="myPrice != 'POA'" class="price-gst-section plpGrid">{{ myPrice != '$0.00' ? "(excl. GST)" : ''}}</div>
+        </div>
+    </ng-container>
+    <div [ngClass]="screenName == 'plpGrid'? 'col-md-6':'col-md-5'" class="retailPrice plpGrid">
+        <div class="price-heading plpGrid">Retail Price</div>
+        <div style="min-height: 15px;">
+            <div *ngIf="!showEmptyPrice" class="price-value plpGrid">{{ retailPrice != '$0.00' ? retailPrice : "POA"}} <span *ngIf="retailPrice != 'POA'" class="EA">{{retailPrice != '$0.00' ? unit : ''}}</span></div>
+        </div>
+        <div *ngIf="retailPrice != 'POA'" class="price-gst-section plpGrid">{{retailPrice != '$0.00' ? "(excl. GST)" : ''}}</div>
+    </div>
+</div>
+
+<div *ngIf="screenName == 'editMyList'" class="price-section editMyList">
+    <ng-container *ngIf="isPricingPermission">
+        <div class="col-md-6 price plpGrid">
+            <div class="price-heading plpGrid">My Price</div>
+            <div style="min-height: 15px;">
+                <div *ngIf="!showEmptyPrice" class="price-value plpGrid">{{ myPrice != '$0.00' ? myPrice : "POA"}} <span class="EA">{{myPrice != '$0.00' ? unit : ''}}</span></div>
+            </div>
+            <div class="price-gst-section plpGrid">{{ myPrice != '$0.00' ? "(excl. GST)" : ''}}</div>
+        </div>
+    </ng-container>
+    <div [ngClass]="screenName == 'plpGrid'? 'col-md-6':'col-md-5'" class="retailPrice plpGrid">
+        <div class="price-heading plpGrid">Retail Price</div>
+        <div style="min-height: 15px;">
+            <div *ngIf="!showEmptyPrice" class="price-value plpGrid">{{retailPrice != '$0.00' ? retailPrice : "POA"}} <span class="EA">{{retailPrice != '$0.00' ? unit : ''}}</span></div>
+        </div>
+        <div class="price-gst-section plpGrid">{{retailPrice != '$0.00' ? "(excl. GST)" : ''}}</div>
+    </div>
+</div>
+
+
+<div *ngIf="(screenName=='cart') && isPricingPermission" class="price-section cart">
+    <div class="col-md-12 price cart">
+        <div class="price-heading cart">My Price</div>
+        <div style="min-height: 15px;">
+            <div *ngIf="!showEmptyPrice" class="price-value cart">{{ myPrice != '$0.00' ? myPrice : "POA"}} <span class="EA">{{myPrice != '$0.00' ? unit : ''}}</span></div>
+        </div>
+        <div class="price-gst-section cart">{{ myPrice != '$0.00' ? "(excl. GST)" : ''}}</div>
+    </div>
+</div>
+
+<div *ngIf="screenName == 'pdp'" class="price-section pdp">
+    <ng-container *ngIf="isPricingPermission">
+        <div class="pdp price">
+            <div class="price-heading">My Price</div>
+            <div style="min-height: 15px;">
+                <div *ngIf="!showEmptyPrice" class="price-value">{{ myPrice != '$0.00' ? myPrice : "POA"}} <span *ngIf="myPrice != 'POA'" class="EA">{{myPrice != '$0.00' ? unit : ''}}</span></div>
+            </div>
+            <div *ngIf="myPrice != 'POA'" class="price-gst-section">{{ myPrice != '$0.00' ? "(excl. GST)" : ''}}</div>
+        </div>
+    </ng-container>
+    <div class="pdp retailPrice">
+        <div class="price-heading">Retail Price</div>
+        <div style="min-height: 15px;">
+            <div *ngIf="!showEmptyPrice" class="price-value">{{ retailPrice != '$0.00' ? retailPrice : "POA"}} <span *ngIf="retailPrice != 'POA'" class="EA">{{retailPrice != '$0.00' ? unit : ''}}</span></div>
+        </div>
+        <div *ngIf="retailPrice != 'POA'" class="price-gst-section">{{retailPrice != '$0.00' ? "(excl. GST)" : ''}}</div>
+    </div>
+</div>
+<!-- </ng-container> -->

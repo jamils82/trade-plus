@@ -1,0 +1,26 @@
+<div class="menu-list">
+    <ul id="menu-items">
+        <li [ngClass]="selectedTab == 'dashboard' ? 'selectedTab':'notSelectedTab'"
+            (click)="pageNavigate('accountPage')"><a [ngClass]="payments ? 'notDisable':'isDisabled'">Account
+                Dashboard</a> </li>
+        <li [ngClass]="selectedTab == 'payments' ? 'selectedTab':'notSelectedTab'"
+            (click)="pageNavigate('paymentPage')"><a [ngClass]="payments ? 'notDisable':'isDisabled'">My Payments</a>
+        </li>
+        <li [ngClass]="selectedTab == 'invoices' ? 'selectedTab':'notSelectedTab'"
+            (click)="pageNavigate('invoicePage')"><a [ngClass]="invoice ? 'notDisable':'isDisabled'">Invoices &
+                Adjustments</a></li>
+        <li [ngClass]="selectedTab == 'statements' ? 'selectedTab':'notSelectedTab'"
+            (click)="pageNavigate('statementsPage')"><a
+                [ngClass]="invoice ? 'notDisable':'isDisabled'">Statements</a> </li>
+        <li [ngClass]="selectedTab == 'quotes' ? 'selectedTab':'notSelectedTab'" (click)="pageNavigate('quotesPage')"><a
+                [ngClass]="{'isDisabled': disableQuotes | async}">My Quotes </a> </li>
+        <!-- <li [ngClass]="selectedTab == 'mylist' ? 'selectedTab':'notSelectedTab'" (click)="pageNavigate('mylist')">My Lists</li> -->
+        <!-- <li [ngClass]="selectedTab == 'priceupdate' ? 'selectedTab':'notSelectedTab'"><a (click)="pageNavigate('priceupdate')" [ngClass]="{'isDisabled': disablePrices| async}">Price Updates </a> </li> -->
+        <li [ngClass]="selectedTab == 'pricefile' ? 'selectedTab':'notSelectedTab'"
+            (click)="pageNavigate('priceFilesPage')"><a [ngClass]="{'isDisabled': disablePrices| async}">Price Files
+            </a></li>
+        <li [ngClass]="selectedTab == 'download' ? 'selectedTab':'notSelectedTab'"
+            (click)="pageNavigate('downloadFilesPage')"><a [ngClass]="{'isDisabled': disablePrices| async}">Download Formats
+            </a></li>
+    </ul>
+</div>

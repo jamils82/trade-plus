@@ -1,0 +1,121 @@
+<div class="web-view">
+    <div class="loading" *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+    <div class="section_title">
+        <h1 class="heading">View Invoice / Credit Note</h1>
+    </div>
+    <div id="online_document_container" *ngFor="let data of individualDataSource">
+        <div id="online_document">
+            <div id="onlineinvoice_header">
+                <table>
+                    <tbody>
+                        <tr class="logocell">
+                            <td class="returnaddress"><b>{{data?.returnDetails?.address?.companyName}}</b><br>ABN {{data?.returnDetails?.address?.businessNumber}}<br>{{data?.returnDetails?.address?.address1}}
+                                <br>{{data?.returnDetails?.address?.address2}} {{data?.returnDetails?.address?.address3}}<br>Phone: {{data?.returnDetails?.address?.phone}} Fax: 02 92967398<br>Internet:
+                                www.tradelink.com.au
+                                <br>Email: tl@tradelink.com.au
+                            </td>
+                            <td class="title"><b style="font-family:'NiveauGroteskBold';">{{data.docType == 'INV' ? 'COPY TAX INVOICE':'COPY ADJUSTMENT NOTE'}}</b></td>
+                            <td><img src="../../../../../assets/images/wv-tradelink.jpg" class="logo" alt=""></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="billto"><b>BILL TO</b><br><br></td>
+                            <td class="billto">
+                                {{data.billToDetails.address.address1}}, {{data.billToDetails.address.address2}}<span
+                                    *ngIf="data.billToDetails.address.address2">, </span>
+                                {{data.billToDetails.address.address3}}<span
+                                    *ngIf="data.billToDetails.address.address3">, </span>
+                                {{data.billToDetails.address.city}}, {{data.billToDetails.address.postCode}},
+                                {{data.billToDetails.address.state}}
+                                <br><br>
+                            </td>
+                            <td class="invinfo">
+                                <b>{{data.docType == 'INV' ? 'Copy Tax Invoice No:':'Copy Adjustment Note No:'}}</b><br>
+                                <b>Invoice Date:</b><br>
+                                <b>Customer Order No:</b><br>
+                                <b>Sales Order No:</b><br>
+                                <b>Taken By:</b><br>
+                            </td>
+                            <td class="invinfo">
+                                {{ data.docNumber }}<br> {{ data.docDate }}<br> {{
+                                data.customerContext.customerPOReference }}<br> {{data.order.orderId}}
+                                <br> {{data.takenBy}}
+                                <br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="invinfo del-to" colspan="4">
+                                <br><br> <b>DELIVER TO </b>&nbsp;&nbsp;&nbsp;{{data.delivery?.notes}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="invoicedetail">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ITEM CODE</th>
+                            <th>DEL REF</th>
+                            <th class="itemdesc">ITEM DESCRIPTION</th>
+                            <th>UOM</th>
+                            <th>UNIT PRICE <br>INCL GST</th>
+                            <th>QTY</th>
+                            <th>UNIT PRICE <br>EXCL GST</th>
+                            <th>EXT PRICE <br>EXCL GST</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tableData of data.invoiceDetails">
+                            <td class="bleft"> {{ tableData.sku}}</td>
+                            <td>{{ tableData.shipmentRef}}</td>
+                            <td class="center">{{ tableData.description}}</td>
+                            <td class="right">{{ tableData.unitOfMeasure}}</td>
+                            <td class="right">{{ negativeConverter(tableData.linePrice.total)}}</td>
+                            <td class="right">{{ tableData.quantityOrdered}}</td>
+                            <td class="right">{{ negativeConverter(tableData.linePrice.subtotal)}}</td>
+                            <td class="right">{{ negativeConverter(tableData.linePrice.unitPrice)}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td class="btop" colspan="4">&nbsp;</td>
+                            <td colspan="3" class="right btop">Total exclusive of GST</td>
+                            <td class="right btop">{{ negativeConverter(data.totalEx) }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">&nbsp;</td>
+                            <td colspan="3" class="right btop">GST</td>
+                            <td class="right btop">{{ negativeConverter(data.totalGSTValue) }}</td>
+                        </tr>
+                        <!-- <tr>
+                            <td colspan="4">&nbsp;</td>
+                            <td colspan="3" class="right btop">Total inclusive of GST $</td>
+                            <td class="right btop">${{ data.totalInc | number : '1.2-2' }}</td>
+                        </tr> -->
+                        <tr>
+                            <td colspan="4">&nbsp;</td>
+                            <td colspan="3" class="right btop bbottom"><b> Invoice Total</b>
+                                <!-- <span class="subtoal-gst">&nbsp;(excl. GST) </span>  -->
+                            </td>
+                            <td class="right btop bbottom"><b>{{ negativeConverter(data.totalInc) }}</b></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <p class="smallfont"><b>WARRANTY &amp; CONSUMER GUARANTEE</b></p>
+                <p class="smallfont">Many of our products come with a warranty from us or the manufacturer. For full
+                    terms and conditions of any warranty, including how to claim, please refer to our website (if we are
+                    providing the warranty) or the manufacturer's website
+                    (if they are providing the warranty), and any separate warranty documents.</p>
+                <p class="smallfont">In addition, if you are a Consumer as defined in the Australian Consumer Law, these
+                    goods come with guarantees that cannot be excluded and you are entitled to a replacement or refund
+                    for a major failure and compensation for any other reasonably
+                    foreseeable loss or damage. You are also entitled to have the goods repaired or replaced if the
+                    goods fail to be of acceptable quality and the failure does not amount to a major failure.</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,286 @@
+@import '../../../quotes.component.scss';
+@import '../../../create-new-quotes-popup/create-new-quotes-popup.component.scss';
+
+.costTip {
+    font-size: 16px;
+    @include font-NiveauGrotesk();
+    color:$mediumBlue;   
+    margin:12px 0 28px;
+}
+.modal-body {
+    min-height: 250px;
+    h1 {
+        color: #495A60;
+        margin-bottom: 50px;
+        font-size: 32px;
+        line-height: 37px;
+        font-weight: normal;
+        @include font-NiveauGroteskBold();
+    }
+    .btn-cancel {
+        margin-right: 35px !important;
+        background: #77889380 !important;
+        color: #495A64 !important;
+    }
+}
+
+.loading-wrapper {
+    display: block;
+    margin-top: 35px;
+    .loader-more {
+        background: $lightBlue;
+    }
+}
+.starick{
+    color: #ce1141;
+    font-size: 14px;
+    @include font-NiveauGrotesk();
+}
+.btn.btn-blue {
+    text-transform: none;
+}
+.error{
+    margin-left: 150px;
+    margin-bottom: 20px;
+}
+.adjustFirst{
+    margin-bottom: 0px;
+}
+button[disabled] {
+    opacity: 1 !important;
+    background-color: #003D7A !important;
+    color: #FFFFFF !important;
+}
+.btn-wrapper{
+    text-align: right;
+    button {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    // width: 100%;
+    // .btnCancelButton {
+    //     margin-left: 64%;
+    // }
+    // .btnCancel{
+    //     float: right;
+    //     text-align: right;
+    //     width: 30%;
+    //     // margin-left: 60%;
+    // }
+    
+}
+.form-group{
+    .form-control{
+        border-radius: 2px;
+        font-size: 14px;
+        opacity: 1;
+        &::placeholder{
+            color:#778893;
+            opacity: 0.5;
+        }
+    }
+    // .adjustFirst{
+    //     margin-bottom: 0px;
+    //     input{
+    //         width: 100%;
+    //     }
+    //     .error {
+    //         margin-bottom: 20px;
+    //         margin-left: 150px;
+    //     }
+    // }
+    // label{
+    //     width: 150px;
+    //     margin-top: 10px;
+    // }
+    // input{
+    //     width: calc(100% - 150px);
+    // }
+    &.hide-label {
+        &label:not(:first-child) {
+            display: none;
+        }
+    }
+    & > label, .label{
+        display: inline-block;
+        vertical-align: middle;
+        width: 24%;
+    }
+    .input-wrap{
+        display: inline-block;
+        vertical-align: middle;
+        width: 70%;
+    }
+    .input-error {
+        color: #ce1141;
+        font-size: 14px;
+    }
+    // .spaceErr{
+    //     margin-left: 150px;
+    // }
+}
+.loading {
+    position: absolute;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    // background: radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+    background: transparent;
+}
+.loading:not(:required) {
+    /* hide "loading..." text */
+    // font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+.loading:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 10px;
+    position: relative;
+    top: 50%;
+    width: 1em;
+    height: 1em;
+    margin: auto;
+    -webkit-animation: spinner 150ms infinite linear;
+    -moz-animation: spinner 150ms infinite linear;
+    -ms-animation: spinner 150ms infinite linear;
+    -o-animation: spinner 150ms infinite linear;
+    animation: spinner 150ms infinite linear;
+    border-radius: 0.5em;
+    -webkit-box-shadow: 1.5em 0 0 0 #212738, 1.1em 1.1em 0 0 #212738, 0 1.5em 0 0 #212738, -1.1em 1.1em 0 0 #212738, -1.5em 0 0 0 #212738, -1.1em -1.1em 0 0 #212738, 0 -1.5em 0 0 #212738, 1.1em -1.1em 0 0 #212738;
+    box-shadow: 1.5em 0 0 0 #212738, 1.1em 1.1em 0 0 #212738, 0 1.5em 0 0 #212738, -1.1em 1.1em 0 0 #212738, -1.5em 0 0 0 #212738, -1.1em -1.1em 0 0 #212738, 0 -1.5em 0 0 #212738, 1.1em -1.1em 0 0 #212738;
+}
+    .mob
+    {
+        display: none;
+    }
+
+/* Animation */
+
+@-webkit-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@media screen and (max-width:$mobileScreenPotrait) {
+    .form-group{
+        display: block;
+        .labelCtrl{
+
+            width: 100%;
+        }
+        label{
+            width: 100%;
+        }
+        .input-wrap{
+            width: 100%;
+        }
+    }
+
+    .modal-body{
+
+        .btn-wrapper{
+            float: right;
+            margin-top: 28px;
+            display: flex;
+
+            .btnCancel{
+                float: right;
+                text-align: right;
+                width: 100%;
+                margin-left: 10px;
+            }
+        }
+    }
+
+
+
+}
+label{
+    @include font-NiveauGrotesk();
+}
+
+@media (min-width: 1650px) and (max-width: 1750px){
+    .form-group{
+        .form-control{
+
+        }
+        & > label, .label{
+            width: 19%;
+        }
+   
+    }
+}

@@ -1,0 +1,34 @@
+<ng-container *ngIf="cart$ | async as cart">
+    <ng-container *ngIf="entries$ | async as entries">
+        <div class="custom-order-summary">
+            <app-custom-order-summary [cart]="cart"></app-custom-order-summary>
+
+        </div>
+        <div class="loading " *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+        <div class="row ml-0 mr-0 buttons-layout">
+            <div class="col-4" style="float: left; padding-left: 0px;">
+                <a class="continue-shopping-achor" routerLink="/">
+                    <button class="continue-shopping-button" type="button">
+                    Continue Shopping 
+                    </button>
+                </a>
+            </div>
+            <div class="cart-button col-8" style="text-align: right; padding-right: 0px;">
+                <button *ngIf="!isMobile" class="cart-clear" (click)="clearCart()" type="button">
+                  Clear Cart 
+                </button>
+                <div class="searchtooltip">
+                    <button (click)="checkout(data)" *ngIf="entries.length" [disabled]="cart.totalPriceWithTax?.formattedValue == '$0.00' || (rejected | async) == true || poaProduct" class="checkout-button" type="button">
+                      Checkout
+                    </button>
+                    <span *ngIf="cart.totalPriceWithTax?.formattedValue == '$0.00'" class="tooltiptext">We are having issues processing this order.  Please Logout, press Ctrl+Shift+Delete then sign back in and try again.
+                    </span>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>
+
+<ng-template #data let-modal>
+    <app-shared-warning-popup [heading]="heading" [infoMessage]="infoMessage"></app-shared-warning-popup>
+</ng-template>

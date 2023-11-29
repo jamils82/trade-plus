@@ -1,0 +1,20 @@
+<div class="row mobileMenu mr-2" *ngIf="isMobile">
+    <div class="menubgbackground" *ngIf="openMenu || openAccountsBurger" (click)="bgClick();"></div>
+    <div class="d-flex align-items-center justify-content-center">
+        <span class="pr-3" (click)="openAccountMenuIcon()"><img src="assets/images/mobile/menu.svg"
+                alt="Menu Icon" /></span>
+        <app-m-hamburgermenuopen *ngIf="openAccountsBurger" class="totalMenuContainer"></app-m-hamburgermenuopen>
+        <span class="pl-3 pr-3" (click)="openProductSearch()"><img src="assets/images/mobile/search.svg"
+                alt="Search Icon" /></span>
+        <app-help-support></app-help-support>
+        <span class="pl-3" (click)="menuClick()"><i class="fa fa-user m-accountIcon"></i></span>
+        <app-custom-mini-cart class="pl-4"></app-custom-mini-cart>
+        <div class="totalMenuContainer" *ngIf="openMenu">
+            <app-accountdropdown></app-accountdropdown>
+            <button (click)="logout()">Logout</button>
+        </div>
+        <div class="totalMenuContainer" *ngIf="openSearch">
+            <app-m-product-search (searchvalueChange)="searchtext($event)" [searchVal]="searchVal"></app-m-product-search>
+        </div>
+    </div>
+</div>

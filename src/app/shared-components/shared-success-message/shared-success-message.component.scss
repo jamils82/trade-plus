@@ -1,0 +1,68 @@
+@import "../../shared/styles/variables.scss";
+@import "../../shared/styles/fontSize.scss";
+.success-message-container {
+    width: 50%;
+    // display: none;
+    margin: 0 auto 15px auto;
+    @media screen and (min-width: $Largescreen-1600) {
+        margin: 20px auto;
+        position: relative;
+        bottom: 35px;
+    }
+}
+
+.success-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #0B961B;
+    background-color: #0B961B1A;
+    color: #0B961B;
+    font-family: 'NiveauGrotesk';
+    padding: 10px;
+    font-size: 13px;
+    @media screen and (min-width: $Largescreen-1600) {
+        padding: 10px;
+        font-size: var(--fontsize16);
+    }
+}
+
+.tick-icon,
+.alert-icon {
+    width: 20px;
+    height: 20px;
+    @media screen and (min-width: $Largescreen-1600) {
+        width: 28px;
+        height: 28px;
+    }
+    margin-right: 10px;
+}
+
+.alert-message {
+    line-height: 1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 6px;
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    .success-message-container {
+        width: 92%;
+        margin: 15px auto;
+        .success-container {
+            border-radius: 4px;
+            padding: 5px 20px 8px 8px;
+            line-height: 1;
+            .tick-icon {
+                width: 18px;
+                height: 18px;
+            }
+        }
+        .close-btn {
+            right: 10px;
+        }
+    }
+}

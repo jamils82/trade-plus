@@ -1,0 +1,23 @@
+<ng-template cxOutletRef="TopHeaderNavigation" [cxOutletPos]="outletPosition.AFTER">
+    
+    <div class="job-acc-dropdown-section" *ngIf="accountDataService?.jobAccountList?.length && dataService.showPage" (clickElsewhere)="onDropClick($event)">
+        <div class="selected-job-acc" (click)="toggleJobDropdown($event)">
+            <span *ngIf="dataService.selectedJobAcc[0] !== undefined" class="selected-job-name">{{dataService.selectedJobAcc[0].searchName | textTransform: 'capitalize'}}</span>
+            <span *ngIf="dataService.selectedJobAcc[0] !== undefined" class="glyphicon glyphicon-remove-circle clear-job-option" (click)="checkCurrentCart('',$event,'clear')"></span>
+            
+            <span *ngIf="dataService.selectedJobAcc[0] === undefined">
+                {{headerLabels.selectJobAccText}}
+            </span>
+            <span class="glyphicon glyphicon-menu-down"></span>
+        </div>
+        <div class="job-acc-dropdown" *ngIf="accountDataService?.jobAccountList?.length && showDropdown">
+            <ul>
+                <li *ngFor="let acc of accountDataService?.jobAccountList; let i = index">
+                    <p (click)="dataService.selectedJobAcc[0]?.jobId !== acc.jobId ? checkCurrentCart(acc,$event,''):checkCurrentCart('',$event,'clear')" [ngClass]="{'selected': dataService.selectedJobAcc[0]?.jobId === acc.jobId}" class="job-option"><span class="job-name">{{acc.searchName | textTransform: 'capitalize'}}</span></p>
+                </li>
+            </ul>
+        </div>
+    
+    </div>
+
+</ng-template>

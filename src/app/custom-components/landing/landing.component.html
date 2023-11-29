@@ -1,0 +1,68 @@
+<div class="landing_main">
+    <div class="container">
+        <div class="top_header">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tradelink_logo">
+                        <img class="logo" src="../../../assets/images/Tradelink_word_only_R-White.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="landing_body">
+            <h1>WELCOME !</h1>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <p>Select if you have previously registered</p>
+                                <button class="btn btn-sign" (click)="signinRedirect('Login')">SIGN IN</button>
+                        </div>
+                    </div>
+                <div class="col-md-12">
+            <div class="box">
+                <p>For existing Tradelink Trade customers who have not used the portal or app before</p>
+                    <button class="btn btn-register" (click)="signinRedirect('Register')">REGISTER</button>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="box">
+                <p>Don’t have a Trade credit account? Click to apply</p>
+                    <button class="btn btn-trade" (click)="tradeAccount()">TRADE CREDIT APPLICATION</button>
+            </div>
+        </div>
+        <div class="col-md-12">
+        <div class="help">
+            <a class="helpLink" (click)="NeedHelp()">Need Help <span style="padding-left: 5px;" *ngIf="iconDown"><img src="../../../assets/icons/Icon_ionic-ios-arrow-down.svg"> </span> <span  style="padding-left: 5px;" *ngIf="iconUp"><img src="../../../assets/icons/Icon_ionic-ios-arrow-up.svg"> </span></a>
+            <ul *ngIf="contactUSDetail">
+                <li><a href="https://support.tradelink.com.au/s/contact-us" target="_blank" class="contact">Contact Us <span  style="padding-left: 10px;"><img src="../../../assets/icons/contactus_svg.svg"> </span> </a>  </li>
+                <li>Phone: 1300 658 277</li>
+                <li>Email: support@tradelink.com.au</li>
+            </ul>
+        </div>
+    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 
+<div class="landing_main">
+    <div class="container">
+        <div class="top_header">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tradelink_logo">
+                        <img class="logo" src="../../../assets/images/Tradelink_word_only_R-White.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+       <div class="landing_cong_body">
+        <h3>Congratulations!</h3>
+        <h4>Your account is ready to go.</h4>
+        <p> <span> <img class="logo" src="../../../assets/images/help_FILL0_wght400_GRAD0_opsz48.svg" alt=""> </span>Before you get started, please visit<span> <a href="#"> Profile Settings </a> > <a href="#"> Preferences </a> </span>  and make sure the pre-set options work for you.</p>
+        <button class="btn btn-sign">GET STARTED</button>
+    
+    </div>
+    </div>
+</div> -->

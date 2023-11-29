@@ -1,0 +1,519 @@
+@import '../../../shared/styles/variables.scss';
+@import '../../../shared/styles/fontSize.scss';
+.heading {
+    font-weight: bolder;
+    color: #495A64;
+    margin-bottom: 10px;
+    font-size: var(--fontsize40);
+    font-family: "NiveauGroteskbold";
+}
+.total-cart-summary-gst
+{
+    position: relative;
+    top:-2px;
+}
+.quote-header-backgound {
+    background-color: white;
+    padding: 20px 61px 20px 45px;
+    margin-top: 20px;
+    .header-heading {
+        color: #495A64;
+        font-family: 'NiveauGroteskbold';
+        font-size: var(--fontsize20);
+        margin-bottom: 0;
+    }
+    .header-description {
+        color: #495A64;
+        font-size: var(--fontsize18);
+        font-family: 'NiveauGrotesk';
+        margin-bottom: 0px;
+    }
+}
+
+.custom-top-padding {
+    padding-top: 20px !important;
+}
+
+.summary-heading {
+    color: #495A64;
+    font-family: 'NiveauGroteskbold';
+    font-size: var(--fontsize24);
+    margin-bottom: 0;
+}
+
+.quote_view {
+    padding: 0px 20px 20px 20px;
+    font-family: 'NiveauGrotesk';
+    color: #495A64;
+    h3 {
+        font-weight: 500;
+        font-size: 20px;
+        color: darkblue;
+        margin: auto;
+    }
+    .container {
+        padding: 0;
+        min-width: 100%;
+    }
+    .col-lg {
+        margin: auto;
+    }
+    // button {
+    //     background: #003D7A;
+    //     color: white;
+    //     border-radius: 7px;
+    // }
+    mat-icon {
+        color: grey;
+        padding-top: 4px;
+    }
+}
+
+.products-list {
+    background-color: #F6F6F6;
+    border-radius: 10px;
+    margin-bottom: 0;
+    padding: 0px 5px 0px 5px;
+    .product-list-row {
+        height: 85px;
+        align-items: center;
+        justify-content: space-between;
+        .product-list-image {
+            padding: 0 25px;
+            max-width: 7%;
+            ::ng-deep cx-media img {
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            ::ng-deep cx-media.is-missing {
+                height: 76px;
+                width: 76px;
+                img {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                }
+            }
+        }
+        .poduct-list-details {
+            padding: 0;
+            .product-name {
+                font-size: var(--fontsize20);
+                font-family: 'NiveauGroteskBold';
+                color: $pdp-font-color;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                // white-space: nowrap;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                line-height: 20px;
+            }
+            .itemCode {
+                font-size: var(--fontsize18);
+                font-family: 'NiveauGrotesk';
+                color: $pdp-font-color;
+                font-weight: 100;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+        .product-list-price {
+            padding: 0 110px;
+            font-size: var(--fontsize18);
+            text-align: center;
+        }
+        .product-list-data {
+            text-align: left;
+            color: #495A64;
+            font-family: 'NiveauGrotesk';
+            font-size: var(--fontsize18);
+        }
+    }
+}
+
+.products-list.even {
+    background-color: $white-color;
+}
+
+.listheaderDef {
+    font-size: var(--fontsize20);
+    font-family: 'NiveauGroteskBold';
+    color: $pdp-font-color;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+    top: 18px;
+    margin-bottom: 4px;
+}
+
+.listheaderDescription {
+    font-size: var(--fontsize18);
+    font-family: 'NiveauGrotesk';
+    color: $pdp-font-color;
+    font-weight: 100;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 10px;
+}
+
+.list-header {
+    margin-top: 20px;
+    margin-left: 0;
+    margin-right: 0;
+    .product-list-image {
+        padding: 0 25px;
+        max-width: 6.83%;
+    }
+}
+
+.header-heading-width {
+    max-width: 32.33%;
+}
+
+.header-row {
+    background-color: #E0E1E2;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    height: 70px;
+}
+
+.order-summary-total-detail {
+    padding: 50px 60px 60px 0px;
+    height: 254px;
+    font-family: 'NiveauGrotesk';
+}
+
+.custom-text {
+    margin-bottom: 0;
+    font-size: var(--fontsize18);
+    color: #495A64;
+}
+
+.cx-summary-amount {
+    font-size: var(--fontsize24);
+    font-family: 'NiveauGroteskBold';
+    text-align: right;
+}
+
+.cx-summary-label {
+    font-size: var(--fontsize24);
+    color: #495A64;
+}
+
+.excl-class {
+    font-size: var(--fontsize18);
+    color: #495A64;
+}
+
+.cart-summary-total-amount-value {
+    font-size: var(--fontsize34);
+    font-family: 'NiveauGroteskBold';
+    color: #495A64;
+}
+
+.cart-summary-total-amount-label {
+    font-size: var(--fontsize34);
+    color: #495A64;
+    font-family: 'NiveauGroteskBold';
+}
+
+.total-cart-summary-gst {
+    font-size: var(--fontsize18);
+    font-family: 'NiveauGrotesk';
+}
+
+.border-line {
+    border: 1px solid #f6f6f6;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.quoteAdderssVal {
+    word-wrap: break-word;
+}
+
+.btn-block.back {
+    width: 26%;
+    font-family: 'NiveauGroteskBold';
+    font-size: var(--fontsize20) !important;
+    background-color: #aebbc5;
+    border: 1px solid #aebbc5;
+    color: $pdp-font-color;
+    min-height: var(--buttonHeight60) !important;
+    max-height: var(--buttonHeight60) !important;
+    text-transform: inherit;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    margin-left: 20px;
+    &:focus {
+      box-shadow: 0 0 0 transparent;
+    }
+  }
+
+  .btn-block.convert_btn {
+    width: 50%;
+    font-family: 'NiveauGroteskBold';
+    font-size: 21px;
+    background-color: transparent;
+   
+    color: #003D7A;
+    min-height: var(--buttonHeight60) !important;
+    max-height: var(--buttonHeight60) !important;
+    text-transform: inherit;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    margin-left: 8px;
+    border: 1px solid #003D7A;
+    padding: 26px 12px;
+  }
+  .back_a{
+    color:#495A64;
+    font-size: var(--fontsize24) !important;
+    text-decoration: underline;
+    margin-top: 30px;
+    margin-left: 85px;
+    display: inline-block;
+    font-family: 'NiveauGroteskBold';
+  }
+
+  @media screen and (max-width: $mobileScreenPotrait) {
+      .quote_view {
+          padding: 20px;
+          .heading {
+              font-size: var(--fontsize20);
+              padding: 0;
+              display: flex;
+              align-items: center;
+              margin-bottom: 0;
+          }
+          .back-button {
+              padding: 0;
+              .btn-block.back {
+                width: 90%;
+              }
+          }
+          .quote-header-backgound {
+              padding: 10px 0px;
+              border-radius: 5px;
+              margin-top: 15px;
+              .header-heading-width,
+              .cust-details {
+                  padding: 0 10px 20px 10px;
+                  .header-heading {
+                    font-size: var(--fontsize18);
+                }
+                .header-description {
+                    font-size: var(--fontsize16);
+                }
+              }
+              .header-heading-width {
+                  max-width: 100%;
+              }
+              .job-account {
+                padding: 0 10px 0px 10px;
+                .header-heading {
+                    font-size: var(--fontsize18);
+                }
+                .header-description {
+                    font-size: var(--fontsize16);
+                }
+              }
+              .summary-heading {
+                    font-size: var(--fontsize18);
+                }
+          }
+          .order-summary-total-detail {
+              height: max-content;
+              padding: 10px 0 20px 0;
+              .custom-text {
+                  font-size: var(--fontsize16);
+              }
+              .para {
+                  display: flex;
+                  .custom-text:last-child {
+                    padding-left: 2px;
+                  }
+              }
+              .cart-summary-total-amount-label
+              , .cart-summary-total-amount-value {
+                  font-size: var(--fontsize23);
+                  span {
+                      font-family: 'NiveauGrotesk';
+                      font-size: var(--fontsize18);
+                  }
+              }
+              .products-list {
+                  .product-list-row {
+                      height: auto;
+                  }
+              }
+          }
+          .quotes-detail-view {
+              .products-list {
+                background-color: $white-color;
+                border-radius: 0;
+                margin: 0 10px;
+                padding: 0;
+              .product-list-row {
+                  height: auto;
+                  margin: 0;
+                  justify-content: flex-start;
+                  padding: 10px 0;
+                  .product-list-image {
+                    ::ng-deep cx-media.is-missing {
+                        height: 66px;
+                        width: 66px;
+                    }
+                  }
+                  .poduct-list-details {
+                    .product-name {
+                        white-space: pre-wrap;
+                        line-height: 1.2;
+                        font-size: var(--fontsize19);
+                    }
+                }    
+              }
+            }
+            .products-list.even {
+                background-color: #F6F6F6;
+            }
+            .product-list-image {
+                max-width: 25%;
+                padding: 0 15px;
+                margin-bottom: 10px;
+                cx-media {
+                    img {
+                        max-width: 100%;
+                    }
+                }
+            }
+            .poduct-list-details {
+                margin-bottom: 10px;
+            }
+            .item-label {
+                font-size: var(--fontsize18);
+                font-family: 'NiveauGrotesk';
+                color: $pdp-font-color;
+                .gst {
+                    font-size: var(--fontsize16);
+                }
+            }
+            .product-list-data {
+                text-align: right;
+                font-family: 'NiveauGroteskBold';
+                font-size: var(--fontsize18);
+                color: $pdp-font-color;
+            }
+          }
+          .custom-top-padding {
+              margin-bottom: 40px;
+              padding-top: 10px !important;
+          }
+          .chips {
+            justify-content: center;
+          }
+      }
+
+  }
+
+  @media (min-width: 1600px) and (max-width: 1700px){
+    .btn-block.convert_btn {
+        width: 41%;
+    }
+    .back_a {
+        margin-top: 20px;
+    }
+  }
+  .row.quote-header-backgound .col-md-2{
+    flex: 0 0 14%;
+    max-width: 14%;
+    margin-right: 0px;
+    padding-left: 10px;
+    padding-right: 0px;
+  }
+  .comment_button_section label{
+    font-family: NiveauGroteskBold;
+    font-size: var(--fontsize24);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    letter-spacing: 0;
+    opacity: 1;
+    padding-top: 30px;
+    color: #495a64;
+  }
+
+
+  .comment_button_section textarea{
+    border-radius: 2px;
+    opacity: 1;
+    width: 100%;
+    padding: 18px 20px;
+    font-family: 'NiveauGrotesk';
+    resize: none;
+    min-height: 85px;
+    border: 1px solid #d3d6db!important;
+    background: #fff 0 0 no-repeat padding-box;
+
+  }
+
+  .wishlist {
+    background-color: $anchor-color;
+    border: 1px solid $anchor-color;
+    color: $white-color;
+    font-family: "NiveauGroteskBold";
+    font-size: 1.1rem;
+    // height: 40px;
+    border-radius: 8px;
+    text-transform: none;
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+    @media screen and (max-width: 550px){
+        border-radius: 8px;
+    }
+}
+
+.addToCart{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #003d7a;
+    border: 1px solid #003d7a;
+    font-family: NiveauGroteskBold;
+    font-size: 1.1rem;
+    color: #fff;
+    min-height: var(--buttonHeight60);
+    border-radius: 8px;
+    text-transform: none;
+}
+.row.addAllToCart {
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-top: 95px;
+}
+.mr-0{
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+@media (min-width: 1600px) and (max-width: 1700px){
+    .row.addAllToCart{
+        width: 82%;
+        float: right;
+    }
+}

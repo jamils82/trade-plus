@@ -1,0 +1,832 @@
+@import "../styles/variables.scss";
+cx-storefront {
+    min-height: 117.5vh !important;
+    header {
+        background-color: $blue-color;
+        box-shadow: 0px 0px 4px 2px $header-gray;
+        position: sticky;
+        top: 0;
+        height: 150px;
+        z-index: 3;
+        // background: url(../../../assets/images/bgColorImg.png), #fff;
+        background-size: 100% 25% !important;
+        background-repeat: no-repeat;
+        z-index: 99;
+        cx-banner cx-media img {
+            margin-top: 0.7rem;
+            margin-bottom: 0rem;
+        }
+        select {
+            margin-top: 42px;
+            border: 1px solid #c8c9c7;
+            border-radius: 0.25rem;
+            color: #979797;
+            height: 2.0625rem;
+            width: 12.7rem;
+            cursor: pointer;
+            option {
+                cursor: pointer;
+            }
+        }
+        label {
+            display: inline-flex;
+        }
+        .SiteContext {
+            color: $white-color;
+            z-index: 1;
+            &:after {
+                border-top: none;
+            }
+        }
+        .menuItemContainer {
+            // min-width: 3rem;
+            // height: 2.7rem;
+            // font-size: $font-size-1;
+            ul {
+                box-shadow: $box-shadow-grey 0rem 6px 4px 0px;
+                li .contact-us-info a {
+                    text-decoration: underline;
+                }
+                li a {
+                    color: $header-menu-a-font-color;
+                    &:active {
+                        color: $header-menu-a-font-color;
+                        background-color: $white-color;
+                    }
+                }
+            }
+        }
+    }
+    .BottomHeaderSlot {
+        max-width: 1920px !important;
+        width: 100%;
+        /* position: relative; */
+        margin: 0 auto;
+    }
+    app-custombreadcrub {
+        min-width: 88%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        margin: auto;
+        align-items: flex-start;
+        background-color: #E8EFF7;
+        font-family: 'NiveauGrotesk';
+        font-size: var(--fontsize14);
+        padding: 10px 15px;
+        display: flex;
+        flex-direction: row;
+        @media screen and (min-width: 1200px){
+            max-width: 1140px;
+        }
+        @media screen and (min-width: 992px){
+            max-width: 960px;
+        }
+        @media screen and (min-width: 768px){
+            max-width: 720px;
+        }
+        @media screen and (min-width: 576px){
+            max-width: 540px;
+        }
+        nav {
+            justify-content: left;
+            font-size: var(--fontsize14);
+            span {
+                a {
+                    color: $blue-color;
+                    text-decoration: underline;
+                    text-transform: capitalize;
+                    &:hover {
+                        color: $blue-color;
+                    }
+                    &:focus {
+                        outline: none;
+                    }
+                    // &:first-letter {
+                    //     text-transform: uppercase !important;
+                    // }
+                }
+                &::after {
+                    content: '\003E' !important;
+                    color: $blue-color;
+                    padding: 0 5px;
+                }
+            }
+        }
+        h1 {
+            color: $pdp-font-color;
+            font-family: 'NiveauGrotesk';
+            font-size: var(--fontsize14);
+            margin-bottom: 0;
+            padding: 3px 0px;
+            text-transform: capitalize;
+        }
+    }
+}
+
+.TLPreferencePageTemplate,
+.TLMyQuotesPageTemplate,
+.SearchResultsGridPageTemplate,
+.ProductGridPageTemplate,
+.TLAccountPageTemplate,
+.TLPaymentPageTemplate,
+.TLInvoicePageTemplate,
+.TLStatementsPageTemplate,
+.TLPriceFilesPageTemplate,
+.TLDownloadFilesPageTemplate {
+    app-custombreadcrub {
+        min-width: 98%;
+    }
+}
+
+// @media screen and(max-width: $screenMedium-1200) {
+//     cx-storefront {
+//         header {
+//             input {
+//                 width: 18rem;
+//             }
+//         }
+//     }
+// }
+
+$screenMedium-1200: "1200px";
+
+// @media screen and(max-width: $ipadScreen-768) {
+//     cx-storefront header input {
+//         width: 11rem;
+//     }
+// }
+
+// @media screen and(max-width: $m991) {
+//     cx-storefront cx-page-layout.LandingPage2Template cx-page-slot.Section1 {
+//         margin-top: 1rem;
+//     }
+//     header {
+//         .header {
+//             // .SiteLogo {
+//             //     top: 1.5rem;
+//             // }
+//             .SiteContext {
+//                 background-color: transparent;
+//                 position: absolute;
+//                 top: -7px;
+//                 padding-left: 0 !important;
+//             }
+//             .SiteLinks {
+//                 background-color: transparent;
+//                 position: absolute;
+//                 top: -0.2rem;
+//                 right: 2rem;
+//                 display: flex;
+//             }
+//         }
+//     }
+// }
+
+// @media screen and(max-width: $mobileScreenPotrait) {
+//     // cx-storefront header .header .SiteLogo {
+//     //     padding: 0 0 1rem 0;
+//     //     width: 24vw;
+//     // }
+//     header {
+//         .header {
+//             .SiteContext {
+//                 padding-left: 0.7rem;
+//                 padding-top: 0.7rem;
+//             }
+//         }
+//     }
+//     cx-storefront cx-paragraph p {
+//         font-size: 0.78rem;
+//     }
+//     cx-storefront header label {
+//         word-break: break-all;
+//         width: 16rem;
+//     }
+//     cx-storefront header .menuItemContainer ul {
+//         box-shadow: none;
+//     }
+// }
+
+// @media screen and(max-width: $smallmobileScreenPotrait) {
+//     cx-storefront cx-paragraph p {
+//         font-size: 0.67rem;
+//     }
+//     cx-storefront header cx-banner cx-media img {
+//         width: 6rem;
+//         height: auto;
+//     }
+// }
+
+.header {
+   position: relative;
+   max-width: 1920px !important;
+   width: 100%;
+   padding-right: 3px !important;
+   padding-left: 3px !important;
+   margin-right: auto;
+   margin-left: auto;
+}
+
+.SiteLogo {
+    width: 100% !important;
+    margin-top: 20px;
+    cx-banner cx-generic-link a{
+        position: absolute;
+        left: 2rem;
+        top: 3.8rem;
+        width: 14%;
+        // position: absolute;
+    	// top: 3rem;
+	    // left: -4rem;
+        cx-media img {
+            width: 100%;
+        }
+    }
+}
+
+.SiteLogin {
+	position: absolute;
+	top: 1em;
+	font-size: 14px;
+	font-family: 'NiveauGrotesk';
+	right: 1rem;
+}
+
+.NavigationBar {
+    position: absolute;
+    top: 4.6rem;
+	left: 19.8rem;
+    display: flex !important;
+    min-height: 63px;
+    flex-wrap: nowrap;
+    z-index: -9;
+    align-items: center;
+	font-size: 0.875rem;
+	font-family: 'NiveauGrotesk';
+	color: $white-color;
+}
+
+.MiniCart {
+    position: absolute;
+    top: 2.1rem;
+    right: 8rem;
+    display: flex !important;
+    flex-wrap: nowrap;
+    align-items: center;
+    cx-paragraph {
+        visibility: hidden;
+        position: absolute;
+        left: 0;
+        height: 50%;
+        width: 100px;
+    }
+    cx-paragraph:last-child {
+        width: 170px !important;
+        left: unset !important;
+        right: 40px !important;
+    }
+}
+.QuickOrderButtonSlot {
+    position: absolute;
+    right: -46rem;
+    top: 1.1rem;
+    z-index: -9999;
+    min-width: 165px;
+    a {
+        padding: 10px 22px;
+        background-color: $cart-yellow-color;
+        border-radius: 5px;
+        color: $blue-color;
+        font-size: 1.125rem;
+        font-family: 'NiveauGroteskBold';
+        cursor: pointer;
+        button {
+            border-radius: 5px;
+            color: #003d7a !important;
+            font-family: 'NiveauGroteskBold' !important;
+            font-size: 1rem !important;
+           &:hover{
+            background: none !important;
+           }
+           .mat-ripple{
+            &.mat-menu-ripple{
+                display: none;
+            }
+           } 
+        }
+    }
+}
+
+.RequestQuoteButtonSlot {
+    position: absolute;
+    right: -32rem;
+    top: 1.1rem;
+    z-index: -9999;
+    min-width: 165px;
+    a
+     {
+        padding: 10px 12px;
+        background-color: $cart-yellow-color;
+        border-radius: 5px;
+        color: $blue-color;
+        font-size: 1.125rem;
+        font-family: 'NiveauGroteskBold';
+        cursor: pointer;
+        button {
+            border-radius: 5px;
+            color: #003d7a !important;
+            font-family: 'NiveauGroteskBold' !important;
+            font-size: 1rem !important;
+            &:hover{
+                background: none !important;
+               }
+               .mat-ripple{
+                &.mat-menu-ripple{
+                    display: none;
+                }
+               }
+        }
+        
+
+    }
+}
+
+// .QuickOrderButtonSlot.disabled.mat-menu-item {
+//   pointer-events: none;
+//   a {
+//       button {
+//         opacity: 0.5;
+//         cursor: default;
+//       }
+//   }
+// }
+
+
+
+// .RequestQuoteButtonSlot.disabled {
+//     pointer-events: none;
+//     a {
+//         opacity: 0;
+//         cursor: default;
+//     }
+//   }
+
+
+.SearchBox {
+	position: absolute;
+	top: 4.45rem;
+	right: 20rem;
+	margin: 0px;
+	.searchbox {
+		padding-top: 0px;
+		padding-bottom: 0px;
+		width: 415px;
+        min-width: 200px;
+        border-radius: 5px;
+		background-color: $white-color;
+		font-family: 'NiveauGrotesk';
+		color: $pdp-font-color;
+        line-height: 0;
+        align-items: center;
+        height: 44px;
+        input {
+            height: 30px;
+            font-size: var(--fontsize18);
+            line-height: 2;
+        }
+		.reset {
+			cx-icon {
+				&::before {
+					vertical-align: middle;
+				}
+			}
+		}
+        .search-icon {
+            color: $pdp-font-color;
+            cx-icon {
+                &::before {
+                    font-size: 1.3rem;
+                    margin-right: 15px;
+                }
+            }
+        }
+	}
+	#results {
+        width: 130%;
+        .message {
+			font-family: 'NiveauGroteskBold';
+			color: $searchBar-text-color;
+			font-size: var(--fontsize18);
+        }
+		.suggestions {
+			font-family: 'NiveauGroteskBold';
+			color: $searchBar-text-color;
+			font-size: var(--fontsize18);
+		}
+		.products {
+			li {
+				a {
+					display: flex;
+					flex-direction: row;
+					position: relative;
+					align-items: center;
+				}
+				cx-media {
+					width: 50px;
+					height: 50px;
+				}
+				.name {
+					font-family: 'NiveauGrotesk';
+					color: $searchBar-text-color;
+					font-weight: 300;
+					font-size: var(--fontsize18);
+                    width: 50%;
+                    line-height: normal;
+                    white-space: normal;
+				}
+				.price {
+					text-align: right;
+					position: absolute;
+					right: 15px;
+					font-family: 'NiveauGroteskBold';
+					color: $searchBar-text-color;
+					font-size: var(--fontsize18);
+				}
+			}
+		}
+	}
+}
+// cx-searchbox:hover:after{
+//     position: absolute;
+//     content: 'Add "QUOTATION MARKS" around multiple words to narrow your search';
+//     top: 45px;
+//     left: 0px;
+//     background-color:#ffffff;
+//     padding: 0.5rem 1rem !important;
+//     color: black;
+//     font-family: 'NiveauGroteskBold';
+//     font-size: var(--fontsize14);
+//     border-radius: 7px;
+//   }
+
+@media screen and (max-width: $Largescreen-1440) {
+    cx-searchbox:hover:after{
+        top:42px;
+    }
+    cx-storefront {
+        header {
+            height: 135px;
+        }
+    }
+    // .SiteLogo {
+    //     cx-banner cx-generic-link a {
+    //         top: 3rem;
+    //         cx-media img {
+    //             width: 100%;
+    //         }
+    //     }
+    // }
+    .NavigationBar {
+        top: 4.2rem;
+        left: 15.8rem;
+        z-index: -9;
+        // font-size: 1.125rem;
+    }
+    .QuickOrderButtonSlot {
+        top: 0.7rem;
+        right: -26rem;
+        a {
+            font-size: 1rem;
+            padding: 8px 26px;
+            // font-size: 1.125rem;
+        }
+    }
+    .RequestQuoteButtonSlot {
+        top: 0.7rem;
+        right: -15rem;
+        a {
+            font-size: 1rem;
+            padding: 8px 12px;
+            // font-size: 1.125rem;
+        }
+    }
+    .SearchBox {
+        right: 13rem;
+        margin: 0 !important;
+        top: 1.4rem;
+        .searchbox {
+            // width: 20rem;
+            height: 40px;
+            input {
+                // height: 44px;
+                // font-size: 1.125rem;
+            }
+            .search-icon cx-icon {
+                &::before {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+        #results {
+            .suggestions {
+                // font-size: 1.125rem;
+            }
+            .products {
+                li {
+                    .name,
+                    .price {
+                        // font-size: 1.125rem;
+                    }
+                }
+            }
+        }
+    }
+}
+// @media screen and(max-width: $ScreenMedium-1300) and (min-width: $mobileScreenPotrait) {
+// 	.SiteLogo {
+//         cx-banner cx-generic-link a{
+//             left: -3rem;
+//             cx-media img {
+//                 width: 55%;
+//                 margin-left: 5px;
+//             }
+//         }
+//     }
+// 	.SiteLogin {
+// 		right: 7rem;
+// 	}
+// 	.NavigationBar {
+// 		margin-left: 6rem;
+//         margin-top: 7.5rem;
+// 		.flyout {
+// 			font-size: 10px;
+// 		}
+// 	}
+//     .QuickOrderButtonSlot {
+//         right: 1rem;
+//     }
+// 	.SearchBox {
+// 		right: 10rem;
+// 		.searchbox {
+//             min-width: 250px !important;
+// 			width: 250px !important;
+// 		}
+// 	}
+// }
+
+@media screen and (max-width: $mobileScreenPotrait){
+    cx-storefront header {
+        height: 125px;
+    }
+    .SiteLogo cx-banner cx-generic-link a cx-media img {
+        width: 220px;
+    }
+    .SearchBox {
+        width: 100%;
+        left: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+        .searchbox {
+            width: 100%;
+        }
+    }
+    .MiniCart {
+        position: unset;
+        top: 1.5rem;
+        right: 8rem;
+        display: flex !important;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    .QuickOrderButtonSlot a
+    {
+        font-family: 'NiveauGrotesk';
+        font-weight: 600;
+    }
+    .RequestQuoteButtonSlot a
+    {
+        font-family: 'NiveauGrotesk';
+        font-weight: 600;
+    }
+    .SiteLogo cx-banner cx-generic-link a{
+        width: 225px;
+        top: 1.5rem;
+        left: 5rem;
+    }
+    .SiteLogo {
+        width: auto!important;
+        margin-top:0px;
+    }
+
+    cx-storefront header cx-banner cx-media img {
+        margin-top: 0;
+    }
+    .QuickOrderButtonSlot {
+        top: 2rem;
+        right: 5rem;
+        a {
+            border-radius: 2px;
+            padding: 10px 38px;
+        }
+    }
+    .RequestQuoteButtonSlot {
+        top: 2rem;
+        right: 5rem;
+        a {
+            border-radius: 2px;
+            padding: 10px 2px;
+        }
+    }
+    app-custombreadcrub {
+        display: none !important;
+    }
+    .OrderChekoutTemplate,
+    .OrderConfirmationPageTemplate,
+    .MultiStepCheckoutSummaryPageTemplate {
+        header {
+        height: 85px !important;
+      }
+      .SiteLogo cx-banner cx-generic-link a cx-media img {
+        width: 186px;
+        }
+      .SiteLogo cx-banner cx-generic-link a
+      {
+          left:3.5rem !important;
+          top:2.3rem !important;
+      }
+      header cx-banner cx-media img {
+        margin-top: 0px;
+      }
+    }
+}
+
+// .MultiStepCheckoutSummaryPageTemplate .dropdown-menu-end li:nth-child(2) {display: none !important;}
+
+
+@media screen and (max-width: 550px){
+    .SiteLogo cx-banner cx-generic-link a{
+        width: 180px;
+        top: 1.5rem;
+        left: 3.5rem;
+    }
+    .TLMobSiteLogoSlot{
+        width: 25%;
+        top: 1.7rem;
+        left: 50px;
+        position: absolute;
+    }
+    .QuickOrderButtonSlot {
+        top: 1.8rem;
+        right: -38px;
+        a {
+            padding: 7px 10px;
+            font-size: 0.7rem;
+        }
+    }
+    .RequestQuoteButtonSlot {
+        top: 1.8rem;
+        right: 60px;
+        a {
+            padding: 7px 10px;
+            font-size: 0.7rem;
+        }
+    }
+    cx-storefront header cx-banner cx-media img {
+        margin-top: 1px;
+    }
+    .SiteLogo cx-banner cx-generic-link a cx-media img {
+        width: 165px;
+    }
+}
+@media screen and (max-width: 400px){
+    cx-storefront header cx-banner cx-media img {
+        margin-top: 3px;
+    }
+    .SiteLogo cx-banner cx-generic-link a cx-media img {
+        width: 158px;
+    }
+    .QuickOrderButtonSlot a {
+        font-size: 0.75rem;
+        padding: 5px 8px;
+    }
+    .RequestQuoteButtonSlot a {
+        font-size: 0.75rem;
+        padding: 5px 8px;
+    }
+
+}
+@media screen and (max-width:375px){
+    cx-storefront header cx-banner cx-media img {
+        margin-top: 4px;
+    }
+    .SiteLogo cx-banner cx-generic-link a cx-media img {
+        width: 148px;
+    }
+
+}
+@media screen and (max-width:340px){
+    .SiteLogo cx-banner cx-generic-link a cx-media img {
+        width: 125px;
+    }
+    cx-storefront header cx-banner cx-media img {
+        margin-top: 5px;
+    }
+    .QuickOrderButtonSlot a {
+        font-size: 0.7rem;
+        padding: 5px 8px;
+    }
+    .RequestQuoteButtonSlot a {
+        font-size: 0.7rem;
+        padding: 5px 8px;
+    }
+}
+
+.NavigationBar{
+    top: 4.2rem;
+    left: -20px;
+    .is-initialized{
+        text-align: right;
+        margin-right: 10px;
+        top: -2px;
+        margin-top: -13px;
+        img{
+            width: 79%;
+        }
+    }
+
+}
+@media (min-width: 1100px) and (max-width: 1200px){
+    .QuickOrderButtonSlot{right: -25rem;}
+    .RequestQuoteButtonSlot{right: -14rem;}
+}
+@media (min-width: 1400px) and (max-width: 1500px){
+    .QuickOrderButtonSlot{right: -39rem;}
+    .RequestQuoteButtonSlot{right: -28rem;}
+}
+@media (min-width: 1501px) and (max-width: 1600px){
+    .QuickOrderButtonSlot{right: -32rem;}
+    .RequestQuoteButtonSlot{right: -21rem;}
+    .NavigationBar{left: 42px;}
+}
+@media (min-width: 1601px) and (max-width: 1700px){
+    .QuickOrderButtonSlot{right: -26rem;}
+    .RequestQuoteButtonSlot{right: -16rem;}
+    .NavigationBar{left: 43px;}
+    .mat-focus-indicator.mat-menu-item{padding: 0 0.5rem !important;}
+}
+@media (min-width: 1700px) and (max-width: 1800px){
+    .QuickOrderButtonSlot{right: -31rem;}
+    .RequestQuoteButtonSlot{right: -20rem;}
+    .NavigationBar{left: 42px;}
+}
+@media (min-width: 1800px) and (max-width: 1950px){
+    .QuickOrderButtonSlot{right: -35rem;}
+    .RequestQuoteButtonSlot{right: -24rem;}
+    .NavigationBar{left: 43px;}
+}
+
+@media (min-width: 1500px) and (max-width: 1920px){
+    .SearchBox{
+    position: absolute;
+    top: 0.4rem;
+    right: 16rem;
+    }
+   
+    .SearchBox .searchbox{min-width: 650px;width: 446px;}
+    .MiniCart{top: 2.1rem;right: 10rem;}
+    .RequestQuoteButtonSlot a{padding: 10px 7px;}
+    .cart-link .quantity .fa-circles{top: -4px !important;}
+}
+
+
+@media (min-width: 1500px) and (max-width: 1600px){
+    .SearchBox .searchbox{min-width: 439px;}
+    .cart-link .quantity .fa-circles{top: 0px !important;}
+    
+}
+@media (min-width: 1601px) and (max-width: 1790px){
+    .SearchBox .searchbox{min-width: 410px;width: 406px;}
+    
+}
+@media (min-width: 1921px) and (max-width: 5160px){
+    .SearchBox{
+        top: 0.4rem;
+        right: 14rem;
+    }
+     .cart-link .quantity .fa-circles{top: -4px !important;}
+    .RequestQuoteButtonSlot a{padding: 10px 7px;}
+    .SearchBox .searchbox{ min-width: 439px;width: 550px;}
+    .QuickOrderButtonSlot{right: -38rem;}
+    .RequestQuoteButtonSlot{right: -27rem;}
+    .NavigationBar{left: 43px;}
+
+    
+}
+.mat-menu-item[disabled] {
+    color: default;
+    opacity: 0.3;
+    cursor: auto !important;
+    pointer-events: auto !important;
+}

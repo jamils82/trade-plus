@@ -1,0 +1,310 @@
+<div class="quote_view">
+    <div class="container">
+        <div class="row">
+            <div class="col-8 col-sm-8 col-md-6 heading">
+                QUOTE NO. {{quoteDetailViewList.erpCode ? quoteDetailViewList.erpCode : quoteDetailViewList.code }}
+            </div>
+            <!-- <div class="col-4 col-sm-4 col-md-6 back-button"> -->
+                <!-- <button class="btn btn-block back" (click)="backClicked()">Back</button> -->
+            <!-- </div> -->
+           
+            
+            <br />
+        </div>
+
+        <div class="row quote-header-backgound">
+            <div class="col-12 col-sm-12 col-md-2 header-heading-width">
+                <p class="header-heading"> Order / Job Ref. </p>
+                <p class="header-description"> {{quoteDetailViewList?.purchaseOrderNumber}} </p>
+            </div>
+            <div class="col-12 col-sm-12 col-md-2 cust-details">
+                <div class="col-12 col-sm-12 col-md-12 cust-details">
+                <p class="header-heading"> Attention </p>
+                <p class="header-description lo_sensitive"> {{quoteDetailViewList?.contactFirstName}}  {{quoteDetailViewList?.contactLastName}}
+                </p>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 cust-details">
+                <p class="header-heading"> Email: </p>
+                <p class="header-description"> {{quoteDetailViewList?.email}}
+                </p>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-2 cust-details">
+            <div class="col-12 col-sm-12 col-md-12 cust-details">
+            <p class="header-heading"> Quote Date </p>
+            <p class="header-description"> {{ quoteDetailViewList.createdDate | date: 'dd/MM/yyyy' }}
+            </p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 cust-details">
+            <p class="header-heading"> Expiry Date</p>
+            <p class="header-description">{{ quoteDetailViewList.expirationDate | date: 'dd/MM/yyyy' }} 
+            </p>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-2 cust-details">
+        <div class="col-12 col-sm-12 col-md-12 cust-details">
+        <p class="header-heading"> Prepared by </p>
+        <p class="header-description">   {{quoteDetailViewList.quoteProcessedBy}}
+        </p>
+    </div>
+   
+</div>
+
+<div class="col-12 col-sm-12 col-md-2 cust-details">
+    <div class="col-12 col-sm-12 col-md-12 cust-details">
+    <p class="header-heading"> Customer Details </p>
+    <p class="header-description">  {{quoteDetailViewList?.accountAddress?.formattedAddress}}
+    </p>
+</div>
+
+</div>
+
+<div class="col-12 col-sm-12 col-md-2 cust-details">
+    <div class="col-12 col-sm-12 col-md-12 cust-details" *ngIf="quoteDetailViewList.deliveryModeName == 'Delivery'">
+    <p class="header-heading"> Address Details</p>
+    <p class="header-description quoteAdderssVal"> {{address}}
+    </p>
+</div>
+
+<div class="col-12 col-sm-12 col-md-12 cust-details" *ngIf="quoteDetailViewList.deliveryModeName == 'Pick Up'">
+    <p class="header-heading"> Branch Details</p>
+    <p class="header-description"> {{quoteDetailViewList?.deliveryAddress?.formattedAddress}}
+    </p>
+</div>
+
+</div>
+            <div class="col-12 col-sm-12 col-md-2 cd_status">
+                <div class="col-md-12">
+                    <mat-chip-list aria-label="Status selection">
+                   <mat-chip class="chips" style="text-transform: uppercase; justify-content: center;" [ngStyle]="status(quoteDetailViewList.state)" >
+                           {{quoteDetailViewList.state == 'BUYER_ORDERED' ? 'CONVERTED' : quoteDetailViewList.state}}
+                        </mat-chip>
+                    </mat-chip-list>
+                
+            </div>
+            </div>
+        </div>
+        <div class="row custom-top-padding quote-header-backgound">
+            <div class="col-md-12">
+                <p class="summary-heading">SUMMARY</p>
+            </div>
+            <div *ngIf="!isMobile" class="col-md-12 list-header">
+                <div class="row header-row">
+                    <div class="col-md-1 product-list-image"></div>
+                    <div class="col-md-3 pl-0">
+                        <p class="listheaderDef">Item Description</p>
+                    </div>
+                    <div class="col">
+                        <p class="listheaderDef">Item Code</p>
+                    </div>
+                    <div class="col">
+                        <p class="listheaderDef">UOM</p>
+                    </div>
+                    <div class="col">
+                        <p class="listheaderDef">Unit Price</p>
+                        <div class="listheaderDescription">(excl. GST) </div>
+                    </div>
+                    <!-- <div class="col">
+                        <p class="listheaderDef">Unit Price</p>
+                        <div class="listheaderDescription">(incl. GST) </div>
+                    </div> -->
+                    <div class="col">
+                        <p class="listheaderDef">Quantity</p>
+                    </div>
+                    <div class="col">
+                        <p class="listheaderDef">EXT Price</p>
+                        <div class="listheaderDescription">(excl. GST) </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isMobile" class="col-md-12">
+                <div *ngFor="let product of quoteDetailViewList.entries; let i=index" [ngClass]="i%2?'even':'odd'" class="products-list">
+                    <div class="product-list-row row">
+                        <div class="product-list-image col-md-1">
+                            <!-- <img class="cx-product-image" [src]="product.product.images" format="product" [alt]="product.summary"> -->
+                            <cx-media class="cx-product-image" [container]="product?.product?.images" format="product"></cx-media>
+                        </div>
+                        <div class="poduct-list-details col-md-3">
+                            <div title="{{product?.name}}" class="product-name">{{product?.product?.name}}</div>
+                        </div>
+                        <div class="product-list-data col">
+                            <div> {{product.product.code == 'QUOTETEXT' || product.product.code == 'UNKNOWN' ? '': product.product.code}} </div>
+                        </div>
+                        <div class="product-list-data col">
+                            {{product.product.code == 'QUOTETEXT' || product.product.code == 'UNKNOWN' ? '': product?.unitOfMeasure}}
+                        </div>
+                        <div class="product-list-data col lo_sensitive">
+                            {{product.product.code == 'QUOTETEXT' || product.product.code == 'UNKNOWN' ? '': '$'}}{{product.product.code == 'QUOTETEXT' || product.product.code == 'UNKNOWN' ? '': product?.basePrice?.value | number: '1.2-2' }}
+                        </div>
+                        <!-- <div class="product-list-data col">
+                            {{'$'+product?.unitPriceIncGST+'.00'}}
+                        </div> -->
+                        <div class="product-list-data col">
+                            {{product.product.code == 'QUOTETEXT' || product.product.code == 'UNKNOWN' ? '': product?.quantity}}
+                        </div>
+                        <div class="product-list-data col lo_sensitive">
+                            {{product.product.code == 'QUOTETEXT' || product.product.code == 'UNKNOWN' ? '': '$'}}{{product.product.code == 'QUOTETEXT' || product.product.code == 'UNKNOWN' ? '': product?.subTotal?.value | number: '1.2-2'}}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="cx-summary-partials order-summary-total-detail">
+                    <div class="row">
+                        <div class="col-12 col-md-5">
+                            <p class="custom-text">* All prices shown exclude GST </p>
+                            <!-- <p class="custom-text">* All information is subject to change without notice</p> -->
+                            <p *ngIf="!isMobile" class="custom-text">* This order may be subject to additional costs if the delivery address or chosen collection branch extends beyond 50km of the original quoted address or store.</p>
+                            <div *ngIf="isMobile" class="para">
+                                <p class="custom-text">* </p>
+                                <p class="custom-text">This order may be subject to additional costs if the delivery address or chosen collection branch extends beyond 50km of the original quoted address or store.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
+                        <div class="col-12 col-md-4">
+                            <!--- commenting GST as confirmed by Business. Ticker No # TLBP-1732 ----->
+                            <div class="cx-summary-row row">
+                                <div class="col-6 ">
+                                    <div class="cx-summary-label">
+                                        Subtotal <span class="excl-class"> (excl. GST)</span>
+                                    </div>
+                                </div>
+                                <div class="col-6 cx-summary-amount">
+                                    <div class="cx-summary-amount">
+                                        {{quoteDetailViewList.subTotal.formattedValue ? quoteDetailViewList.subTotal.value : '$'+quoteDetailViewList.subTotal.value }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cx-summary-row row">
+                                <div class="col-6 cx-summary-label">
+                                    GST
+                                </div>
+                                <div class="col-6 cx-summary-amount">
+                                    {{quoteDetailViewList.totalTax.formattedValue ? quoteDetailViewList.totalTax.value : '$'+quoteDetailViewList.totalTax.value}}
+                                </div>
+                            </div>
+                            <div class="border-line"></div>
+                            <!--- commenting GST as confirmed by Business. Ticker No # TLBP-1732 ----->
+                            <div class="cx-summary-row row cx-summary-total">
+                                <!-- <div class="col-6 cx-summary-label cart-summary-total-amount-label">
+                                    {{ 'Total' }} <span class="total-cart-summary-gst">(incl. GST)</span>
+                                </div> -->
+                                <div class="col-6 cx-summary-label cart-summary-total-amount-label">
+                                    {{ 'Total' }} <span class="total-cart-summary-gst">(incl. GST)</span>
+                                </div>
+                                <div class="col-6 cx-summary-amount cart-summary-total-amount-value">
+                                    ${{quoteDetailViewList?.totalPrice?.value | number: '1.2-2'}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isMobile" class="quotes-detail-view">
+                <div *ngFor="let product of quoteDetailViewList.entries; let i=index" [ngClass]="i%2?'even':'odd'" class="products-list">
+                    <div class="product-list-row row">
+                        <div class="product-list-image col-3 col-md-1">
+                            <!-- <img class="cx-product-image" [src]="product.product.images" format="product" [alt]="product.summary"> -->
+                            <cx-media class="cx-product-image" [container]="product.product.images" format="product"></cx-media>
+                        </div>
+                        <div class="poduct-list-details col-9 col-md-3">
+                            <div title="{{product.name}}" class="product-name">{{product.product.name}}</div>
+                        </div>
+                        <div class="item-label col-6">
+                            <span>Item Code</span>
+                        </div>
+                        <div class="product-list-data col-6">
+                            <div> {{product.product.code == 'QUOTETEXT' || product.product.code == 'UNKNOWN' ? '': product.product.code}} </div>
+                        </div>
+                        <div class="item-label col-6">
+                            <span>UOM</span>
+                        </div>
+                        <div class="product-list-data col-6">
+                            {{product.product.code == 'QUOTETEXT' || product.product.code == 'UNKNOWN' ? '': product?.unitOfMeasure}}
+                        </div>
+                        <div class="item-label col-6">
+                            <span>Unit Price <span class="gst">(excl. GST)</span></span>
+                        </div>
+                        <div class="product-list-data col-6">
+                            {{product.product.code == 'QUOTETEXT' || product.product.code == 'UNKNOWN' ? '': '$'}}{{product.product.code == 'QUOTETEXT' || product.product.code == 'UNKNOWN' ? '': product?.basePrice?.value | number: '1.2-2'}}
+                        </div>
+                        <!-- <div class="product-list-data col">
+                            {{'$'+product?.unitPriceIncGST+'.00'}}
+                        </div> -->
+                        <div class="item-label col-6">
+                            <span>Quantity</span>
+                        </div>
+                        <div class="product-list-data col-6">
+                            {{product.product.code == 'QUOTETEXT' || product.product.code == 'UNKNOWN' ? '': product?.quantity}}
+                        </div>
+                        <div class="item-label col-6">
+                            <span>EXT Price <span class="gst">(excl. GST)</span></span>
+                        </div>
+                        <div class="product-list-data col-6">
+                            {{product.product.code == 'QUOTETEXT' || product.product.code == 'UNKNOWN' ? '': '$'}}{{product.product.code == 'QUOTETEXT' || product.product.code == 'UNKNOWN' ? '': product?.subTotal?.value | number: '1.2-2'}}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_button_section">
+            <div class="row mr-0">
+                <div class="col-md-5 mr-0">
+                    <label for="">Comments</label>
+<textarea name="" placeholder="Please add any comments or requests that may be relevant to this quote request." [(ngModel)]="comments" maxlength="40">{{quoteDetailViewList?.customerInstructions}}</textarea>
+
+                </div>
+                <div class="col-md-7">
+                    <div class="row addAllToCart addAllToCart_re_f">
+                        <div class="col-md-4 addAllToList">
+                            <div class="wishlist-btn addAllToList">
+                                
+                               
+                                <button class="btn btn-block wishlist addAllToList" (click)="backClicked()"  type="button" >
+                                    Back to My Quotes
+                </button>
+        
+                            </div>
+        
+                        </div>
+        
+        
+                        <div class="col-md-3 addAllToList addfromquates" *ngIf="quoteDetailViewList.state == 'Active' || quoteDetailViewList.state == 'ACTIVE'  || quoteDetailViewList.state == 'EXPIRED' || quoteDetailViewList.state == 'SUBMITTED' || quoteDetailViewList.state == 'BUYER_ORDERED' ">
+                            <div class="wishlist-btn addAllToList">
+                                <!-- <app-add-to-list-view [screenName]="'quickOrderMultiItem'"
+                                    [selectedItemCount]="selectedItemCount"></app-add-to-list-view> -->
+                                 
+                                    <button class="btn btn-block wishlist addAllToList" type="button" (click)="redirectToQuote($event, quoteDetailViewList.code)">
+                                        Re-quote
+                    </button>
+        
+                            </div>
+        
+                        </div>
+        
+        
+                        <div class="col-md-4 addAllToCart" *ngIf="quoteDetailViewList.state == 'ACTIVE' || quoteDetailViewList.state == 'Active'" >
+                            <div class="addToCart-btn addAllToCart">
+                                <button class="btn btn-block addToCart addAllToCart" (click)="redirectToCheckout(quoteDetailViewList.code,$event,comments)"  type="button"> 
+                                    <!-- <img class="addAllToCart" src="../../../assets/images/Icon material-shopping-cart.svg"> -->
+                                    Convert to Order
+                                </button>
+                               
+        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

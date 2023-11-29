@@ -1,0 +1,190 @@
+<!-- <div id="addAllToCart" class="loader">
+    <div class="loading"></div>
+</div> -->
+<div class="cx-page" *ngIf="model$ | async as model">
+    <!-- sadfasfasfasfasfasf
+  {{model|json}} -->
+
+    <!-- <app-productfacets   [model]="model"
+                                [accordionData]="hideAccordion" [facetState]="facetState"
+                                [resetFilters]="resetFilters"
+                                [facetCategoryState]="facetCategoryState" [subFacetState]="subFacetState"
+                                (resetFilterFalse)="resetFilterFalse(e)">
+                            </app-productfacets> -->
+
+    <div class="heading-row row">
+        <div *ngIf='model?.freeTextSearch == ""' class="products-heading col-md-12">
+            <h1 class="products">PRODUCTS</h1>
+        </div>
+        <div *ngIf='model?.freeTextSearch && model?.freeTextSearch != ""' class="products-heading col-md-12">
+            <h1 class="products">SEARCH RESULTS FOR ‘{{model?.freeTextSearch}}’</h1>
+            <div class="search-results">{{model?.pagination?.totalResults > 1 ? model?.pagination?.totalResults+ ' Results Found' : model?.pagination?.totalResults + ' Result Found'}}</div> 
+        </div>
+    </div>
+    <section class="cx-page-section">
+        <div class="custom-product container">
+            <div class="row">
+                <div class="col-12 successMsg">
+                    <app-shared-success-message [successInd$]="successInd$" class="success-message-selector" *ngIf="successInd$ | async" [infoMessage]="infoMessage"></app-shared-success-message>
+                </div>
+
+                <div class="top-segment col-12 col-lg-12" *ngIf="viewMode$ | async as viewMode">
+                    <div class="cx-sorting top" *ngIf="model?.products.length > 0">
+                        <!-- <div class="row">
+                            <div *ngIf='model?.freeTextSearch == ""' class="products-heading col-md-12">
+                                <h1 class="products">PRODUCTS</h1>
+                            </div>
+                            <div *ngIf='model?.freeTextSearch && model?.freeTextSearch != ""' class="products-heading col-md-12">
+                                <h1 class="products">SEARCH RESULTS FOR ‘{{model?.freeTextSearch}}’</h1>
+                                <div class="search-results">{{model?.pagination?.totalResults}} Results Found</div>
+                            </div>
+                        </div> -->
+                        <div class="row plp-header">
+                            <div class="col-md-2 selectAll">
+                                <label class="check-container">
+                                    <input type="checkbox" value="Select All" [checked]="selectAllParent" (change)="selectAllChangeHandler($event)" class="checkbox"/>
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="selectAll-label">Select All</label>
+                                <!-- <input type="checkbox" value="Select All" [checked]="selectAllParent" (change)="selectAllChangeHandler($event)" /> -->
+                                <!-- <label class="selectAll-label">Select All</label> -->
+                            </div>
+                            <div class="col-md-4 searchField">
+                                <app-product-search [config]="searchConfig"></app-product-search>
+                            </div>
+                            <div *ngIf="isMobile" class="row addAllToCart">
+                                <div class="col-6 col-sm-6 col-md-6 addAllToList">
+                                    <app-add-to-list-view [product]="model?.products" [screenName]="'plpScreenMultiItem'" (successMessageEmitter)="successMessageEmitter()" [isPOAProduct]="poaProduct || parentPoaProduct" [selectedItemCount]="selectedItemCount"></app-add-to-list-view>
+                                </div>
+                                <div class="col-6 col-sm-6 col-md-6 addAllToCart">
+                                    <div class="addToCart-btn addAllToCart">
+
+                                        <button class="btn btn-block addToCart addAllToCart" type="button" [disabled]="poaProduct || selectedItemCount <= 0 || addToCartDisabled || parentAddToCartDisabled || parentPoaProduct" (click)="addSelectedItemToCart()">
+                                            <img class="addAllToCart" src="../../../assets/images/Icon material-shopping-cart.svg">
+                          Add Selected to Cart
+                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <label class="form-group cx-sort-dropdown col-md-4">
+                  <span>Sort By</span>
+                  <cx-sorting
+                    [sortOptions]="model.sorts"
+                    (sortListEvent)="sortList($event)"
+                    [selectedOption]="model.pagination.sort"
+                    placeholder="{{ 'productList.sortBy' | cxTranslate }}"
+                  ></cx-sorting>
+                </label>
+                            <!-- <div *ngIf="!isInfiniteScroll" class="col-auto">
+                  <div
+                    class="cx-pagination"
+                    [attr.aria-label]="
+                      'productList.productSearchPagination' | cxTranslate
+                    "
+                  >
+                    <cx-pagination
+                      [pagination]="model.pagination"
+                      queryParam="currentPage"
+                      [defaultPage]="0"
+                    ></cx-pagination>
+                  </div>
+                </div> -->
+                            <div class="col-md-2 buttons">
+                                <button class="grid-btn" (click)="changeViewMode(false)" [ngClass]="viewListMode ? 'gridClick':''"><img id="grid-img" class="grid-img" [src]="viewListMode ? '../../../assets/images/ic_grid_white.svg' : '../../../assets/images/ic_grid_grey.svg'" >Grid</button>
+                                <button class="list-btn" (click)="changeViewMode(true)" [ngClass]="!viewListMode ? 'listClick':''"><img id="list-img" class="list-img" [src]="viewListMode ? '../../../assets/images/ic_list_grey.svg' : '../../../assets/images/ic_list_white.svg'" >List</button>
+                                <!-- <cx-product-view
+                    (modeChange)="setViewMode($event)"
+                    [mode]="viewMode"
+                  ></cx-product-view> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cx-product-container" *ngIf="model?.products.length > 0; else noDataAvailable">
+                        <!-- Product list when using pagination *ngIf="viewMode === ViewModes.Grid"  *ngIf="viewMode === ViewModes.List"-->
+                        <ng-container *ngIf="!isInfiniteScroll; else infiniteScroll">
+                            <ng-container *ngIf="!viewListMode">
+                                <div class="row">
+                                    <app-custom-plp-grid-item (successMessageEmitter)="successMessageEmitter()" *ngFor="let product of model?.products" [product]="product" class="plpGridView col-12 col-sm-6 col-md-4" (selectedCartItem)="getSelectedItem($event)"></app-custom-plp-grid-item>
+                                </div>
+                            </ng-container>
+
+                            <ng-container *ngIf="!isMobile && viewListMode">
+
+                                <app-custom-plp-list-item (successMessageEmitter)="successMessageEmitter()" *ngFor="let product of model?.products; let i = index" [product]="product" class="cx-product-search-list" (selectedCartItem)="getSelectedItem($event)"></app-custom-plp-list-item>
+                            </ng-container>
+                            <ng-container *ngIf="isMobile && viewListMode">
+                                <app-custom-plp-grid-item (successMessageEmitter)="successMessageEmitter()" *ngFor="let product of model?.products" [product]="product" class="plpGridView col-12 col-sm-12 col-md-4" (selectedCartItem)="getSelectedItem($event)"></app-custom-plp-grid-item>
+                            </ng-container>
+                        </ng-container>
+
+                        <!-- Product list when using infinite scroll -->
+                        <ng-template #infiniteScroll>
+                            <cx-product-scroll [scrollConfig]="scrollConfig" [model]="model" [inputViewMode]="viewMode"></cx-product-scroll>
+                        </ng-template>
+                    </div>
+                    <ng-template #noDataAvailable>
+                        <div class="noDataAvailable">
+                            <img src="../../../assets/images/Group-13053.svg" alt="">
+                            <span>Products coming soon !</span>
+                            <button class="btn btn-primary" (click)="landingPageRouting()">Back to Home</button>
+                        </div>
+                    </ng-template>
+                    <div class="cx-sorting bottom" *ngIf="model?.products.length > 0">
+                        <div *ngIf="!isMobile" class="pagination-row row">
+                            <!-- <label
+                  class="form-group cx-sort-dropdown col-12 col-lg-4 mr-auto"
+                >
+                  <span>{{ 'productList.sortBy' | cxTranslate }}</span>
+                  <cx-sorting
+                    [sortOptions]="model.sorts"
+                    (sortListEvent)="sortList($event)"
+                    [selectedOption]="model.pagination.sort"
+                    placeholder="{{ 'productList.sortBy' | cxTranslate }}"
+                  ></cx-sorting>
+                </label> -->
+                            <div *ngIf="!isInfiniteScroll" class="col-md-4 pagination" [attr.aria-label]="
+                    'productList.productSearchPagination' | cxTranslate
+                  "><span class="page" *ngIf="model?.products.length >= 12">Page</span>
+                                <div class="cx-pagination">
+                                    <cx-pagination [pagination]="model.pagination" queryParam="currentPage" (viewPageEvent)="pageChangeOTTB($event)" [defaultPage]="0"></cx-pagination>
+                                </div>
+                            </div>
+                            <div class="col-md-8 result-per-page" onch>
+                                Results per page
+                                <div class="selectdiv">
+                                    <label>
+                    <select  (change)="perPageChange($event.target.value)">
+                      <option>12</option>
+                     <option>24</option>
+                      <option>36</option>
+                      <option>200</option>
+                    </select>
+                  </label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="marview mobiledel" *ngIf="viewMoreVisible && isMobile">
+                            <button class="view-more" (click)="viewMoreClick($event)">View More</button>
+                        </div>
+                        <div class="row addAllToCart">
+                            <div class="col-6 col-sm-6 col-md-6 addAllToList">
+                                <app-add-to-list-view [product]="model?.products" [screenName]="'plpScreenMultiItem'" (successMessageEmitter)="successMessageEmitter()" [isPOAProduct]="poaProduct || parentPoaProduct" [selectedItemCount]="selectedItemCount"></app-add-to-list-view>
+                            </div>
+                            <div class="col-6 col-sm-6 col-md-6 addAllToCart">
+                                <div class="addToCart-btn addAllToCart">
+
+                                    <button class="btn btn-block addToCart addAllToCart" type="button" [disabled]="poaProduct ||  selectedItemCount <= 0 || addToCartDisabled || parentAddToCartDisabled || parentPoaProduct" (click)="addSelectedItemToCart()">
+                                        <img class="addAllToCart" src="../../../assets/images/Icon material-shopping-cart.svg">
+                      Add Selected to Cart
+                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="loading " *ngIf="commonService.showWaitCursor | async "></div>
+</div>

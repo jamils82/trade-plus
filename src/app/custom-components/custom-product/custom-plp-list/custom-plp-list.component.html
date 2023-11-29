@@ -1,0 +1,58 @@
+<div class="row plp-list">
+  <div class="col-12 col-md-3 plp-list-image-col">
+    <!-- [routerLink]="{ cxRoute: 'product', params: product } | cxUrl"
+        class="cx-product-image-container"
+        tabindex="-1" -->
+    <label class="check-container">
+      <input type="checkbox" [checked]="selectAll" (change)="itemToCartSelected($event)" class="checkbox"
+        value="product" />
+      <span class="checkmark"></span>
+    </label>
+    <!-- [checked]="selectAllParent" (change)="selectAllChangeHandler($event)"  -->
+    <!-- <input type="checkbox" value="product" [checked]="selectAll" (change)="itemToCartSelected($event)" /> -->
+    <a [routerLink]="['/p',product.code]" class="cx-product-image-container" tabindex="-1">
+      <cx-media class="cx-product-image" [container]="product.images?.PRIMARY" format="product" [alt]="product.summary">
+      </cx-media>
+    </a>
+  </div>
+  <div class="col-12 col-md-9 plp-list-container-col">
+    <!-- [routerLink]="{ cxRoute: 'product', params: product } | cxUrl"
+        class="cx-product-name" -->
+    <div class="product-details">
+      <div class="product-manufacturer" [innerHtml]="product.manufacturer || 'Non-exclusive'"></div>
+      <a [routerLink]="['/p',product.code]" class="cx-product-image-container" tabindex="-1">
+        <h2 class="product-heading" title={{product.name}} [innerHtml]="product.name"></h2>
+      <div class="itemCode">Item Code: {{product.code}} | Supplier Code: {{product.productSupplierCode}}
+        <!-- <span class="itemCode">Item Code : </span><span class="itemCode" [innerHtml]="product.code"></span><span class="itemCode"> | Supplier Code : </span><span class="itemCode" [innerHtml]="product.productSupplierCode"></span> -->
+      </div>
+      </a>
+    </div>
+    <!-- <ng-template [cxOutlet]="ProductListOutlets.ITEM_DETAILS">
+       
+        <div *ngIf="!product.averageRating" class="cx-product-no-review">
+          {{ 'productDetails.noReviews' | cxTranslate }}
+        </div>
+        <div
+          class="cx-product-price"
+          [attr.aria-label]="'productDetails.productPrice' | cxTranslate"
+        >
+          {{ product.price?.formattedValue }}
+        </div>
+      </ng-template> -->
+
+    <app-product-price [showEmptyPrice]="product?.showEmptyPrice" [myPrice]="product?.price?.formattedValue"
+      [retailPrice]="product?.m2Price?.formattedValue" [screenName]="screenName" [unit]="product.unit" ></app-product-price>
+
+    <!-- <div class="row">
+        <div class="col-12 col-md-8">
+          <p class="cx-product-summary" [innerHtml]="product.summary">
+            {{ product.summary }}
+          </p>
+        </div>
+      </div> -->
+    <!-- Add to cart custom -->
+    <app-custom-addtocart [showEmptyPrice]="product?.showEmptyPrice" [showQuantity]="true" [product]="product"
+      [plpList]="true" [productCode]="product.code" (successMessageEmitterMessage)="successMessageEmitterMessage()">
+    </app-custom-addtocart>
+  </div>
+</div>

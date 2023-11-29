@@ -1,0 +1,516 @@
+@import "../../shared/styles/variables.scss";
+.customer-service {
+    //position: absolute;
+    font-size: 1.5rem;
+    top: 1.3rem;
+    cursor: pointer;
+    right: 34rem;
+    padding: 0px 20px;
+    .customer-service-icon {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.settings {
+    //position: absolute;
+    // font-size: 0.875rem;
+    cursor: pointer;
+    right: 30rem;
+    top: 1.6rem;
+    font-size: var(--fontsize18);
+    padding: 0px 20px;
+    .settings-icon {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.miniCartStyle {
+    //position: absolute;
+    font-size: var(--fontsize16);
+    top: 0rem;
+    right: 0rem;
+    position: relative;
+    padding-left: 20px;
+    padding-right: 0px;
+    a
+    {
+        position: relative;
+    }
+    .cart-link {
+        color: $white-color;
+        text-decoration: none;
+        cursor: pointer;
+        height: 29px;
+        .badge{ 
+            position: absolute;
+            top: -11px;
+            right: -12px;
+            .fa-circles{
+            background: #FFD500;
+            width:18px;
+            height:18px;
+            border-radius: 50%;
+            color:#003D7A;
+            font-family: 'NiveauGroteskBold';
+            text-align: center;
+            padding-top: 3px;
+        }
+        }
+        .cart-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-bottom: 0px;
+            margin-top: -5px;
+        }
+        .quantity {
+            position: absolute;
+            color: $blue-color;
+            bottom: 22px;
+            left: 15px;
+            padding: 0px 7px;
+            font-size: var(--fontsize14);
+            font-family: 'NiveauGroteskBold';
+            background-color: $cart-yellow-color;
+            border-radius: 78%;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            padding: 2px 7px 1px 5px;
+            .fa-circles{
+                font-family: 'NiveauGroteskBold';
+                color: #003D7A;
+                font-weight: bold;
+                font-size: 12px;
+                position: relative;
+                left: 0px;
+                top: 0px;
+               
+            }
+        }
+        .totalPrice {
+            padding-left: 10px;
+            font-family: 'NiveauGrotesk';
+            min-width: 60px;
+            font-size: var(--fontsize18);
+        }
+    }
+    .cart-preview {
+        background-color: var(--cx-color-background-focus);
+        color: var(--cx-color-light);
+        display: none;
+        position: absolute;
+        top: 0;
+        min-width: 660px;
+        box-shadow: 0px 4px 3px #0000004D;
+        .arrow-up {
+            position: absolute;
+            top: -8px;
+            right: 41%; 
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 15px solid $white-color;
+        }
+    }
+    .hide-menu {
+        display: none;
+    }
+    .show-menu {
+        display: block;
+        position: absolute;
+        z-index: 999;
+        background: $white-color;
+        color: $heading-dark-grey;
+        list-style: none;
+        border-radius: 3px;
+        top: 35px;
+        right: -12.5rem;
+        padding-left: 0;
+        cursor: auto;
+    }
+    // .remove {
+    //     text-decoration: underline;
+    //     cursor: pointer;
+    // }
+    .cart-preview-header {
+        display: flex;
+        padding: 30px 20px 30px 30px;
+        .cart-summary-label {
+            width: 50%;
+            font-family: 'NiveauGroteskBold';
+            font-size: var(--fontsize20);
+        }
+        .cart-summary-quantity {
+            width: 50%;
+            text-align: right;
+            color: #778893;
+            font-family: 'NiveauGroteskBold';
+            font-size: var(--fontsize20);
+        }
+    }
+    .cart-list {
+        height: 300px;
+        overflow-y: scroll;
+        list-style-type: none;
+        padding: 10px 0px 0 30px;
+        margin-right: 20px;
+        scrollbar-width: thin;
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+        &::-webkit-scrollbar-thumb {
+            -webkit-box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+        }
+        &::-webkit-scrollbar-track {
+            background-color: $scrollbar-track-color;
+            border-radius: 10px;
+        }
+        .cart-list-items {
+            margin-bottom: 15px;
+            padding: 0px;
+            .image-container {
+                width: 58px;
+                height: 58px;
+            }
+            .item img {
+                width: 58px;
+                height: 58px;
+            }
+            .pl-4 {
+                display: grid;
+                line-height: normal;
+                padding-right: 20px;
+                .productName,
+                .productManufacturer {
+                    font-family: 'NiveauGroteskBold';
+                    font-size: var(--fontsize20);
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                }
+                .itemCode {
+                    font-family: 'NiveauGrotesk';
+                    font-size: var(--fontsize16);
+                    margin: 0;
+                }
+            }
+            .item-total-price {
+                padding: 10px 20px 0px 0px;
+                font-family: 'NiveauGroteskBold';
+                font-size: var(--fontsize20);
+            }
+        }
+    }
+    .cart-preview-footer {
+        .cart-preview-subTotal {
+            display: flex;
+            padding: 20px 30px 0px 30px;
+            border-top: 1px solid #eee;
+            font-family: 'NiveauGroteskBold';
+            .cart-subTotal-label {
+                width: 60%;
+                font-size: var(--fontsize24);
+                span {
+                    font-size: var(--fontsize20);
+                }
+            }
+            .cart-subTotal-price {
+                width: 40%;
+                text-align: right;
+                font-size: var(--fontsize24);
+            }
+        }
+        .buttons-container {
+            align-items: center;
+            flex-direction: column;
+            font-family: 'NiveauGroteskBold';
+            padding: 1.5rem 2rem !important;
+            .checkout-achor {
+                margin-bottom: 15px;
+                width: 100%;
+                &:hover {
+                    color: transparent;
+                }
+                .checkout-btn {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: $blue-color;
+                    color: $white-color;
+                    border-color: $blue-color;
+                    min-height: var(--buttonHeight60);
+                    font-size: var(--fontsize24);
+                    width: 100%;
+                    border-radius: 8px;
+                    text-decoration: none;
+                    &:focus {
+                        box-shadow: 0 0 0 transparent;
+                    }
+                }
+            }
+            .continue-shopping-achor {
+                width: 100%;
+                &:hover {
+                    color: transparent;
+                }
+                .continue-shopping-btn {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: $white-color;
+                    border-color: $blue-color;
+                    color: $blue-color;
+                    min-height: var(--buttonHeight60);
+                    font-size: var(--fontsize24);
+                    width: 100%;
+                    text-decoration: none;
+                    &:focus {
+                        box-shadow: 0 0 0 transparent;
+                    }
+                }
+            }
+        }
+    }
+    .empty-cart {
+        padding: 10px;
+        text-align: center;
+        font-family: 'NiveauGroteskBold';
+        font-size: 14px;
+    }
+}
+
+.fa-shopping-cart {
+    margin-right: 5px;
+    width: 28px;
+    height: 22px;
+    margin-bottom: 2px;
+}
+
+.search-button {
+    position: absolute;
+    right: 20px;
+    top: 75px;
+    color: #003d7a;
+    background: white;
+}
+
+.globalSarchMobile {
+    display: none;
+}
+
+.totalMenuContainer {
+    width: 19rem;
+    height: 100vh;
+    background-color: $white-color;
+    position: fixed;
+    top: 0;
+    z-index: 11;
+    button {
+        background-color: $grey-color;
+        color: $white-color;
+        border: none;
+        width: 90%;
+        height: 2.7rem;
+        position: absolute;
+        bottom: 7rem;
+        left: 0.3rem;
+        border-radius: 4px;
+    }
+}
+.header-content
+{
+    display: flex;
+    // position: absolute;
+    right: 17rem;
+    //column-gap: 3rem;
+    top: 1.6rem;
+}
+// @media screen and(max-width: $ScreenMedium-1300) {
+//     .miniCartStyle {
+//         right: 1rem;
+//     }
+// }
+// @media screen and(max-width: $mobileScreenPotrait) {
+// 	.fa-shopping-cart,
+// 	.m-cartIcon {
+// 		color: $grey-color;
+// 		font-size: 1.3rem;
+// 	}
+// 	.miniCartStyle {
+// 		position: static;
+// 		font-size: 1rem;
+// 	}
+// }
+@media screen and (max-width: $Largescreen-1440) {
+    .customer-service {
+        font-size: 1.2rem;
+        // top: 1.3rem;
+        right: 26rem;
+    }
+    .settings {
+        // font-size: 1.25rem;
+        right: 23rem;
+        .settings-icon {
+            width: 20px;
+            height: 20px;
+        }
+    }
+    .miniCartStyle {
+        right: -12px;
+        .cart-link {
+            .cart-icon {
+                width: 1.3rem;
+                height: 1.3rem;
+            }
+            .quantity {
+                bottom: 20px;
+                left: 15px;
+                // padding: 1px 7px;
+                // font-size: 0.875rem;
+            }
+            // .totalPrice {
+            // font-size: 1.25rem;
+            // }
+        }
+        .cart-preview {
+            min-width: 500px;
+            .arrow-up {
+                right: 14rem;
+            }
+        }
+        .show-menu {
+            right: -9.5rem;
+            top:29px;
+        }
+    }
+    .fa-shopping-cart {
+        width: 22px;
+        height: 18px;
+    }
+    .header-content
+    {
+        right: 15rem;
+    }
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    .customer-service {
+        display: none;
+    }
+    .settings {
+        display: none;
+    }
+    .fa-search {
+        font-size: var(--fontsize19);
+        &:before {
+            color:#FFFFFF;
+            opacity: 0.4;
+        }
+    }
+    .globalSarchMobile {
+        display: block;
+    }
+    .search-button,.searchBox-input
+    {
+        background:#060607;
+        border-radius: 2px;
+        width:90%;
+        height: 35px;
+        font-family: 'NiveauGrotesk';
+
+        &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #FFFFFF;
+            opacity: 0.4; /* Firefox */
+          }
+          
+          &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color:  #FFFFFF;
+            opacity: 0.4;
+          }
+          
+          &::-ms-input-placeholder { /* Microsoft Edge */
+            color: #FFFFFF;
+            opacity: 0.4;
+          }
+    }
+    .searchBox-input
+    {
+        padding-inline-start: 10px;
+    }
+    .search
+    {
+        width:10%;
+        background:transparent; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    ::placeholder
+    { 
+        color: $pdp-font-color;
+        font-size: var(--fontsize18);
+        opacity: 0.5;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: $pdp-font-color;
+        font-size: var(--fontsize18);
+        opacity: 0.5;
+       }
+       
+       ::-ms-input-placeholder { /* Microsoft Edge */
+        color:$pdp-font-color;
+        font-size: var(--fontsize18);
+        opacity: 0.5;
+       }
+    .searchBox-input
+    {
+        border: 0px;
+    }
+    .miniCartStyle {
+        position: absolute;
+        right: 1.5rem;
+        top: 1.7rem;
+        padding-right: 0;
+        .d-flex {
+            flex-direction: column;
+        }
+        .cart-link {
+            .quantity {
+                position: unset;
+                color: $cart-yellow-color;
+                padding: 0;
+                font-size: var(--fontsize16);
+                font-family: 'NiveauGroteskBold';
+                background-color: transparent;
+                line-height: 0.9;
+            }
+            .badge{
+                position: absolute !important;
+                top: -8px;
+                right: -8px;
+                left: initial !important;
+            }
+        }
+    }
+    .header-content
+    {
+        position: unset;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .cart-link {
+        img {
+            width: 20px;
+        }
+    }
+}
+
+.search-button{
+    background: #060607;
+}

@@ -1,0 +1,109 @@
+<div class="quotes-container container-fluid">
+    <div class="container">
+    <div class="quotes-header">
+        <h1>{{quoteConstants.myQuoteLabel}}</h1>
+        <!-- <div>
+            <p>Request a quote using the Search field, or add from My Lists or My Quotes. You will be notified
+                via SMS when your quote is available to view in your My Quotes page. </p>
+        </div> -->
+    </div>
+</div>
+<div class="container-fluid material">
+    <div class="loading-quotes" *ngIf="!(isLoading$ | async)">Loading&#8230;</div>
+    <div class="materialSearch">
+        <div class="materials-landing-page" *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'">
+            <button class="addProduct" (click)="openProductSearchModal()">
+                <div role="presentation" class="search-icon">
+                    <cx-icon class="cx-icon fas fa-search"></cx-icon>
+                  </div>
+                <p>{{MaterialsLabel.searchPlaceholder}}</p>
+            </button> 
+            <a class="addOwnProduct" (click)="openAddModal()"><span>+</span><p>{{MaterialsLabel.AddOwnProduct}}</p></a>   
+            <ng-container *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'">
+                <button type="button" class="btn btn-left add-markup" [disabled]="productResultData?.length == 0" (click)="openMarkupAddModal()">
+                    <span>+</span><p>{{sharedDatas?.markupPercentage !== 0 ? quoteConstants.editMarkup : quoteConstants.addMarkup }}</p></button>
+            </ng-container>       
+        </div>
+    </div>
+    <div class="row-container">
+        <div class="sidebar sidebar_tp">
+            <a class="notSelectedTab" (click)="navigateToJobDetails()">{{MaterialsLabel?.jobDetails}}</a>
+            <p class="selectedTab">{{MaterialsLabel?.materials}}</p>
+            <a class="notSelectedTab" (click)="navigateToLabour()">
+                {{MaterialsLabel?.labourOtherCosts}}
+            </a>
+        </div>
+        <div class="right-container">
+            <div class="container-sec">
+                <h1>{{MaterialsLabel.productHeading}}</h1>
+                <div class="materialProductsListItem">
+                    <!-- <h2 class="list-title" *ngIf="paginationData && addedProduct > 0">{{MaterialsLabel.ProductsAdded}} ({{addedProduct}})</h2> -->
+                    <app-custom-product-list-item *ngFor="let product of productResultData"
+                    [product]="product" [productType]="productType" >
+                    </app-custom-product-list-item>
+                </div>
+                <!-- <app-custom-load-more *ngIf="productResultData?.length != 0" [paginationData]="paginationData" [productType]="productType"></app-custom-load-more> -->
+                <hr class="edit-materialLine" />
+                <div class="product-footerSection">
+                    <!-- <ng-container *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'">
+                        <button type="button" class="btn btn-left add-markup" [disabled]="productResultData?.length == 0" (click)="openMarkupAddModal()">
+                            <span>+</span><p>{{sharedDatas?.markupPercentage !== 0 ? quoteConstants.editMarkup : quoteConstants.addMarkup }}</p></button>
+                    </ng-container> -->
+                    <div class="editProductFooter-rightSection" [ngClass]="[quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST' ? 'materialPriceSection' : 'materialPriceFullSection']">
+                        <button *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST' && productType =='materials'" type="button" class="reprice-btn btn-grey" (click)="repriceQuote($event)" [disabled]="productResultData?.length == 0">
+                            <p>{{quoteConstants.repriceLabel}}</p>
+                            <span>{{quoteConstants.withLatestPriceLabel}}</span>
+                            <div class="customerQuoteloading updateLatestPriceLoader loading-wrapper "></div>
+                        </button>
+                        <div class="materialTotalCost">
+                            <span *ngIf="productType != 'review' && productType != 'view'" class="materialPriceTotal"><p class="totalPriceLabel">{{MaterialsLabel?.totalPriceText}}</p><span class="sublabel">{{MaterialsLabel.excludeGSTText}}</span></span>
+                            <p *ngIf="totalPrice?.formattedValue" class="price">{{sharedDatas?.materialPrice?.formattedValue}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-three">
+                <h1>{{MaterialsLabel.costSummary}}</h1>
+                <div class="materialDataSection">
+                    <div class="cost-summary" *ngIf="sharedDatas?.materialsCount > 0">
+                        <div class="cost-detail">
+                            <table>
+                                <tr>
+                                    <td>{{MaterialsLabel.material}}</td>
+                                    <td>{{sharedDatas?.materialPrice?.formattedValue }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{MaterialsLabel.markup}} ({{sharedDatas?.markupPercentage}}%)</td>
+                                    <td>{{sharedDatas?.markupPrice?.formattedValue}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="cost-sub-total">
+                            <span>{{MaterialsLabel.subTotal}}</span><span>${{(sharedDatas?.markupPrice?.value + sharedDatas?.materialPrice?.value) | number:'.2'}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="allProducts_returnJobDetails_Section">
+        <div class="productButtons" [ngClass]="editMode == true ? 'review-quote-btn_con' : ''">
+            <button (click)="navigateToJobDetails()" type="button" class="returnTojobDetails">
+                 Return to Job Details
+            </button>
+            <!-- <button *ngIf=" quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST' && productType =='materials'" [disabled]="productResultData?.length == 0" type="button" class="materialAllProducts btn-blue" (click)="markComplete(true)">
+                {{quoteConstants.allProductAdded}}
+            </button> -->
+            <button   type="button" class="labourbtn btn-blue" (click)="navigateToLabour()" *ngIf="onlyReviewStatus != 'onlyReview'">
+                Add Labour & Other Costs
+            </button>
+            <button *ngIf="editMode == true" type="button" (click)="reviewQuote()" class="review-quote-btn btn-blue" >
+                Review Quote
+            </button>
+            <button *ngIf="editMode == true" type="button" (click)="reviewQuote()" class="review-quote-btn btn-blue" >
+                Review Quote
+            </button>
+        </div>
+    </div>
+</div>
+</div>

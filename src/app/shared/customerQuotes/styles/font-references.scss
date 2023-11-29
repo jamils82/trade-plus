@@ -1,0 +1,52 @@
+
+  @font-face {
+    font-family: OpenSans-Regular;
+    src: url("../../../../assets/fonts/GothamBold.otf");
+    // src: url("../../../assets/fonts/Opensans/OpenSansRegular/opensans-regular.ttf") format('truetype'),
+    //      url("../../../assets/fonts/Opensans/OpenSansRegular/opensans-regular.svg") format('svg'),
+    //      url("../../../assets/fonts/Opensans/OpenSansRegular/opensans-regular.eot") format('embedded-opentype'),
+    //      url("../../../assets/fonts/Opensans/OpenSansRegular/opensans-regular.woff") format('woff'),
+
+   }
+   @font-face {
+    font-family: OpenSans-Bold;
+    src: url("../../../../assets/fonts/ProximaNovaRegular.otf");
+    // src: url("../../../assets/fonts/Opensans/OpenSansBold/opensans-bold.ttf") format('truetype'),
+    //      url("../../../assets/fonts/Opensans/OpenSansBold/opensans-bold.svg") format('svg'),
+    //      url("../../../assets/fonts/Opensans/OpenSansBold/opensans-bold.eot") format('embedded-opentype'),
+    //      url("../../../assets/fonts/Opensans/OpenSansBold/opensans-bold.woff") format('woff');
+   }
+   @font-face {
+    font-family: OpenSans-SemiBold;
+    src: url("../../../../assets/fonts/ProximaNovaRegular.otf");
+    // src: url("../../../assets/fonts/Opensans/OpenSansSemibold/opensans-semibold.ttf") format('truetype'),
+    //      url("../../../assets/fonts/Opensans/OpenSansSemibold/opensans-semibold.svg") format('svg'),
+    //      url("../../../assets/fonts/Opensans/OpenSansSemibold/opensans-semibold.eot") format('embedded-opentype'),
+    //      url("../../../assets/fonts/Opensans/OpenSansSemibold/opensans-semibold.woff") format('woff');
+   }
+   @font-face {
+      font-family: OpenSans-ExtraBold;
+      src: url("../../../../assets/fonts/ProximaNovaRegular.otf");
+      // src: url("../../../assets/fonts/Opensans/OpenSansExtrabold/opensans-extrabold.ttf") format('truetype'),
+      //      url("../../../assets/fonts/Opensans/OpenSansExtrabold/opensans-extrabold.svg") format('svg'),
+      //      url("../../../assets/fonts/Opensans/OpenSansExtrabold/opensans-extrabold.eot") format('embedded-opentype'),
+      //      url("../../../assets/fonts/Opensans/OpenSansExtrabold/opensans-extrabold.woff") format('woff');
+     }
+
+   @font-face {
+      font-family: OpenSans-Light;
+      src: url("../../../assets/fonts/Opensans/OpenSans-Light.ttf") format('truetype'),
+     }
+
+   @font-face {
+      font-family: Poppins-Regular;
+      src: url("../../../assets/fonts/Poppins/Poppins-Regular.ttf") format('truetype'); 
+     }
+     @font-face {
+      font-family: Poppins-Bold;
+      src: url("../../../assets/fonts/Poppins/Poppins-Bold.ttf") format('truetype'),
+     }
+     @font-face {
+      font-family: Poppins-SemiBold;
+      src: url("../../../assets/fonts/Poppins/Poppins-SemiBold.ttf") format('truetype'),
+     }

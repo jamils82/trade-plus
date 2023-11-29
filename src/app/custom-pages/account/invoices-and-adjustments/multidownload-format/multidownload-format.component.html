@@ -1,0 +1,83 @@
+<!-- <div class="container" *ngIf="showMessage ">
+    <div class="loading" *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+    <div class="row">
+        <div class="col-md-12 close-pos">
+            <img (click)="closePopup()" class="cls-icon fa fa-times"
+                src='../../../../assets/images/close-icon-mobile.PNG' alt="Close">
+        </div>
+    </div>
+    <div class="row-content">
+        <div class="col-md-12 pageHeading-col mb-5">
+            <h2>Invoice Download</h2>
+        </div>
+        <div class="col-md-12 col-12 customMessage">
+            <label class="download-title alert-message">No download format found! Please create at least one to enable invoice downloads.</label>
+            <br/>
+            <br/>
+            <button class="btn cancelBtn" (click)="closePopup()">
+                Close
+            </button>
+
+        </div>
+    </div>
+</div> -->
+
+<div class="container" *ngIf="!showMessage && selectedFormat != ''">
+    <div class="loading" *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+    <div class="row">
+        <div class="col-md-12 close-pos">
+            <img (click)="closePopup()" class="cls-icon fa fa-times"
+                src='../../../../assets/images/close-icon-mobile.PNG' alt="Close">
+        </div>
+    </div>
+
+    <div class="row-content">
+        <div class="col-md-12 pageHeading-col mb-5">
+            <h2>INVOICE DOWNLOAD FORMATS</h2>
+        </div>
+        
+        <form [formGroup]="newFormatForm">
+            <div class="form-row form-group">
+                <!-- <div class="col-md-4 col-3 left-title">
+                    <label class="download-title">Download Format</label>
+                </div> -->
+                <div class="col-md-12 col-12 select-col">
+                    <div class="selectdiv1">
+                        <label>
+                            <select class="form-control classic"  (change)="valueChange($event.target.value)" formControlName="formatType" id="formatType">
+                                <!-- <option selected> Select </option> -->
+                                <option *ngFor="let obj of downloadFormats; let i = index" [value]="obj.id"> {{ obj.title }} </option>  
+                            </select>
+                        </label>
+                    </div>
+
+                </div>
+                <div class="download_option">
+                    <div class="download_title col-md-4 col-3 left-title">
+                    <label for="">Download as</label>
+                </div>
+                    <div class="form-check custom-radio col-md-5 col-5">
+                        <input class="form-check-input" type="radio" type="radio" id="individual" value="Individual" [checked]="downloadMethod == 'Individual'" (change)="downloadMethod == 'Individual';selectStatement('Individual')" name="DownloadMulti">
+                         <label for="individual">Individual Files</label>   
+                    </div>
+                    <div class="form-check custom-radio col-md-5 col-5">
+                        <input class="form-check-input" type="radio" type="radio" id="consolidated" name="DownloadMulti" value="Consolidated"  [checked]="downloadMethod == 'Consolidated'" (change)="downloadMethod == 'Consolidated';selectStatement('Consolidated')">
+                         <label for="consolidated">Consolidated File</label>   
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    
+        <div class="row buttons" *ngIf="!showMessage">
+            <div class="col-md-12 btngrp">
+                <button class="btn cancelBtn" (click)="closePopup()">
+                    Cancel
+                </button>
+                <button class="btn confirmBtn" (click)="downloadMultiFormat()"type="submit">
+                    Download
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

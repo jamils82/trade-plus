@@ -1,0 +1,151 @@
+@import "../../../app/shared/styles/variables.scss";
+
+.menuItemContainer {
+    ul {
+        width: 19rem;
+        border: 0px;
+        margin-top: 0.5rem !important;
+        transform: translate(-46.9%, 36px) !important;
+        padding-left: 1.3rem;
+        .arrow-up {
+            position: absolute;
+            top: -8px;
+            right: 44%;
+            width: 0; 
+            height: 0; 
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 15px solid $white-color;
+        }
+        li {
+            margin-left: 0.2rem;
+            margin-right: 1.2rem;
+            @include font-MyriadReg();
+            color: $dark-grey;
+           
+        }
+    }
+    .nav-link {
+        padding: 0px;
+        // &.show {
+        //     background-color: white;
+        //     i {
+        //         color: white;
+        //     }
+        //     & .fa-question-circle:before {
+        //         color: black;
+        //     }
+        // }
+    }
+    .fa-question-circle {
+        width: 24px;
+        height: 24px;
+        margin-top: -5px;
+    }
+
+    .fa-question-circle:before {
+        color: white;
+    }
+}
+
+::ng-deep .customerServiceData {
+.contactService,
+.contactText {
+    cursor: pointer;
+}
+
+.contactText a {
+    text-decoration: underline;
+    color:#00AFE2;
+    font-size: var(--fontsize20);
+    font-family: 'NiveauGrotesk';
+    font-weight: bold;
+}
+
+.icon {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+}
+
+.detail {
+        padding-left: 20px;
+        font-family: 'NiveauGrotesk';
+        a {
+            text-decoration: none !important;
+            color: $dark-grey;
+        }
+ }
+
+
+.marginLine {
+    margin-top: 0.4rem !important;
+    margin-bottom: 0.4rem !important;
+}
+}
+.contact-us-info {
+    font-size:var(--fontsize14);
+    .heading {
+        font-family: 'NiveauGrotesk';     
+
+    }
+}
+.fa-question-circle
+{
+    position: relative;
+    top:-2px;
+}
+
+@media screen and (max-width: $Largescreen-1440) {
+    .menuItemContainer {
+        .fa-question-circle {
+            // font-size: 1.3rem;
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    hr {
+        width: 100%;
+        height: 0;
+        position: relative;
+        border-top: 1px solid #888888;
+        right: 0;
+    }
+    .menuItemContainer {
+        min-width: 1rem;
+        justify-content: flex-end !important;
+        #navbarDropdownMenuLink {
+            padding: 0;
+        }
+        ul {
+            width: 18rem;
+            border: 0px;
+            margin-top: 0rem !important;
+            transform: translate(-95%, 20%) !important;
+            padding-left: 0.3rem;
+            box-shadow: 0rem 0.1rem 0.7rem #0000004d;
+            li {
+                word-break: break-all;
+                width: 81%;
+                ::ng-deep .customerServiceData {
+                    .contact-us-info {
+                        font-size: var(--fontsize16);
+                    }
+                    .contactText a {
+                        font-size: var(--fontsize18);
+                    }
+                }
+            }
+        }
+    }
+    .menuItemContainer .fa-question-circle:before {
+        color: $grey-color;
+        font-size: 25px;
+        padding: 0px 0.6rem;
+        position: relative;
+        top: 1px;
+    }
+}

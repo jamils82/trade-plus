@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30.281" height="43.107" viewBox="0 0 30.281 43.107">
+  <g id="Group_10834" data-name="Group 10834" transform="translate(-131.002 -512.151)">
+    <g id="Group_10831" data-name="Group 10831" transform="translate(-828.998 13.619)">
+      <path id="Icon_material-location-on" data-name="Icon material-location-on" d="M22.641,3A15.1,15.1,0,0,0,7.5,18.087C7.5,29.4,22.641,46.107,22.641,46.107S37.781,29.4,37.781,18.087A15.1,15.1,0,0,0,22.641,3Zm0,20.476a5.388,5.388,0,1,1,5.407-5.388A5.4,5.4,0,0,1,22.641,23.476Z" transform="translate(952.5 495.532)" fill="#ff7d39"/>
+    </g>
+    <g id="Group_10833" data-name="Group 10833">
+      <path id="Subtraction_3" data-name="Subtraction 3" d="M2928,11629.888l0,0a75.3,75.3,0,0,1-6.645-10.5c-2.225-4.37-3.354-8.154-3.354-11.245a15.132,15.132,0,0,1,10-14.247v12.568a5.433,5.433,0,0,0,0,3.357v20.068Z" transform="translate(-2786.999 -11080.895)" fill="#003d7a"/>
+      <path id="Subtraction_4" data-name="Subtraction 4" d="M2940,11631v-19.747a5.4,5.4,0,0,0,0-4.745v-11.977a15.158,15.158,0,0,1,10.283,14.351,23.191,23.191,0,0,1-2.369,9.182,61.88,61.88,0,0,1-5.2,9.136c-.832,1.233-1.743,2.511-2.708,3.8Z" transform="translate(-2789 -11081.533)" fill="#00afe2"/>
+    </g>
+  </g>
+</svg>

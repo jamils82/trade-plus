@@ -1,0 +1,442 @@
+@import '../../../../../node_modules/@spartacus/styles/index';
+@import '../../../shared/styles/variables.scss';
+// To control visual effects while searching the searchbox requires
+// some CSS rules to the outer elements.
+%app-product-search__body {
+    // hide the mobile search button by default and how on mobile
+    button.search {
+      @include media-breakpoint-up(md) {
+        display: none;
+      }
+    }
+    // hide the search icon on mobile
+    div.search-icon {
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
+    }
+  
+    // when there are results and the searchbox is active
+    // we display the searchbox
+    &.searchbox-is-active {
+      &.has-searchbox-results {
+        app-product-search {
+          .results {
+            display: block;
+          }
+        }
+  
+        // the searchbox requires an overlay over the page (except for the header)
+        // we do this with an overlay under the header, on top of the rest of the page
+        header {
+          position: relative;
+          z-index: 100;
+        }
+        cx-storefront {
+          &:before {
+            content: '';
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+  
+            background: rgba(0, 0, 0, 0.5);
+          }
+        }
+      }
+    }
+  
+    &:not(.searchbox-is-active) {
+      @include media-breakpoint-down(sm) {
+        // hide the input on mobile when there's no interaction with searchbox
+        app-product-search {
+          input {
+            // we cannot use display:none, visible:hidden or opacity: 0
+            // as this will no longer emit a focus event to the controller logic
+            width: 0;
+            padding: 0;
+          }
+          button.reset {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  
+  %app-product-search {
+    @include media-breakpoint-up(md) {
+      // we position the parent relative to ensure the result panel
+      // is aligned to the left of searchbox
+      position: relative;
+      z-index: 0;
+    }
+  
+    z-index: 10;
+    display: block;
+  
+    > * {
+      z-index: 20;
+      @include media-breakpoint-up(md) {
+        background-color: var(--cx-color-secondary);
+        position: relative;
+      }
+    }
+  
+    a,
+    .message {
+      padding: 6px 16px;
+      color: currentColor;
+      user-select: none;
+    }
+  
+    label {
+      display: flex;
+      align-content: stretch;
+      margin: 0;
+      padding-top: 6px;
+      padding-inline-end: 6px;
+      padding-bottom: 6px;
+      padding-inline-start: 10px;
+      @include media-breakpoint-up(md) {
+        width: 27vw;
+        min-width: 300px;
+        max-width: 550px;
+        // hide search icon when the input is dirty
+        &.dirty div.search-icon {
+          display: none;
+        }
+      }
+  
+      input {
+        background: none;
+        border: none;
+        outline: none;
+  
+        display: block;
+  
+        @include media-breakpoint-down(sm) {
+          position: absolute;
+          left: 0;
+          top: 57px;
+          width: 100%;
+          background-color: var(--cx-color-secondary);
+          padding: 6px 16px;
+          height: 48px;
+          border-bottom: 1px solid var(--cx-color-light);
+        }
+  
+        flex-basis: 100%;
+        height: 35px;
+        color: currentColor;
+        z-index: 20;
+  
+        @include placeholder {
+          color: currentColor;
+        }
+      }
+  
+      // hide reset icon when the input is empty
+      &:not(.dirty) button.reset {
+        display: none;
+      }
+  
+      button,
+      div.search-icon {
+        color: currentColor;
+        flex-basis: 48px;
+        text-align: center;
+        background: none;
+        border: none;
+        padding: 6px;
+        &.reset cx-icon {
+          &:before {
+            font-size: 1.4rem;
+          }
+          @include media-breakpoint-down(sm) {
+            position: relative;
+            left: 74px;
+            z-index: 20;
+            top: 52px;
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  
+    .results {
+      // hide the result by default
+      display: none;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      color: #000;
+      background-color: #fff;
+      font-size: var(--cx-font-small, 1rem);
+  
+      @include media-breakpoint-down(sm) {
+        top: 105px;
+        z-index: 10;
+      }
+  
+      a {
+        text-decoration: none;
+        cursor: pointer;
+  
+        font-weight: 800;
+  
+        .highlight,
+        .search-results-highlight {
+          font-weight: normal;
+          font-style: normal;
+        }
+  
+        &:hover,
+        &:focus {
+          background: var(--cx-color-light);
+          color: currentColor;
+        }
+      }
+      .suggestions {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        padding-inline-start: 0;
+        margin-bottom: 0;
+        li,
+        a {
+          flex: 100%;
+          line-height: 2rem;
+          display: block;
+        }
+      }
+      .products {
+        list-style: none;
+        padding-inline-start: 0;
+        margin-bottom: 0;
+  
+        @include media-breakpoint-down(sm) {
+          display: none;
+        }
+  
+        a {
+          display: grid;
+          grid-column-gap: 16px;
+  
+          &.has-media {
+            // create a grid layout in case we show an image
+            grid-template-columns: 50px 1fr;
+          }
+  
+          border-top: solid 1px var(--cx-color-light);
+  
+          cx-media {
+            grid-row: 1 / 3;
+          }
+  
+          div.name {
+            text-overflow: ellipsis;
+  
+            font-size: inherit;
+            font-weight: inherit;
+  
+            // Required for text-overflow to do anything
+            white-space: nowrap;
+            overflow: hidden;
+          }
+          .price {
+            font-weight: normal;
+          }
+        }
+      }
+    }
+  }
+
+
+  .searchbox {
+		padding-top: 0px;
+		padding-bottom: 0px;
+		width: 100%;
+    margin: 0;
+		font-family: 'NiveauGrotesk';
+    display: inline-flex;
+		color: $searchBar-placeholder-color;
+    .searchBox-input {
+      width: 90%;
+      min-height: var(--buttonHeight60);
+      padding-left: 10px;
+      border: 1px solid #BBC3C9;
+      border-right: 0;
+      font-size: var(--fontsize20);
+    }
+		.search {
+      min-height: var(--buttonHeight60);
+      background-color: #fff;
+      border: 1px solid #BBC3C9;
+      border-left: 0px;
+      width: 10%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+			cx-icon {
+        color: $blue-color;
+        // margin-top: 10px;
+        // margin-left: 5px;
+        font-size: var(--fontsize24);
+				&::before {
+					vertical-align: middle;
+				}
+			}
+		}
+        .search-icon {
+            color: $white-color;
+        }
+	}
+
+  .quick-order.searchbox {
+    .searchBox-input {
+      color: #495A64;
+      border: 0;
+      font-size: var(--fontsize24);
+      font-family: 'NiveauGroteskBold';
+    }
+    .search {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      width: 20%;
+      cx-icon {
+          margin-top: 0;
+          margin-left: 0;  
+        &::before {
+          font-size: var(--fontsize28);
+        }
+      }
+    }
+  }
+	#results {
+    display: none;
+    background-color: #fff;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    box-shadow: 0px 16px 16px #0000003d;
+    border-radius: 10px;
+    margin-top: 40px;
+    .message {
+			font-family: 'NiveauGroteskBold';
+			color: $searchBar-text-color;
+			font-size: var(--fontsize14);
+      padding-left: 10px;      
+    }
+		.suggestions {
+			font-family: 'NiveauGroteskBold';
+			color: $searchBar-text-color;
+			font-size: var(--fontsize14);
+      padding-left: 10px;
+      margin: 5px 0px;
+      .suggestiveSearch-li {
+        list-style-type: none;
+      }
+		}
+		.products {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 0px;
+			li {
+        cursor: pointer;
+        border-bottom: 1px solid #BBC3C9;
+        &:hover {
+          background-color: #BBC3C9;
+        }
+				a {
+					display: flex;
+					flex-direction: row;
+					position: relative;
+					align-items: center;
+          text-decoration: none;
+				}
+				cx-media {
+					width: 50px;
+					height: 50px;
+          margin-left: 15px;
+				}
+				.name {
+					font-family: 'NiveauGrotesk';
+					color: $searchBar-text-color;
+					font-weight: 300;
+					font-size: var(--fontsize16);
+          width: 50%;
+          line-height: normal;
+          white-space: normal;
+          padding-left: 15px;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+				}
+				.price {
+					text-align: right;
+					position: absolute;
+					right: 15px;
+					font-family: 'NiveauGroteskBold';
+					color: $searchBar-text-color;
+					font-size: var(--fontsize16);
+          span {
+            font-family: 'NiveauGrotesk';
+          }
+				}
+			}
+		}
+	}
+
+  .quick-order.results {
+    width: 165% !important;
+  }
+
+  .quick-order-results {
+    display: flex;
+    align-items: center;
+    min-height: var(--buttonHeight60);
+  }
+  @media screen and (max-width: $screenMedium-1200) {
+    .searchbox {
+      .search {
+        cx-icon {
+          margin-left: 0px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: $mobileScreenPotrait) {
+  .quick-order.searchbox {
+    .search {
+      width: 10%;
+    }
+   .searchBox-input
+    {
+        font-size: var(--fontsize18);
+    }
+  }
+  .quick-order.results {
+    width: 100% !important;
+  }
+  .quick-order.searchbox {
+    .search {
+      cx-icon {
+        &::before {
+          font-size: var(--fontsize24);
+        }
+      }
+    }
+  }
+}
+
+  input::placeholder {
+    opacity: 0.5;
+    font-family: 'NiveauGrotesk';
+  }

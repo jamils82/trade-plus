@@ -1,0 +1,71 @@
+<div class="cart-preview">
+    <div class="container">
+        <div class="cart-preview-header">
+            <div class="col-12 close-pos">
+                <img (click)="closePopUp()" class="cls-icon fa fa-times" src='../../../../assets/images/close-icon-mobile.PNG'>
+            </div>
+            <span class="cart-summary-label"><img class="fas fa-shopping-cart" src="../../../assets/images/cart-shopping-fast.svg"> Cart Summary</span>
+            <span class="cart-summary-quantity" *ngIf="quantity$ | async as quantity">{{ quantity }} {{quantity == '1'? 'item': 'items'}} in
+                cart</span>
+        </div>
+        <ul class="cart-list">
+            <li class="cart-list-items" *ngFor="let p of items">
+                <div class="items-container">
+                    <div class="item d-flex">
+                        <!-- <div><img src="{{p.product.images.PRIMARY.cartIcon.url}}"></div> -->
+                        <!-- {{p.product.images.PRIMARY.url}}; -->
+                        <div class="image-container">
+                            <cx-media [container]="p.product.images?.PRIMARY" format="thumbnail" role="presentation"></cx-media>
+                            <!-- <img src="{{p?.product?.images?.PRIMARY?.cartIcon?.url}}"> -->
+                        </div>
+
+                        <div class="d-md-flex d-flex w-100 justify-content-between pl-3 pl-md-0">
+                            <div class="prod-details">
+                                <span class="productName" title={{p.product.name}}>{{p.product.name}}</span>
+                                <p class="itemCode">Item Code : {{p.product.code}}</p>
+                                <!-- <p  class="mb-0">Customer Product Code {{p.product.code}}</p> -->
+                                <!-- <label>Qty:</label> <span>{{p.quantity}}</span> -->
+
+
+                                <!-- <span><p class="remove">Remove</p></span> -->
+                            </div>
+                            <div class="item-total-price">
+                                <span>{{p?.totalPrice?.formattedValue}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="cart-preview-footer">
+            <div class="cart-preview-subTotal">
+                <span class="cart-subTotal-label">Subtotal <span>(excl. GST)</span></span>
+                <span class="cart-subTotal-price">{{totalPriceFormat}}</span>
+            </div>
+            <div class="buttons-container d-flex p-4">
+                <a class="checkout-achor" routerLink="/cart">
+                    <button class="btn checkout-btn" (click)="closePopUp()">
+                        Checkout
+                    </button>
+                </a>
+                <a class="continue-shopping-achor" routerLink="/">
+                    <button class="btn continue-shopping-btn" (click)="closePopUp()">
+                        Continue Shopping
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!------------------------------- empty Cart message container ----------------------------------->
+
+    <!-- <ng-template #empty_cart>
+    <div class="container">
+        <div class="empty-cart">
+            <span class="empty-cart-label">Your cart is empty!</span>
+            </div>
+            </div>
+        </ng-template> -->
+
+    <!------------------------------------------------------------------------------------------------>
+</div>

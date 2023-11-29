@@ -1,0 +1,104 @@
+<div class="loading " *ngIf="commonService.showWaitCursor | async "></div>
+
+
+<div class="container">
+    <div class="modal-head-row row">
+        <div class="col-md-12 close-pos">
+            <div class="cls-btn" (click)="closePopup()">
+                <img (click)="closePopup()" class="cls-icon fa fa-times" src='../../../../assets/images/close-icon.PNG'>
+            </div>
+        </div>
+        <div class="popup-heading col-md-12">
+            <h2 class="pageHeading">CREATE OR ADD TO LIST</h2>
+        </div>
+    </div>
+    <div class="row" *ngIf="errorInd">
+        <div class="col-md-12">
+            <div class="failure-message-container">
+                <div class="failure-container">
+                    <div class="error-message">{{infoMesasge}}<span class="close-btn" (click)="errorInd = false"><i class="fa fa-times"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="successInd">
+        <div class="col-md-12">
+            <div class="success-message-container">
+                <div class="success-container">
+                    <div class="error-message">{{infoMesasge}}<span class="close-btn" (click)="successInd = false"><i class="fa fa-times"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body ">
+        <div class="row-content">
+            <div class="createListField col-md-12">
+                <form [formGroup]="listForm">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row defacted-padding form-group">
+                                <div class="custom-padding col-md-9 col-sm-9 col-xs-9 col-9">
+                                    <div class="createListBox">
+                                        <div class="createUserIcon">
+                                            <img src="../../../assets/images/Icon material-playlist-add (1).svg">
+                                        </div>
+                                        <input type="text" id="createInput" class="form-control" placeholder="Enter new list name" required formControlName="listName" />
+                                    </div>
+                                </div>
+
+                                <div class="createButton col-md-3 col-sm-3 col-xs-3 col-3">
+                                    <button class="btn confirmBtn" (click)="createList()" type="submit">
+                                Create
+                              </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="existing-list-heading col-md-12 col-sm-12 col-xs-12">
+                <p class="para-heading">Or add to an existing list </p>
+            </div>
+            <div class="searchBox col-md-12 col-sm-12 col-xs-12">
+                <!-- search box -->
+                <div class="searchListBox col-md-11 col-sm-11 col-xs-11 col-11">
+                    <div class="searchListIcon">
+                        <img src="../../../assets/images/Icon material-playlist-add (1).svg">
+                    </div>
+                    <input autocomplete="off" (keyup)="filterLists($event.target.value)" id="searchInput" aria-describedby="initialDescription" class="form-control" aria-controls="results" aria-autocomplete="both" placeholder="Search for an existing list" aria-label="Search">
+                </div>
+                <div class="searchIconButton col-md-1 col-sm-1 col-xs-1 col-1">
+                    <i class="searchIcon fa fa-search"></i>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12 mylist-view">
+                <div>
+                    <div class="checkboxLoop" *ngFor="let list of mylist; let i = index">
+
+                        <label class="check-container">
+                            <input type="checkbox" [checked]="selectAll" (change)="itemToCartSelected($event , i)" class="list checkbox"  value="list"/>
+                            <span class="list checkmark"></span>
+                        </label>
+                        <!-- <input class="checkboxInput" type="checkbox" value="list" [checked]="selectAll" (change)="itemToCartSelected($event , i)" /> -->
+                        <p class="listNameValues"> {{ list.listName }} </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row buttons">
+                <div class="col-md-12 btngrp">
+                    <button class="btn cancelBtn" (click)="closePopup()">
+              Cancel
+            </button>
+                    <button class="btn confirmBtn" (click)="addList()" type="submit">
+              Add
+            </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

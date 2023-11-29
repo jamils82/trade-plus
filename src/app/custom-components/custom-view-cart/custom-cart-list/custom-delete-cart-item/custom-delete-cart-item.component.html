@@ -1,0 +1,25 @@
+<div class="modal-body ">
+    <div class="row-content">
+        <div class="col-md-12 close-pos">
+            <img (click)="close()" class="cls-icon fa fa-times" src='../../../../../assets/images/close-icon-mobile.PNG'>
+            <!-- <div class="cls-btn" (click)="close()"><i class="fa fa-times"></i></div> -->
+        </div>
+        <div class="col-md-12 heading">
+            <h3 class="pageHeading">REMOVE ITEM</h3>
+        </div>
+        <div class="col-md-12 pageHeading desc">
+            <p class="page-desc">Are you sure you want to remove this item from your Cart?</p>
+        </div>
+        <div class="row buttons">
+            <div class="col-md-12">
+                <button class="btn cancelBtn" (click)="close()">
+                Cancel
+              </button>
+                <button class="btn confirmBtn" type="submit" (click)="closeWithSuccess()">
+               Remove
+              </button>
+
+            </div>
+        </div>
+    </div>
+</div>

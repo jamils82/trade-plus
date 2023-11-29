@@ -1,0 +1,430 @@
+//@import '../../../shared/styles/global.scss';
+//@import '../../../shared/styles/custom-variables.scss';
+@import '../quotes.component.scss';
+@import '../job-detail/job-detail.component.scss';
+@import '../../../shared/styles/variables.scss';
+
+
+.quotes-container {
+  margin-bottom: 180px;
+
+  a {
+    font-size: var(--fontsize18);
+    line-height: 24px;
+  }
+
+  .sidebar a {
+    font-size: var(--fontsize20);
+  }
+
+  .row-container {
+    @media screen and (max-width:901px) {
+      display: grid;
+
+      .sidebar,
+      .container-second,
+      .container-three {
+        width: 100%;
+        margin-top: 10px;
+        margin-left: 0px;
+      }
+    }
+
+    .sidebar p {
+      height: auto;
+      min-height: 67px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
+
+      &.active {
+        cursor: auto;
+
+        .sub-title {
+          color: $grey-custom;
+        }
+      }
+
+      span {
+        display: block;
+        line-height: 21px;
+        word-break: break-all;
+
+        &.sub-title {
+          color: $grey-custom;
+          font-size: 12px;
+          line-height: 16px;
+          @include font-NiveauGroteskBold();
+        }
+      }
+    }
+
+    .container-sec {
+      padding-left: 22px;
+      position: relative;
+      padding: 19px 19px 60px;
+      width: 100% !important;
+      min-height: 320px;
+      background-color: #fff;
+      border-radius: 2px;
+
+      .headingAndButton {
+        border-bottom: 1px solid $grey-border;
+        height: 60px;
+
+        h2 {
+          float: left;
+          color: $grey-custom;
+          margin-top: 15px;
+          @include font-NiveauGroteskBold();
+          font-size: var(--fontsize24);
+        }
+
+        .add-costs {
+          float: right;
+          margin-top: 10px;
+
+          a {
+            color: #2F519B;
+            cursor: pointer;
+            padding: 18px 30px;
+            border: 1px solid #2F519B;
+            align-items: center;
+            justify-content: center;
+            @include font-NiveauGroteskBold();
+            border-radius: 7px;
+
+            .plus {
+              font-size: 32px;
+              font-weight: 600;
+              position: relative;
+              top: 4px;
+              @include font-NiveauGrotesk();
+            }
+
+            .btnText {
+              margin-left: 4px;
+            }
+          }
+
+          a:hover {
+            text-decoration: none;
+          }
+
+          a .plus {
+            color: #374F96;
+          }
+        }
+      }
+
+      .listHolder {
+        border-top: 1px solid $scrollbar-track-color;
+        border-bottom: 1px solid $scrollbar-track-color;
+      }
+
+      h1 {
+        color: $mediumBlue;
+      }
+
+      .list-title {
+        font-size: 16px;
+        color: $grey-custom;
+        @include font-NiveauGroteskBold();
+        border-bottom: 1px solid $lightGrey;
+        margin-top: 35px;
+        padding-bottom: 10px;
+      }
+
+      .empty-state-view {
+        text-align: center;
+        //margin: 36px auto;
+        max-width: 390px;
+
+        h3 {
+          font-size: 24px;
+          line-height: 32px;
+          @include font-NiveauGroteskBold();
+          margin: 8px 0;
+        }
+
+        p {
+          margin-bottom: 16px;
+        }
+
+        a {
+          background: url('../../../../assets/images/plus-icon.svg') no-repeat 0px 6px;
+          padding-left: 25px;
+        }
+      }
+
+      .costList {
+        border: 1px solid $scrollbar-track-color;
+        padding: 12px 10px 9px;
+        margin: 10px 0px;
+        font-size: var(--fontsize18);
+
+        .titleLeft {
+          float: left;
+        }
+
+        .titleRight {
+          float: right;
+
+          .total {
+            margin-right: 60px;
+            color: $grey-custom;
+            @include font-NiveauGroteskBold();
+            font-size: var(--fontsize20);
+          }
+
+          .list-edit img {
+            width: 21px;
+            height: 21px;
+            margin: 5px 27px;
+            cursor: pointer;
+          }
+
+          .list-delete img {
+            cursor: pointer;
+            width: 18px;
+            height: 23px;
+          }
+        }
+
+        .title {
+          color: $grey-custom;
+          font-size: var(--fontsize20);
+          @include font-NiveauGroteskBold();
+          margin: 4px 0 14px;
+        }
+
+        .list-container {
+          overflow: hidden;
+          clear: both;
+          display: block;
+
+          .list-lable,
+          .list-note {
+            color: $grey-custom;
+            font-size: var(--fontsize18);
+            @include font-NiveauGrotesk();
+            float: left;
+
+            &.change {
+              width: 182px;
+              margin-right: 3px;
+              margin-left: 5px;
+              font-size: var(--fontsize18);
+            }
+
+          }
+
+          .list-note {
+            float: left;
+            word-break: break-all;
+
+            @media screen and (min-width:1024px) and (max-width:1340px) {
+              width: 230px;
+            }
+          }
+
+          .list-left-section {
+            float: left;
+
+            //width: 78%; 
+            @media screen and (min-width:1024px) and (max-width:1340px) {
+              width: 75%;
+            }
+          }
+
+          .list-right-section {
+            float: right;
+            width: 22%;
+
+            span img {
+              cursor: pointer;
+            }
+
+            @media screen and (min-width:1024px) and (max-width:1340px) {
+              width: 25%;
+            }
+
+            .total {
+              width: 105px;
+              float: left;
+              @include font-NiveauGroteskBold();
+              line-height: 25px;
+              text-align: right;
+              word-break: break-all;
+              color: $grey-custom
+            }
+          }
+
+          .list-edit {
+            width: 36px;
+          }
+
+          .list-edit,
+          .list-delete {
+            float: left;
+            margin-top: -2px;
+            text-align: right;
+
+            img {
+              cursor: pointer;
+            }
+          }
+
+          .list-delete {
+            text-align: right;
+            width: 36px;
+          }
+        }
+      }
+    }
+
+    .container-three {
+      width: 21%;
+      background-color: #fff;
+      margin-left: 9px;
+      border-radius: 2px;
+      padding: 19px;
+
+      .cost-summary {
+        width: 100%;
+        padding-right: 0px;
+        margin-top: 15px;
+
+        .cost-detail {
+          border: 0px;
+
+          table tr td {
+            padding-bottom: 0px;
+            font-size: var(--fontsize18);
+            line-height: 30px;
+          }
+
+          .costSumTotal {
+            border-top: 1px solid #E0E1E2;
+
+            p {
+              margin-top: 5px;
+              @include font-NiveauGroteskBold();
+            }
+            span {
+              @include font-NiveauGrotesk();
+              font-size: 14px;
+            }
+          }
+        }
+      }
+
+      .costSummary {
+        border-bottom: 3px solid #495A64;
+        padding: 0px 0px 17px 0px;
+
+        h1 {
+          color: #495A64;
+          margin-top: 10px;
+          @include font-NiveauGroteskBold();
+          font-size: var(--fontsize24);
+          line-height: 30px;
+        }
+      }
+    }
+  }
+}
+
+.subTotal {
+  border-top: 1px solid $grey-border;
+  padding-bottom: 10px;
+  position: absolute;
+  width: 96%;
+  right: 20px;
+  bottom: 0;
+  top: auto;
+  left: auto;
+
+  table {
+    width: 100%;
+    color: $grey-custom;
+
+    span {
+      font-size: var(--fontsize14);
+      padding: 3px;
+    }
+
+    .totalCosts{
+      @include font-NiveauGroteskBold();
+      font-size: var(--fontsize24);
+      padding: 3px;
+      margin-top: 3px;
+      position: relative;
+      top:1px;
+    }
+    p {
+      @include font-NiveauGroteskBold();
+      font-size: var(--fontsize24);
+      padding: 3px;
+      margin-top: 3px;
+    }
+
+    td {
+      text-align: right;
+    }
+
+    .lblTot {
+      width: 90%;
+    }
+
+    .amountToto {
+      width: 10%;
+      padding: 5px;
+
+      p {
+        font-size: var(--fontsize22);
+      }
+    }
+  }
+}
+
+.loading-wrapper {
+  display: block;
+
+  .loader-more {
+    background: $lightBlue;
+  }
+}
+
+.container-second {
+  width: 55%;
+
+  .bottomMargin {
+    margin-bottom: 20px;
+  }
+}
+
+.container-fluid.labour {
+  width: 96%;
+}
+
+.button_cls {
+  margin-right: 50px;
+  padding-bottom: 25px;
+}
+.totalCosts_labour{left: -8px;}
+
+// .review-quote-btn {
+//   width: 230px;
+// }
+
+@media screen and (max-width:$mobileScreenPotrait) {
+  .quotes-container .row-container .container-three {
+    width: 100%;
+    margin-left: 0px;
+  }
+  .quotes-container .row-container .container-sec {
+    min-height: 40vh;
+  }
+}

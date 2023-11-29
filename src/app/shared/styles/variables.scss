@@ -1,0 +1,112 @@
+$grey-color: #545859;
+$black-color: #000;
+$white-color: #fff;
+$medium-gray: #d8d9de;
+$placeholder-grey: #999999;
+$dark-grey: #666666;
+$red-color: #ef3e33;
+$error-text-red-color: #ff4100;
+$header-gray: #0000004b;
+$heading-grey1: #ecebea;
+$font-size-1: 1rem;
+$header-menu-icon-width: 4.5rem;
+$header-menu-a-font-color: #696969;
+$size-08: 0.8rem;
+$heading-grey: #ecebea;
+$box-shadow-grey: #888888;
+$breadcrumb-grey: #4e4e4e;
+$disabled-grey: #c8c9c7;
+$background-grey: #545859d9;
+$heading-dark-grey: #595959;
+$blue-color: #003D7A;
+$button-disable-color: #4f83b8;
+$cart-yellow-color: #FFD500;
+$scrollbar-track-color: #77889380;
+$searchBar-black-color: #022C57;
+$searchBar-text-color: #495A64;
+$searchBar-placeholder-color: #8196AB;
+$success-border-color: #189C27;
+$success-background-color: #E6F4E8;
+$failure-border-color: #DF4A5E;
+$failure-background-color: #FCEDEF;
+$main-section-background-color: #E8EFF7;
+$red-color: #973937;
+$stock-label-color: #0B961B;
+$pdp-font-color: #495A64;
+$anchor-color: #00AFE2;
+$quantity-button-color: #D8D8D8;
+$star-disable-color: #d3d6db;
+$orange-color: #FF7D39;
+$filter-border-color:#83838380;
+$filter-background:#D1D5D8;
+$filter-order-color:#929EA6;
+$order-border:#A8B9CC;
+$placeholder-color:rgba(119, 136, 147, 0.5);
+$head-border-dashboard:rgba(73, 90, 100,0.25);
+$grey-custom: #495A64;
+$won-color: #02B382;
+$lost-color: #D7373F;
+$grey-border: #E0E1E2;
+$yellow-color: #ffcb05;
+$skyblue-shade: #00afe2;
+
+@font-face {
+    font-family: "NiveauGroteskBold";
+    src: url("../../../assets/fonts/NiveauGroteskBold.woff") format("woff");
+}
+@font-face {
+    font-family: "NiveauGrotesk";
+    src: url("../../../assets/fonts/NiveauGroteskRegular.woff") format("woff");
+}
+/* Mixins*/
+
+@mixin font-MyriadReg() {
+    font-family: "MyriadReg";
+}
+@mixin font-NiveauGroteskBold() {
+    font-family: "NiveauGroteskBold", sans-serif, Arial !important;
+}
+@mixin font-NiveauGrotesk() {
+    font-family: "NiveauGrotesk", sans-serif, Arial !important;
+}
+
+
+@mixin font-Arial() {
+    font-family: "Arial";
+}
+
+@mixin font-NiveauGroteskBold() {
+    font-family: "NiveauGroteskBold", sans-serif, Arial !important;
+}
+
+@mixin font-NiveauGrotesk() {
+    font-family: "NiveauGrotesk", sans-serif, Arial !important;
+}
+
+
+.searchformfld .label {
+    color: $grey-color;
+}
+
+/* Media quires resolution screen sizes*/
+
+$ExtraLargeScreen-1920: "1920px";
+$Largescreen-1760: "1760px";
+$Largescreen-1700: "1700px";
+$Largescreen-1600: "1600px";
+$Largescreen-1440: "1440px";
+$ScreenMedium-1300: "1300px";
+$screenMedium-1200: "1200px";
+$screenMedium-1024: "1024px";
+$ipadScreen-768: "901px";
+$mobileScreen: "900px";
+$m991: "991px";
+$mobileScreenPotrait: "767px";
+$mobileScreenPotrait-768: "768px";
+$smallmobileScreenPotrait576: "576px";
+$smallmobileScreenPotrait568: "568px";
+$smallmobileScreenPotrait440: "440px";
+$smallmobileScreenPotrait420: "420px";
+$smallmobileScreenPotrait375: "375px";
+$smallmobileScreenPotrait360: "360px";
+$smallmobileScreenPotrait: "330px";

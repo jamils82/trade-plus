@@ -1,0 +1,37 @@
+<div class="other-payment-option">
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon">close</mat-icon>
+    </button>
+    <div class="for-padding">
+        <h3>OTHER PAYMENT OPTIONS</h3>
+        <div class="inner-data other">
+            <div class="">
+                <img src="assets/images/b-pay.png" alt="">
+            </div>
+            <div class="">
+                <div class="Bpay">
+                    <p class="title-head">BPay</p>
+                    <p>Biller Code : <span class="p-val">172155</span></p>
+                    <p class="spacing-separator">Customer Ref. : <span class="p-val">Located on your Statement</span></p>
+                    <p class="p-val">Contact your bank or financial institution to make this payment from your cheque,
+                        savings, debit or transaction account. <br>
+                        For more info. visit <a href="https://bpay.com.au/" target="_blank"><span class="link"> www.bpay.com.au</span></a></p>
+                </div>
+                <div class="separation">
+                    <p class="title-head">Direct Deposit</p>
+                    <p>Westpac BSB : <span class="p-val">034 891</span></p>
+                    <p class="spacing-separator">Account No : <span class="p-val">Located on your Statement</span></p>
+                    <p class="p-val">Record your Customer Code in the Contact Details section to ensure your payment is allocated to
+                        your account.</p>
+                </div>
+                <div class="separation">
+                    <p class="title-head">Cash/In Person</p>
+                    <p class="p-val">Visit your local Tradelink branch to make payments in person.</p>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <button class="close-dial-button other" (click)="close()">Close</button>
+        </div>
+    </div>
+</div>

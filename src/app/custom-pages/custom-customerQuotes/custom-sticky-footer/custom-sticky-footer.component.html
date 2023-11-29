@@ -1,0 +1,33 @@
+<div id="sticky-footer-area" class="sticky-footer-area container" >
+    <div class="total-price-area">
+        <div class="price-area">
+            <p *ngIf="!labourFooterLabel && productType != 'review' && productType != 'view'">{{quoteConstants.TotalPriceLabel}}</p>
+            <p *ngIf="productType == 'review' || productType == 'view'">{{quoteConstants.reviewTotalPrice}}</p>
+            <p *ngIf="labourFooterLabel">{{quoteConstants.costTotal}} </p>
+            <p class="price" *ngIf="totalPrice.formattedValue">{{totalPrice.formattedValue}}</p>
+        </div>
+        <ng-container *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'">
+            <button type="button" class="btn btn-left add-markup" [disabled]="productLength.length == 0" (click)="openAddModal()"  *ngIf="productType =='materials'">
+                {{addEditMarkup.markupPercentage ? quoteConstants.editMarkup : quoteConstants.addMarkup }}</button>
+        </ng-container>
+    </div>
+    
+    <div class="button-area" *ngIf="!labourFooterLabel"> 
+        <button type="button" (click)="reviewQuote()" class="review-quote-btn btn-blue" *ngIf="productType !='materials' && productType != 'review' && productType != 'view'">
+            {{quoteConstants.reviewQuote}}
+        </button>
+        <button type="button" (click)="viewQuote()" class="review-quote-btn btn-blue" *ngIf="productType == 'review'">
+            {{quoteConstants.viewQuote}}
+        </button>
+        <button type="button" class="reprice-btn btn-grey mr-3" (click)="repriceQuote($event)" *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST' && productType =='materials' && jobDetailService.catalogProducts">
+            {{quoteConstants.repriceLabel}}</button>
+        <button type="button" class="btn-blue" (click)="markComplete(true)" [disabled]="productLength.length == 0" *ngIf=" quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST' && productType =='materials'">
+            {{quoteConstants.allProductAdded}}</button>
+        <button type="button" (click)="reviewQuote()" class="btn btn-cancel" *ngIf="productType == 'view'">
+            {{quoteConstants.goBackBtn}}
+        </button>
+        <button type="button" class="btn btn-blue" *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST' && productType == 'view'" [disabled]="quotesService.quoteStatus!='NOTSENT'" (click)="sendtQuoteModal()">
+            {{quoteConstants.sendToCustomerBtn}}
+        </button>
+     </div>
+</div>

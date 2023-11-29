@@ -1,0 +1,20 @@
+<div *ngIf="hasHeader" class="item-list d-md-block d-lg-block d-xl-block">
+
+    <div class="cx-item-list-row" [ngClass]="i%2?'even':'odd'" *ngFor="let item of viewMoreItems; let i = index">
+        <div *ngIf="getControl(item) | async as control" class="cx-item-list-items" [ngClass]="item.rejected == true ? 'reject':''" [class.is-changed]="control?.get('quantity')?.disabled">
+            <app-custom-cart-item [item]="item" [quantityControl]="control.get('quantity')" [readonly]="readonly" [promotionLocation]="promotionLocation" [options]="options">
+            </app-custom-cart-item>
+
+
+
+        </div>
+    </div>
+</div>
+<div *ngIf="isMobile && viewMoreVisible">
+    <button (click)="viewMoreClick()" class="view-more">View More</button>
+</div>
+<ng-template #totalHeader>
+    <div class="cx-item-list-total col-md-2 col-lg-2 col-xl-2">
+        {{ 'cartItems.total' | cxTranslate }}
+    </div>
+</ng-template>

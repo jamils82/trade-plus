@@ -1,0 +1,301 @@
+@import "../../../shared/styles/variables.scss";
+
+	.cart-preview {
+	}
+    .container {
+        max-width: 100%;
+    }
+    .close-pos {
+        text-align: right;
+        position: absolute;
+        right: 5px;
+        top: 15px;
+        color: $pdp-font-color;
+        .cls-icon {
+            cursor: pointer;
+            color: #778893;
+            width: 15px;
+            height: 15px;
+			margin-top: -12px;
+		    margin-right: -5px;
+          }
+    }
+	// .hide-menu {
+	// 	display: none;
+	// }
+	// .show-menu {
+	// 	display: block;
+	// 	position: absolute;
+	// 	z-index: 999;
+	// 	background: $white-color;
+	// 	color: $heading-dark-grey;
+	// 	list-style: none;
+	// 	border-radius: 3px;
+	// 	top: 29px;
+	// 	right: -18rem;
+	// 	padding-left: 0;
+	// 	cursor: auto;
+	// }
+	// .remove {
+	//     text-decoration: underline;
+	//     cursor: pointer;
+	// }
+	.cart-preview-header {
+		display: flex;
+        flex-direction: column;
+		padding: 10px 0px;
+		.cart-summary-label {
+			width: 100%;
+			font-family: 'NiveauGroteskBold';
+			font-size: var(--fontsize22);
+            color: $pdp-font-color;
+		}
+		.cart-summary-quantity {
+			width: 100%;
+			text-align: left;
+            padding: 5px 0;
+			color: #778893;
+			font-family: 'NiveauGroteskBold';
+			font-size: var(--fontsize20);
+		}
+	}
+	.cart-list {
+		height: auto;
+		// overflow-y: scroll;
+		list-style-type: none;
+		padding: 0;
+        margin-bottom: 250px;
+		margin-right: 0px;
+		// scrollbar-width: thin;
+		// &::-webkit-scrollbar {
+		// 	width: 4px;
+		// }
+		// &::-webkit-scrollbar-thumb {
+		// 	-webkit-box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.25);
+		// 	border-radius: 10px;
+		// }
+		// &::-webkit-scrollbar-track {
+		// 	background-color: $scrollbar-track-color;
+		// 	border-radius: 10px;
+		// }
+		.cart-list-items {
+			margin-bottom: 15px;
+			padding: 10px 0 0 0;
+			.image-container {
+				width: 80px;
+				height: 80px;
+			}
+			.item img {
+				width: 80px;
+				height: 80px;
+			}
+			.prod-details {
+				display: grid;
+				line-height: normal;
+				padding-right: 20px;
+                padding-left: 0;
+				align-content: center;
+				color: $pdp-font-color;
+				.productName,
+				.productManufacturer {
+					font-family: 'NiveauGroteskBold';
+					font-size: var(--fontsize20);
+					position: absolute;
+					width: 60%;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					overflow: hidden;
+					max-height: 33px;
+					color: $pdp-font-color;
+				}
+				.itemCode {
+					font-family: 'NiveauGrotesk';
+					font-size: var(--fontsize20);
+					margin: 0;
+					color: $pdp-font-color;
+				}
+			}
+			.item-total-price {
+				padding: 0px;
+				font-family: 'NiveauGroteskBold';
+				font-size: var(--fontsize20);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+				color: $pdp-font-color;
+			}
+		}
+	}
+	.cart-preview-footer {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+		.cart-preview-subTotal {
+			display: flex;
+			padding: 20px 15px 0px 15px;
+			border-top: 1px solid #eee;
+			font-family: 'NiveauGroteskBold';
+			.cart-subTotal-label {
+				width: 60%;
+				font-size: var(--fontsize22);
+				color: $pdp-font-color;
+				span {
+                    font-family: 'NiveauGrotesk';
+					font-size: var(--fontsize18);
+				}
+			}
+			.cart-subTotal-price {
+				width: 40%;
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+				text-align: right;
+                padding-right: 0px;
+				font-size: var(--fontsize20);
+				color: $pdp-font-color;
+			}
+		}
+		.buttons-container {
+			align-items: center;
+			flex-direction: column;
+			font-family: 'NiveauGroteskBold';
+			padding: 1.5rem 15px !important;
+			.checkout-achor {
+				margin-bottom: 15px;
+				width: 100%;
+				&:hover {
+					color: transparent;
+				}
+				.checkout-btn {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					background-color: $blue-color;
+					color: $white-color;
+					border-color: $blue-color;
+					min-height: var(--buttonHeight60);
+					max-height: var(--buttonHeight60);
+					font-size: var(--fontsize22);
+					width: 100%;
+					border-radius: 6px;
+					text-decoration: none;
+					&:focus {
+						box-shadow: 0 0 0 transparent;
+					}
+				}
+			}
+			.continue-shopping-achor {
+				width: 100%;
+				&:hover {
+					color: transparent;
+				}
+				.continue-shopping-btn {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					background-color: $white-color;
+					border-color: $blue-color;
+					color: $blue-color;
+					min-height: var(--buttonHeight60);
+					max-height: var(--buttonHeight60);
+					font-size: var(--fontsize22);
+					width: 100%;
+                    border-radius: 6px;
+					text-decoration: none;
+					&:focus {
+						box-shadow: 0 0 0 transparent;
+					}
+				}
+			}
+		}
+	}
+
+    .empty-cart {
+        padding: 10px;
+        text-align: center;
+        font-family: 'NiveauGroteskBold';
+        font-size: 14px;
+    }
+
+.fa-shopping-cart {
+	margin-right: 5px;
+	width: 28px;
+	height: 22px;
+    margin-bottom: 2px;
+}
+
+// @media screen and(max-width: $ScreenMedium-1300) {
+//     .miniCartStyle {
+//         right: 1rem;
+//     }
+// }
+// @media screen and(max-width: $mobileScreenPotrait) {
+// 	.fa-shopping-cart,
+// 	.m-cartIcon {
+// 		color: $grey-color;
+// 		font-size: 1.3rem;
+// 	}
+// 	.miniCartStyle {
+// 		position: static;
+// 		font-size: 1rem;
+// 	}
+// }
+
+// @media screen and (max-width: $Largescreen-1440) {
+// 	.miniCartStyle {
+// 		right: 15rem;
+// 		.cart-link {
+// 			.cart-icon {
+// 				width: 1.3rem;
+// 				height: 1.3rem;
+// 			}
+// 			.quantity {
+// 				bottom: 20px;
+// 				left: 15px;
+// 				padding: 1px 7px;
+// 				// font-size: 0.875rem;
+// 			}
+// 			// .totalPrice {
+// 				// font-size: 1.25rem;
+// 			// }
+// 		}
+// 		.cart-preview {
+// 			min-width: 500px;
+// 			.arrow-up {
+// 				right: 14rem;
+// 			}
+// 		}
+// 		.show-menu {
+// 			right: -13rem;
+// 		}
+// 	}
+// }
+
+// @media screen and (max-width: $mobileScreenPotrait) {
+// 	.customer-service {
+// 		display: none;
+// 	}
+	
+// 	.settings {
+// 		display: none;
+// 	}
+	
+// 	.miniCartStyle {
+// 		right: 1.5rem;
+// 		top: 2rem;
+// 		.d-flex {
+// 			flex-direction: column;
+// 		}
+// 		.cart-link {
+// 			.quantity {
+// 				position: unset;
+// 				color: $cart-yellow-color;
+// 				padding: 0;
+// 				font-size: var(--fontsize18);
+// 				font-family: 'NiveauGroteskBold';
+// 				background-color: transparent;
+// 			}
+// 		}
+// 	}
+// }

@@ -1,0 +1,977 @@
+<div *ngIf="!isMobile">
+  <div class="my_statements" *ngIf="isParticularInvoice">
+    <div class="loading" *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+    <div class="">
+      <div class="row topHeading">
+       
+        <div class="col-md-3 custom-width-navigation" style="margin-top: 7rem;">
+          <div>
+            <app-account-left-nav [selectedTab]="'invoices'"></app-account-left-nav>
+          </div>
+        </div>
+        <div class="col-md-9 custom-width-grid">
+          <div class="heading-row1 row">
+            <div class="heading">
+              <h1>INVOICES & ADJUSTMENTS</h1>
+              <div class="row">
+                <i class="fa fa-info-circle"></i><p style="font-size: 14px; font-family: NiveauGrotesk;">You now have more options to find invoices quickly. Select the date range, choose your desired Search By option, enter your search details and then <br>
+                  press the Search button. Your date range and Search By selections will be saved automatically. To reset, simply press the Clear Filter button.</p>
+              </div>
+            </div>
+            <br>
+            
+          </div>
+        <div class="row searchbox-row">
+            <div class="col-md-3 drop">
+                <div class="selectdiv price_download dropdown"
+                    [ngClass]="selection.selected.length > 1 ? 'dropdown_mul' : 'dropdown_mul_hide'">
+                    <button class="btn btn-secondary dropdown-toggle price_download" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Select Download Options
+                    </button>
+                    <ul class="dropdown-menu price_download_sub" aria-labelledby="dropdownMenuButton1">
+                        <li><button (click)="emailMultiDialogOpen(selection.selected)">Email</button></li>
+                        <li><button (click)="webView()">Print in a Web View</button></li>
+                        <li><button (click)="listView()">Print as a List</button></li>
+                        <li><button (click)="singledownload(selection.selected)">Download as PDF (Individual files)</button>
+                        </li>
+                        <li><button (click)="multipleDownloadPDF(selection.selected)">Download as PDF (Consolidated)</button>
+                        </li>
+                        <li><button (click)="downloadMultiCSV(selection.selected)">Invoice Download Formats</button></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div>
+                    <label class="datebox">
+                        <input type="text" ngxDaterangepickerMd [(ngModel)]="selected" [showCustomRangeLabel]="true"
+                            [alwaysShowCalendars]="true" [ranges]="ranges" (datesUpdated)="datesUpdated($event)"
+                            [linkedCalendars]="true" [showClearButton]="true" placeholder="Select Date Range">
+                    </label>
+                </div>
+            </div>
+            <!-- Invoices search starts here -->
+            <div class="col-md-4 d-flex drop-search">
+                <div (click)="toggleSearchFilterDropdown()">
+                    <button class="nav-link dd-button search-drp" id="searchCriterDropDown" role="button"
+                        data-bs-toggle="dropdown" matTooltipPosition="below" aria-expanded="false">
+                        <ng-container>
+                            <span class="mr-2">{{searchInputFilter.value}}</span>
+                        </ng-container>
+                        <span class="m-display-inline m-arrow">
+                            <i *ngIf="isSearchFilterDropdownExpand" class="fa fa-chevron-up"
+                                aria-hidden="true"></i>
+                            <i *ngIf="!isSearchFilterDropdownExpand" class="fa fa-chevron-down"
+                                aria-hidden="true"></i>
+                        </span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-search dropdown-menu-end invoice-search"
+                        aria-labelledby="searchCriterDropDown">
+                        <ng-container *ngFor="let item of searchTerms; let i = index">
+                            <li class=" pr-3 d-flex align-items-center" (click)="doSearchFilter(item)"
+                            [ngClass]="{'selected':item.checked}">
+                                <div class="primaryAccount-tick" *ngIf="selectedActiveItem === item"></div>
+                                <div class="sortOption">
+                                    <label class="form-check-label" >
+                                        {{item}}
+                                    </label>
+                                </div>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+                <label class="searchbox w-100">
+                    <input autocomplete="off" [formControl]="searchInput" (keyup)="searchInvoice($event)" #searchKeyValue
+                        aria-describedby="initialDescription" class="form-control search-input" aria-controls="results"
+                        aria-autocomplete="both" placeholder="Enter search details" aria-label="Search">
+                    <i [class]="searchBoxDisable || (searchKeyValue.value.length<1)? 'fas fa-search disabled': 'fas fa-search'" 
+                       (click)="!searchBoxDisable && searchKeyValue.value.length>0 && doSearch(searchKeyValue.value)"
+                       [attr.aria-hidden] = "true"
+                       [ngClass]="{ 'fa-search': true}">
+                    </i>
+                </label>
+            </div>
+            <div class="col-md-2 d-flex justify-content-between">
+                <button class="col-6 col-md-5 btn btn-primary search-filter" [disabled]="searchBoxDisable || (searchKeyValue.value.length<1)" 
+                [ngClass]="{'disabled-button': searchBoxDisable || (searchKeyValue.value.length<1)}" (click)="doFilter(searchKeyValue.value)"> Search</button>
+                <div class="w-100"></div>
+                <button class="cod-6 col-md-6 btn btn-primary clear-filter-btn" (click)="clearFilterData()"> Clear Filter</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 invoiceTable">
+                <table mat-table [dataSource]="invoiceList" (matSortChange)="sortData($event)" matSort>
+                    <!-- checkbox Column -->
+                    <ng-container matColumnDef="select">
+                        <th mat-header-cell *matHeaderCellDef style="width: 6%;" class="custom-table-bottom-align">
+                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()">
+                            </mat-checkbox>
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                                [checked]="selection.isSelected(row)">
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;" class="custom-table-bottom-align">
+                            Date</th>
+                        <td mat-cell *matCellDef="let element" (click)="IndividualInvoice(element.docNumber)">
+                            {{element.docDate | date: 'dd/MM/yyyy'}} </td>
+                    </ng-container>
+                    <!-- Role Column -->
+                    <ng-container matColumnDef="type">
+                        <th class="position-relative" mat-header-cell *matHeaderCellDef style="width: 9%;"
+                            class="custom-table-bottom-align"> Type
+                            <mat-icon id="navbarDropdownMenuLink1" data-bs-toggle="dropdown" class="search_filter"
+                                style="padding-top: 5px !important;">filter_alt</mat-icon>
+                            <div id="invoice-adj-type" class="dropdown-contenttype px-3 dropdown-menu dropdown-menu-end">
+                                <!-- <a class="text-left ml-4"> <input type="checkbox" name="all" /> All </a> -->
+                                <a class="text-left ml-4">
+                                    <label class="check-container">
+                                        <input type="checkbox" class="checkbox" [(ngModel)]="isTypeAll"
+                                            (change)="doFilterSelect($event,'ALL', 'docType')" value="ALL" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="selectAll-label">All</label>
+                                </a>
+                                <a class="text-left ml-4">
+                                    <label class="check-container">
+                                        <input type="checkbox" class="checkbox" [(ngModel)]="isInv"
+                                            (change)="doFilterSelect($event,'INV', 'docType')" value="INV" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="selectAll-label">INV</label>
+                                </a>
+                                <a class="text-left ml-4">
+                                    <label class="check-container">
+                                        <input type="checkbox" class="checkbox" [(ngModel)]="isCrd"
+                                            (change)="doFilterSelect($event,'CRD', 'docType')" value="CRD" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="selectAll-label">CRD</label>
+                                </a>
+                            </div>
+                        </th>
+                        <td mat-cell *matCellDef="let element" (click)="IndividualInvoice(element.docNumber)">
+                            {{element.docType }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="invoiceNo">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="custom-table-align custom-table-bottom-align"
+                            style="width: 11%;line-height: 1.2;">
+                            Invoice/<br> Credit No. </th>
+                        <td mat-cell *matCellDef="let element" (click)="IndividualInvoice(element.docNumber)">
+                            {{element.docNumber }} </td>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="orderJobRef">
+                        <th mat-header-cell *matHeaderCellDef class="custom-table-align custom-table-bottom-align"
+                            style="width: 12%;line-height: 1.2;" mat-sort-header>
+                            Order/ <br>Job Ref. &nbsp;
+                        </th>
+                        <td class="lo_sensitive" mat-cell *matCellDef="let element" (click)="IndividualInvoice(element.docNumber)">
+                            {{ element.customerContext.customerPOReference}}
+                        </td>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="salesOrderNo">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="custom-table-align custom-table-bottom-align"
+                            style="width: 10%;line-height: 1.2;">
+                            Sales <br>Order No. </th>
+                        <td mat-cell *matCellDef="let element" (click)="IndividualInvoice(element.docNumber)">
+                            {{element.order.orderId}}
+                        </td>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="branch">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 12%;" class="custom-table-bottom-align">
+                            Branch </th>
+                        <td mat-cell *matCellDef="let element" (click)="IndividualInvoice(element.docNumber)">
+                            {{ element.branch.name}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="total">
+                        <th mat-header-cell *matHeaderCellDef 
+                            class="custom-table-align custom-table-bottom-align right-align" style="width: 10%;line-height: 1.2;">
+                            Total <br> <span class="span-gst"> (incl. GST) </span> </th>
+                        <td mat-cell *matCellDef="let element" (click)="IndividualInvoice(element.docNumber)" class="right-align">
+                            {{ negativeConverter(element.totalInc)}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="outstanding">
+                        <th mat-header-cell *matHeaderCellDef  class="custom-table-align custom-table-bottom-align"
+                            style="width: 12%;line-height: 1.2;">
+                            Outstanding <br><span class="span-gst"> (incl. GST) </span></th>
+                        <td mat-cell *matCellDef="let element" (click)="IndividualInvoice(element.docNumber)">
+                            {{ negativeConverter(element.outstandingAmount)}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                        <th class="position-relative" mat-header-cell *matHeaderCellDef style="width: 10%;"
+                            class="custom-table-bottom-align"> Status
+                            <mat-icon id="navbarDropdownMenuLink1" data-bs-toggle="dropdown" class="search_filter"
+                                style="padding-top: 5px !important;">filter_alt</mat-icon>
+                            <div id="invoice-adj-status" class="dropdown-contenttype px-3 dropdown-menu dropdown-menu-end">
+                                <a class="text-left ml-4">
+                                    <label class="check-container">
+                                        <input type="checkbox" class="checkbox" [(ngModel)]="isStatusAll"
+                                            (change)="doFilterSelect($event,'ALL', 'status')" value="Select All" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="selectAll-label">All</label>
+                                </a>
+                                <a class="text-left ml-4">
+                                    <label class="check-container">
+                                        <input type="checkbox" class="checkbox" [(ngModel)]="isOpen"
+                                            (change)="doFilterSelect($event,'OPEN', 'status')" value="Open" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="selectAll-label">Open</label>
+                                </a>
+                                <a class="text-left ml-4">
+                                    <label class="check-container">
+                                        <input type="checkbox" class="checkbox" [(ngModel)]="isPaid"
+                                            (change)="doFilterSelect($event,'PAID', 'status')" value="Paid" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="selectAll-label">Paid</label>
+                                </a>
+                            </div>
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="status-filter" (click)="IndividualInvoice(element.docNumber)">
+                            {{ element.status}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Actions">
+                        <th mat-header-cell *matHeaderCellDef style="width: 10%;" class="custom-table-bottom-align">
+                            &nbsp;&nbsp;Actions </th>
+                        <td mat-cell *matCellDef="let element" class="icon-td">
+                            <span id="navbarDropdownMenuLink1" data-bs-toggle="dropdown">
+                                <img src="assets/icons/ellipsis.svg" style="transform: scale(1.3);" class="ico-img" alt="ellipsis">
+                                &nbsp; </span>
+                            <div id="action-popup" class="dropdown-contenttype px-3 dropdown-menu dropdown-menu-end">
+                                <a class="text-left" (click)="emailDialogOpen(element)">
+                                    <img src="assets/icons/Icon simple-email.svg" class="ico-img" alt="email">
+                                    &nbsp;Email </a>
+                                <a class="text-left">
+                                    <span (click)="webViewIndividual(element.docNumber)">
+                                        <img src="assets/icons/print-in-web.svg" class="ico-img" alt="email">
+                                        &nbsp;Print in a Web View
+                                    </span>
+                                </a>
+                                <a class="text-left" (click)="downloadPDF(element.docNumber)">
+                                    <img src="assets/icons/Icon awesome-file-pdf.svg" class="ico-img" alt="Download as PDF">
+                                    &nbsp;Download as PDF </a>
+                                <a class="text-left">
+                                    <span (click)="listViewIndividual(element)">
+                                        <img src="assets/icons/print-list.svg" class="ico-img" alt="email">
+                                        &nbsp;Print as a List
+                                    </span>
+                                </a>
+                            </div>
+                            <span title="Download Invoice File" (click)="downloadCSV(selection.selected, element)"> <img
+                                    src="assets/icons/download.svg" class="ico-img" alt="download"> &nbsp;
+                            </span>
+                            <!-- <span> <img src="assets/icons/download.svg" class="ico-img" alt="download"
+                                                                (click)="downloadDialogOpen()"> &nbsp; </span> -->
+                        </td>
+                    </ng-container>
+            
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns "></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
+                </table>
+                <table class="noDataTable" *ngIf="invoicesNotFound">
+                    <tr>
+                        <td style="text-align: center;" [attr.colspan]="displayedColumns.length">
+                            No Records Found!
+                        </td>
+                    </tr>
+                </table>
+                <ng-container>
+                  <mat-paginator *ngIf="dataSource?.filteredData?.length != 0 && !isMobile" [hidden]="(dataSource?.filteredData?.length == 0) || (invoiceList.length == 0)"
+                  appPagination [length]="testPaginator.length " [pageSizeOptions]="[12,24,36,50,100] " [pageSize]="testPaginator.pageSize "
+                    [pageIndex]="testPaginator.pageIndex " [hidePageSize]="false " (page)="pageEvent($event) ">
+                </mat-paginator>
+              </ng-container>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="isMobile">
+  <div class="container" *ngIf="isParticularInvoice">
+    <div class="loading" *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+    <div class="">
+      <div class="row">
+        <div class="heading-row row">
+          <div class="col-md-9 heading invoicemain">
+            INVOICES & ADJUSTMENTS
+          </div>
+          <div class="col-md-3 update-preference" style="z-index: 1;">
+            <button class="update-preference-button" style="cursor: pointer !important;" (click)="updatePrefRoute()">
+              Update Preferences
+            </button>
+          </div>
+          <br />
+        </div>
+        <div class="col-md-3 custom-width-navigation" style="margin-top: 7rem;">
+          <div>
+            <app-account-left-nav [selectedTab]="'invoices'"></app-account-left-nav>
+          </div>
+        </div>
+        <div class="col-md-9 custom-width-grid">
+          <div class="row searchbox-row">
+
+            <div class="col-12 flex-display">
+              <label class="form-check-label dateRangeLabel col-3">Date Range</label>
+              <div class="datepicker-width">
+                <label class="datebox">
+                  <!-- <input autocomplete="off" (click)="openDateFilterPopUp(data)" readonly aria-describedby="initialDescription" class="form-control date-filter border-search"
+                             aria-controls="results" [value]="fromDate + ' - ' + toDate" aria-autocomplete="both" placeholder="dd/MM/yyyy"   aria-label="Search"> -->
+                  <app-ngb-date-rangepicker [disableDate]="false" pageName="invoice"
+                    (dateRangeEmitter)="dateRangeEmitter($event);" placeholder="test">
+                  </app-ngb-date-rangepicker>
+                  <!-- <i class="fas fa-search" ng-reflect-type="SEARCH"></i> -->
+                  <!-- <img class="calendar-icon" src="../../../assets/images/ic_calender.svg"> -->
+                </label>
+
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <button class="filters" (click)="openFilterPopup(filter)"> <i class="fa fa-filter"></i>&nbsp;
+                Filters </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="list-options" *ngIf="selection.selected.length > 1">
+                <button class="email-btn" (click)="emailMultiDialogOpen(selection.selected)">
+                  <img src="assets/icons/Icon simple-email.svg" class="ico-img">&ensp;Email
+                </button>
+                <button class="print-web-btn" (click)="webView()"> <img src="assets/icons/print-in-web.svg"
+                    class="ico-img">&ensp;Print in a Web
+                  View
+                </button>
+                <button class="dwnld-btn" (click)="multipleDownloadPDF(selection.selected)">
+                  <img src="assets/icons/Icon awesome-file-pdf.svg" class="ico-img">&ensp;Download
+                  as
+                  PDF
+                </button>
+                <button class="print-list-btn" (click)="listView()">
+                  <img src="assets/icons/print-list.svg" class="ico-img">&ensp;Print as a
+                  List&ensp;
+                </button>
+                <button class="dwnld-btn csv" (click)="multipleDownloadCSV(selection.selected)">
+                  <img src="assets/icons/download.svg" class="ico-img">&ensp;Download as CSV
+                </button>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="mobData.length == 0">
+            <p class="noOrdersMsgForMob">No Records Found!</p>
+          </div>
+
+          <div *ngFor="let data of mobData" class="background-list">
+            <div class="row">
+
+              <div class="col-9">
+                <div class="inline">
+                  <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(data) : null"
+                    [checked]="selection.isSelected(data)">
+                  </mat-checkbox>
+                </div>
+                <div class="pl-0 pr-0 vertical-align" (click)="IndividualInvoice(data.docNumber)">
+                  <h2 class="headmob">Invoice/Credit No : {{data.docNumber}}</h2>
+                </div>
+              </div>
+
+              <div class="col-3 right">
+                <span id="navbarDropdownMenuLink1" data-bs-toggle="dropdown">
+                  <img src="assets/icons/ellipsis.svg" style="transform: scale(1.3);" class="ico-img settings"
+                    alt="ellipsis"> &nbsp; </span>
+                <div id="action-popup" class="dropdown-contenttype px-3 dropdown-menu dropdown-menu-end">
+                  <a class="text-left" (click)="emailDialogOpen(data)">
+                    <img src="assets/icons/Icon simple-email.svg" class="ico-img" alt="email">
+                    &nbsp;Email </a>
+                  <a class="text-left">
+                    <span (click)="webViewIndividual(data.docNumber)">
+                      <img src="assets/icons/print-in-web.svg" class="ico-img" alt="email">
+                      &nbsp;Print in a Web View
+                    </span>
+                  </a>
+                  <a class="text-left" (click)="downloadPDF(data.docNumber)">
+                    <img src="assets/icons/Icon awesome-file-pdf.svg" class="ico-img" alt="Download as PDF">
+                    &nbsp;Download as PDF </a>
+                  <a class="text-left">
+                    <span (click)="listViewIndividual(data)">
+                      <img src="assets/icons/print-list.svg" class="ico-img" alt="email">
+                      &nbsp;Print as a List
+                    </span>
+                  </a>
+                </div>
+                <span title="Download Invoice File" (click)="downloadCSV(data.docNumber)"> <img
+                    src="assets/icons/download.svg" class="ico-img download" alt="download"> &nbsp;
+                </span>
+              </div>
+            </div>
+            <hr class="marginhr" />
+            <div (click)="IndividualInvoice(data.docNumber)">
+              <div class="row">
+                <div class="col-7">
+                  <h4 class="leftlist">Date</h4>
+                </div>
+                <div class="col-5 pl-0">
+                  <h4 class="text-right rightlist">{{data.docDate | date: 'dd/MM/yyyy'}}</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-7">
+                  <h4 class="leftlist">Type</h4>
+                </div>
+                <div class="col-5 pl-0">
+                  <h4 class="text-right rightlist">{{data.docType }}</h4>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-7">
+                  <h4 class="leftlist">Status</h4>
+                </div>
+                <div class="col-5">
+                  <h4 class="text-right rightlist status-filter">{{data.status }}</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-7">
+                  <h4 class="leftlist">Order/ Job Ref</h4>
+                </div>
+                <div class="col-5 pl-0">
+                  <h4 class="text-right rightlist">{{ data.customerContext.customerPOReference}}</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-7">
+                  <h4 class="leftlist">Sales Order No.</h4>
+                </div>
+                <div class="col-5 pl-0">
+                  <h4 class="text-right rightlist">{{ data.order.orderId }}</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-7">
+                  <h4 class="leftlist">Branch</h4>
+                </div>
+                <div class="col-5 pl-0">
+                  <h4 class="text-right rightlist">{{data.branch.name }}</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-7">
+                  <h4 class="leftlist">Total<span> (incl. GST)</span></h4>
+                </div>
+                <div class="col-5 pl-0">
+                  <h4 class="text-right rightlist">${{ data.totalInc | number: '1.2-2'}}</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-7">
+                  <h4 class="leftlist">Oustanding<span> (incl. GST)</span></h4>
+                </div>
+                <div class="col-5 pl-0">
+                  <h4 class="text-right rightlist">${{ data.outstandingAmount | number:'1.2-2'}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isMobile && viewMoreVisible">
+            <button class="view-more" (click)="viewMoreClick()">View More</button>
+          </div>
+          <div class="bottom-btns">
+            <div class="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!isMobile">
+  <div class="my_statements isparticular-statement" *ngIf="!isParticularInvoice">
+    <div class="loading" *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+    <div class="row for-bottom-space">
+      <div *ngIf="individualDataSource?.docType == 'INV'" class="col-md-9 heading headingDetail">
+        COPY TAX INVOICE NO. {{individualDataSource?.docNumber}}
+      </div>
+      <div *ngIf="individualDataSource?.docType == 'CRD'" class="col-md-9 heading headingDetail">
+        COPY ADJUSTMENT NOTE NO. {{individualDataSource?.docNumber}}
+      </div>
+      <div class="col-md-3 update-preference">
+        <button class="back-button statement-back-button" type="button" style="width: 124px;" (click)="back()">
+          Back
+        </button>
+      </div>
+    </div>
+    <div class="row box pad-bottom">
+      <div class="col-md-4 col">
+        <div style="margin-left: 10px;">
+          <div class="divide">
+            <p class="title">{{individualDataSource.returnDetails.address.companyName}}</p>
+            <p *ngIf="individualDataSource?.returnDetails?.address?.address1" class="font-18">
+              {{individualDataSource?.returnDetails?.address?.address1}}</p>
+            <p *ngIf="individualDataSource?.returnDetails?.address?.address2" class="font-18">
+              {{individualDataSource?.returnDetails?.address?.address2}}</p>
+            <p *ngIf="individualDataSource?.returnDetails?.address?.address3" class="font-18">
+              {{individualDataSource?.returnDetails?.address?.address3}}</p>
+            <p *ngIf="individualDataSource?.returnDetails?.address?.phone" class="font-18">
+              {{individualDataSource?.returnDetails?.address?.phone}}</p>
+            <!-- <p class="font-18">1-3 SLOUGH AVENUE QLD 2128</p>
+                        <p class="font-18">Phone: 02 9296 7300 </p> -->
+            <p class="font-18">Web: <span style="text-decoration: underline;">www.tradelink.com.au</span>
+            </p>
+            <p class="font-18">Email: <span style="text-decoration: underline;">tl@tradelink.com.au</span>
+            </p>
+          </div>
+          <div class="divide abn-div">
+            <p class="title">ABN</p>
+            <p class="font-18">{{individualDataSource?.returnDetails?.address?.businessNumber}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col">
+        <div style="margin-left: 10px;">
+          <div class="divide">
+            <p class="title">Bill To</p>
+            <p class="font-18 lo_sensitive">
+              {{individualDataSource?.customer?.id}}<br>
+              {{individualDataSource?.billToDetails?.address?.address1}},
+              {{individualDataSource?.billToDetails?.address?.address2}}<span
+                *ngIf="individualDataSource?.billToDetails?.address?.address2">, </span>
+              {{individualDataSource?.billToDetails?.address?.address3}}<span
+                *ngIf="individualDataSource?.billToDetails?.address?.address3">, </span>
+              {{individualDataSource?.billToDetails?.address?.city}},
+              {{individualDataSource?.billToDetails?.address?.postCode}},
+              {{individualDataSource?.billToDetails?.address?.state}}
+            </p>
+          </div>
+          <div class="divide">
+            <p class="title">Deliver To</p>
+            <p class="font-18 lo_sensitive">{{individualDataSource?.delivery?.notes}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col">
+        <div style="margin-left: 10px;">
+          <div class="divide">
+            <p class="title">Invoice Date</p>
+            <p class="font-18 lo_sensitive">{{individualDataSource?.docDate | date: 'dd/MM/yyyy'}}</p>
+          </div>
+          <div class="divide lo_sensitive">
+            <p class="title">Customer Order No.</p>
+            <p class="font-18">{{individualDataSource?.customerContext?.customerPOReference}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col">
+        <div style="margin-left: 10px;">
+          <div class="divide">
+            <p class="title">Sales Order No.</p>
+            <p class="font-18 lo_sensitive">{{individualDataSource?.order?.orderId}}</p>
+          </div>
+          <div class="divide lo_sensitive">
+            <p class="title">Taken By</p>
+            <p class="font-18">{{individualDataSource?.takenBy}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <table mat-table [dataSource]="individualDataSource?.invoiceDetails">
+        <!-- checkbox Column -->
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="itemCode">
+          <th mat-header-cell *matHeaderCellDef class="custom-table-bottom-align"> Item Code </th>
+          <td mat-cell *matCellDef="let element" style="cursor: default;">
+            {{element.sku}} </td>
+        </ng-container>
+
+        <!-- Role Column -->
+        <ng-container matColumnDef="deliveryRef">
+          <th class="position-relative custom-table-bottom-align" mat-header-cell *matHeaderCellDef> Delivery
+            Ref. &nbsp;
+          </th>
+          <td mat-cell *matCellDef="let element" style="cursor: default;">
+            {{element.shipmentRef }} </td>
+        </ng-container>
+        <ng-container matColumnDef="itemDesc">
+          <th mat-header-cell *matHeaderCellDef style="width: 25%;" class="custom-table-bottom-align"> Item
+            Description </th>
+          <td mat-cell *matCellDef="let element" style="padding-right: 3%;cursor: default;">
+            {{element.description }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="uom">
+          <th mat-header-cell *matHeaderCellDef class="status-class custom-table-bottom-align"
+            style="justify-content: center;width: 9%;">
+            UOM &nbsp;
+          </th>
+          <td mat-cell *matCellDef="let element" style="cursor: default;">
+            {{element.unitOfMeasure }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef style="width: 9%;" class="custom-table-bottom-align"> Quantity
+          </th>
+          <td mat-cell *matCellDef="let element" style="cursor: default;"> {{element.quantityOrdered }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="unitPriceEXCL">
+          <th mat-header-cell *matHeaderCellDef style="line-height: 1.2;width: 9%;"
+            class="custom-table-align custom-table-bottom-align"> Unit Price <br><span class="span-gst">
+              (excl. GST) </span> </th>
+          <td mat-cell *matCellDef="let element" class="lo_sensitive" style="cursor: default;">
+            {{negativeConverter(element.linePrice.unitPrice)}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="unitPriceINCL">
+          <th mat-header-cell *matHeaderCellDef class="custom-table-align custom-table-bottom-align"
+            style="line-height: 1.2;width: 9%;"> Unit Price <br><span class="span-gst">
+              (incl. GST) </span> </th>
+          <td mat-cell *matCellDef="let element" style="cursor: default;">
+            {{negativeConverter(element.linePrice.total)}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="extPrice">
+          <th mat-header-cell *matHeaderCellDef class="custom-table-align custom-table-bottom-align"
+            style="line-height: 1.2;width: 9%;"> EXT Price <br><span class="span-gst">
+              (excl. GST) </span> </th>
+          <td mat-cell *matCellDef="let element" class="lo_sensitive" style="cursor: default;">
+            {{negativeConverter(element.linePrice.subtotal)}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Actions">
+          <th mat-header-cell *matHeaderCellDef class="custom-table-bottom-align"> Actions </th>
+          <td mat-cell *matCellDef="let element" class="icon-td">
+            <span id="navbarDropdownMenuLink1" data-bs-toggle="dropdown">
+              <img src="assets/icons/ellipsis.svg" style="transform: scale(1.3);margin-left: 22px;" class="ico-img"
+                alt="ellipsis"> &nbsp; </span>
+            <div id="detail-action-popup" class="dropdown-contenttype px-3 dropdown-menu dropdown-menu-end">
+              <a class="text-left" (click)="emailDialogOpen(individualDataSource.docNumber , true)">
+                <img src="assets/icons/Icon simple-email.svg" class="ico-img" alt="email"> &nbsp;Email
+              </a>
+              <a title="Download Invoice File" class="text-left" (click)="downloadPDF(individualDataSource.docNumber)">
+                <img src="assets/icons/Icon awesome-file-pdf.svg" class="ico-img" alt="Download as PDF">
+                &nbsp;Download as PDF </a>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="individualInvoiceDisplayedColumns "></tr>
+        <tr mat-row *matRowDef="let row; columns: individualInvoiceDisplayedColumns; "></tr>
+
+      </table>
+      <table class="noDataTable">
+        <tr *ngIf="individualDataSource?.filteredData && individualDataSource?.filteredData?.length == 0">
+          <td style="text-align: center;" [attr.colspan]="individualInvoiceDisplayedColumns.length">
+            No Records Found!
+          </td>
+        </tr>
+      </table>
+
+      <mat-paginator appPagination [length]="testPaginator.length " [pageSizeOptions]="[12, 24, 36,50,100]"
+        *ngIf="isParticularInvoice" style="width: 100%;" [pageSize]="testPaginator.pageSize "
+        [pageIndex]="testPaginator.pageIndex " [hidePageSize]="false " (page)="pageEvent($event) ">
+      </mat-paginator>
+    </div>
+    <div class="row box" style="margin-top: 20px;">
+      <div class="col-md-9 ">
+        <div style="margin-left: 10px;">
+          <p class="title">Warranty & Consumer Guarantee</p>
+          <p class="for-p">Many of our products come with a warranty from us or the manufacturer. For full
+            terms and conditions of any warranty, including how to claim, please refer to our website (if we
+            are providing the warranty) or the manufacturer’s website
+            (if they are providing the warranty), and any separate warranty documents.<br><br> In addition,
+            if you are a Consumer as defined in the Australian Consumer Law, these goods come with
+            guarantees that cannot be excluded and you are
+            entitled to a replacement or refund for a major failure and compensation for any other
+            reasonably foreseeable loss or damage. You are also entitled to have the goods repaired or
+            replaced if the goods fail to be of acceptable quality
+            and the failure does not amount to a major failure.</p>
+        </div>
+      </div>
+      <div class="col-md-3 cus-col-3 lo_sensitive">
+        <div style="margin-left: 10px;">
+          <div class="inner-bottom-price">
+            <p> <span class="sub-title">Total Exclusive of GST</span></p>
+            <p class="price-bottom">{{ negativeConverter(individualDataSource.totalEx) }}
+            </p>
+          </div>
+          <div class="inner-bottom-price">
+            <p><span class="sub-title">GST $</span></p>
+            <p class="price-bottom">{{ negativeConverter(individualDataSource.totalGSTValue)}}</p>
+          </div>
+          <div class="inner-bottom-price">
+            <p> <span class="sub-title">Total Incl GST</span></p>
+            <p class="price-bottom">{{ negativeConverter(individualDataSource.totalInc) }}</p>
+          </div>
+          <hr>
+          <div class="inner-bottom-price">
+            <p> <span class="sub-title invoice-total">Invoice Total</span> </p>
+            <p class="price-bottom price-value">{{ negativeConverter(individualDataSource.totalInc)}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="isMobile">
+  <div class="container" *ngIf="!isParticularInvoice">
+    <div class="loading" *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+    <div class="row for-bottom-space marg">
+      <div *ngIf="individualDataSource?.docType == 'INV'"
+        class="col-md-9 col-sm-9 col-9 heading headdetail invoicedetail">
+        COPY TAX INVOICE NO. {{individualDataSource?.docNumber}}
+      </div>
+      <div *ngIf="individualDataSource.docType == 'CRD'"
+        class="col-md-9 col-sm-9 col-9 heading headdetail invoicedetail">
+        COPY ADJUSTMENT NOTE NO. {{individualDataSource?.docNumber}}
+      </div>
+      <div class="col-md-3 col-sm-3 col-3 update-preference">
+        <button class="back-button statement-back-button" type="button" (click)="back()">
+          Back
+        </button>
+      </div>
+    </div>
+
+    <div class="background-list box">
+      <div class="row margtp">
+        <div class="col-12">
+          <div class="divide">
+            <p class="title">{{individualDataSource.returnDetails.address.companyName}}</p>
+            <p *ngIf="individualDataSource?.returnDetails?.address?.address1" class="font-18">
+              {{individualDataSource?.returnDetails?.address?.address1}}</p>
+            <p *ngIf="individualDataSource?.returnDetails?.address?.address2" class="font-18">
+              {{individualDataSource?.returnDetails?.address?.address2}}</p>
+            <p *ngIf="individualDataSource?.returnDetails?.address?.address3" class="font-18">
+              {{individualDataSource?.returnDetails?.address?.address3}}</p>
+            <p *ngIf="individualDataSource?.returnDetails?.address?.phone" class="font-18">
+              {{individualDataSource?.returnDetails?.address?.phone}}</p>
+            <p class="title">Tradelink Pvt. Ltd.</p>
+            <!-- <p class="font-18">1-3 SLOUGH AVENUE QLD 2128</p>
+                        <p class="font-18">Phone: 02 9296 7300 </p> -->
+            <p class="font-18">Web: <span style="text-decoration: underline;">www.tradelink.com.au</span>
+            </p>
+            <p class="font-18">Email: <span style="text-decoration: underline;">tl@tradelink.com.au</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row margtp">
+        <div class="col-6">
+          <div class="divide abn-div">
+            <p class="title">ABN</p>
+            <p class="font-18">{{individualDataSource?.returnDetails?.address?.businessNumber}}</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="divide">
+            <p class="title">Bill To</p>
+            <p class="font-18">
+              {{individualDataSource?.customer?.id}}<br>
+              {{individualDataSource?.billToDetails?.address?.address1}},
+              {{individualDataSource?.billToDetails?.address?.address2}}
+              <span *ngIf="individualDataSource?.billToDetails?.address?.address2">,</span>
+              {{individualDataSource?.billToDetails?.address?.address3}}
+              <span *ngIf="individualDataSource?.billToDetails?.address?.address3">,</span>
+              {{individualDataSource?.billToDetails?.address?.city}},
+              {{individualDataSource?.billToDetails?.address?.postCode}},
+              {{individualDataSource?.billToDetails?.address?.state}}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row margtp">
+        <div class="col-6">
+          <div class="divide">
+            <p class="title">Deliver To</p>
+            <p class="font-18 lo_sensitive">Hold</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="divide">
+            <p class="title">Invoice Date</p>
+            <p class="font-18">{{individualDataSource?.docDate | date: 'dd/MM/yyyy'}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row margtp">
+        <div class="col-6">
+          <div class="divide lo_sensitive">
+            <p class="title">Customer Order No.</p>
+            <p class="font-18">{{individualDataSource?.customerContext?.customerPOReference}}</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="divide">
+            <p class="title">Sales Order No.</p>
+            <p class="font-18 lo_sensitive">{{individualDataSource?.order?.orderId}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row margtp">
+        <div class="col-6">
+          <div class="divide lo_sensitive">
+            <p class="title">Taken By</p>
+            <p class="font-18">Hold</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row box marg warranty" style="margin-top: 20px;margin-bottom: 20px;">
+      <div class="col-md-9 pl-0 pr-0">
+        <div>
+          <p class="title warrantyhd">Warranty & Consumer Guarantee</p>
+          <p class="for-p">Many of our products come with a warranty from us or the manufacturer. For full
+            terms and conditions of any warranty, including how to claim, please refer to our website (if we
+            are providing the warranty) or the manufacturer’s website
+            (if they are providing the warranty), and any separate warranty documents.<br><br> In addition,
+            if you are a Consumer as defined in the Australian Consumer Law, these goods come with
+            guarantees that cannot be excluded and you are
+            entitled to a replacement or refund for a major failure and compensation for any other
+            reasonably foreseeable loss or damage. You are also entitled to have the goods repaired or
+            replaced if the goods fail to be of acceptable quality
+            and the failure does not amount to a major failure.</p>
+        </div>
+      </div>
+      <div class="col-md-3 cus-col-3 pl-0 pr-0">
+        <div>
+          <div class="inner-bottom-price">
+            <p> <span class="sub-title">Subtotal</span>&nbsp;<span class="gst-type">(excl. GST)</span></p>
+            <p class="price-bottom">${{ individualDataSource?.totalEx | number: '1.2-2' }}</p>
+          </div>
+          <div class="inner-bottom-price">
+            <p><span class="sub-title">GST</span></p>
+            <p class="price-bottom">${{ individualDataSource?.totalGSTValue | number: '1.2-2' }}</p>
+          </div>
+          <div class="inner-bottom-price">
+            <p> <span class="sub-title">Total</span>&nbsp;<span class="gst-type">(excl. GST)</span> </p>
+            <p class="price-bottom">${{ individualDataSource?.totalInc | number: '1.2-2' }}</p>
+          </div>
+          <hr class="margbtm">
+          <div class="inner-bottom-price">
+            <p> <span class="sub-title invoice-total">Invoice Total</span>&nbsp;<span class="gst-type">(incl.
+                GST)</span> </p>
+            <p class="price-bottom price-value">${{ individualDataSource?.totalInc | number: '1.2-2' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let data1 of mobData1" class="background-list invoicedetail">
+      <div class="row">
+        <div class="col-9 aligncenter">
+          <h2 class="headmob">Item Code : {{data1.sku}}</h2>
+        </div>
+        <div class="col-3 right">
+          <span id="navbarDropdownMenuLink1" data-bs-toggle="dropdown">
+            <img src="assets/icons/ellipsis.svg" style="transform: scale(1.3);margin-left: 22px;" class="ico-img settingdetail" alt="ellipsis"> &nbsp; 
+          </span>
+          <div id="detail-action-popup" class="dropdown-contenttype px-3 dropdown-menu dropdown-menu-end">
+            <a class="text-left">
+              <img src="assets/icons/Icon simple-email.svg" class="ico-img" alt="email"> &nbsp;Email
+            </a>
+            <a title="Download Invoice File" class="text-left" (click)="downloadCSV(individualDataSource.docNumber)">
+              <img src="assets/icons/Icon awesome-file-pdf.svg" class="ico-img" alt="Download as PDF">
+              &nbsp;Download as PDF 
+            </a>
+          </div>
+        </div>
+      </div>
+      <hr class="marginhr1" />
+      <div class="row">
+        <div class="col-6">
+          <h4 class="leftlist">Delivery Ref.</h4>
+        </div>
+        <div class="col-6 pl-0">
+          <h4 class="rightlist">{{data1.shipmentRef}}</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <h4 class="leftlist">Item Description</h4>
+        </div>
+        <div class="col-6 pl-0">
+          <h4 class="rightlist">{{data1.description}}</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <h4 class="leftlist">UOM</h4>
+        </div>
+        <div class="col-6 pl-0">
+          <h4 class="rightlist">{{data1.unitOfMeasure}}</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <h4 class="leftlist">Quantity</h4>
+        </div>
+        <div class="col-6 pl-0">
+          <h4 class="rightlist">{{data1.quality}}</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <h4 class="leftlist">Unit Price(excl.GST)</h4>
+        </div>
+        <div class="col-6 pl-0">
+          <h4 class="rightlist lo_sensitive">${{data1.linePrice.subtotal | number: '1.2-2'}}</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <h4 class="leftlist">Unit Price(incl.GST)</h4>
+        </div>
+        <div class="col-6 pl-0">
+          <h4 class="rightlist lo_sensitive">${{data1.linePrice.total | number: '1.2-2'}}</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <h4 class="leftlist">EXT Price(excl.GST)</h4>
+        </div>
+        <div class="col-6 pl-0">
+          <h4 class="rightlist lo_sensitive">${{data1.linePrice.unitPrice | number: '1.2-2'}}</h4>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isMobile && viewMoreVisible1">
+      <button class="view-more" (click)="viewMoreClickDetailPage()">View More</button>
+    </div>
+  </div>
+</div>
+
+<div class="back-drop" *ngIf="priceDownload">
+
+</div>
+
+<ng-template #filter let-modal>
+  <app-filter-popup-invoice-adjustments [type]="paramsFromFilter.type" [status]="paramsFromFilter.status"
+    (doMobFilter)="mobFilter($event)"></app-filter-popup-invoice-adjustments>
+</ng-template>

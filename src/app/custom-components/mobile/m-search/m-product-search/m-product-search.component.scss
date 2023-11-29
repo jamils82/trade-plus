@@ -1,0 +1,302 @@
+@import "../../../../shared/styles/variables.scss";
+.custom-control-input:checked~.custom-control-label::before {
+    background-color: #545859;
+}
+
+.custom-control-input:checked~.custom-control-label.gray::before {
+    background-color: #fff;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    color: #fff;
+    border-color: #545859;
+}
+
+.custom-radio .custom-control-input:checked~.custom-control-label::after {
+    background-color: #545859 !important;
+    border-radius: 50%;
+}
+
+.menuContainer {
+    @include font-MyriadReg();
+    font-size: 0.8rem;
+    label {
+        color: $black-color;
+    }
+}
+
+.menuContainer {
+    .custom-control {
+        font-size: 0.7rem !important;
+    }
+    .custom-control-label::before {
+        top: 0 !important;
+    }
+    .custom-control-label::after {
+        top: 0 !important;
+    }
+}
+
+.headerTitle {
+    position: relative;
+    right: 7px;
+}
+
+.resetIconspan {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: 1px solid #000;
+    border-radius: 0.28rem;
+    opacity: 1;
+    height: 2rem;
+    width: 2rem;
+    color: black;
+    margin-right: 1rem;
+    cursor: pointer;
+    display: flex;
+    img {
+        height: 100%;
+        width: 100%;
+        padding: 0.4rem;
+    }
+}
+
+.searchIconspan {
+    background-color: #545859;
+    border-radius: 0.28rem;
+    padding: 6px;
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+    display: flex;
+    img {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.searchIcon {
+    border-radius: 3px;
+    opacity: 1;
+    background: 0% 0% no-repeat padding-box;
+    height: 1.4rem;
+}
+
+.appScaleLevel header .SearchBox {
+    margin: 18px auto;
+}
+
+
+/* OOTB Styles */
+
+.productSearchBox {
+    color: #545859;
+    z-index: 10;
+    display: block;
+    margin-right: 0.8rem;
+    .searchTextBox {
+        position: relative;
+        border: 1px solid #c8c9c7;
+        border-radius: 4px;
+        height: 40px;
+    }
+    label {
+        display: flex;
+        align-content: stretch;
+        margin: 0;
+        padding-top: 6px;
+        padding-inline-end: 2px;
+        padding-bottom: 6px;
+        padding-inline-start: 2px;
+        .headerTitle {
+            font-size: 1.1rem !important;
+        }
+        input {
+            background: none;
+            border: none;
+            outline: none;
+            display: block;
+            flex-basis: 98%;
+            height: 27px;
+            color: currentColor;
+            border-radius: 4px;
+            z-index: 20;
+        }
+        &:not(.dirty) cx-icon.reset {
+            display: none;
+        }
+    }
+}
+
+.searchResetIcons {
+    display: flex;
+    margin-top: 40px;
+    justify-content: space-between !important;
+}
+@media screen and (max-width:$mobileScreenPotrait) {
+.headerTitle
+{
+    color: $pdp-font-color !important;
+    font-size: var(--fontsize19);
+    text-transform: uppercase;
+    font-family: 'NiveauGroteskBold';
+    right: 0px;
+    margin-bottom: 15px;
+}
+
+::placeholder {
+    color: $placeholder-color; /* Firefox */
+    font-size: var(--fontsize16);
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: $placeholder-color;
+   font-size: var(--fontsize16);
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+   color:$placeholder-color;
+   font-size: var(--fontsize16);
+  }
+ .custom-control-input:checked~.custom-control-label::before {
+   width: 14px;
+   height: 14px;
+   border: 1.5px solid $pdp-font-color;
+  }
+  .custom-radio .custom-control-input:checked~.custom-control-label::after {
+    background-color:$pdp-font-color !important;
+    background-image: none;
+    border-radius: 50% !important;
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    top: 8.5px!important;
+    left: -20.5px;
+  }
+  .custom-control-input:focus~.custom-control-label:before
+  {
+    box-shadow: none !important;
+  }
+  .custom-control-input:disabled~.custom-control-label, .custom-control-input[disabled]~.custom-control-label {
+    color: $pdp-font-color;
+    opacity: 0.5;
+}
+input[type=radio]:checked {
+    border-color: unset !important;
+}
+.searchField
+{
+    border-radius: 5px;
+}
+    span.search 
+    {
+        position: absolute;
+        font-size: var(--fontsize24);
+        right: 20px;
+        padding: 8px;
+        color: $blue-color;
+    }
+
+ .menuContainer .custom-control-label:after, .menuContainer .custom-control-label:before
+  {
+      top:5px !important;
+  }
+  .custom-control-label:after, .custom-control-label:before
+  {
+      width: 14px;
+      height: 14px;
+  }
+.productSearchBox 
+{
+    margin-right: 0px;
+    label{
+        display: block;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+    .searchTextBox
+    {
+        height: 40px;
+        border: 0px;
+    }
+}
+
+.custom-control-label
+{
+    color: $pdp-font-color !important;
+    font-size: var(--fontsize20);
+    font-family: 'NiveauGrotesk';
+    margin: 10px 0px;
+}
+.cancelBtn,.confirmBtn
+  {
+     max-height: var(--buttonHeight60);
+   
+  }
+  .cancelBtn {
+    background-color: #77889380;
+    color: #495A64;
+    outline: none;
+    border:0px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    min-height: var(--buttonHeight60);
+    font-size: var(--fontsize21);
+    font-family: 'NiveauGroteskBold';
+    max-width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+}
+.confirmBtn {
+    float: right;
+    background-color: #003D7A;
+    color: #ffffff;
+    outline: none;
+    border: 1px solid #003D7A;
+    border-radius: 5px;
+    font-weight: bold;
+    max-width: 45%;
+    margin-bottom: 15px;
+    min-height: var(--buttonHeight60);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'NiveauGroteskBold';
+    font-size: var(--fontsize21);
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+    &:hover {
+        color: $white-color !important;
+    }
+}
+
+.cls-icon {
+    cursor: pointer;
+    color: $pdp-font-color;
+    width: 12px;
+    height: 12px;
+}
+.cls-btn {
+    text-align: right;
+    position: absolute;
+    right: 30px;
+    top: 7px;
+}
+.cls-btn i.fa.fa-times {
+    color: #b5bec3;
+}
+.searchField {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ccc;
+    font-family: 'NiveauGrotesk';
+    font-size: var(--fontsize18);
+    color: $pdp-font-color;
+    padding: 5px;
+}
+}

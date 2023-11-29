@@ -1,0 +1,242 @@
+<div *ngIf="!isMobile">
+    <div class="container-page">
+        <div class="loading" *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+        <div class="top-proof-container row">
+            <div class="proof-delivery-content col-md-6">
+                <h3 class="proof font-bold proof-checkout-h3">PROOF OF DELIVERY</h3>
+            </div>
+            <div class='col-sm-6 col-6'>
+                <button class="btn btn-block back" (click)="onBackButtonClicked()">Back</button>
+                <!-- <button mat-button class="re-order-btn font-bold" (click)="placeOrder()" cdkFocusInitial>Re-Order</button> -->
+            </div>
+        </div>
+        <div class="row proof-row-container">
+            <div class="col-sm-12">
+                <div class="btn-group">
+                    <button *ngFor="let data of consignmentsIds; let ind = index" class="btn" [ngClass]="{'deselect': ind != selectInd }" (click)="selectInd = ind; getProofOfDelivery(ind)" aria-current="page"> Consignment -  {{ data }} </button>
+
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: -15px;" class="row proof-row-container">
+            <div class="col-sm-12">
+                <mat-card class="proof-card-container">
+                    <mat-card-content class="box-container">
+                        <div class="row">
+                            <div class="col-sm-3 delivery-container">
+                                <div class="delivery-box">
+                                    <img class="delivery-img" src="./../assets/icons/delivery.svg" />
+                                </div>
+                                <div class="delivery-container-text">
+                                    <mat-card-title>Delivery</mat-card-title>
+                                    <mat-card-subtitle>We will deliver right to your door.</mat-card-subtitle>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <mat-card-title>Delivered To</mat-card-title>
+                                        <mat-card-subtitle class="lo_sensitive"> {{customerAccountId}} <br> {{deliveryData.DeliveredTo || ' ' }}
+                                        </mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-card-title>Delivery Address</mat-card-title>
+                                        <mat-card-subtitle class="lo_sensitive">{{deliveryData.DeliveryAddress || ' ' }}</mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-card-title>Date Delivered</mat-card-title>
+                                        <mat-card-subtitle>{{deliveryData.DateDelivered || ' ' }}
+                                        </mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-card-title>Time Delivered</mat-card-title>
+                                        <mat-card-subtitle>{{ deliveredTime | date : 'HH:mm:ss a'|| deliveryData.TimeDelivered || ' ' }}</mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-card-title>Customer Order / Job Ref.</mat-card-title>
+                                        <mat-card-subtitle class="lo_sensitive">{{deliveryData.CustomerOrder || ' ' }}</mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-card-title>Received By</mat-card-title>
+                                        <mat-card-subtitle class="lo_sensitive">{{deliveryData.ReceivedBy || ' ' }}</mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-card-title>Sales Order No.</mat-card-title>
+                                        <mat-card-subtitle>{{deliveryData.SalesOrderNo || ' ' }}</mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-card-title>Driver ID</mat-card-title>
+                                        <mat-card-subtitle class="lo_sensitive">{{deliveryData.DriverID || ' ' }}</mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-card-title>Item Summary</mat-card-title>
+                                        <mat-card-subtitle *ngFor="let element of deliveryData.ItemSummary">
+                                            {{element.quantityShipped + ' X ' + element.description }}
+                                        </mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-card-title>Delivery Instructions</mat-card-title>
+                                        <mat-card-subtitle class="lo_sensitive">{{deliveryData.DeliveryInstructions || ' ' }}
+                                        </mat-card-subtitle>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div class=" proof-row-container bg-white">
+            <h4 class="font-bold proof-checkout-h2">DELIVERY DETAILS</h4>
+        </div>
+        <div class="row proof-row-container">
+            <div class="col-sm-12">
+                <mat-card class="proof-card-container">
+                    <mat-card-content class="box-container">
+                        <div class="row lo_sensitive">
+                            <div class="col-sm-4">
+                                <h5 class="sign-box-h5">Signature</h5>
+                                <div class="box-content">
+                                    <img [src]="signatureImage" class="deliver-location-box" onerror="this.style.visibility='hidden'">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <h5 class="deliver-location-box-h5">Delivery Location</h5>
+                                <div class="box-content">
+                                    <img [src]="mapImage" class="deliver-location-box" onerror="this.style.visibility='hidden'">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <h5 class="photos-box-h5">Photo</h5>
+                                <div class="box-content">
+                                    <img [src]="productImage" class="photos-box" onerror="this.style.visibility='hidden'">
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="isMobile">
+    <div class="container">
+        <div class="loading" *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+        <div class="top-proof-container row">
+            <div class="proof-delivery-content col-md-6 col-6">
+                <h3 class="proof font-bold proof-checkout-h3">PROOF OF DELIVERY</h3>
+            </div>
+            <div class='col-sm-6 col-6'>
+                <button class="btn btn-block back" (click)="onBackButtonClicked()">Back</button>
+                <!-- <button mat-button class="re-order-btn font-bold" (click)="placeOrder()" cdkFocusInitial>Re-Order</button> -->
+            </div>
+        </div>
+        <div class="row proof-row-container">
+            <div class="col-sm-12 menu-list">
+                <div class="btn-group">
+                    <button *ngFor="let data of dates; let ind = index" class="btn" [ngClass]="{'deselect': ind != selectInd }" (click)="selectInd = ind; getProofOfDelivery(ind)" aria-current="page"> {{data}} </button>
+
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: -15px;" class="row proof-row-container">
+            <div class="col-md-12 col-sm-12 col-12">
+                <mat-card class="proof-card-container padcontainer">
+                    <mat-card-content class="box-container">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12 col-12 delivery-container mobflex">
+                                <div class="delivery-box col-6 col-sm-6">
+                                    <img class="delivery-img" src="./../assets/icons/delivery.svg" />
+                                </div>
+                                <div class="col-6 col-sm-6 inlinemob">
+                                    <p>Delivery</p>
+                                    <p>We will deliver right<br /> to your door.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-12 col-12">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-6 margbtm">
+                                        <mat-card-title>Delivered To</mat-card-title>
+                                        <mat-card-subtitle class="lo_sensitive">{{deliveryData.DeliveredTo || ' ' }}</mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-6 margbtm">
+                                        <mat-card-title>Delivery Address</mat-card-title>
+                                        <mat-card-subtitle class="lo_sensitive">{{deliveryData.DeliveryAddress || ' ' }}</mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-6 margbtm">
+                                        <mat-card-title>Date Delivered</mat-card-title>
+                                        <mat-card-subtitle>{{deliveryData.DateDelivered | date: 'dd/MM/yyyy' || ' ' }}
+                                        </mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-6 margbtm">
+                                        <mat-card-title>Time Delivered</mat-card-title>
+                                        <mat-card-subtitle>{{deliveryData.TimeDelivered || ' ' }}</mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-6 margbtm">
+                                        <mat-card-title>Customer Order / Job Ref.</mat-card-title>
+                                        <mat-card-subtitle class="lo_sensitive">{{deliveryData.CustomerOrder || ' ' }}</mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-6 margbtm">
+                                        <mat-card-title>Received By</mat-card-title>
+                                        <mat-card-subtitle class="lo_sensitive">{{deliveryData.ReceivedBy || ' ' }}</mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-6 margbtm">
+                                        <mat-card-title>Sales Order No.</mat-card-title>
+                                        <mat-card-subtitle>{{deliveryData.SalesOrderNo || ' ' }}</mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-6 margbtm">
+                                        <mat-card-title>Driver ID</mat-card-title>
+                                        <mat-card-subtitle class="lo_sensitive">{{deliveryData.DriverID || ' ' }}</mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-6 margbtm">
+                                        <mat-card-title>Item Summary</mat-card-title>
+                                        <mat-card-subtitle *ngFor="let element of deliveryData.ItemSummary">
+                                            {{element.quantityShipped + ' X ' + element.description }}
+                                        </mat-card-subtitle>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-6 margbtm">
+                                        <mat-card-title>Delivery Instructions</mat-card-title>
+                                        <mat-card-subtitle class="lo_sensitive">{{deliveryData.DeliveryInstructions || ' ' }}
+                                        </mat-card-subtitle>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div class="proof-row-container padcontainer bg-white">
+            <h4 class="font-bold proof-checkout-h2">DELIVERY DETAILS</h4>
+        </div>
+        <div class="proof-row-container padcontainer bg-white last-box">
+            <div class="col-sm-12">
+
+                <mat-card-content class="box-container">
+                    <div class="row lo_sensitive">
+                        <div class="col-sm-4 pl-0 pr-0 marbox">
+                            <h5 class="sign-box-h5">Signature</h5>
+                            <div class="box-content">
+                                <img [src]="signatureImage" class="deliver-location-box" onerror="this.style.visibility='hidden'">
+                            </div>
+                        </div>
+                        <div class="col-sm-4 pl-0 pr-0 marbox">
+                            <h5 class="deliver-location-box-h5">Delivery Location</h5>
+                            <div class="box-content">
+                                <img [src]="mapImage" class="deliver-location-box" onerror="this.style.visibility='hidden'">
+                            </div>
+                        </div>
+                        <div class="col-sm-4 pl-0 pr-0">
+                            <h5 class="photos-box-h5">Photo</h5>
+                            <div class="box-content">
+                                <img [src]="productImage" class="photos-box" onerror="this.style.visibility='hidden'">
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </div>
+        </div>
+    </div>
+</div>

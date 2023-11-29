@@ -1,0 +1,58 @@
+.modal-body {
+    text-align: center;
+    padding: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+
+    h1 {
+        text-align: center;
+        font-family: "OpenSans-SemiBold";
+        font-size: 24px;
+        font-weight: normal;
+        font-style: normal;
+        margin: 20px 0 10px;
+        line-height: 26.4px;
+        color: #091d5a;
+    }
+    .account-change-info {
+        font-family: "OpenSans-SemiBold";
+        font-size: 16px;
+        font-weight: normal;
+        font-style: normal;
+        padding-bottom: 10px;
+        padding-top: 15px;
+        display: block;
+        color: #808080;
+        margin: 0;
+        line-height: 22.8px;
+    }
+    .btn-wrapper {
+        width: 100%;
+        margin: 10px 0; 
+        .btn {
+            font-family: "OpenSans-SemiBold";
+            font-size: 16px;
+            font-weight: normal;
+            font-style: normal;
+            padding: 7px 20px;
+            box-shadow: none;
+            border-radius: 0;
+            line-height: 22.85px;
+            height: auto;
+            color: #ffffff;
+        }
+        .btn-cancel {
+            border: 3px solid #727272;
+            background-color: #727272;
+        }
+        
+        .btn-change {
+            background-color: #E06863;
+            border: 3px solid #E06863;
+            margin-left: 28px;
+        }
+    }
+}
+
+
+

@@ -1,0 +1,317 @@
+<div class="quotes-container container">
+    <div class="quotes-header">
+        <button *ngIf="!isMobile" (click)="openModal()" class="btn btn-blue btn-right">{{quoteConstants.createNewLabel}}</button>
+        <h1>PREVIEW QUOTE</h1>
+        <button *ngIf="isMobile" (click)="openModal()" class="btn btn-blue btn-right">{{quoteConstants.createNewLabel}}</button>
+    </div>
+</div>
+<div class="view-quote-wrapper container">
+    <div class="loading-quotes" *ngIf="!(isLoading$ | async)">Loading&#8230;</div>
+    <div class="left-section">
+       <div class="quote-preview-section">
+        <div class="company-profile-header">
+            <div class="row" style="display: grid">
+                <div class="job-sec" >
+                    <p class="job-name">{{quoteData?.jobName}}</p>
+                  </div>
+                  
+                  <div class="client-detail" aria-describedby="Client Details" role="presentation">
+                    <div>
+                        <span class="light-font" style="padding-right: 15px !important;">{{viewQuote.dateIssued}}</span>
+                        <span>{{quoteData?.creationTime}}</span>
+                    </div>
+                </div>
+            
+            </div>
+            <div class="company-logo" style="float: right !important">
+                <img *ngIf="companyData?.companyLogo != undefined"
+                    src="{{environment.siteUrl+companyData?.companyLogo.url}}" alt="Company Logo" />
+            </div>
+           
+            <div class="company-details-section col-md-12">
+                <div class="client-detail">
+                    <p class="bold">{{quoteData?.consumerAddress?.firstName}}</p>
+                    <p>{{quoteData?.consumerAddress?.phone}}</p>
+                    <p>{{quoteData?.consumerAddress?.email}}</p>
+                    <p>{{quoteData?.consumerAddress?.formattedAddress}}</p>
+                </div>
+                <!-- <table class="client-detail" aria-describedby="Client Details" role="presentation">
+                    <tr>
+                        <td class="light-font">{{viewQuote.clientName}}</td>
+                        <td>{{quoteData?.consumerAddress?.firstName}}</td>
+                    </tr>
+                    <tr>
+                        <td class="light-font">{{viewQuote.phone}}</td>
+                        <td>{{quoteData?.consumerAddress?.phone}}</td>
+                    </tr>
+                    <tr>
+                        <td class="light-font">{{viewQuote.email}}</td>
+                        <td>{{quoteData?.consumerAddress?.email}}</td>
+                    </tr>
+                    <tr>
+                        <td class="light-font">{{viewQuote.address}}</td>
+                        <td>{{quoteData?.consumerAddress?.formattedAddress}}</td>
+                    </tr>
+                    <tr>
+                        <td class="light-font">{{viewQuote.dateIssued}}</td>
+                        <td>{{quoteData?.creationTime | date:'dd/MM/YYYY'}}</td>
+                    </tr>
+                </table> -->
+                <div class="company-detail">
+                    <p class="bold">{{companyData?.companyAddress?.companyName}}</p>
+                    <p>{{companyData?.companyAddress?.phone}}</p>
+                    <p>{{companyData?.companyAddress?.email}}</p>
+                    <p style="width: 48%; float: right">{{companyData?.companyAddress?.formattedAddress}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="scope-of-work-section col-md-12">
+            <h6>{{viewQuote.scopeOfWork}}</h6>
+            <pre>{{quoteData?.scopeOfWork}}</pre>
+        </div>
+
+        <div class="materials-section col-md-12">
+            <div class="materials-header col-md-12 py-3">
+                <div [ngClass]="quoteDisplayOption?.viewRetailsPrice==true ? 'col-md-5':'col-md-5'">
+                    {{viewQuote.materialsLabel}}</div>
+                <div class="col-md-3 text-center">{{viewQuote.numberOfProducts}}</div>
+                <div class="col-md-2 text-center" *ngIf="quoteDisplayOption?.viewRetailsPrice==true">
+                    {{viewQuote.rrpLabel}}</div>
+                    <div class="col-md-2 text-center" *ngIf="quoteDisplayOption?.viewRetailsPrice==false">
+                        &nbsp;</div>
+                <div class="col-md-2 text-right">{{viewQuote.priceLabel}}</div>
+            </div>
+            <div class="all-materials-view col-md-12 py-1"
+                *ngIf="quoteDisplayOption?.viewSectionBreakdown==true">
+                <div [ngClass]="quoteDisplayOption?.viewRetailsPrice==true ? 'col-md-5':'col-md-5'">
+                    {{viewQuote.allMaterialsLabel}}</div>
+                <div class="col-md-3 text-center">
+                    {{quoteData?.materialsCount}}
+                </div>
+                <div class="col-md-2 text-center" *ngIf="quoteDisplayOption?.viewRetailsPrice==true">
+                    {{quoteData.totalRetailPrice.formattedValue}}
+                </div>
+                <div class="col-md-2 text-center" *ngIf="quoteDisplayOption?.viewRetailsPrice==false">
+                   &nbsp;
+                </div>
+                <div class="col-md-2 text-right">
+                    {{(quoteData?.materialPrice.value+(quoteData?.materialPrice.value*quoteData?.markupPercentage/100))
+                    | currency:'':'symbol':'.2-2'}}</div>
+            </div>
+            <div class="materials-detail-view col-md-12" *ngIf="quoteDisplayOption?.viewSectionBreakdown==true">
+                <div *ngFor="let stage of materialData" class="material-list-item col-md-12 py-1">
+                    <div [ngClass]="quoteDisplayOption?.viewRetailsPrice==true ? 'col-md-5':'col-md-7'">
+                        {{stage.name}}</div>
+                    <div class="col-md-2 text-center">{{stage.productCount}}</div>
+
+                    <div class="col-md-2 text-center" *ngIf="quoteDisplayOption?.viewRetailsPrice==true">
+                        <ng-container *ngFor="let sob of retailPrice.sobTotalRetailPrice">
+                            <ng-container *ngIf='sob.name == stage.name'>
+                                {{sob.retailPrice | currency:'':'symbol':'.2-2'}}
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        {{(stage.totalPrice.value+(stage.totalPrice.value*quoteData?.markupPercentage/100)) |
+                        currency:'':'symbol':'.2-2'}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="costs-section col-md-12">
+            <div class="costs-header col-md-12 py-3">
+                <div class="col-md-10">{{viewQuote.costHeading}}</div>
+                <!-- <div class="col-md-2 text-right">{{viewQuote.priceLabel}}</div> -->
+            </div>
+            <!-- <div class="costs-detail-view col-md-12" *ngIf="quoteDisplayOption?.viewCostBreakdown==true">
+                <div *ngFor="let cost of costData" class="cost-list-item col-md-12 py-1">
+                    <div class="col-md-10">{{cost.costType=='SubContractor'?'Sub Contractor':cost.costType=='OtherCosts'?' Other Costs':cost.costType}}</div>
+                    <div class="col-md-2 text-right">{{cost.total.formattedValue}}</div>
+                </div>
+            </div> -->
+        </div>
+        <!-- <div class="all-costs-view col-md-12 py-1" *ngIf="quoteDisplayOption?.viewCostBreakdown==false">
+            <div class="col-md-10">{{viewQuote.allCostsLabel}}</div>
+            <div class="col-md-2 text-right">{{quoteData?.otherCostPrice.formattedValue}}</div>
+        </div> -->
+        <div class="all-costs-view col-md-12 py-1" *ngIf="quoteDisplayOption?.viewCostBreakdown==true">
+            <div class="col-md-8">{{viewQuote.labourCost}}</div>
+            <!-- <div class="col-md-3 text-center">{{labourPrice}}</div> -->
+            <ng-container *ngFor="let cost of labourData.otherCostList">
+                <!-- <div class="col-md-2 text-center">{{stage.productCount}}</div> -->
+                <div class="col-md-4 text-right" *ngIf="cost.costType=='Labour'">{{cost.total.value | currency:'':'symbol':'.2-2'}}</div>
+            </ng-container>
+        </div>
+        <div class="all-costs-view col-md-12  py-1" *ngIf="quoteDisplayOption?.viewCostBreakdown==true">
+            <div class="col-md-8">{{viewQuote.otherCost}}</div>
+            <!-- <div class="col-md-3 text-center">{{otherPrice}}</div> -->
+            <ng-container *ngFor="let cost of costData.otherCostList">
+
+                <div class="col-md-4 text-right" *ngIf="cost.costType=='OtherCosts'">{{cost.total.value | currency:'':'symbol':'.2-2'}}</div>
+            </ng-container>
+        </div>
+        <!-- <div class="subtotal-section col-md-12">
+            <div class="col-md-10">{{viewQuote.subtotal}}</div>
+            <div class="col-md-2 text-right">{{quoteData?.totalPrice.formattedValue}}</div>
+        </div> -->
+        <!-- <div class="gst-section col-md-12">
+            <div class="col-md-10">{{viewQuote.gst}} ({{quoteData?.appliedTaxPercent}}%)</div>
+            <div class="col-md-2 text-right">{{quoteData?.totalTax.formattedValue}}</div>
+        </div> -->
+        <div class="total-section col-md-12" *ngIf="quoteDisplayOption?.viewCostBreakdown==false">
+            <div class="col-md-10">{{viewQuote.total}}</div>
+            <div class="col-md-2 text-right">{{quoteData?.otherCostPrice?.formattedValue}}</div>
+        </div>
+        <div class="additional-details col-md-12 pb-5">
+            <div class="terms-conditions-section fl_n">
+                <h6>{{viewQuote.termsAndConditionsLabel}}</h6>
+                <p>{{companyData?.termsAndConditions != '' ? companyData?.termsAndConditions :
+                    quoteConstants.companySetupTC}}</p>
+            </div>
+            <div class="payment-terms-section fl_n">
+                <h6>{{viewQuote.paymentTermsLabel}}</h6>
+                <p>{{companyData?.paymentTerms}}</p>
+            </div>
+            
+        </div>
+        <div class="totalPrice col-md-5 text-right fl_r" >
+            <div class="totPrice fl_n"><span class="gstUp_tot no_b">{{viewQuote.totalPrice}} <span class="gstUp no_a">(excl. GST) </span></span>  <span class="gstUp_tot_val" >&nbsp;&nbsp;${{((quoteData?.totalPriceWithTax?.value) - (quoteData?.totalTax?.value)) | number:'.2'}}</span></div>
+            <div class="totPrice fl_n"><span class="gstUp_tot no_b">GST</span> <span class="gstUp_tot_val">{{quoteData?.totalTax?.formattedValue}}</span></div><hr>
+            <div class="totPrice fl_n" style="margin-top: 20px;"><span class="gstUp gst_total"> {{viewQuote.totalPrice}} <span class="gstUp no_a">(incl. GST)</span></span> <span class="gstUp gst_total">&nbsp;&nbsp;{{quoteData?.totalPriceWithTax?.formattedValue}}</span></div>
+        </div>
+        <!-- <div class="totalPrice">
+            <table>
+                <tr class="text-right">
+                    <td><span class="totPrice">{{viewQuote.totalPrice}}</span><span class="gstUp"> (incl. GST)</span></td>                         
+                    <td class="consumerValue">{{quoteData?.totalPriceWithTax.formattedValue}}</td>                          
+                </tr>
+            </table>
+        </div> -->
+    </div>
+    </div>
+    
+    <div class="right-section">
+        <h3>{{viewQuote.companyDetailsLabel}}</h3>
+        <p>{{viewQuote.companyDetailsContent}}</p>
+        <button type="button" *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'"
+            class="btn btn-blue edit-company-details-btn" [disabled]="quotesService.quoteStatus!='NOTSENT'"
+            (click)="openCompanyDetailsModal(contentModel)">{{viewQuote.editDetailsBtn}}
+        </button>
+        <div class="loading-quotes" *ngIf="isDataLoad">Loading&#8230;</div>
+        <div class="display-options">
+            <h3>{{viewQuote.displayOptionTitle}}</h3>
+            <div class="options-list" *ngIf="quoteDisplayOption">
+                <div class="toggle-section">
+                    <h4 class="matterialSection">{{viewQuote.materialTitle}}</h4>
+                    <div class="clear">
+                        <span>{{viewQuote.retailPriceLabel}}</span>
+                        <div class="form-check">
+                            <label class="switch">
+                                <div class="sliderTickLeft"></div>
+                                <div class="sliderTick"></div>
+                                <input type="checkbox" [(ngModel)]="quoteDisplayOption.viewRetailsPrice" 
+                                    [disabled]="quotesService.quoteStatus == 'WON' || quotesService.quoteStatus == 'LOST'"
+                                    (change)="updateDisplayOption()">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- <p class="info">{{viewQuote.rrpInfoLabel}}</p> -->
+                </div>
+                <!-- <div class="toggle-section sectionBreak">
+                    <span>{{viewQuote.sectionBreakdownLabel}}</span>
+                    <div class="form-check">
+                        <label class="switch">
+                            <div class="sliderTickLeft"></div>
+                            <div class="sliderTick"></div>
+                            <input type="checkbox" [(ngModel)]="quoteDisplayOption.viewSectionBreakdown" 
+                                [disabled]="quotesService.quoteStatus == 'WON' || quotesService.quoteStatus == 'LOST'"
+                                (change)="updateDisplayOption()">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div> -->
+                <div class="toggle-section allCosts">
+                    <h4>{{viewQuote.costsTitle}}</h4>
+                    <span>{{viewQuote.costBreakdownLabel}}</span>
+                    <div class="form-check">
+                        <label class="switch">
+                            <div class="sliderTickLeft"></div>
+                            <div class="sliderTick"></div>
+                            <input type="checkbox" [(ngModel)]="quoteDisplayOption.viewCostBreakdown" 
+                                [disabled]="quotesService.quoteStatus == 'WON' || quotesService.quoteStatus == 'LOST'"
+                                (change)="updateDisplayOption()">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <!--<h4>{{viewQuote.attachmentTitle}}</h4>
+                <div class="toggle-section">
+                    <span>{{viewQuote.includeImagesLabel}}</span>
+                    <mat-slide-toggle
+                        [disabled]="quotesService.quoteStatus == 'WON' || quotesService.quoteStatus == 'LOST'"
+                        [(ngModel)]="quoteDisplayOption.viewIncludeImages" (change)="updateDisplayOption($event,'images')">
+                    </mat-slide-toggle>
+                </div>
+                <div class="toggle-section">
+                    <span>{{viewQuote.includeFilesTitle}}</span>
+                    <mat-slide-toggle
+                        [disabled]="quotesService.quoteStatus == 'WON' || quotesService.quoteStatus == 'LOST'"
+                        [(ngModel)]="quoteDisplayOption.viewIncludeFiles" (change)="updateDisplayOption($event,'files')">
+                    </mat-slide-toggle>
+                </div>
+                <div class="attachment-list">
+                <h4>{{viewQuote.includePhotosFilesLabel}}</h4>
+                 <div class="file-section">
+                    <ng-container *ngIf="attachmentList != undefined">
+                        <ng-container  *ngFor="let file of attachmentList">
+                            <ng-container *ngIf="quoteDisplayOption.viewIncludeFiles">
+                                <div class="file-item" *ngIf="file.mime.indexOf('image/') < 0">
+                                    <p>{{file.code}}</p>
+                                    <div class="item">
+                                        <img *ngIf="file.mime.indexOf('.spreadsheet')!=-1 || file.mime.indexOf('/csv')!=-1 || file.mime.indexOf('excel')!=-1 || file.mime.indexOf('numbers')!=-1 || file.code.indexOf('.numbers')!=-1 || file.code.indexOf('.xlsm')!=-1" class="file-icon" src="assets/images/file_sheet.svg" alt="Sheet Icon" />
+                                        <img *ngIf="file.mime.indexOf('.presentation')!=-1 || file.mime.indexOf('powerpoint')!=-1 || file.mime.indexOf('keynote')!=-1 || file.code.indexOf('.key')!=-1" class="file-icon" src="assets/images/file_ppt.svg" alt="Powerpoint Icon" />
+                                        <img *ngIf="file.mime.indexOf('/pdf')!=-1 || file.mime.indexOf('.document')!=-1 || file.mime.indexOf('/msword')!=-1 || file.mime.indexOf('/plain')!=-1 || file.mime.indexOf('pages')!=-1 || file.code.indexOf('.pages')!=-1" class="file-icon" src="assets/images/file_text.svg" alt="Text icon" />
+                                        <img *ngIf="file.mime.indexOf('dwg')!=-1 || file.mime.indexOf('acad')!=-1 || file.mime.indexOf('autocad')!=-1" class="file-icon" src="assets/images/file_cad.svg" alt="CAD Icon" />
+                                        <img *ngIf="file.mime.indexOf('video')!=-1" class="file-icon" src="assets/images/file_video.svg" alt="Video Icon" />
+                                        <img *ngIf="file.mime.indexOf('zip')!=-1 && file.code.indexOf('.xlsm')==-1 && file.code.indexOf('.numbers')==-1 && file.code.indexOf('.key')==-1 && file.code.indexOf('.pages')==-1" class="file-icon" src="assets/images/file_zip.svg" alt="Zip Icon" />
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="quoteDisplayOption.viewIncludeImages">
+                                <div class="file-item"  *ngIf="file.mime.indexOf('image/')>-1">
+                                    <p>{{file.code}}</p>
+                                    <div class="item">
+                                        <img *ngIf="file.mime.indexOf('image/')!=-1 && file.mime.indexOf('dwg') == -1" [src]="environment.storefrontUrl+file.downloadUrl" alt="Photo"/>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </div> 
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="view-quote-wrapper container adjustMargin">
+    <div class="previewBtn">
+        <div class="leftAlign">
+            <button type="button" class="btn btn-blue" [routerLink]="['/quoteReview', getQuotedId]" >{{viewQuote.goBack}}</button>
+        </div>
+        <div class="rightAlign">
+            <button type="button" class="btn btn-blue"  [disabled]="quotesService.quoteStatus!='NOTSENT'" (click)="sendtQuoteModal()">{{viewQuote.sendToCustomer}}</button>
+        </div>
+    </div>
+</div>
+
+<!-- <app-custom-sticky-footer *ngIf="totalPrice !=undefined" [quoteData]="this.quoteData"
+    [customerMailAddress]="customerMailAddress" [totalPrice]='totalPrice' [productType]="productType">
+</app-custom-sticky-footer> -->
+
+<ng-template #contentModel let-modal>
+    <app-company-details-popup [form]="form" (companySettingsSubmit)='companySettingsSubmit()'
+        [companyProfileData]="companyProfileData" [noCompanyData]="noCompanyData"
+        *ngIf="companyProfileData!=undefined && editCompanyProfilebtn ==false"></app-company-details-popup>
+    <app-company-details-popup [form]="form" (companySettingsSubmit)='companySettingsSubmit()'
+        [noCompanyData]="noCompanyData" *ngIf="editCompanyProfilebtn"></app-company-details-popup>
+</ng-template>

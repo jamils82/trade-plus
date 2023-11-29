@@ -1,0 +1,109 @@
+<!-- Registration page -->
+<div class="landing-page">
+    <div class="container">
+        <div class="row justify-content-center align-items-sm-center min-vh-100">
+            <div class="col-sm-12 col-md-12 col-lg-9 col-xl-7">
+                <div class="card reg-card">
+                    <div class="card-header logo-header">
+                        <img src="../../../assets/images/Tradelink_word_only_R-White.png" class="banner-logo" alt="logo">
+                    </div>
+                    <div class="card-body">
+                        <div class="register">
+                            <div class="welcome-page-link">
+                                <a href="#" id="welcome-page-link" (click)="returnToSignIn()"
+                                    class="default-text rm-text-decoration"><i class="fa fa-angle-left"></i> Return to Welcome Page</a>
+                            </div>
+                            <h2 class="mb-4 reg-header">REGISTER</h2>
+                            <div class="steps">
+                                <div class="step-1">
+                                    <div class="steps-link">
+                                        <div class="round-bg">1</div>
+                                        <p>Personal Details</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <img src="../../../assets/images/double_arrow_right.svg" alt="arrow-right">
+                                </div>
+                                <div class="step-2">
+                                    <div class="steps-link">
+                                        <div class="round-bg">2</div>
+                                        <p>Verification</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <img src="../../../assets/images/double_arrow_right.svg" alt="arrow-right">
+                                </div>
+                                <div class="step-3">
+                                    <div class="steps-link">
+                                        <div class="round-bg round-bg-active">3</div>
+                                        <p class="primary-color font-bold">Account</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="success-message-container" *ngIf="successInd" (click)="closeErrorMessage()">
+                                <div class="success-container">
+                                    <img class="tick-icon" src="../../../assets/images/Icon ionic-ios-checkmark-circle-outline.svg">
+                                    <div class="success-message">{{infoMessage}}<span class="close-btn"><i
+                                                class="fa fa-times"></i></span>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="failure-message-container" *ngIf="errorInd" (click)="closeErrorMessage()">
+                                <div class="failure-container">
+                                    <div class="col-1">
+                                        <img class="alert-icon" src="../../../assets/images/Icon material-error-outline.svg">
+                                    </div>
+                                    <div class="col">
+                                        <div class="alert-message"><p [innerHTML]="infoMessage"></p><span class="close-btn"><i
+                                            class="fa fa-times"></i></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info row ml-0 mr-0" *ngIf="accordions && accordions.length > 0">
+                                <div class="col-1">
+                                    <img class="mr-2 icon-width" src="../../../assets/images/info-icon.svg" alt="info">
+                                </div>
+                               <div class="col pl-0">
+                                <span>Please select your default account, i.e. the one you will use most often. You will be able to select others once you have signed in.</span>
+                               </div>
+                            </div>
+                            <div class="input-icons" *ngIf="accordions && accordions.length > 0">
+                                <div *ngFor="let accordion of accordions; let i= index" class="tab radio-options" [ngClass]="seletedIndex == i ? 'active-border' : '' ">
+                                        <label for={{i}}>
+                                            <input type="radio" name="accordion" id={{i}} (click)="accountValue(accordion, i)">
+                                            {{accordion.name}} <br>
+                                            <span>A/C Number {{accordion.uid}} | Branch : {{accordion?.branch_pos?.name}}</span>
+                                        </label>
+                                </div>
+                            </div>
+                            <div class="term-checkbox">
+                                <input type="checkbox" (click)="acceptTermsAndConditions()">
+                                <span>Please read and acknowledge Tradelink’s <a href="https://trade.tradelink.com.au/legal" target="_blank">Terms and Conditions</a> then click on complete registration button.</span>
+                            </div>
+                            <div class="term-checkbox">
+                                <input type="checkbox" checked value="" (click)="acceptNotifications()">
+                                <span>I would like to receive notifications of new products and upcoming sales and promotions.</span>
+                            </div>
+                            <div>
+                                <button class="btn btn-register" (click)="linkTradeAccounts()" [ngClass]="buttonDisable? 'disabled' : ''" [disabled]="buttonDisable">COMPLETE REGISTRATION</button>
+                            </div>
+                            <div class="signIn-link">
+                                <p>Already have an account? <a routerLink="/login">Sign In</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" >
+                        <div class="help">
+                            <a class="helpLink" (click)="NeedHelp()">Need Help <span style="padding-left: 5px;" *ngIf="iconDown"><img src="../../../assets/icons/Icon_ionic-ios-arrow-down.svg"> </span> <span  style="padding-left: 5px;" *ngIf="iconUp"><img src="../../../assets/icons/Icon_ionic-ios-arrow-up.svg"> </span></a>
+                            <ul *ngIf="contactUSDetail">
+                                <li><a href="https://support.tradelink.com.au/s/contact-us" target="_blank" class="contact">Contact Us <span  style="padding-left: 10px;"><img src="../../../assets/icons/contactus_svg.svg"> </span> </a>  </li>
+                                <li>Phone: 1300 658 277</li>
+                                <li>Email: support@tradelink.com.au</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

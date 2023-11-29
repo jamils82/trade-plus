@@ -1,0 +1,58 @@
+
+<div class="container">
+    <div class="row modal-head-row">
+
+        <div class="col-md-12 close-pos">
+            <div class="cls-btn" (click)="closePopup()">
+                <img (click)="closePopup()" class="cls-icon fa fa-times" src='../../../../assets/images/close-icon.PNG'>
+            </div>
+        </div>
+        <div class="popup-heading col-md-12">
+            <h2 class="pageHeading">ADD FROM MY QUOTES</h2>
+        </div>
+    </div>
+    <div class="modal-body ">
+        <div class="row-content">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <p class="para-heading">Please select one or more quotes that you would like re-quoted, then click Add.</p>
+            </div>
+            <div class="searchBox col-md-12 col-sm-12 col-xs-12">
+                <!-- search box -->
+                <div class="searchListBox col-11 col-md-11">
+                    <div class="searchListIcon">
+                        <img src="../../../assets/images/Icon material-playlist-add (1).svg">
+                    </div>
+                    <input autocomplete="off" (keyup)="filterMyQuotesLists($event.target.value)" id="searchInput" aria-describedby="initialDescription" class="form-control" aria-controls="results" aria-autocomplete="both" placeholder="Search quotes" aria-label="Search">
+                </div>
+                <div class="searchIconButton col-1 col-md-1">
+                    <i class="searchIcon fa fa-search"></i>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12 mylist-view">
+                <div>
+                    <div class="checkboxLoop" *ngFor="let list of myQuotelist; let i = index">
+
+                        <label class="check-container">
+                            <input type="checkbox"  class="list checkbox"  [value]="i"   [(ngModel)]="selectAll[i]" (ngModelChange)="itemToCartSelected(i)" name="flexCheckDefault" id="checkbox"/>
+                            <span class="list checkmark"></span>
+                        </label>
+                   
+                        <p class="listNameValues"> {{list.quoteCode}} - {{list.purchaseOrderNumber}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row buttons"> 
+                <div class="col-md-12 btngrp">
+                    <button class="btn cancelBtn" (click)="closePopup()">
+              Cancel
+            </button>
+                    <button class="btn confirmBtn"  [disabled]="buttonDisable" (click)="addList()" type="submit">
+              Add
+            </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

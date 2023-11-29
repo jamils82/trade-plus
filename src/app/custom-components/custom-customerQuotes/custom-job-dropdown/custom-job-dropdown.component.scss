@@ -1,0 +1,113 @@
+.job-acc-dropdown-section {
+    display: block;
+    margin:8px 0px 8px 16px;
+    font-family: 'OpenSans-Regular';
+    @media screen and (min-width:1024px) and (max-width:1336px) {
+        margin: 8px 17px;
+    }
+    position: relative;
+    float: left;
+    width: 270px;
+    @media screen and (min-width:1024px) and (max-width:1336px) {
+        width: 235px;
+    }
+    z-index: 1;
+    select {
+        height: 40px;
+        padding: 0 10px;
+        font-size: 12px;
+    }
+
+    .selected-job-acc {
+        height: 40px;
+        padding:10px 15px;
+        font-size: 13px;
+        background: #202d62;
+        color: #fff;
+        text-align: left;
+        cursor: pointer;
+        .selected-job-name {
+            width: 82%;
+            display: inline-block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .glyphicon-menu-down {
+            float: right;
+            top: 4px;
+            right:-4px;
+        }
+        .clear-job-option {
+            right: 31px;
+            position: absolute;
+            top: 14px;
+        }
+    }
+
+    .job-acc-dropdown {
+        //display: none;
+        position: absolute;
+        background: #091b5a;
+        width: 100%;
+        border: 1px solid #091b5a;
+        max-height: 410px;
+        overflow: auto;
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        &::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+        }
+        ul {
+            margin: 0;
+            padding:15px 0 0;
+            li {
+                list-style: none;
+                margin-top: 3px;
+                &:first-child {
+                    margin: 0;
+                }
+                p {
+                    &.heading {
+                        border-bottom: 1px solid #003976;
+                        margin: 0px 20px;
+                        padding: 10px 0;
+                        font-size: 16px;
+                    }
+                    &.job-option {
+                        font-size: 12px;
+                        cursor: pointer;
+                        &:hover {
+                            background: #fff;
+                            color: #091b5a;
+                            &.selected {
+                                background-image: url('../../../assets/images/check-solid.svg');
+                                background-repeat: no-repeat;
+                                background-position: right 10px center;
+                                background-size: 6%;
+                            }
+                        }
+                        .job-name {
+                            width: 90%;
+                            display: inline-block;
+                        }
+                        &.selected {
+                            background-image: url('../../../assets/images/check-solid-white.svg');
+                            background-repeat: no-repeat;
+                            background-position: right 10px center;
+                            background-size: 6%;
+                        }
+                    }
+                    padding: 9px 20px;
+                    margin: 0;
+                }
+            }
+        }
+    }
+}

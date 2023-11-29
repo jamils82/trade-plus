@@ -1,0 +1,133 @@
+@import '../../shared/styles/variables.scss';
+
+.close-pos {
+    text-align: right;
+    top: 5px;
+    color: $pdp-font-color;
+    .cls-icon {
+        cursor: pointer;
+        color: #778893;
+        width: 18px;
+        height: 18px;
+        margin-right: 5px;
+        margin-top: 5px;
+      }
+}
+
+.pageHeading {
+    font-family: "NiveauGroteskBold";
+    font-size: var(--fontsize24);
+    color: $pdp-font-color;
+}
+
+.pageHeading.quickOrder {
+    text-align: center;
+}
+
+.pageHeading-col {
+    padding: 0;
+}
+
+.pageLabel {
+    padding: 25px 0 30px 0;
+    font-family: "NiveauGrotesk";
+    font-size: var(--fontsize20);
+    color: $pdp-font-color;
+}
+
+.pageLabel.quickOrder {
+    text-align: center;
+}
+
+.confirmBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "NiveauGroteskBold";
+    float: right;
+    background-color: #003D7A;
+    color: #ffffff;
+    outline: none;
+    border: 1px solid #003D7A;
+    border-radius: 5px;
+    font-weight: bold;
+    min-height: var(--buttonHeight60);
+    font-size: var(--fontsize24);
+    width: 230px;
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+}
+
+.cancelBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "NiveauGroteskBold";
+    background-color: #E0E1E2;
+    color: $pdp-font-color;
+    outline: none;
+    border: 1px solid #E0E1E2;
+    border-radius: 5px;
+    min-height: var(--buttonHeight60);
+    font-size: var(--fontsize24);
+    font-weight: bold;
+    width: 144px;
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+    //  margin-bottom: 15px;
+}
+
+.btngrp {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (min-width: $mobileScreenPotrait-768) {
+    .row-content {
+        padding: 5px 30px 50px 30px;
+    }
+}
+
+.row.buttons {
+    margin-top: 15px;
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    .container {
+        max-width: 100%;
+    }
+    .close-pos {
+        z-index: 1;
+        .cls-icon {
+            width: 13px;
+            height: 13px;
+            margin-right: 10px;
+            margin-top: 5px;
+            z-index: 1;
+          }
+    }
+    .pageHeading-col {
+        margin-top: -15px;
+    }
+    .pageHeading {
+        font-size: var(--fontsize26);
+    }
+    .pageLabel {
+        padding: 15px 0 30px 0;
+        font-size: var(--fontsize19);
+    }
+    .cancelBtn {
+        background-color: #BAC3C9;
+    }
+    .confirmBtn,
+    .cancelBtn {
+        font-size: var(--fontsize23);
+        width: 48%;
+        max-height: var(--buttonHeight60);
+    }
+    .row-content {
+        padding: 0px 10px 30px 10px;
+    }
+}

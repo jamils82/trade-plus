@@ -1,0 +1,588 @@
+@import '../../shared/styles/variables.scss';
+  
+.cx-sorting.bottom {
+    position: relative;
+    .pagination-row {
+      margin: 35px 5px;
+    }
+}
+  // .loader {
+  //   display: none;
+  //   top: 50%;
+  //   left: 50%;
+  //   z-index: 1;
+  //   padding-left: 100%;
+  //   position: sticky;
+  //   transform: translate(-50%, -50%);
+  // }
+  
+  // .loading {
+  //   border: 2px solid #ccc;
+  //   width: 60px;
+  //   height: 60px;
+  //   border-radius: 50%;
+  //   border-top-color: red;
+  //   border-left-color: red;
+  //   animation: spin 1s infinite ease-in;
+  // }
+  
+  // @keyframes spin {
+  //   0% {
+  //     transform: rotate(0deg);
+  //   }
+  
+  //   100% {
+  //     transform: rotate(360deg);
+  //   }
+  // }
+
+
+.cx-page {
+    padding-bottom: 40px;
+}
+
+.custom-product.container {
+    max-width: 100%;
+}
+
+.products-heading {
+  margin: 0 0 20px 0;
+}
+.products {
+    color: $pdp-font-color;
+    font-family: 'NiveauGroteskBold';
+    font-size: var(--fontsize40);
+    margin: 0;
+}
+
+.plp-header {
+    align-items: center;
+    margin: 4.2rem 0 20px 0;
+    .selectAll {
+        padding: 0;
+        input {
+            width: 15px;
+            height: 15px;
+            margin: 10px 0 0 0;
+        }
+        .selectAll-label {
+            font-size: var(--fontsize24);
+            padding-left: 30px;
+            color: $pdp-font-color;
+            font-family: 'NiveauGroteskBold';        
+        }
+    }
+    .cx-sort-dropdown {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0px;
+        z-index: 1;
+        span {
+            width: 40%;
+            text-align: center;
+            font-size: var(--fontsize24);
+            font-family: 'NiveauGrotesk';
+            color: $pdp-font-color;
+        }
+    }
+    .grid-btn,
+    .list-btn {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+        font-size: var(--fontsize14);
+        font-family: 'NiveauGrotesk';
+        border: 0px;
+        width: 60px;
+        min-height: var(--buttonHeight60);
+        height: 40px;
+        width: 60px;
+        margin-left: 5px;
+        line-height: 1;
+        .grid-img,
+        .list-img {
+            display: block;
+            width: var(--fontsize20);
+            height: 18pxvar(--fontsize20);
+            margin-bottom: 0px;
+        }
+    }
+    .grid-btn {
+        background-color: rgb(224, 225, 226);
+        color: rgb(73, 90, 100);
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+    .list-btn {
+        // background-color: rgb(224, 225, 226);
+        // color: rgb(73, 90, 100);
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    .gridClick,
+    .listClick {
+      background-color: #003D7A;
+      color: $white-color;
+    }
+}
+
+.pagination {
+    display: inline-flex;
+    align-items: center;
+.page {
+    font-size: var(--fontsize18);
+    font-family: "NiveauGrotesk";
+    color: #495A64;
+    margin-right: 10px;
+}
+}
+.result-per-page {
+    text-align: right;
+    font-size: var(--fontsize18);
+    font-family: "NiveauGrotesk";
+    color: #495A64;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    select {
+        padding: 7px 7px 7px 15px;
+        margin-left: 10px;
+        border: 1px solid #77889380;
+        min-height: 50px;
+        width: 87px;
+        font-size: var(--fontsize20);
+    }
+}
+
+.row.addAllToCart {
+    margin-top: 50px;
+.wishlist-btn {
+    display: flex;
+    position: relative;
+    width: 307px;
+    padding-right: 20px;
+    app-add-to-list-view {
+        width: 100%;
+    }
+    img {
+        position: absolute;
+        top: 15px;
+        left: 21%;
+        width: 15px;
+        height: 15px;
+        z-index: 1;
+    }
+    .wishlist {
+        background-color: $anchor-color;
+        border: 1px solid $anchor-color;
+        color: $white-color;
+        font-family: "NiveauGroteskBold";
+        font-size: 1rem;        
+        height: 40px;
+        border-radius: 8px;
+        text-transform: none;
+        &:focus {
+            box-shadow: 0 0 0 transparent;
+        }
+    }
+}
+.addToCart-btn {
+    display: flex;
+    position: relative;
+    width: 307px;
+    float: right;
+    cursor: pointer;
+    img {
+      margin-right: 20px;
+        width: var(--addToCartImgWidth21);
+        height: var(--addToCartImgHeight21);
+        z-index: 1;
+    }
+    .addToCart {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+        background-color: $blue-color;
+        border: 1px solid $blue-color;
+        font-family: "NiveauGroteskBold";
+        font-size: var(--fontsize24);
+        color: $white-color;
+        min-height: var(--buttonHeight60);
+        border-radius: 8px;
+        text-transform: none;
+        line-height: 1;
+        &:focus {
+            box-shadow: 0 0 0 transparent;
+        }
+    }
+}
+}
+
+.searchField {
+    padding: 0;
+}
+.buttons {
+    text-align: end;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end; 
+}
+
+@media screen and (max-width: $mobileScreen) {
+    .plp-header {
+        .cx-sort-dropdown {
+            margin-left: 0px;
+        }
+    }
+}
+
+select {
+    outline:none;
+    width: 50px;
+}
+
+// .selectdiv {
+//   position: relative;
+// }
+
+/* IE11 hide native button (thanks Matt!) */
+select::-ms-expand {
+display: none;
+}
+
+// .selectdiv:after {
+//   content: "";
+//   background-image: url('../../../assets/images/dropdown_Icon.svg');
+//   background-repeat: no-repeat;
+//   background-size: 15px;
+//   background-repeat: no-repeat;
+//   background-size: 15px;
+//   background-position: center;
+//   transform: rotate(0deg);
+//   right: 10px;
+//   width: 22px;
+//   position: absolute;
+//   top: 0;
+//   color: #003d7a;
+//   font-weight: 700;
+//   height: 50px;
+// }
+
+// .selectdiv select {
+//   -webkit-appearance: none;
+//   -moz-appearance: none;
+//   appearance: none;
+//   /* Add some styling */
+//   float: right;
+// }
+
+.selectdiv label {
+  background: $white-color;
+  margin-left: 10px;
+}
+
+.selectdiv select {
+  cursor: pointer;
+  padding: 7px 7px 7px 15px;
+  margin-left: 0;
+  border: 1px solid #77889380;
+  min-height: 50px;
+  width: 87px;
+  font-size: var(--fontsize20);
+  font-family: "NiveauGrotesk";
+  color: $pdp-font-color;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 1;
+  &:not(:focus) {
+    background: #0000 !important;
+  }
+  &:focus {
+    background: #0000 !important;
+  }
+}
+
+.selectdiv:after {
+  content: "";
+  background-image: url("../../../assets/images/Icon\ ionic-ios-arrow-down\ \(2\).svg");
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: center;
+  transform: rotate(0deg);
+  right: 15px;
+  width: 48px;
+  top: 1px;
+  position: absolute;
+  height: 48px;
+  background-color: transparent;
+  border: 0px;
+  border-left: 0;
+}
+.noDataAvailable {
+    font-size: 1.25rem;
+    font-family: 'NiveauGrotesk';
+    color: $pdp-font-color;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    margin: 200px 0;
+    span{
+      display: block;
+      font-family: 'NiveauGrotesk';
+      font-size: 2.5rem;
+      padding: 20px 0;
+      color: #000000;
+    }
+    img{
+      display: block;
+      margin: 0 auto;
+    }
+    button{
+      display: block;
+      margin: 0 auto;
+      background: #003D7A;
+      border: 1px solid #003D7A;
+      padding: 10px 35px;
+      &:active{
+      background: #003D7A;
+      border: 1px solid #003D7A;
+      }
+    }
+
+}
+
+.plpGridView {
+  padding: 0 10px;
+}
+
+.heading-row {
+  position: absolute;
+    max-width: 1920px !important;
+    width: 98%;
+    margin: auto;
+    align-items: flex-start;
+    background-color: #e8eff7;
+    font-family: NiveauGrotesk;
+    font-size: var(--fontsize14);
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: row;
+    left: 0;
+}
+
+///////////////////////////////////////// custom checkbox CSS - START ////////////////////////////////////////
+
+input.checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    top: 13px;
+    left: 0;
+  }
+  .checkmark {
+    position: absolute;
+      top: 13px;
+      left: 0;
+      height: 20px;
+      width: 20px;
+      background-color: #e8eff7;
+      border: 3px solid $pdp-font-color;
+      border-radius: 4px;
+  }
+    
+  .checkmark.terms {
+    width: 18px;
+    height: 18px;
+    top: 4px;
+  }
+  
+  .checkmark.terms.disable {
+    opacity: 0.5;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .check-container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  .check-container:hover input ~ .checkmark.disable {
+    background-color: #fff;
+  }
+            
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .check-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .check-container .checkmark:after {
+    left: 4px;
+    top: 0px;
+    width: 6px;
+    height: 11px;
+    border: solid $pdp-font-color;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  
+  .check-container .checkmark.terms:after {
+    left: 6px;
+      top: 2px;
+      width: 5px;
+      height: 10px;
+  }
+  // .searchField:hover:after{
+  //   position: absolute;
+  //   content: 'Add "QUOTATION MARKS" around multiple words to narrow your search';
+  //   top: 47px;
+  //   left: 0px;
+  //   background-color:#ffffff;
+  //   padding: 0.5rem 1rem !important;
+  //   color: black;
+  //   font-family: 'NiveauGroteskBold';
+  //   font-size: var(--fontsize14);
+  //   border-radius: 7px;
+  //   width: 100%;
+  //   text-align: center;
+  //   box-shadow: 0px 16px 16px #0000003d;
+  //   z-index: 1;
+  //  }
+  
+  @media screen and (max-width: $Largescreen-1440){
+    .searchField:hover:after{
+     top: 42px;
+    }
+  }
+  @media screen and (max-width: $Largescreen-1600) and (min-width: $ipadScreen-768) {
+    input.checkbox {
+      top: 8px;
+    }
+    .checkmark {
+        top: 8px;
+    }
+  }
+  ///////////////////////////////////////// custom checkbox CSS - END ////////////////////////////////////////
+
+  @media screen and (max-width: $mobileScreenPotrait) {
+    .successMsg {
+      position: absolute;
+      padding: 0;
+      top: 15px;
+    }
+    .top-segment {
+      margin-top: 20px;
+    }
+    .heading-row {
+      padding: 10px 0;
+    }
+    .products-heading {
+      margin: 0;
+      .products {
+        font-size: var(--fontsize22);
+      }
+    }
+    .plp-header {
+      margin: 3rem 0 0px;
+      flex-flow: column-reverse;
+      align-items: flex-start;
+      .selectAll {
+        .checkmark {
+          height: 16px;
+          width: 16px;
+          top: 10px;
+          border-radius: 2px;
+          border: 2px solid #495a64;
+          &::after {
+            top: 1px;
+            width: 4px;
+            height: 8px;
+            border: solid #495a64;
+            border-width: 0px 2px 2px 0;
+          }
+        }
+        .selectAll-label {
+          font-size: var(--fontsize18);
+          padding-left: 20px;
+        }
+      }
+      .searchField,
+      app-product-search,
+      .buttons {
+        display: none;
+      }
+      .cx-sort-dropdown {
+        padding-left: 0;
+        width: 60%;
+        z-index: 0;
+        span {
+          width: 35%;
+          text-align: left;
+          font-size: var(--fontsize18);
+        }
+      }
+    }
+    .row.addAllToCart {
+      margin: 25px 0px 15px 0px;
+      width: 100%;
+      .addAllToList {
+        padding-left: 0;
+        padding-right: 10px;
+      }
+      .addAllToCart {
+        padding-left: 5px;
+        padding-right: 0;
+      }
+      .addToCart-btn {
+        width: 100% !important;
+          .addToCart {
+          border-radius: 2px;
+          max-height: var(--buttonHeight60);
+          img {
+            margin-right: 10px;
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+    }
+    .cx-sorting.bottom {
+      margin-top: -15px;
+    }
+    .view-more {
+      background-color: #fff!important;
+      color: #495a64!important;
+      border: 1px solid #495a64;
+      width: 100%;
+      border-radius: 25px!important;
+      padding: 5px 0;
+      font-family: 'NiveauGroteskBold';
+      font-size: var(--fontsize18);
+   }
+   .marview
+   {
+     margin: 0 0px 25px 0px;
+   }
+  }
+
+  @media (min-width: 1100px) and (max-width: 1300px){
+
+    .noDataAvailable{margin: 100px 0;}
+  }

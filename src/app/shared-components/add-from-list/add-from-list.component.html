@@ -1,0 +1,59 @@
+<div class="loading " *ngIf="commonService.showWaitCursor | async "></div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12 close-pos">
+            <div class="cls-btn" (click)="closePopup()">
+                <img (click)="closePopup()" class="cls-icon fa fa-times" src='../../../../assets/images/close-icon.PNG'>
+            </div>
+        </div>
+        <div class="popup-heading col-md-12">
+            <h2 class="pageHeading">ADD MY LIST TO CART</h2>
+        </div>
+    </div>
+    <div class="modal-body ">
+        <div class="row-content">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <p class="para-heading">Select the list you wish to add to your cart</p>
+            </div>
+            <div class="searchBox col-md-12 col-sm-12 col-xs-12">
+                <!-- search box -->
+                <div class="searchListBox col-11 col-md-11">
+                    <div class="searchListIcon">
+                        <img src="../../../assets/images/Icon material-playlist-add (1).svg">
+                    </div>
+                    <input autocomplete="off" (keyup)="filterLists($event.target.value)" id="searchInput" aria-describedby="initialDescription" class="form-control" aria-controls="results" aria-autocomplete="both" placeholder="Search list" aria-label="Search">
+                </div>
+                <div class="searchIconButton col-1 col-md-1">
+                    <i class="searchIcon fa fa-search"></i>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12 mylist-view">
+                <div>
+                    <div class="checkboxLoop" *ngFor="let list of mylist; let i = index">
+                        <div class="form-check custom-radio">
+                            <input class="form-check-input " type="radio" type="radio" [value]="i" [(ngModel)]="selectAll[i]" (ngModelChange)="itemToCartSelected(i)" name="flexRadioDefault" id="radio">
+                            <label class="form-check-label" for="radio">
+                                {{list.listName}}
+                            </label>
+                        </div>
+                        <!-- <input class="checkboxInput" type="radio" [value]="i" [(ngModel)]="selectAll[i]" (ngModelChange)="itemToCartSelected(i)" />
+                        <p class="listNameValues"> {{ list.listName }} </p> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="row buttons">
+                <div class="col-md-12 btngrp">
+                    <button class="btn cancelBtn" (click)="closePopup()">
+              Cancel
+            </button>
+                    <button class="btn confirmBtn" [disabled]="buttonDisable" (click)="addList()" type="submit">
+              Add to Cart
+            </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

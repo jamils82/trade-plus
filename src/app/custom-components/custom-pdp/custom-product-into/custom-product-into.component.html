@@ -1,0 +1,27 @@
+<div class="loading " *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+<ng-container *ngIf="products$ | async as product">
+    <div class="success-container-row row">
+        <app-shared-success-message [successInd$]="successInd$" class="success-message-selector"
+            [infoMessage]="infoMessage"></app-shared-success-message>
+    </div>
+    <!-- {{product|json}} -->
+    <h3 class="manufacturer">{{product?.manufacturer ? product?.manufacturer : 'Non-exclusive'}}</h3>
+    <span class="wels-rating" *ngIf="product?.averageRating">WELS Rating</span>
+    <cx-star-rating *ngIf="product?.averageRating" [rating]="product?.averageRating"></cx-star-rating>
+    <h1 class="name">{{product.name}}</h1>
+    <div class="description" [innerHTML]=product.description></div>
+    <span class="itemCode">Item Code : {{product.code}} | Supplier Code : {{product.productSupplierCode}}</span>
+    <div class="unit">Unit : {{product.unit}}</div>
+
+    <app-product-price [showEmptyPrice]="product?.showEmptyPrice" [myPrice]="product?.price?.formattedValue"
+        [retailPrice]="product?.m2Price?.formattedValue" [screenName]="screenName" [unit]="product.unit"></app-product-price>
+
+    <app-custom-addtocart [showEmptyPrice]="product?.showEmptyPrice"
+        (successMessageEmitterMessage)="successMessageEmitterMessage()" [showQuantity]="true" [product]="product"
+        [screenName]="screenName" [productCode]="product.code"></app-custom-addtocart>
+</ng-container>
+
+<!-- 
+<ng-template [cxOutletRef]="cx-add-to-cart" cxOutletPos="after" let-model>
+    <p>After component fdasdfasfasfaf asfasdf</p>
+  </ng-template> -->

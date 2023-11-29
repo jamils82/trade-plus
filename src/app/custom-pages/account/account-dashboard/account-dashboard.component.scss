@@ -1,0 +1,591 @@
+@import '../../../shared/styles/variables.scss';
+.accountDashboard {
+    position: relative;
+    .dashboardHeading {
+        font-size: var(--fontsize40);
+        color: #495A64;
+        font-family: 'NiveauGroteskBold';
+        margin-top: 1.75rem;
+        margin-bottom: 3.438rem;
+        @media screen and (min-width: $Largescreen-1600) {
+            margin-bottom: 0rem;
+            margin-top: 0rem;
+        }
+    }
+    .heading-row {
+        position: absolute;
+        max-width: 1920px !important;
+        width: 98%;
+        margin: auto;
+        align-items: flex-start;
+        background-color: #e8eff7;
+        font-family: NiveauGrotesk;
+        font-size: var(--fontsize14);
+        padding: 10px 15px;
+        display: flex;
+        flex-direction: row;
+        left: 0;
+    }
+    .leftNavigation {
+        margin-top: 3rem;
+        max-width: 20%;
+        margin-left: 15px;
+        padding-right: 30px;
+        margin-right: 5px;
+        @media screen and (min-width: $Largescreen-1600) {
+            margin-top: 2rem;
+        }
+    }
+    .dashboardData {
+        max-width: 73%;
+        margin-top: 6rem;
+    }
+    .cardView {
+        width: 100%;
+        background-color: #fff;
+        height: 390px;
+        border-radius: 10px;
+        padding: 24px;
+        margin-bottom: 19px;
+        position: relative;
+        @media screen and (min-width: $Largescreen-1600) {
+            margin-bottom: 19px;
+            height: 440px;
+            padding: 30px;
+        }
+    }
+    .cardHeading {
+        border-bottom: 1px solid #E0E1E2;
+        font-family: 'NiveauGroteskBold';
+        color: #495A64;
+        display: flex;
+        justify-content: space-between;
+        font-size: var(--fontsize24);
+        margin-bottom: 1.138rem;
+        label {
+            margin-bottom: 0.47rem;
+        }
+        @media screen and (min-width: $Largescreen-1600) {
+            margin-bottom: 1.438rem;
+            label {
+                margin-bottom: 0.75rem;
+            }
+        }
+    }
+    .accountRightCard {
+        padding-left: 9px !important;
+        @media screen and (min-width: $Largescreen-1600) {
+            padding-left: 15px !important;
+        }
+    }
+    .noBorder {
+        border-bottom: none;
+    }
+    .cardTable {
+        table {
+            margin-bottom: 70px;
+            @media screen and (min-width: $Largescreen-1600) {
+                // margin-bottom: 3.3rem;
+            }
+            thead {
+                tr:first-child {
+                    width: 100%;
+                    border-bottom: 1px solid #E0E1E2;
+                    // @media screen and (min-width: $Largescreen-1600) {
+                    //     margin-top: 20px;
+                    //     margin-bottom: 10px;
+                    // }
+                }
+                th {
+                    text-align: left;
+                    text-transform: initial !important;
+                    color: #495A64;
+                    font-size: var(--fontsize20);
+                    font-family: 'NiveauGroteskBold';
+                    padding: 0;
+                    padding-bottom: 14px;
+                    line-height: 18px;
+                    @media screen and (min-width: $Largescreen-1600) {
+                        padding-bottom: 20px;
+                    }
+                }
+            }
+            tbody {
+                tr:first-child {
+                    td {
+                        padding-top: 10px;
+                    }
+                }
+                td {
+                    text-align: left;
+                    text-transform: initial !important;
+                    color: #495A64;
+                    font-size: var(--fontsize18);
+                    font-family: 'NiveauGrotesk';
+                    padding: 0;
+                    border: none !important;
+                    padding-bottom: 13px;
+                    line-height: 18px;
+                    @media screen and (min-width: $Largescreen-1600) {
+                        padding-bottom: 18px;
+                    }
+                }
+            }
+        }
+        .cardLinkItems {
+            display: flex;
+            position: absolute;
+            bottom: 20px;
+            width: 90%;
+            justify-content: flex-end;
+            a {
+                color: #00AFE2;
+                font-size: var(--fontsize20);
+                font-family: 'NiveauGroteskBold';
+                border-bottom: 1px solid #00AFE2;
+                // line-height: 17px;
+                text-decoration: underline;
+                border: none;
+            }
+        }
+    }
+    .paymentDueContent {
+        span {
+            display: flex;
+            justify-content: space-between;
+            line-height: 18px;
+            margin-bottom: 18px;
+            label {
+                color: #778893;
+                font-size: var(--fontsize20);
+                font-family: 'NiveauGrotesk';
+                margin-bottom: 0;
+            }
+            p {
+                margin-bottom: 0;
+                color: #495A64;
+                font-size: var(--fontsize20);
+                font-family: 'NiveauGroteskBold';
+            }
+        }
+    }
+    // .orderTable {
+    //     table {
+    //         thead {
+    //             th {
+    //                 min-width: 178px;
+    //             }
+    //         }
+    //     }
+    // }
+    .orderLinkItems {
+        justify-content: space-between !important;
+        align-items: center;
+        button {
+            background-color: #FFD500;
+            color: #003D7A;
+            font-size: var(--fontsize18);
+            width: 8.185rem;
+            height: var(--fontsize40);
+            font-family: 'NiveauGroteskBold';
+            border: none;
+            @media screen and (min-width: $Largescreen-1600) {
+                width: 10.185rem;
+            }
+        }
+    }
+    .chartLengendsData {
+        padding-top: 1rem;
+        span {
+            display: flex;
+            justify-content: space-between;
+            line-height: 18px;
+            margin-bottom: 0.563rem;
+            label {
+                margin: 0;
+                color: #778893;
+                font-size: var(--fontsize20);
+                font-family: 'NiveauGroteskBold';
+                margin-left: 4rem;
+            }
+            p {
+                margin: 0;
+                color: #495A64;
+                font-size: var(--fontsize20);
+                font-family: 'NiveauGroteskBold';
+            }
+        }
+        .LengendsInfo {
+            margin-top: 1.1rem;
+            span {
+                div {
+                    width: 16px;
+                    height: 6px;
+                }
+                .overDueColorLengend {
+                    background-color: #973937;
+                    margin-right: 4px;
+                }
+                .invoiceColorLengend {
+                    background-color: #FF7D39;
+                    margin-right: 4px;
+                }
+                .unappliedColorLengend {
+                    background-color: #00AFE2;
+                    margin-right: 4px;
+                }
+                .avaliableColorLengend {
+                    background-color: #0B961B;
+                    margin-right: 4px;
+                }
+                label {
+                    display: flex;
+                    align-items: center;
+                    margin-left: 2.9rem;
+                    font-family: 'NiveauGrotesk';
+                }
+            }
+        }
+        .cardLinkItems {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 5rem;
+            a {
+                color: #00AFE2;
+                font-size: var(--fontsize20);
+                font-family: 'NiveauGroteskBold';
+                border-bottom: 1px solid #00AFE2;
+                // line-height: 17px;
+                text-decoration: underline;
+                border: none;
+            }
+        }
+    }
+}
+
+
+/* Absolute Center Spinner */
+
+.loading {
+    position: absolute;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    // background: radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+    background: transparent;
+}
+
+
+/* Transparent Overlay */
+
+// .loading:before {
+//     content: '';
+//     display: block;
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     background: radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+//     background: -webkit-radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+// }
+
+/* :not(:required) hides these rules from IE9 and below */
+
+.loading:not(:required) {
+    /* hide "loading..." text */
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+.loading:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 10px;
+    position: relative;
+    top: 50%;
+    width: 1em;
+    height: 1em;
+    margin: auto;
+    -webkit-animation: spinner 150ms infinite linear;
+    -moz-animation: spinner 150ms infinite linear;
+    -ms-animation: spinner 150ms infinite linear;
+    -o-animation: spinner 150ms infinite linear;
+    animation: spinner 150ms infinite linear;
+    border-radius: 0.5em;
+    -webkit-box-shadow: 1.5em 0 0 0 #212738, 1.1em 1.1em 0 0 #212738, 0 1.5em 0 0 #212738, -1.1em 1.1em 0 0 #212738, -1.5em 0 0 0 #212738, -1.1em -1.1em 0 0 #212738, 0 -1.5em 0 0 #212738, 1.1em -1.1em 0 0 #212738;
+    box-shadow: 1.5em 0 0 0 #212738, 1.1em 1.1em 0 0 #212738, 0 1.5em 0 0 #212738, -1.1em 1.1em 0 0 #212738, -1.5em 0 0 0 #212738, -1.1em -1.1em 0 0 #212738, 0 -1.5em 0 0 #212738, 1.1em -1.1em 0 0 #212738;
+}
+    .mob
+    {
+        display: none;
+    }
+
+/* Animation */
+
+@-webkit-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@media screen and (max-width:$mobileScreenPotrait) {
+    .mob
+    {
+        display: block;
+    }
+   .desk 
+   {
+       display: none;
+   }
+    .accountDashboard {
+        .chartLengendsData {
+            .cardLinkItems {
+                margin-top: 2rem;
+                a {
+                    font-size: var(--fontsize18);
+                }
+            }
+            .LengendsInfo
+            {
+                span 
+                {
+                    .overDueColorLengend, .invoiceColorLengend, .unappliedColorLengend,.avaliableColorLengend
+                    {
+                        border-radius: 5px;
+                    }
+                }
+            }
+        }
+        .paymentDueContent {
+            span {
+                line-height: 6px;
+                p {
+                    font-size: var(--fontsize18);
+                }
+                label {
+                    font-size: var(--fontsize18);
+                }
+            }
+        }
+        .orderLinkItems {
+            button {
+                width: 5.2rem;
+                border-radius: 2px;
+                font-size: var(--fontsize16);
+                height: auto;
+                font-family: 'NiveauGrotesk';
+                font-weight: 600;
+            }
+        }
+       .cardHeading {
+            border-bottom: 1px solid $head-border-dashboard;
+            font-size: var(--fontsize19);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            .credit
+            {
+                font-size: var(--fontsize18);
+            }
+        }
+        .heading-row {
+            width: 100%;
+        }
+        .accountRightCard {
+            padding-right: 15px !important;
+            padding-left: 15px !important;
+        }
+        .leftNavigation {
+            max-width: 100%;
+            margin-left: 0px;
+            margin-right: 0px;
+            padding-right: 15px;
+            margin-top: 0px;
+        }
+        .dashboardHeading {
+            font-size: var(--fontsize20);
+            margin-top: 0rem;
+            padding-left: 0px;
+        }
+        .dashboardData {
+            margin-top: 0rem;
+            max-width: 100%;
+        }
+        .cardView {
+            height: auto;
+            padding: 6px 12px 15px;
+        }
+        .cardTable {
+            table {
+                margin-bottom: 10px;
+                thead {
+                    th {
+                        font-size: var(--fontsize16);
+                        padding: 0 0 4px;
+                    }
+                    tr:first-child {
+                        border-bottom: 1px solid $head-border-dashboard;
+                    }
+                }
+                tbody {
+                    td {
+                        font-size: var(--fontsize16);
+                        line-height: 12px;
+                    }
+                }
+            }
+            .cardLinkItems {
+                justify-content: right;
+                right: 15px;
+                position: inherit;
+                width: 100%;
+                a {
+                    font-size: var(--fontsize18);
+                }
+            }
+        }
+        .chartLengendsData {
+            span {
+                line-height: 14px;
+                label {
+                    margin: 0 0 0 0rem;
+                    font-size: var(--fontsize18);
+                }
+                p {
+                    font-size: var(--fontsize18);
+                }
+            }
+            .LengendsInfo {
+                span {
+                    label {
+                        margin-left: 0rem;
+                    }
+                }
+            }
+            .cardLinkItems {
+                justify-content: space-between;
+            }
+        }
+    }
+}
+@media screen and (max-width:420px){
+    .accountDashboard{
+        .orderLinkItems {
+            button {
+                width: 30%;
+                height: 28px;
+            }
+        }
+    }
+}
+@media screen and (max-width:390px){
+    .chartjs-render-monitor {
+        width: 340px !important;
+        height: 170px !important;
+        left: calc(100% - 20.92em);
+        position: relative;
+    }  
+}
+@media screen and (max-width:376px){
+    .chartjs-render-monitor {
+        left: calc(100% - 20.5em) !important;
+    }
+}
+@media screen and (max-width:370px) {
+    .accountDashboard {
+       .chartLengendsData {
+            .cardLinkItems {
+                a {
+                    font-size: var(--fontsize16);
+                }
+            }
+        }
+        .cardTable {
+            .cardLinkItems {
+                a {
+                    font-size: var(--fontsize16);
+                }
+            }
+        }
+      
+    }
+}
+@media screen and (max-width:360px){
+    .chartjs-render-monitor {
+        left: calc(100% - 19.7em) !important;
+        width: 330px !important;
+        height: 165px !important;
+    }
+}

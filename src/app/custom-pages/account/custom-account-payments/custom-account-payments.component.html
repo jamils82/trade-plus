@@ -1,0 +1,414 @@
+<div class="accountPayments">
+    <div class="heading-row row">
+        <div class="col-md-12 dashboardHeading">
+            MY PAYMENTS
+        </div>
+    </div>
+    <div class="row ml-0 mr-0">
+        <div class="col-md-3 custom-width-navigation leftNavigation">
+            <div class="left-right">
+                <app-account-left-nav [selectedTab]="'payments'"></app-account-left-nav>
+            </div>
+        </div>
+        <div class="col-md-9 paymentsData">
+            <!-- Payments Due -->
+            <div class="cardView">
+                <div class="cardHeading">
+                    <label class="due-lable">Payments Due</label>
+                </div>
+                <div class="paymentDueContent">
+                    <span>
+                        <label>Overdue (Pay Immediately) </label>
+                        <p>{{ accountSummaryData.balanceOverDueInvoices ?
+                            negativeConverter(accountSummaryData.balanceOverDueInvoices) : '$0.00'}}
+                        </p>
+                    </span>
+                    <span>
+                        <label>Future </label>
+                        <p>{{ accountSummaryData.futureAmount ?
+                            negativeConverter(accountSummaryData.futureAmount) : '$0.00'}}
+                        </p>
+                    </span>
+                    <span *ngFor="let payment of paymentDues">
+                        <label> {{ payment.date }} </label>
+                        <p>{{ payment.amount ?
+                            negativeConverter(payment.amount) : '$0.00'}}
+                        </p>
+                    </span>
+                </div>
+            </div>
+            <div class="row custom-card">
+                <div class="col-md-12 title">
+                    <h2>Make a Payment</h2>
+                </div>
+                <!-- Make a Payment -->
+                <div class="col-md-6 paymentsDue for-adjustment">
+                    <div class="cardView min-card">
+                        <div class="cardHeading">
+                            <label>Select Amount</label>
+                        </div>
+                        <div class="">
+                            <mat-radio-group [(ngModel)]="selectAmount" (change)="payButtonEnable()">
+                                <div class="separation">
+                                    <mat-radio-button class="example-radio-button" name="selectAmount"
+                                        (change)="isCustom = false;isAmountValid=customAmount" value="customAmount"
+                                        [checked]="isRadioChecked">
+                                        Custom Amount
+                                    </mat-radio-button>
+                                    <div class="input-group prefix lo_sensitive">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" name="input" (keypress)="numberOnly($event)"
+                                            [disabled]="isCustom"
+                                            (input)="enableButton = (customAmount > 0 && paymentOptions )? true : false;isAmountValid=customAmount"
+                                            [(ngModel)]="customAmount" placeholder="Enter Custom Amount">
+                                    </div>
+                                </div>
+                                <div class="separation">
+                                    <mat-radio-button class="example-radio-button" name="selectAmount"
+                                        (change)="isCustom = true;enableButton = dueThisMonth ? true : false;isAmountValid=dueThisMonth"
+                                        [value]="dueThisMonth +'#'">
+                                        Due This Month
+                                    </mat-radio-button>
+                                    <div class="input-group prefix except-prefix lo_sensitive">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" name="input"
+                                            [disabled]="forInputEnable == 'dueThisMonth' ? true : true"
+                                            [value]="negativeConverterPayments(dueThisMonth)">
+                                        <span *ngIf="isMobile" class="input-group-addon"></span>
+                                    </div>
+                                </div>
+                                <div class="separation">
+                                    <mat-radio-button class="example-radio-button" name="selectAmount"
+                                        (change)="isCustom = true;enableButton = overDue ? true : false;isAmountValid=overDue"
+                                        [value]="overDue +'@'">
+                                        Overdue
+                                    </mat-radio-button>
+                                    <div class="input-group prefix except-prefix lo_sensitive">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" name="input" disabled
+                                            [value]="negativeConverterPayments(overDue)">
+                                        <span *ngIf="isMobile" class="input-group-addon"></span>
+                                    </div>
+                                </div>
+                                <div class="total-outstanding separation">
+                                    <mat-radio-button class="example-radio-button" name="selectAmount"
+                                        (change)="isCustom = true;enableButton = totalOutStanding ? true : false;isAmountValid=totalOutStanding"
+                                        [value]="totalOutStanding +'$'">
+                                        Total Outstanding
+                                    </mat-radio-button>
+                                    <div class="input-group prefix except-prefix lo_sensitive">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" name="input" disabled
+                                            [value]="negativeConverterPayments(totalOutStanding)">
+                                        <span *ngIf="isMobile" class="input-group-addon"></span>
+                                    </div>
+                                </div>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-12 bottom-title">
+                        <a class="for-link">View Payment History</a>
+                    </div> -->
+                </div>
+                <div class="col-md-6 paymentsDue accountRightCard">
+                    <div class="cardView min-card">
+                        <div class="for-sub-title">
+                            <div class="cardHeading">
+                                <div class="">
+                                    <label>Payments Options</label>
+                                </div>
+                                <div class="">
+                                    <img [src]="!isMobile ? 'assets/images/secuere.png': 'assets/images/Mask Group 11.png'"
+                                        class="secure-mob visa-img" alt="">
+                                    <img [src]="!isMobile ? 'assets/images/visa.png': 'assets/images/1308201-visa-inverted-payment-method-icon-png-visa-png-512_320.png'"
+                                        class="visa-mob visa-img" alt="">
+                                    <img [src]="!isMobile ? 'assets/images/master-card.svg': 'assets/images/card_x2C__credit_x2C__Mastercard_x2C___bank_x2C__debit_x2C_.svg'"
+                                        class="master-mob visa-img" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="payment-option-section">
+                                <mat-radio-group [(ngModel)]="paymentOptions" (change)="payButtonEnable()">
+                                    <div class="card-seperation separation card-align">
+                                        <mat-radio-button *ngFor="let data of savedCardInfo"
+                                            class="example-radio-button" name="paymentOptions"
+                                            [value]="data.cardNumber">
+                                            <img [src]="!isMobile ? 'assets/images/master-card.svg': 'assets/images/card_x2C__credit_x2C__Mastercard_x2C___bank_x2C__debit_x2C_.svg'"
+                                                class=" master-mob card-visa-img right-margin" alt="">
+                                            <span class="card-details right-margin">{{ maskingCard(data.cardNumber)}} {{
+                                                data.accountHolderName}}</span>
+                                            <img [src]="!isMobile ? 'assets/images/Group-lock.png': 'assets/images/Group 11563.png'"
+                                                class="lock-img right-margin" alt="">
+                                        </mat-radio-button>
+                                    </div>
+                                    <div class="new-card-separation separation">
+                                        <mat-radio-button class="example-radio-button" name="paymentOptions"
+                                            value="New Credit Card">
+                                            <span class="card-details right-margin">New Credit Card</span>
+                                            <img [src]="!isMobile ? 'assets/images/Group-lock.png': 'assets/images/Group 11563.png'"
+                                                class="lock-img right-margin" alt="">
+                                        </mat-radio-button>
+                                    </div>
+                                    <div class="save-card separation">
+                                        <div class="lo_sensitive">
+                                            <label class="container"
+                                                [ngStyle]="{'color': paymentOptions !='New Credit Card' ? 'var(--cx-color-light)' : '' }">Save
+                                                Credit Card
+                                                <input type="checkbox"
+                                                    [disabled]=" paymentOptions !='New Credit Card' ?? true"
+                                                    [(ngModel)]="isSave">
+                                                <span class="checkmark"
+                                                    [ngStyle]="{'background-color': paymentOptions !='New Credit Card' ? 'var(--cx-color-light)' : '' }"></span>
+                                            </label>
+                                        </div>
+                                        <div class="">
+                                            <button
+                                                [ngClass]="enableButton == true ? 'pay-button' : 'pay-button-disable' "
+                                                (click)="payNowDialog()">Pay Now</button>
+                                        </div>
+                                    </div>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 bottom-title">
+                        <a class="for-link" (click)="merchantDialog()">Merchant Fees</a>
+                        <a class="for-link" (click)="otherPaymentDialog()">Other Payment Options</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Online Payment History -->
+            <div class="onlinePaymentHistory">
+                <div class="cardView">
+                    <div class="cardHeading">
+                        <label class="online-pay">Online Payments History</label>
+                    </div>
+                    <div class="paymentDueContent lo_sensitive">
+                        <table *ngIf="!isMobile" class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Payment Date</th>
+                                    <th scope="col">Payment Type</th>
+                                    <th scope="col">Payment Amount</th>
+                                    <th scope="col">Payment Status</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let paymentHistory of paymentHistory; let i = index">
+                                <tr>
+                                    <td>{{paymentHistory.paymentDate}}</td>
+                                    <td>{{paymentHistory.paymentType}}</td>
+                                    <td>{{paymentHistory.amount}}</td>
+                                    <td>{{changeValTest(paymentHistory.transactionStatus) | titlecase }}</td>
+                                    <span (click)="expanded.l1 = (i === expanded.l1) ? -1 : i">
+                                        <td class="a-Icon" *ngIf="expanded.l1 !== i"><img
+                                                src="assets/icons/paymentdownarrow.png" style="opacity: 0.8;" /></td>
+                                        <td class="a-Icon" *ngIf="expanded.l1 === i"><img
+                                                src="assets/icons/paymentuparrow.png" style="opacity: 0.8;" /></td>
+                                    </span>
+                                </tr>
+                                <tr *ngIf="expanded.l1 === i">
+                                    <td colspan="5" style="padding-bottom: 0 !important;">
+                                        <div class="inner-table-data">
+                                            <div class="row" style="margin-bottom: 15px;">
+                                                <div class="col-md-6">
+                                                    <div class="">
+                                                        <div class="cardHeading inner-td-heading">
+                                                            <label class="table-inner-title">Payment Details</label>
+                                                        </div>
+                                                        <div class="separation-inner">
+                                                            <p class="left-title">Date:</p>
+                                                            <p class="right-value"> {{paymentHistory.date}} </p>
+                                                        </div>
+                                                        <div class="separation-inner">
+                                                            <p class="left-title">Amount</p>
+                                                            <p class="right-value">{{paymentHistory.amount}}</p>
+                                                        </div>
+                                                        <div class="separation-inner">
+                                                            <p class="left-title">Receipt No.</p>
+                                                            <p class="right-value">{{paymentHistory.receiptNumber}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="">
+                                                        <div class="for-sub-title">
+                                                            <div class="cardHeading inner-td-heading">
+                                                                <!-- <div class="">
+                                                                    <label></label>
+                                                                </div> -->
+                                                            </div>
+                                                            <div class="separation-inner">
+                                                                <p class="left-title">Payment Type:</p>
+                                                                <p class="right-value">{{paymentHistory.paymentType}}
+                                                                </p>
+                                                            </div>
+                                                            <div class="separation-inner">
+                                                                <p class="left-title">Status:</p>
+                                                                <p class="right-value">
+                                                                    {{paymentHistory.transactionStatus | titlecase}}</p>
+                                                            </div>
+                                                            <div class="separation-inner">
+                                                                <p class="left-title">Transacton ID:</p>
+                                                                <p class="right-value">{{paymentHistory.transactionId}}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="margin-bottom: 15px;">
+                                                <div class="col-md-6">
+                                                    <div class="">
+                                                        <div class="cardHeading inner-td-heading">
+                                                            <label class="table-inner-title">Card Details</label>
+                                                        </div>
+                                                        <div class="separation-inner">
+                                                            <p class="left-title">Card Name:</p>
+                                                            <p class="right-value">
+                                                                {{paymentHistory.cardDetail?.accountHolderName}}</p>
+                                                        </div>
+                                                        <div class="separation-inner">
+                                                            <p class="left-title">Card Type:</p>
+                                                            <p class="right-value">
+                                                                {{paymentHistory.cardDetail?.cardType}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="">
+                                                        <div class="for-sub-title">
+                                                            <div class="cardHeading inner-td-heading">
+                                                                <!-- <div class="">
+                                                                    <label></label>
+                                                                </div> -->
+                                                            </div>
+                                                            <div class="separation-inner">
+                                                                <p class="left-title">Card Number:</p>
+                                                                <p class="right-value">
+                                                                    {{maskingCard(paymentHistory.cardDetail?.cardNumber)}}
+                                                                </p>
+                                                            </div>
+                                                            <div class="separation-inner">
+                                                                <p class="left-title">Card Expiry:</p>
+                                                                <p class="right-value">
+                                                                    {{paymentHistory.cardDetail?.cardExpiry}}
+                                                                    <!-- {{paymentHistory.cardDetail?.expiryMonth}}/{{paymentHistory.cardDetail?.expiryYear}} -->
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="">
+                                                        <div class="cardHeading inner-td-heading">
+                                                            <label class="table-inner-title">Account Details</label>
+                                                        </div>
+                                                        <div class="separation-inner">
+                                                            <p class="left-title">Account Name:</p>
+                                                            <p class="right-value">{{paymentHistory.accountName}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="">
+                                                        <div class="for-sub-title">
+                                                            <div class="cardHeading inner-td-heading">
+                                                                <!-- <div class="">
+                                                                    <label></label>
+                                                                </div> -->
+                                                            </div>
+                                                            <div class="separation-inner">
+                                                                <p class="left-title">Account Number:</p>
+                                                                <p class="right-value">{{paymentHistory.accountNumber}}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div *ngIf="isMobile" class="paymentHistoryContent">
+                            <div *ngFor="let data of paymentHistory; let i = index"
+                                class="paymentHistorycontainer container">
+                                <div class="row paymentHistoryRow">
+                                    <div class="col-6 payment-history label">Payment Date</div>
+                                    <div class="col-6 payment-history data">{{data.date | date: 'dd/MM/yyyy'}}</div>
+                                    <div class="col-6 payment-history label">Payment Type</div>
+                                    <div class="col-6 payment-history data">{{data.paymentType}}</div>
+                                    <div class="col-6 payment-history label">Payment Amount</div>
+                                    <div class="col-6 payment-history data">{{data.amount}}</div>
+                                    <div class="col-6 payment-history label">Payment Status</div>
+                                    <div class="col-6 payment-history data">{{data.transactionStatus | titlecase}}</div>
+                                    <div class="col-12 viewDetails">
+                                        <span (click)="expanded.l1 = (i === expanded.l1) ? -1 : i"
+                                            *ngIf="expanded.l1 !== i">View Details</span>
+                                        <span (click)="expanded.l1 = (i === expanded.l1) ? -1 : i"
+                                            *ngIf="expanded.l1 === i">Hide Details</span>
+                                    </div>
+                                    <div *ngIf="expanded.l1 === i">
+                                        <div>
+                                            <div class="inner-table-data">
+                                                <div class="row table-inner-row">
+                                                    <div class="col-12 cardHeading inner-td-heading">
+                                                        <label class="table-inner-title">Payment Details</label>
+                                                    </div>
+                                                    <div class="col-6 left-title">Date</div>
+                                                    <div class="col-6 right-value"> {{data.date | date: 'dd/MM/yyyy'}}
+                                                    </div>
+                                                    <div class="col-6 left-title">Payment Type</div>
+                                                    <div class="col-6 right-value"> {{data.paymentType}} </div>
+                                                    <div class="col-6 left-title">Amount</div>
+                                                    <div class="col-6 right-value"> {{data.amount}} </div>
+                                                    <div class="col-6 left-title">Status</div>
+                                                    <div class="col-6 right-value"> {{data.transactionStatus |
+                                                        titlecase}} </div>
+                                                    <div class="col-6 left-title">Receipt No.</div>
+                                                    <div class="col-6 right-value"> {{data.receiptNumber}} </div>
+                                                    <div class="col-6 left-title">Transacton ID</div>
+                                                    <div class="col-6 right-value"> {{data.transactionId}} </div>
+                                                </div>
+                                                <div class="row table-inner-row">
+                                                    <div class="col-12 cardHeading inner-td-heading">
+                                                        <label class="table-inner-title">Card Details</label>
+                                                    </div>
+                                                    <div class="col-6 left-title">Card Name</div>
+                                                    <div class="col-6 right-value"> {{data.cardDetail?.cardType}} </div>
+                                                    <div class="col-6 left-title">Card Number</div>
+                                                    <div class="col-6 right-value"> {{data.cardDetail?.cardNumber}}
+                                                    </div>
+                                                    <div class="col-6 left-title">Card Type</div>
+                                                    <div class="col-6 right-value"> {{data.cardDetail?.cardType}} </div>
+                                                    <div class="col-6 left-title">Card Expiry</div>
+                                                    <div class="col-6 right-value">
+                                                        {{data.cardDetail?.expiryMonth}}/{{data.cardDetail?.expiryYear}}
+                                                    </div>
+                                                </div>
+                                                <div class="row table-inner-row">
+                                                    <div class="col-12 cardHeading inner-td-heading">
+                                                        <label class="table-inner-title">Account Details</label>
+                                                    </div>
+                                                    <div class="col-6 left-title">Account Name</div>
+                                                    <div class="col-6 right-value"> {{data.accountName}} </div>
+                                                    <div class="col-6 left-title">Account Number</div>
+                                                    <div class="col-6 right-value"> {{data.accountNumber}} </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<div class=" modal-header modal-head container">   
+    <button type="button" class="close" aria-label="Close" (click)="openModalCancelPopup()">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body ">
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <h2 class="heading">{{labelData.addYourOwnProduct}}</h2>
+                <div>
+                    <form [formGroup]="addProductForm" class="addCustomProduct">
+                            <div class="form-group">
+                                <span class="addCustomProduct">
+                                    <label for="productName">{{labelData.productName}} <span class="mandatory">*</span></label>
+                                    <input type="text" tabindex="1" class="form-control" maxlength="255" id="productName" placeholder="Enter name of product"
+                                    formControlName="productName">
+                                </span>
+                                     <div
+                                        *ngIf="!addProductForm.get('productName')?.valid && (addProductForm.get('productName')?.dirty ||addProductForm.get('productName')?.touched)"
+                                         class="error" [hidden]="!addProductForm.get('productName').errors.required" >
+                                            {{labelData.nameError}}
+                                        </div>
+                            </div>
+                            <div class="form-group">
+                                <span class="addCustomProduct">
+                                    <label for="price">{{labelData.price}} <span class="mandatory">*</span></label>
+                                    <input type="text" tabindex="2" name='price' (input)="numberOnly($event)" (paste)="onPaste($event)" class="form-control" [attr.maxlength]=quantityMaxLength id="price" placeholder="Enter GST exclusive price"
+                                    formControlName="price">
+                                </span>
+                                <div
+                                *ngIf="!addProductForm.get('price')?.valid && (addProductForm.get('price')?.dirty ||addProductForm.get('price')?.touched)"
+                                 class="error" [hidden]="!addProductForm.get('price').errors.required" >
+                                        {{labelData.priceError}}
+                                </div>
+                            </div>
+                            <div class="form-group addCustomProduct">
+                                <label for="descriptionNote">{{labelData.descriptionOrNotes}} </label>
+                                <input type="text" tabindex="3" class="form-control" maxlength="255" id="descriptionNote" placeholder="Enter product description"
+                                formControlName="descriptionNote">
+                            </div>
+                            <div class="form-group addCustomProduct">
+                                <label for="unitOfMeasure">{{labelData.unitOfMeasure}}</label>
+                                <input type="text" tabindex="4" class="form-control" maxlength="255" id="unitOfMeasure" placeholder="Enter UOM, e.g. EA"
+                                formControlName="unitOfMeasure">
+                            </div>
+                            <div class="form-group addCustomProduct quantity-sec">
+                                <label for="quantity" class="quantityLabel">{{labelData.quantity}} </label>
+                                <div class="quantity-input">
+                                <button class="decrement" (click)="decrement()">-</button>
+                                <input type="text" id="quantity-box" tabindex="5" onPaste="return false" name='quantity' (input)="numberOnly($event)" class="quantity" [attr.maxlength]=quantityMaxLength id="quantity"
+                                formControlName="quantity">
+                                <button class="increment" (click)="increment()">+</button>
+                            </div>
+                            </div>
+                        <div class="form-group btn-wrapper addProductButton">
+                            <button type="button" tabindex="6" class="btn btn-cancel" aria-label="Close" (click)="openModalCancelPopup()">
+                                {{labelData.cancel}}
+                            </button>
+                            <button (click)="addOwnProduct()" tabindex="7" class="btn btn-blue add-quote" [disabled]="!addProductForm.valid || disabledBtn">
+                                {{labelData.addToQuote}}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            
+            </div>
+    
+        </div>
+    </div>

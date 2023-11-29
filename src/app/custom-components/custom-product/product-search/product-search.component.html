@@ -1,0 +1,104 @@
+<!-- (blur)="close($event, true)" -->
+
+<label [ngClass]="screenMode == 'quickOrder' ? 'quick-order':''" class="searchbox" [class.dirty]="!!searchInput.value">
+  <input
+  class="searchBox-input"
+    #searchInput
+    placeholder='Item Code or Product'
+    autocomplete="off"
+    aria-describedby="initialDescription"
+    aria-controls="results"
+    aria-autocomplete="both"
+    [attr.aria-label]="'common.search' | cxTranslate"
+    (input)="search(searchInput.value)"
+    (blur)="close($event, true)"
+    (keydown.escape)="close($event, true)"
+    (keydown.enter)="
+      close($event, true);
+      launchSearchResult($event, searchInput.value);
+      updateChosenWord(searchInput.value);
+      searchGTMEventPixel(searchInput.value)
+    "
+    (keydown.arrowup)="focusPreviousChild($event)"
+    (keydown.arrowdown)="focusNextChild($event)"
+    [value]="selectedCode"
+  />
+
+
+  <div role="presentation" class="search">
+    <cx-icon [type]="iconTypes.SEARCH"></cx-icon>
+  </div>
+
+
+<div *ngIf="(searchInput.value.length >= 2) && results$ | async as result" [ngClass]="screenMode == 'quickOrder' ? 'quick-order':''" class="results plp-search" id="results" role="listbox">
+  <div *ngIf="result.message" class="message plp-search" [innerHTML]="result.message"></div>
+  <ul
+    class="suggestions"
+    attr.aria-label="{{ 'searchBox.ariaLabelSuggestions' | cxTranslate }}"
+    role="listbox"
+  >
+    <li *ngFor="let suggestion of result.suggestions">
+      <a
+        role="option"
+        [routerLink]="['/search',suggestion]"
+        (keydown.arrowup)="focusPreviousChild($event)"
+        (keydown.arrowdown)="focusNextChild($event)"
+        (keydown.enter)="close($event, true)"
+        (keydown.escape)="close($event, true)"
+        (blur)="close($event)"
+        (mousedown)="preventDefault($event)"
+        (click)="
+          dispatchSuggestionEvent({
+            freeText: searchInput.value,
+            selectedSuggestion: suggestion,
+            searchSuggestions: result.suggestions
+          });
+          updateChosenWord(suggestion);
+          resultGTMClick(suggestion, searchInput.value);
+          closePopup()
+        "
+      ><div>{{suggestion}}</div>
+      </a>
+    </li>
+  </ul>
+  <ul *ngIf="result.products && !result.message" class="suggestions" attr.aria-label="{{ 'searchBox.ariaLabelSuggestions' | cxTranslate }}" tabindex="0">
+      <li class="suggestiveSearch-li">
+          <div class="suggestiveSearch">Suggestive Search</div>
+      </li>
+  </ul>
+
+  <ul class="products" *ngIf="result.products" attr.aria-label="{{ 'searchBox.ariaLabelProducts' | cxTranslate }}" tabindex="0">
+      <li *ngFor="let product of result.products">
+
+          <div *ngIf="screenMode =='quickOrder'">
+              <div class="quick-order-results" (mousedown)="searchItemHandler($event,product); quickOrderResultGTMClick(product.name, searchInput.value);">
+                  <cx-media *ngIf="config.displayProductImages" [container]="product.images?.PRIMARY" format="thumbnail" role="presentation"></cx-media>
+                  <div class="name" [innerHTML]="product.nameHtml"></div>
+                  <span class="price">{{ product.price?.formattedValue != '$0.00' ? product.price?.formattedValue : 'POA'}} <span *ngIf="product.price?.formattedValue != 'POA'">{{product.price?.formattedValue != '$0.00' ? 'EA' : ''}}</span></span>
+              </div>
+          </div>
+
+
+          <a *ngIf="screenMode !=='quickOrder'" [routerLink]="
+          ['/p',product.code]
+        " [class.has-media]="config.displayProductImages" (keydown.arrowup)="focusPreviousChild($event)" (keydown.arrowdown)="focusNextChild($event)" (keydown.enter)="close($event, true)" (keydown.escape)="close($event, true)" (blur)="close($event, true)"
+              (mousedown)="preventDefault($event)" (click)="
+          dispatchProductEvent({
+            freeText: searchInput.value,
+            productCode: product.code
+          });
+          quickOrderResultGTMClick(product.name, searchInput.value);
+        ">
+              <cx-media *ngIf="config.displayProductImages" [container]="product.images?.PRIMARY" format="thumbnail" role="presentation"></cx-media>
+              <div class="name" [innerHTML]="product.nameHtml"></div>
+              <span class="price">{{ product.price?.formattedValue != '$0.00' ? product.price?.formattedValue : 'POA' }} <span *ngIf="product.price?.formattedValue != 'POA'">{{product.price?.formattedValue != '$0.00' ? 'EA' : ''}}</span></span>
+          </a>
+      </li>
+  </ul>
+  <span id="initialDescription" class="cx-visually-hidden">
+    {{ 'searchBox.initialDescription' | cxTranslate }}
+  </span>
+  <div *ngIf="result.suggestions?.length || result.products?.length" aria-live="assertive" class="cx-visually-hidden">
+      {{ 'searchBox.suggestionsResult' | cxTranslate: { count: result.suggestions?.length } }} {{ 'searchBox.productsResult' | cxTranslate: { count: result.products?.length } }} {{ 'searchBox.initialDescription' | cxTranslate }}
+  </div>
+</div>

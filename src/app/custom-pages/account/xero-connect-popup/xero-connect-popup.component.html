@@ -1,0 +1,50 @@
+<div class="editName-popUp container">
+    <div class="close-btn-row row">
+        <div class="close-btn-col col-md-12">
+            <img (click)="closePopUp()" class="close-btn-icon fa fa-times"
+                src='../../../../assets/images/close-icon.PNG'>
+            <!-- <i  class="close-btn-icon fa fa-times"></i> -->
+        </div>
+    </div>
+    <div class="heading-row row">
+        <div class="heading-col col-md-12">
+            <div class="heading-label">XERO CONNECT</div>
+        </div>
+    </div>
+    <div class="edit-name-row row">
+        <div class="edit-name-col col-md-12">
+            <div class="edit-name-label">Linking your Xero account to the Tradelink Xero invoice delivery service is a
+                smart choice. Save yourself loads of time by having your invoices appear directly in your Xero account.
+                You are only a few simple steps away from no more manual
+                data capture, no more accidental typos and no more tedious sessions spent wrangling PDF’s.</div>
+        </div>
+    </div>
+    <div class="edit-name-input-row row">
+        <div class="edit-name-input-col col-md-12">
+            <input type="email" [formControl]="email" class="edit-name-input"
+                placeholder="Enter your Xero invoice email address" [(ngModel)]="xeroEmail">
+        </div>
+        <div class="errorMsg col-md-12">
+            <span *ngIf="showError" class="error-msg">Email Validation Failed</span>
+        </div>
+    </div>
+    <div class="more-information-row row">
+        <div class="more-information-col col-md-12">
+            <div class="more-information-label">For more information about your Xero invoice email address <a
+                    class="more-information-label-anchor" target="_blank"
+                    href="https://central.xero.com/s/article/Manage-your-file-library#Uploadafiletothefilelibrary">click
+                    here</a></div>
+        </div>
+    </div>
+    <div class="buttons-row row">
+        <div class="cancel-button-col col-md-6 deskbtn">
+            <button class="btn cancel-btn" (click)="closePopUp()">Cancel Connection</button>
+        </div>
+        <div class="save-button-col col-md-6">
+            <button type="submit" (click)="onSave()" class="btn save-btn">Finish Connection</button>
+        </div>
+        <div class="cancel-button-col col-md-6 mobbtn">
+            <button class="btn cancel-btn" (click)="closePopUp()">Cancel Connection</button>
+        </div>
+    </div>
+</div>

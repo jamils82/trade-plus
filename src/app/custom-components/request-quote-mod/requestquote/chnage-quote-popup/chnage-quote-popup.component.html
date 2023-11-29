@@ -1,0 +1,35 @@
+
+<div class="heading-container container">
+    <div class="row">
+    <div class="col-md-12">
+        <div class="close-icon" (click)="closePopUp()">
+            <img class="cls-icon fa fa-times" src='../../../../assets/images/close-icon.PNG'>
+        </div>
+        </div>
+        <div class="col-md-12 heading">
+            <div class="pageHeading">EXITING QUOTE REQUEST FORM
+        </div>
+    </div>
+   </div>
+</div>
+
+<div class="modal-body ">
+    <div class="row-content">
+        <div class="description col-md-12 col-sm-12 col-xs-12">
+            <p class="desc">If you exit this form without submitting the quote request, the Quote Request Form will be cleared.  Do you wish to proceed?</p>
+        </div>
+            <div class="col-md-12 btngrp">
+                <button class="btn" class="confirmBtn" (click)="changePage(true)" >
+                    YES
+                </button>
+
+                <button class="btn" class="cancelBtn" (click)="closePopUp()" >
+                    NO
+                </button>
+
+            </div>
+        
+        </div>
+
+    </div>
+

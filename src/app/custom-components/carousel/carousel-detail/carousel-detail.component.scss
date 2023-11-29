@@ -1,0 +1,88 @@
+@import '../../../shared/styles/variables.scss';
+
+.carousel-panel {
+    display: flex;
+    justify-content: space-between;
+
+    // The size of carousel items depends on the number of items per slide.
+    // We generate 10 sizes in case there are a lot of carousel items displayed
+    // on a single slide.
+    @for $i from 1 through 10 {
+      &.size-#{$i} .item {
+        flex: 0 0 calc((100 / #{$i}) * 1%);
+      }
+    }
+
+    .slides {
+      flex: auto;
+      position: relative;
+
+      .slide {
+        transition: 0.6s all;
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+
+        &:not(.active) {
+          // we keep the active slide non-absolute, so the height
+          // of the parent is based on the displayed slide
+          position: absolute;
+          opacity: 0;
+          z-index: -1;
+          transition: none;
+        }
+
+        .item {
+          opacity: 0;
+          z-index: -1;
+          &.active {
+            opacity: 1;
+            z-index: 1;
+          }
+          transition: 0.4s all;
+
+          // we add a transition delay so that items are nicely animated in a sequence
+          @for $i from 1 through 4 {
+            &:nth-child(#{$i}) {
+              transition-delay: calc(var(--cx-speed, 1) * #{$i * 0.25s});
+            }
+          }
+        }
+      }
+    }
+    .previous,
+    .next {
+        border: 0px;
+        background: transparent;
+        font-size: 2rem;
+        color: grey;
+        opacity: 0.5;
+    }
+    .previous:disabled,
+    .next:disabled {
+        color: grey;
+        opacity: 0.5;
+    }
+    .previous:not(:disabled):hover,
+    .next:not(:disabled):hover {
+        color: $blue-color;
+        opacity: 1;
+    }
+  }
+
+.indicators {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button {
+        border: 0px;
+        background: transparent;
+        color: grey;
+        opacity: 0.5;
+    }
+    button[disabled] {
+        color: $blue-color;
+        opacity: 1;
+    }
+}

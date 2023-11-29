@@ -1,0 +1,26 @@
+
+@import '../../../../shared/styles/variables.scss';
+.load-more-section {
+    text-align: center;
+    margin: 48px 0 20px;
+    .loading-wrapper {
+        .loader-more {
+            background: blue;
+        }
+    }
+    .load-more-btn {
+        position: relative;
+        min-width: 145px;
+        min-height: 50px;
+        @include font-NiveauGroteskBold();
+        border-radius: 9px;
+    }
+    p.pagination-details {
+        margin-top: 8px;
+        color: #666666;
+    }
+    .btn-cancel {
+        background: #f5f5f5;
+        color: #003976;
+    }
+}

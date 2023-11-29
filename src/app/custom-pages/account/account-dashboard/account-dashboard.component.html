@@ -1,0 +1,349 @@
+<div class="accountDashboard">
+    <div class="heading-row row">
+        <div class="col-md-12 dashboardHeading">
+            ACCOUNT DASHBOARD
+        </div>
+    </div>
+    <div class="row ml-0 mr-0">
+        <div class="col-md-3 col-sm-12 col-12 custom-width-navigation leftNavigation">
+            <app-account-left-nav [selectedTab]="'dashboard'"></app-account-left-nav>
+        </div>
+        <div class="col-md-9 col-sm-12 col-12 dashboardData">
+            <!-- <div class="row">
+                <div class="col-md-12 dashboardHeading">
+                    ACCOUNT DASHBOARD
+                </div>
+            </div> -->
+            <!-- Account Summary -->
+            <div class="cardView">
+
+                <div class="loading" *ngIf="accountSummary$ | async ">Loading&#8230;</div>
+                <div class="cardHeading">
+                    <label>Account Summary</label>
+                    <label class="credit">Credit Limit: {{accountSummaryData.creditLimit ?
+                        negativeConverter(accountSummaryData.creditLimit) : '$00.00'}}
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="chartData col-md-6">
+                        <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
+                            [colors]="doughnutChartColors" [options]="options" [chartType]="'doughnut'">
+                        </canvas>
+                    </div>
+                    <div class="chartLengendsData col-md-6">
+                        <span>
+                            <label>Total Outstanding</label>
+                            <p>{{accountSummaryData.balanceOpenValues ?
+                                negativeConverter(accountSummaryData.balanceOpenValues) : '$00.00'}}
+                            </p>
+                        </span>
+                        <span>
+                            <label>Last Payment Date</label>
+                            <p>{{accountSummaryData.lastPaymentDate | date : 'dd/MM/yy'}}</p>
+                        </span>
+                        <span>
+                            <label>Last Payment Amount</label>
+                            <p>{{accountSummaryData.lastPaymentAmount ?
+                                negativeConverter(accountSummaryData.lastPaymentAmount) : '$00.00'}}
+                            </p>
+                        </span>
+                        <div class="LengendsInfo">
+                            <span>
+                                <label>
+                                    <div class="overDueColorLengend"></div> Overdue (Pay Immediately)
+                                </label>
+                                <p>{{accountSummaryData.balanceOverDueInvoices ?
+                                    negativeConverter(accountSummaryData.balanceOverDueInvoices) : '$00.00'}}
+                                </p>
+                            </span>
+                            <span>
+                                <label>
+                                    <div class="invoiceColorLengend"></div> Invoices Due This Month
+                                </label>
+                                <p>{{accountSummaryData.balanceDueInvoices ?
+                                    negativeConverter(accountSummaryData.balanceDueInvoices) : '$00.00'}}
+                                </p>
+                            </span>
+                            <span>
+                                <label>
+                                    <div class="unappliedColorLengend"></div> Unapplied Cash
+                                </label>
+                                <p>{{accountSummaryData.unappliedAmount ?
+                                    negativeConverter(accountSummaryData.unappliedAmount) : '$00.00'}}
+                                </p>
+                            </span>
+                            <span>
+                                <label>
+                                    <div class="avaliableColorLengend"></div> Available Credit
+                                </label>
+                                <p>{{accountSummaryData.availableCreditAll ?
+                                    negativeConverter(accountSummaryData.availableCreditAll) : '$00.00'}}
+                                </p>
+                            </span>
+                        </div>
+                        <div class="cardLinkItems">
+                            <a style="margin-right: 30px;" routerLink="/preferencesPage"
+                                (click)="accountBalanceNavigate()">View Account Balance Alerts</a>
+                            <a routerLink="/paymentPage">View Payments</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Recent Payments -->
+                <div class="col-md-6 recentPayments">
+                    <div class="cardView">
+                        <div class="loading" *ngIf="recentPayments$ | async ">Loading&#8230;</div>
+                        <div class="cardHeading noBorder">
+                            <label>Recent Payments</label>
+                        </div>
+                        <div class="cardTable desk">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th width="25%" scope="col">Date</th>
+                                        <th width="47%" scope="col">Transaction ID</th>
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="lo_sensitive">
+                                    <tr *ngFor="let history of paymentHistory">
+                                        <td width="25%"> {{ history.paymentDate }} </td>
+                                        <td width="47%" style="padding-right: 22px;"> {{ history.transactionId }}</td>
+                                        <td> {{ history.amount || '0.00' }} </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <div class="cardLinkItems">
+                                <a routerLink="/paymentPage">View Payments</a>
+                            </div>
+                        </div>
+                        <div class="cardTable mob">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th width="40%" scope="col">Date</th>
+                                        <th width="45%" scope="col">Transaction ID</th>
+                                        <th scope="col" width="25%">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="lo_sensitive">
+                                    <tr *ngFor="let history of paymentHistory">
+                                        <td width="40%"> {{ history.paymentDate | date : 'dd/MM/yyyy'}} </td>
+                                        <td width="45%" style="padding-right: 22px;"> {{ history.transactionId }}</td>
+                                        <td width="25%"> {{ history.amount || '0.00' }} </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <div class="cardLinkItems">
+                                <a routerLink="/paymentPage">View Payments</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Payments Due -->
+                <div class="col-md-6 paymentsDue accountRightCard">
+                    <div class="cardView">
+                        <div class="loading" *ngIf="accountSummary$ | async ">Loading&#8230;</div>
+                        <div class="cardHeading">
+                            <label>Payments Due</label>
+                        </div>
+                        <div class="paymentDueContent lo_sensitive">
+                            <span>
+                                <label>Overdue (Pay Immediately) </label>
+                                <p>{{ accountSummaryData.balanceOverDueInvoices ?
+                                    negativeConverter(accountSummaryData.balanceOverDueInvoices) : '$0.00'}}
+                                </p>
+                            </span>
+                            <span>
+                                <label>Future </label>
+                                <p>{{ accountSummaryData.futureAmount ?
+                                    negativeConverter(accountSummaryData.futureAmount) : '$0.00'}}
+                                </p>
+                            </span>
+                            <span *ngFor="let payment of paymentDues">
+                                <label> {{ payment.date }} </label>
+                                <p>{{ payment.amount ?
+                                    negativeConverter(payment.amount) : '$0.00'}}
+                                </p>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Invoice & Adjustments-->
+                <div class="col-md-6 recentPayments">
+                    <div class="cardView">
+                        <div class="loading" *ngIf="invoices$ | async ">Loading&#8230;</div>
+                        <div class="cardHeading noBorder">
+                            <label>Invoices & Adjustments</label>
+                        </div>
+                        <div class="cardTable">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="width: 25%;">Date</th>
+                                        <th scope="col" style="width: 30%;">Transaction No.</th>
+                                        <th scope="col">Order / Job Ref.</th>
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="lo_sensitive">
+                                    <tr *ngFor="let data of InvoiceDataSource">
+                                        <td> {{ data.docDate | date : 'dd/MM/yyyy' }} </td>
+                                        <td> {{ data.docNumber }} </td>
+                                        <td> {{ data.customerContext.customerPOReference }} </td>
+                                        <td> ${{ data.totalInc }} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="cardLinkItems">
+                                <a routerLink="/invoicePage">View Invoices & Adjustments</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- My Orders -->
+                <div class="col-md-6 recentPayments accountRightCard">
+                    <div class="cardView">
+                        <div class="loading" *ngIf="myOrders$ | async ">Loading&#8230;</div>
+                        <div class="cardHeading noBorder">
+                            <label>My Orders</label>
+                        </div>
+                        <div class="cardTable orderTable desk">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th width="37%" scope="col">Date</th>
+                                        <th width="37%" scope="col">Order No.</th>
+                                        <th width="26%" scope="col">Order / Job Ref.</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="lo_sensitive">
+                                    <tr *ngFor="let order of ordersData">
+                                        <td width="37%">{{order.requestedDeliveryDate | date : 'dd/MM/yyyy'}} </td>
+                                        <td width="37%">{{order.code}} </td>
+                                        <td width="26%">{{order.purchaseOrderNumber}} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="cardLinkItems orderLinkItems">
+                                <button routerLink="/tpQuickOrderPage">Quick Order</button>
+                                <a routerLink="/my-orders-deliveries">View Orders & Deliveries</a>
+                            </div>
+                        </div>
+                        <div class="cardTable orderTable mob">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th width="33%" scope="col">Date</th>
+                                        <th width="33%" scope="col">Order No.</th>
+                                        <th width="34%" scope="col">Order / Job Ref.</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="lo_sensitive">
+                                    <tr *ngFor="let order of ordersData">
+                                        <td width="33%">{{order.requestedDeliveryDate | date : 'dd/MM/yyyy'}} </td>
+                                        <td width="33%">{{order.code}} </td>
+                                        <td width="34%">{{order.purchaseOrderNumber}} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="cardLinkItems orderLinkItems">
+                                <button routerLink="/tpQuickOrderPage">Quick Order</button>
+                                <a routerLink="/my-orders-deliveries">View Orders & Deliveries</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- My Quotes -->
+                <div class="col-md-6 recentPayments">
+                    <div class="cardView">
+                        <div class="loading" *ngIf="myQuotes$ | async ">Loading&#8230;</div>
+                        <div class="cardHeading noBorder">
+                            <label>My Quotes</label>
+                        </div>
+                        <div class="cardTable">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Quote No.</th>
+                                        <th scope="col">Order / Job Ref.</th>
+                                        <th scope="col">Quote Expiry Date</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let quote of quotesData">
+                                        <td> {{quote.code }} </td>
+                                        <td class="lo_sensitive"> {{quote.projectNumber }} </td>
+                                        <td> {{quote.expirationDate | date: 'dd/MM/yyyy' }} </td>
+                                        <td> {{quote.state | uppercase }} </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <div class="cardLinkItems">
+                                <a routerLink="/quotesPage">View My Quotes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Scheduled Price Changes -->
+                <!-- <div class="col-md-6 recentPayments accountRightCard">
+                    <div class="cardView">
+                        <div class="cardHeading noBorder">
+                            <label>Scheduled Price Changes</label>
+                        </div>
+                        <div class="cardTable orderTable priceChangeTable">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Supplier</th>
+                                        <th scope="col" class="text-center">Product</th>
+                                        <th scope="col" class="text-right">Effective</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>AllProofIndustries</td>
+                                        <td class="text-center">All Items</td>
+                                        <td class="text-right">21/03/2021</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amalgated Hardware</td>
+                                        <td class="text-center">All Items</td>
+                                        <td class="text-right">21/03/2021</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Aquatice</td>
+                                        <td class="text-center">All Items</td>
+                                        <td class="text-right">21/03/2021</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bata</td>
+                                        <td class="text-center">All Items</td>
+                                        <td class="text-right">21/03/2021</td>
+                                    </tr>
+                                    <tr>
+                                        <td>AllProofIndustries</td>
+                                        <td class="text-center">All Items</td>
+                                        <td class="text-right">21/03/2021</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="cardLinkItems">
+                                <a routerLink="">View Price Updates</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+
+            </div>
+        </div>
+    </div>
+</div>

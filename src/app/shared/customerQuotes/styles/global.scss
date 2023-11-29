@@ -1,0 +1,113 @@
+@import './custom-variables.scss';
+p,h1 {
+    margin:0;
+}
+h1 {
+    font-family: "OpenSans-ExtraBold";
+    font-size: 32px;
+}
+input:focus,textarea:focus {
+    outline: 0;
+}
+.error {
+    color:$red;
+    font-size: 14px;
+    font-family: "OpenSans-Bold";
+}
+.btn {
+    border-radius: 8px;
+    font-family: "OpenSans-Bold";
+    font-size: 18px;
+    padding: 12px 24px;
+    height: auto;
+    line-height: 24px;
+    max-height: none;
+    &:focus{
+        outline: 0;
+        box-shadow:0 0 0;
+    }
+}
+.btn-blue {
+    background: #003D7A;
+    color:$white;
+}
+.btn-blue-border {
+    background:$white;
+    color:$lightBlue;
+    border: 1px solid $lightBlue;
+    .loading-wrapper .loader-more {
+        background: $lightBlue;
+    }
+}
+.btn-cancel {
+    background:$mediumGray;
+    color:$mediumBlue;
+}
+.btn-grey {
+    background:$mediumGray;
+    color:$black;
+}
+.btn-red {
+    background:$red;
+    color:$white;
+	@include font-NiveauGroteskBold();
+}
+.btn-right {
+    float: right;
+}
+.btn-left {
+    float: left;
+}
+
+
+.loading-wrapper {
+	position: absolute;
+	top: 50%;	
+	left:50%;
+	transform: translateX(-50%) translateY(-50%);
+	  .loader-more {
+		display: block;
+		height: 8px;
+		width:4px;
+		background:$white;
+		float: left;
+		margin-right: 6px;
+		transform-origin: 50% 50%;
+		animation: scale 1700ms ease-in-out;
+		animatiom-delay: 1000ms;
+		border-radius: 2px;
+		opacity: .75;
+
+	  &.one {
+		animation-iteration-count: infinite;
+		animation-delay: 200ms;
+		}
+	  &.two {
+		animation-iteration-count: infinite;
+		animation-delay: 400ms;
+		}
+	  &.three {
+		animation-iteration-count: infinite;
+		animation-delay: 600ms;
+		}
+	  &.four{
+		 animation-iteration-count: infinite;
+		animation-delay: 800ms;
+		}
+	@keyframes scale {
+	  0%
+		{transform: scale(1)}
+	  25%  
+		{transform: scale(2.1)}
+	  50%
+		{transform: scale(1)}
+	  75%
+		{transform: scale(0.9)}
+		}
+		
+		}
+	}
+
+	.reprice-btn .loader-more {
+		background: #00B4CD;
+	}

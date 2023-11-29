@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="modal-body ">
+      <div class="row-content">
+        <div class="col-md-12">
+          <div class="cls-btn" (click)="close()"><i class="fa fa-times"></i></div>
+        </div>
+        <div class="col-md-12">
+          <h2 class="pageHeading">Confirm</h2>
+        </div>
+        <div class="col-md-12 pageHeading">
+            Are you sure you want to delete Invite?
+            <br/>
+        </div>
+        <div class="row buttons mt-5">
+            <div class="col-md-12 btngrp">
+              <button class="btn cancelBtn" (click)="close()">
+                Cancel
+              </button>
+              <button class="btn confirmBtn" type="submit" (click)="deleteInvite()" >
+               Yes
+              </button>
+              
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>

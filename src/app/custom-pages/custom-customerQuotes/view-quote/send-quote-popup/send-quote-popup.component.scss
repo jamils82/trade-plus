@@ -1,0 +1,188 @@
+@import './../../quotes.component.scss';
+@import './../../../../shared/customerQuotes/styles/custom-variables.scss';
+@import './../../../../shared/styles/variables.scss';
+//@import './../../../../shared/customerQuotes/styles/global.scss';
+.modal-body {
+    padding: 0px 75px 40px;
+    .form-group {
+        margin-bottom: 30px;
+        @include font-NiveauGrotesk();
+        
+    }
+    .toEmailAddress {
+        margin-bottom: 12px;
+    }
+    textarea.form-control {
+        min-height: 342px;
+    }
+}
+
+.pdf-status {
+    margin: 35px 0 25px;
+    font-size: 12px;
+    .loading {
+        color:$grey;
+        img {
+            height: 25px;
+            width: 25px;
+            margin-right: 3px;
+            margin-top: -2px;
+        }
+    }
+    .success {
+        color: $black;
+        position: relative;
+        background: url('../../../../../assets/images/tick-icon.svg')no-repeat;
+        padding-left: 28px;
+        line-height: 21px;
+        display: block;
+    }
+    .error {
+        font-weight: normal;
+     //   font-family: $openSansRegular;
+        position: relative;
+        .err-icon{
+            background: url('../../../../../assets/images/alert-warning.svg')no-repeat;
+            padding-left: 30px;
+            float: left;
+            width:21px;
+            height: 21px;
+        }
+    }
+    .try-again {
+        color:$lightBlue;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
+.nicejob-msg {
+    text-align: center;
+    margin:20px auto 40px;
+    p {
+        width:52%;
+        font-size: 14px;
+        line-height: 22px;
+        color:$grey;
+        @include font-NiveauGrotesk();
+        margin:auto;
+    }
+    .nice-job-info {
+        width:55%;
+        font-size: 18px;
+        line-height: 24px;
+        color:$mediumBlue;
+        @include font-NiveauGroteskBold();
+        margin:12px auto;
+    }
+    .links {
+        margin-top: 24px;
+        a {
+            color:$white;
+            @include font-NiveauGroteskBold();
+            font-size: 18px;
+        }
+    }
+}
+
+.email-list{
+    width: 100%;
+    position: relative;
+    display: block;
+    .cc-show {
+        position: absolute;
+        top: 41px;
+        right: 18px;
+        cursor: pointer;
+    }
+    .mat-chip.mat-standard-chip {
+        background:$white;
+        border: 0;
+        border-radius: 0;
+        min-height:24px;
+        padding:0;
+        margin:2px 12px 2px 0;
+        &:focus,&:active,&:hover{
+            background: transparent;
+            box-shadow: 0 0 0;
+        }
+        &:after {
+            display: none;
+        }
+        .email{
+            background: transparent;
+            border:1px solid $grey;
+            padding:2px 12px;
+            min-height: 24px;
+            color: $black;
+            border-radius: 16px;
+            .mat-chip-remove.remove {
+                background: url('../../../../../assets/images/remove-icon-grey.svg')no-repeat;
+                width: 19px;
+                height: 19px;
+                background-size: 100%;
+                float:right;
+                margin: 2px 2px 0 12px;
+                opacity: 1;
+            }
+        }
+
+     
+    }
+
+  
+    .mat-chip-list-invalid.ng-invalid {
+        .mat-standard-chip:nth-last-child(-n+2){
+            .email{
+                border: 0;
+                background: #CE1141;
+                border-radius: 8px;
+                color: $white;
+             //   font-family: $openSansBold;
+                &:focus{
+                    color: $white;
+                    &::after{
+                        display: none;
+                    }
+                }
+                .mat-chip-remove.remove {
+                   background: url('../../../../../assets/images/remove-icon-grey.svg')no-repeat;
+                    background-size: 100%;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+::ng-deep .mat-chip-list-wrapper {
+    padding: 4px 24px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin: 0;
+   }
+::ng-deep .mat-chip-ripple {
+    position: absolute !important;
+}
+::ng-deep .mat-chip-input {
+    border: none;
+}
+
+.btn-wrapper {
+    float:none !important;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-blue {
+    @include font-NiveauGroteskBold();
+}
+.btn-cancel{
+    background: #77889380 !important;
+    color: #495A64 !important;
+}
+button[disabled] {
+    opacity: 1 !important;
+    background-color: #003D7A !important;
+    color: #FFFFFF !important;
+}

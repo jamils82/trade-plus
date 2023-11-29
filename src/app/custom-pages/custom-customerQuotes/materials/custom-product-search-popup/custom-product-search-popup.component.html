@@ -1,0 +1,56 @@
+<div class=" modal-header modal-head container">   
+    <button type="button" class="close" aria-label="Close" data-dismiss="modal"  data-toggle="modal" (click)="closeModal('close')">
+        <span aria-hidden="true">×</span>   
+    </button>
+</div>
+    
+<div class="modal-body ">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+
+          <div class="searchProductToQuote productSearchBox" #popupProductSearchContainer>
+            <div class="searchTextBox">
+              <label class="searchbox" [class.dirty]="!!popupSearchInput.value">
+                <input #popupSearchInput placeholder="{{quoteConstants.searchPlaceholder}}" aria-label="search"
+                  (input)="cSearch(popupSearchInput.value,$event);" (keydown.escape)="cClose()" (keydown.enter)="
+                  cClose();
+                cLaunchSearchResult($event, popupSearchInput.value);
+                cUpdateChosenWord(popupSearchInput.value,'');
+              " (keydown.arrowup)="cFocusPreviousChild($event)" (keydown.arrowdown)="cFocusNextChild($event)"
+                  value="{{ chosenWord }}" (blur)="checkandclose($event)" ngbAutoFocus />
+      
+                  <a class="clear-field-icon" *ngIf="popupSearchInput.value != ''" (click)="clearField($event)"><img src="assets/images/icon-clear-field.svg" /></a>
+              </label>
+              <div class="error price-down-error mt-2 ml-4" *ngIf="priceApiDown">{{quoteConstants.priceApiDownError}}</div>
+            </div>
+
+            <ng-container *ngIf="!(isLoading$ | async) && searchResult.length != 0">
+              <div class="results" (click)="cClose()">
+                <div class="suggestions" tabindex="0">
+                      <a *ngFor="let suggestion of searchResult; let i=index" (keydown.arrowup)="cFocusPreviousChild($event)" (keydown.arrowdown)="cFocusNextChild($event)" (blur)="checkandclose($event)" 
+                        (keydown.enter)="cUpdateChosenWord(suggestion.value,suggestion.name);cLaunchSearchResult($event, suggestion.value);" (keydown.escape)="cClose()"
+                        (mousedown)="cUpdateChosenWord(suggestion.value,suggestion.name);" (click)="cLaunchSearchResult($event, suggestion.value);">
+                        <span *ngIf="suggestion.name === undefined">{{suggestion.value}}</span>
+                        <span *ngIf="suggestion.name !== undefined" class="bold">{{suggestion.name}}</span>
+                      </a>
+                </div>
+              </div>
+            </ng-container>
+          
+          </div>
+
+
+          <div class="product-results-area">
+              <!-- <div class="loading-wrapper"><div class="loader-more one"></div><div class="loader-more two"></div><div class="loader-more three"></div><div class="loader-more four"></div></div> -->
+              <div id="product-search-loading-wrapper" class="customerQuoteloading loading-wrapper "></div>
+              <app-custom-product-list-item *ngFor="let product of productResultData"
+                [product]="product" [quoteId]="quoteId" [productType]="productType">
+              </app-custom-product-list-item>
+              <p *ngIf="paginationData != undefined && paginationData?.totalResults == 0" class="no-result-message">{{quoteConstants.noResultsMessage}}</p>
+          </div>
+
+          <app-custom-load-more *ngIf="productResultData?.length != 0" [paginationData]="paginationData" [productType]="productType"></app-custom-load-more>
+            
+        </div>
+    </div>
+</div>

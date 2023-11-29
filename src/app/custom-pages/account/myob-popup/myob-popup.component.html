@@ -1,0 +1,42 @@
+<div class="editName-popUp container">
+    <div class="close-btn-row row">
+        <div class="close-btn-col col-md-12">
+            <img (click)="closePopUp()" class="close-btn-icon fa fa-times"
+                src='../../../../assets/images/close-icon.PNG'>
+            <!-- <i  class="close-btn-icon fa fa-times"></i> -->
+        </div>
+    </div>
+    <div class="heading-row row">
+        <div class="heading-col col-md-12">
+            <img class="heading-label" src="../../../../assets/images/Icon material-error-outline (1).svg">
+        </div>
+    </div>
+    <div class="edit-name-row row">
+        <div class="edit-name-col col-md-12">
+            <div class="edit-name-label">Please note, you have a pending Cloud Connection with MYOB</div>
+        </div>
+    </div>
+    <!-- <div class="edit-name-input-row row">
+        <div class="edit-name-input-col col-md-12">
+            <input type="text" class="edit-name-input">
+        </div>
+    </div> -->
+    <div class="more-information-row row">
+        <div class="more-information-col col-md-12">
+            <div class="more-information-label">If you did not get directed to MYOB to complete the Cloud connection,
+                please choose Finish Connection or <a class="more-information-label-anchor" href="#">Refresh Connection
+                    Status</a></div>
+        </div>
+    </div>
+    <div class="buttons-row row">
+        <div class="cancel-button-col col-md-6 deskbtn">
+            <button class="btn cancel-btn" (click)="closePopUp()">Cancel Connection</button>
+        </div>
+        <div class="save-button-col col-md-6">
+            <button (click)="onSave()" class="btn save-btn">Finish Connection</button>
+        </div>
+        <div class="cancel-button-col col-md-6 mobbtn">
+            <button class="btn cancel-btn" (click)="closePopUp()">Cancel Connection</button>
+        </div>
+    </div>
+</div>

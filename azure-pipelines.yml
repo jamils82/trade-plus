@@ -1,0 +1,25 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '14.x'
+    displayName: 'Install Node.js'
+
+- script: |
+    npm install -g @angular/cli
+    npm install
+    ng build --configuration=production
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'tradeplus-spartacus-prod-test'
+    repository: 'tradeplus'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: 'prod'

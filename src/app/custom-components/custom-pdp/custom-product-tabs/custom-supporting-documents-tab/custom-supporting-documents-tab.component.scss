@@ -1,0 +1,74 @@
+@import '../../../../shared/styles/variables.scss';
+
+.container {
+    max-width: 100%;
+    margin: 0 25px;
+    table tr {
+        display: flex;
+        flex-direction: column;
+        td {
+            font-size: var(--fontsize18);
+            font-family: 'NiveauGrotesk';
+            color: $pdp-font-color;
+            min-width: 270px;
+            h3 {
+                margin: 20px 0;
+            }
+            .data {
+                margin: 10px 0;
+            }
+            a {
+                &:hover {
+                    color: transparent;
+                    text-decoration: none;
+                }
+            }
+            .box {
+                border-radius: 6px;
+                border: 1px solid #707070;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                img {
+                    width: 35px;
+                    height: 47px;
+                }
+                .name {
+                    font-family: 'NiveauGroteskBold';
+                    color: $anchor-color;
+                    padding-left: 10px;
+                }
+            }
+        }
+        // .MSDS-td {
+        //     margin-left: 30px;
+        // }
+        .key {
+            font-family: 'NiveauGroteskBold';
+        }
+    }
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    .container {
+        margin: 0;
+        table tr {
+            display: flex;
+            flex-direction: column;
+            td {
+                min-width: 210px;
+                .box {
+                    img {
+                        width: 22px;
+                        height: 29px;
+                    }
+                }
+            }
+            .MSDS-td {
+                margin-left: 0px;
+                margin-top: 10px;
+            }
+        }
+    }
+}

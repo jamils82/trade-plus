@@ -1,0 +1,124 @@
+<div class="quotes-container">
+    <div class="quotes-header container">
+        <h1>{{quotesbuttonLabel.myQuoteLabel}}</h1>
+        <!-- <div>
+            <p>Request a quote using the Search field, or add from My Lists or My Quotes. You will be notified
+                via SMS when your quote is available to view in your My Quotes page. </p>
+        </div> -->
+    </div>
+    <div class="container-fluid job-detail">
+    <div class="loading-quotes" *ngIf="!(isLoading$ | async)">Loading&#8230;</div>
+    <div class="row-container container-fluid">
+        <div class="sidebar">
+            <p class="selectedTab">{{labelData.jobDetails}}</p>
+            <a class="notSelectedTab" [routerLink]="['/quoteMaterials',jobDetails?.code]">{{labelData.materials}}
+                <!-- <span class="material-count-area" *ngIf="jobDetails?.materialsCount > 0"><span class="tick-icon" *ngIf="jobDetails?.materialsAddedFlag == true"></span><span class="material-count-message">{{jobDetails?.materialsCount}} product<span *ngIf="jobDetails?.materialsCount > 1">s</span><span *ngIf="jobDetails?.materialsCount > 0 && jobDetails?.markupPercentage > 0">, mark-up</span> added</span></span> -->
+            </a>
+            <a class="notSelectedTab"  (click)="navigateToLabourCost()">
+                {{labelData.labourOtherCosts}}
+                <!-- <span class="total-cost" *ngIf="jobDetails?.otherCostPrice.value != 0">{{jobDetails?.otherCostPrice.formattedValue}}</span> -->
+            </a>
+            <!-- <div id="cost-summary" class="cost-summary" *ngIf="jobDetails?.otherCostsAddedFlag || jobDetails?.materialsCount > 0">
+                <h4 class="cost-title">{{labelData.costSummary}}</h4>
+                <div class="cost-detail">
+                    <table>
+                        <tr>
+                            <td>{{labelData.material}}</td>
+                            <td>{{jobDetails?.materialPrice?.formattedValue }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{labelData.markup}} ({{jobDetails?.markupPercentage}}%)</td>
+                            <td>{{jobDetails?.markupPrice?.formattedValue}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="cost-other-cost">
+                    <span>{{labelData.labourOtherCost}}</span><span>${{(jobDetails?.otherCostPrice.value) | number:'.2'}}</span>
+                </div>
+                <div class="cost-sub-total">
+                    <span>{{labelData.subTotal}}</span><span>${{(jobDetails?.markupPrice.value + jobDetails?.materialPrice?.value + jobDetails?.otherCostPrice?.value) | number:'.2'}}</span>
+                </div>
+            </div> -->
+        </div>
+        <div class="container-sec lo_sensitive">
+            <div class="name-sec">
+                <div class="container-name-sec">
+                    <div>
+                        <div class="job-sec">
+                            <h2 class="job-name">{{jobDetails?.jobName}}</h2>
+                        </div>
+                        <div class="edit-sec">
+                            <label *ngIf="jobDetails?.status != 'WON' && jobDetails?.status != 'LOST'" (click)="openModal()" class="edit-icon"><img src="assets/images/Icon material-edit_quotes.png"></label>
+                        </div>
+
+                    </div>
+                    <div class="datesection">
+                        <div class="date-sec">
+                            <label>{{labelData.dateCreated}}</label>
+                        </div>
+                        <div class="date-value-sec">
+                            <label class="date">{{jobDetails?.creationTime}}</label>
+                        </div>
+                    </div>
+                    <hr class="jobdetailline" />
+                </div>
+            </div>
+            <div class="job-add">
+                <label class="job-add-heading">{{labelData.jobAddress}}</label>
+                <p class="job-loc" *ngIf="jobDetails?.jobAddress?.formattedAddress">
+                    <!-- <img src="assets/images/LocationIcon_Pin.svg"> -->
+                    <label>{{jobDetails?.jobAddress?.formattedAddress}}</label>
+                </p>
+                <p class="notes" *ngIf="jobDetails?.notes">
+                    <span>{{labelData.notes}} {{jobDetails?.notes}}</span>
+                </p>
+                <hr class="jobdetailline" />
+            </div>
+            <div class="job-add">
+                <label>{{labelData.scopeofworkText}}</label>
+                <span *ngIf="jobDetails?.scopeOfWork"><pre>{{jobDetails?.scopeOfWork}}</pre></span>
+                <hr class="jobdetailline" />
+            </div>
+            <div class="Customer-details">
+                <label>{{labelData.customerDetail}}</label>
+                <table>
+                    <tr>
+                        <td class="consumer-heading">{{labelData.names}}</td>
+                        <td class="consumer-value">{{jobDetails?.consumerAddress?.firstName}}</td>
+                    </tr>
+                    <tr>
+                        <td class="consumer-heading">{{labelData.phone}}</td>
+                        <td class="consumer-value">{{jobDetails?.consumerAddress?.phone}}</td>
+                    </tr>
+                    <tr>
+                        <td class="consumer-heading">{{labelData.email}}</td>
+                        <td class="consumer-value">{{jobDetails?.consumerAddress?.email}}</td>
+                    </tr>
+                    <tr>
+                        <td class="consumer-heading">{{labelData.address}}</td>
+                        <td class="consumer-value">{{jobDetails?.consumerAddress?.formattedAddress}} </td>
+                    </tr>
+                </table>
+                <hr class="jobdetailline" />
+            </div>
+            <div class="job-add priceText">
+                <span class="totalPrice">
+                  <label class="totalJobPriceText">{{labelData.totalPriceText}}</label>
+                  <span class="exclText">{{labelData.excludeGSTText}}</span>
+                </span>
+                <span class="totalJobPriceVal" *ngIf="jobDetails?.totalPrice?.formattedValue">&nbsp;&nbsp;{{jobDetails?.totalPrice?.formattedValue}}</span>
+              </div>
+            <div class="form-group btn-wrapper">
+            <button type="button" (click)="addProducts()" class="addMaterial btn-blue" *ngIf="onlyReviewStatus != 'onlyReview'" ><!--*ngIf="productType !='materials' && productType != 'review' && productType != 'view'"-->
+                {{quotesbuttonLabel.AddProductQuote}}
+            </button>
+            <button type="button" (click)="reviewQuote()" class="review-quote-btn btn-blue" >
+                {{quotesbuttonLabel.reviewQuote}}
+            </button>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- <app-custom-sticky-footer *ngIf="totalPrice !=undefined" [totalPrice]='totalPrice' [quoteStatus]="jobDetails?.status"></app-custom-sticky-footer> -->

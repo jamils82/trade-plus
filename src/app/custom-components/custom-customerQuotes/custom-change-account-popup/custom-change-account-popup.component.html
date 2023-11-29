@@ -1,0 +1,12 @@
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <h1>{{changeAccountConstants.popupTitle}}</h1>
+            <p class="account-change-info">{{changeAccountConstants.changeAccDescription}}</p>
+            <div class="form-group btn-wrapper">
+                <button class="btn btn-cancel" (click)="dismissModal()">{{changeAccountConstants.cancel}}</button>
+                <button class="btn btn-change"(click)="closeModal('close')">{{changeAccountConstants.change}}</button>
+            </div>
+        </div>
+    </div>
+</div>

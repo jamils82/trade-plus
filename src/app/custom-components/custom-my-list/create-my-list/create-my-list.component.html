@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12 close-pos">
+            <div class="cls-btn">
+                <img (click)="closePopup()" class="cls-icon fa fa-times" src='../../../../assets/images/close-icon.PNG'>
+                <!-- <i class="cls-icon fa fa-times"></i> -->
+            </div>
+        </div>
+        <!-- <div class="col-md-12">
+    <h2 class="pageHeading">{{ popUpTitle }}</h2>
+  </div> -->
+    </div>
+    <div class="modal-body ">
+        <div class="row-content">
+
+            <div class="col-md-12">
+                <h2 class="pageHeading">{{ popUpTitle }}</h2>
+            </div>
+            <form [formGroup]="listForm">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-row form-group">
+                        <div class="col-md-12">
+                            <input type="text" id="listName" class="form-control" placeholder="Enter new list name" formControlName="listName" />
+                            <!-- [ngClass]="{ 'is-invalid': submitted && f.fname.errors }"  -->
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row buttons">
+                    <div class="col-md-12 btngrp">
+                        <button class="btn cancelBtn" (click)="closePopup()">
+              Cancel
+            </button>
+                        <button class="btn confirmBtn" (click)="create()" type="submit">
+              {{ isEdit == true ? 'Save': 'Create' }}
+            </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

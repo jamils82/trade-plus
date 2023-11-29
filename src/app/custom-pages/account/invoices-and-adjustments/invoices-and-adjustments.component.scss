@@ -1,0 +1,1609 @@
+@import "../../../shared/styles/variables.scss";
+@import "../../../shared/styles/fontSize.scss";
+.heading {
+  font-weight: bolder;
+  color: #495a64;
+  // margin-bottom: 40px;
+  // font-size: var(--fontsize40);
+  font-family: "NiveauGroteskbold";
+}
+
+.topHeading {
+  position: relative;
+}
+
+.right-align {
+  padding-left: 15px;
+}
+.disbaleAction{
+  background-color: #f2f3f3;
+  opacity: 0.2;
+}
+
+.heading-row {
+  position: absolute;
+  max-width: 1920px !important;
+  width: 93.5%;
+  margin: auto;
+  align-items: flex-start;
+  background-color: #e8eff7;
+  font-family: NiveauGrotesk;
+  font-size: var(--fontsize14);
+  padding: 2.5rem 0.938rem;
+  display: flex;
+  flex-direction: row;
+  left: 0;
+}
+
+.status-filter {
+  text-transform: lowercase;
+}
+
+.status-filter::first-letter {
+  text-transform: uppercase;
+}
+
+.custom-table-align {
+  padding-top: 1.3% !important;
+}
+
+.custom-table-bottom-align {
+  padding-bottom: 0.5% !important;
+}
+
+.for-bottom-space {
+  margin-bottom: 15px;
+}
+
+.box {
+  background: white;
+  padding: 20px 20px 20px 0;
+  .col {
+    margin: auto;
+    margin-top: 0;
+    .divide {
+      padding: 10px 0px;
+      min-height: 100px;
+    }
+  }
+  p {
+    margin-bottom: 0;
+  }
+  .title {
+    color: #495a64;
+    font-size: var(--fontsize20);
+    font-family: "NiveauGroteskBold";
+    margin-bottom: 0px;
+  }
+  .for-p {
+    font-size: var(--fontsize18);
+    max-width: 70rem;
+  }
+  .cus-col-3 {
+    margin-top: 1.8rem !important;
+    .inner-bottom-price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      .sub-title {
+        font-size: var(--fontsize20);
+      }
+      .sub-title.invoice-total {
+        font-size: var(--fontsize24);
+        font-family: NiveauGroteskBold;
+        color: rgba(73, 90, 100, 1);
+      }
+      .gst-type {
+        font-size: var(--fontsize18);
+      }
+      .price-bottom {
+        font-size: var(--fontsize20);
+        font-family: NiveauGroteskBold;
+        color: rgba(73, 90, 100, 1);
+      }
+      .price-bottom.price-value {
+        font-size: 34px;
+        font-family: NiveauGroteskBold;
+        color: rgba(73, 90, 100, 1);
+      }
+    }
+  }
+}
+
+.datepicker-width .form-control:focus,
+.form-control[type="text"]:focus {
+  background: #fff !important;
+  // cursor: pointer;
+}
+
+::ng-deep app-ngb-date-rangepicker {
+  #flyout-example {
+    padding-left: 0px !important;
+    .form-group.quotes {
+      // min-height: 60px !important;
+    }
+  }
+}
+
+::ng-deep .mat-checkbox-frame {
+  border-width: 3px !important;
+  border-radius: 4px !important;
+  border-color: #495a64 !important;
+}
+
+mat-checkbox::ng-deep.mat-checkbox-inner-container {
+  height: 24px !important;
+  width: 24px !important;
+  opacity: 0.9;
+}
+
+.spacing-p {
+  margin-left: 10px;
+  margin-top: 20px;
+}
+
+.flex-display {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.datepicker-width {
+  // min-width: 19.813rem !important;
+  margin-left: 10px;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.datepicker-width .form-control:focus,
+.form-control[type="text"]:focus {
+  background: $white-color !important;
+  // cursor: pointer;
+}
+
+.custom-width-navigation {
+  max-width: 19%;
+  margin-left: 17px;
+  padding-right: 30px;
+  margin-right: 5px;
+  margin-top: 2rem;
+}
+
+.custom-width-grid {
+  max-width: 73% !important;
+  padding-left: 25px;
+}
+
+.update-preference {
+  text-align: right;
+  padding-right: 10px !important;
+}
+
+.searchbox-row {
+  margin-top: 2rem;
+  // margin-left: 0px;
+  margin-bottom: 1rem;
+}
+
+.searchbox .form-control {
+  height: 45px;
+  font-size: var(--fontsize16);
+  border: 1px solid #778893;
+    // margin-top: 6px;
+    border-radius: 2px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding-right: 18%;
+  &::placeholder {
+    font-size: var(--fontsize14);
+  }
+}
+
+.datebox {
+  position: relative;
+}
+
+.datebox input[type="text"]{
+    width: 100%;
+    border: 1px solid #778893;
+    min-height: 40px;
+    line-height: 40px;
+    padding-left: 15px;
+    border-radius: 3px;
+    background: #fff url("../../../../assets/images/calendar_month.svg") no-repeat 93% 10px;
+}
+
+
+
+.datebox .form-control {
+  height: 40px;
+  font-size: var(--fontsize18);
+}
+
+// .border-search {
+//   border: 1px solid #bbc3c9;
+// }
+
+.fa-search,
+.search {
+  position: absolute;
+  color: #003d7a !important;
+  right: 37%;
+  top: 15px;
+  font-size: var(--fontsize30);
+  font-weight: 600;
+  width: var(--fontsize28);
+  height: var(--fontsize28);
+}
+
+.calendar-icon {
+  position: absolute;
+  right: 10px;
+  width: 18px;
+  top: 20px;
+  opacity: 0.8;
+  color: #003d7a !important;
+}
+
+.clear-filters {
+  display: flex;
+  align-items: center;
+  color: #00afe2;
+  font-size: var(--fontsize20);
+  height: 60px;
+  font-family: "NiveauGroteskBold";
+  text-decoration: underline;
+}
+
+.dateRangeLabel {
+  font-size: var(--fontsize16);
+  padding-left: 25px;
+  font-family: "NiveauGrotesk";
+  color: #495a64;
+  // width: 25%;
+  display: flex;
+  align-items: center;
+}
+
+.update-preference-button {
+  height: 60px;
+  font-size: var(--fontsize24) !important;
+  padding: 11px;
+  font-family: "NiveauGroteskBold";
+  font-size: 1.5rem;
+  width: 16rem;
+  background: transparent !important;
+  text-align: center;
+  border: 1px solid #003d7a;
+  color: #003d7a !important;
+  border-radius: 5px;
+}
+
+.back-button {
+  color: #495a64;
+  height: 61px;
+  padding: 11px;
+  font-family: "NiveauGroteskBold";
+  border-radius: 4px;
+  font-size: 1.5rem;
+  width: 16.25rem;
+  background: #77889380;
+  text-align: center;
+}
+
+.statement-back-button {
+  background: #77889380 !important;
+  color: #495a64 !important;
+  border-radius: 5px !important;
+  border: transparent !important;
+}
+
+tr.mat-header-row {
+  height: 72px;
+  background-color: #fff !important;
+}
+
+tr:nth-child(odd) {
+  background-color: #e0e7ef;
+}
+
+.my_statements {
+  // padding: 0px 119px 20px 10px;
+  width: 100%;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-family: "NiveauGrotesk";
+  table {
+    width: 100%;
+    margin-top: 5px;
+    th {
+      color: #495a64;
+      font-size: var(--fontsize20);
+      font-family: "NiveauGroteskBold";
+    }
+    td {
+      color: #495a64;
+      font-family: "NiveauGrotesk";
+      font-size: var(--fontsize18);
+      border-bottom-width: 0px;
+      cursor: pointer;
+    }
+    tr {
+      height: 60px;
+    }
+  }
+  .noDataTable {
+    margin-top: 0;
+    tr {
+      td {
+        color: #495a64;
+        font-family: "NiveauGrotesk";
+        font-size: 0.9rem;
+        padding: 12px;
+      }
+    }
+  }
+  h3 {
+    font-size: var(--fontsize20);
+    color: darkblue;
+    margin: auto;
+  }
+  .container {
+    padding: 0;
+    min-width: 90%;
+  }
+  .col-lg {
+    margin: auto;
+  }
+  button {
+    background: #003d7a;
+    color: white;
+    border-radius: 5px;
+    border-color: #003d7a;
+    cursor: pointer;
+    padding: 8px 8px;
+  }
+  mat-icon {
+    color: #707070 !important;
+    padding-top: 0px;
+  }
+}
+
+::ng-deep .mat-sort-header-stem {
+  height: 11px !important;
+  width: 2px !important;
+}
+
+::ng-deep .mat-sort-header-arrow {
+  height: 13px !important;
+  width: 1.5px !important;
+}
+
+::ng-deep .mat-sort-header-pointer-left {
+  width: 6px;
+  height: 1.5px !important;
+}
+
+::ng-deep .mat-sort-header-pointer-right {
+  width: 6px;
+  height: 1.5px !important;
+}
+
+::ng-deep .mat-sort-header-container {
+  align-items: baseline !important;
+}
+
+::ng-deep .status-class .mat-sort-header-container .mat-sort-header-content {
+  margin-left: 20px !important;
+}
+
+mat-paginator {
+  margin-top: 20px;
+  background-color: #e8eff7;
+  @media screen and (min-width: $Largescreen-1600) {
+    margin-bottom: 4.646rem;
+  }
+}
+
+::ng-deep .mat-form-field-flex {
+  background-color: $white-color;
+}
+
+::ng-deep .mat-paginator-navigation-previous {
+  svg {
+    color: transparent;
+    // display: none !important;
+  }
+  width: 25px !important;
+  margin-left: 10px !important;
+  color: $blue-color;
+  //   display: none !important;
+  &::before {
+    content: "↖";
+    position: absolute;
+    background-color: #e8eff7;
+    transform: rotate(315deg);
+    -webkit-transform: rotate(315deg);
+    font-weight: bold;
+    font-size: 1.3rem;
+    // width: 19px;
+  }
+}
+
+::ng-deep .mat-paginator-navigation-next {
+  margin-left: 8px !important;
+  width: 25px !important;
+  top: 1px !important;
+  color: $blue-color;
+  //  display: none !important;
+  &::before {
+    content: "↖";
+    position: absolute;
+    background-color: #e8eff7;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    font-weight: bold;
+    font-size: 1.3rem;
+    //  width: 19px;
+  }
+}
+
+::ng-deep .mat-paginator-page-size-label {
+  margin: 0 33px !important;
+  font-family: "NiveauGrotesk" !important;
+  font-size: var(--fontsize18);
+  color: $pdp-font-color;
+}
+
+::ng-deep .mat-paginator,
+.mat-paginator-page-size .mat-select-trigger {
+  font-family: "NiveauGrotesk";
+  font-size: 1rem;
+  color: $pdp-font-color;
+}
+
+::ng-deep .mat-paginator {
+  font-size: var(--fontsize18);
+}
+
+::ng-deep .mat-form-field {
+  line-height: 1.5;
+  min-width: var(--perPageDropdownWidth);
+  min-height: var(--perPageDropdownHeight);
+  width: var(--perPageDropdownWidth) !important;
+  height: var(--perPageDropdownHeight !important);
+}
+
+::ng-deep .mat-select-min-line {
+  font-size: var(--fontsize24);
+  font-family: "NiveauGrotesk";
+  color: #778893;
+}
+
+::ng-deep .mat-icon-button {
+  font-family: "NiveauGroteskBold";
+  height: 24px;
+  line-height: 27px;
+}
+
+::ng-deep .custom-paginator-page-disabled {
+  background-color: #495a64 !important;
+  color: white;
+}
+
+::ng-deep
+  .mat-sort-header-container:not(.mat-sort-header-sorted)
+  .mat-sort-header-arrow {
+  opacity: 1 !important;
+  transform: translateY(0px) !important;
+}
+
+.mat-sort-header-arrow {
+  opacity: 1 !important;
+}
+
+::ng-deep .mat-sort-header-arrow {
+  color: #003d7a;
+}
+
+::ng-deep .mat-sort-header-arrow :focus :hover {
+  color: #003d7a;
+}
+
+.dropdown-contenttype {
+  position: relative;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  top: 100%;
+  a:last-child {
+    border-bottom: none !important;
+  }
+}
+
+#invoice-adj-type,
+#invoice-adj-status {
+  margin: 8px 0px 0 -70px !important;
+  line-height: 10px;
+}
+
+.bottom-btns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -3rem;
+  margin-bottom: 4rem;
+}
+
+::ng-deep .dropdown-menu {
+  padding: 5px !important;
+}
+
+.ico-img {
+  height: 18px;
+  width: 16px;
+}
+
+.icon-td {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.dropdown-contenttype a {
+  color: #495a64;
+  padding: 7px 7px;
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #dedfdf;
+  margin-right: 10px;
+  font-size: 14px;
+  font-family: "NiveauGrotesk";
+}
+
+.noOrdersMsgForMob {
+  text-align: center;
+  display: block;
+  font-size: 0.9rem;
+  font-family: "NiveauGrotesk";
+  margin-top: 10px;
+}
+
+///////////////////////////////////////// custom checkbox CSS - END ////////////////////////////////////////
+/// MEdia Query ////
+@media screen and(max-width: $Largescreen-1760) {
+  .my_statements {
+    padding: 0px 10px 20px 10px;
+  }
+  .custom-width-navigation {
+    min-width: 325px !important;
+    padding-right: 25px;
+  }
+  // .searchbox {
+  //     width: 25rem;
+  // }
+  // .datebox {
+  //     width: 18.813rem;
+  // }
+  .datepicker-width {
+    // margin-left: 8px;
+    // min-width: 16rem !important;
+  }
+  .update-preference-button {
+    margin-left: 105px !important;
+  }
+}
+
+@media screen and(max-width: $screenMedium-1024) {
+  .my_statements {
+    padding: 0px 10px 20px 10px;
+  }
+  .custom-width-navigation {
+    min-width: 325px !important;
+    padding-right: 25px;
+  }
+}
+@media (min-width: 300px) and (max-width: 767px){
+  .mat-paginator-outer-container .mat-paginator-container{
+    justify-content: center;
+  }
+}
+// .dialog-component-css {
+.close-button {
+  float: right;
+  top: -24px;
+  right: -24px;
+}
+
+.close-icon {
+  transition: 1s ease-in-out;
+}
+
+::placeholder {
+  font-family: "NiveauGrotesk";
+  font-size: var(--fontsize18);
+  color: #495a64;
+  opacity: 1;
+}
+
+#statement-email-popup {
+  padding: 15px 50px;
+  h1 {
+    font-family: "NiveauGroteskBold";
+    font-size: var(--fontsize24);
+  }
+  .fields {
+    font-family: "NiveauGrotesk";
+  }
+  .row {
+    margin-bottom: 15px !important;
+  }
+  textarea {
+    border-radius: 2px;
+    font-size: var(--fontsize20);
+    font-family: "NiveauGrotesk";
+  }
+  input {
+    height: 60px;
+  }
+  .form-label {
+    font-size: var(--fontsize18) !important;
+  }
+  button {
+    font-family: "NiveauGroteskBold";
+    border-radius: 4px;
+  }
+  .cancel-btn {
+    width: 144px;
+    height: 61px;
+    font-size: var(--fontsize24);
+    background: #77889380;
+    color: #495a64;
+    float: left;
+  }
+  .send-email_button {
+    width: 230px;
+    height: 60px;
+    font-size: var(--fontsize24);
+    background: #003d7a;
+    color: #ffffff;
+    float: right;
+  }
+  input {
+    font-family: "NiveauGrotesk";
+    font-size: var(--fontsize20);
+  }
+  input:focus,
+  textarea:focus {
+    border: 1px solid #d3d6db;
+  }
+}
+
+.statement-dialog {
+  // mat-dialog-container {
+  margin-top: 5.5rem !important;
+  // }
+}
+
+.isparticular-statement {
+  padding: 4.688rem 7.813rem !important;
+}
+
+.clear-filter-btn {
+  width: 100%;
+  background: #d2dae3 !important;
+  color:#00000099 !important;
+  width: 95px;
+  height: 40px;
+  border: none;
+  font-family: "NiveauGroteskBold";
+  font-size: var(--fontsize14);
+}
+
+.list-options {
+  display: flex;
+  margin-left: 15px;
+  .email-btn,
+  .print-web-btn,
+  .dwnld-btn,
+  .print-list-btn,
+  .dwnld-btn.csv {
+    background: #d2dae3 !important;
+    color: #545859 !important;
+    height: 40px;
+    border: none;
+    font-family: NiveauGrotesk;
+    font-size: var(--fontsize14);
+    display: flex;
+    border-radius: 0px;
+    min-width: fit-content;
+    align-items: center;
+  }
+  .email-btn,
+  .print-web-btn,
+  .dwnld-btn,
+  .print-list-btn {
+    border-right: 1px solid #545859;
+  }
+  .dwnld-btn.csv {
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+  }
+  .email-btn {
+    border-top-left-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+  }
+}
+
+.custom-col-5 {
+  flex: 0 0 45% !important;
+  max-width: 45% !important;
+}
+
+.custom-col-4 {
+  flex: 0 0 30% !important;
+  max-width: 30% !important;
+}
+
+.custom-col-3 {
+  flex: 0 0 25% !important;
+  max-width: 25% !important;
+}
+
+.isparticular-statement {
+  padding: 4.688rem 7.813rem !important;
+}
+
+.search_filter {
+  color: #003d7a !important;
+  position: absolute;
+  cursor: pointer;
+}
+
+.dropdown-contenttype a {
+  color: #495a64;
+  padding: 7px 7px;
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #dedfdf;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 14px;
+  font-family: "NiveauGrotesk";
+}
+
+.dropdown-contenttype input[type="checkbox"] {
+  height: 14px;
+  width: 14px;
+  vertical-align: middle;
+  margin-inline-start: -1.5rem;
+}
+
+.selectdiv {
+  position: absolute;
+  width: 155px;
+  padding-left: 0px;
+  padding-right: 0px;
+  background-color: $white-color;
+  // right: -30px;
+  // margin-left: 10px;
+  position: relative;
+}
+.selectdiv select, .selectdiv .price_download{
+  min-height: 44px;
+  width: 100%;
+  border: 1px solid #778893;
+  font-size: var(--fontsize18);
+  font-family: "NiveauGrotesk";
+  color: $pdp-font-color;
+  padding-left: 20px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 4px 20px;
+  margin-bottom: 0;
+  border-radius: 3px;
+  position: relative;
+  z-index: 1;
+  line-height: 34px;
+  height: auto;
+  text-align: left;
+  &:not(:focus) {
+    background: #0000 !important;
+  }
+  &:focus {
+    background: #0000 !important;
+  }
+}
+
+.selectdiv:after {
+  content: "";
+  background-image: url("../../../../assets/images/ionic-ios-arrow-download.svg");
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: center;
+  transform: rotate(0deg);
+  right: 0px;
+  width: 48px;
+  top: 0;
+  position: absolute;
+  height: 48px;
+  background-color: transparent;
+  border: 0px;
+  border-left: 0;
+}
+
+:host ::ng-deep .mat-sort-header-content {
+  text-align: left !important;
+}
+
+.span-gst {
+  display: contents;
+  font-size: var(--fontsize18);
+  font-family: "NiveauGrotesk";
+}
+
+.abn-div {
+  margin-bottom: -15px;
+}
+
+.pad-bottom {
+  padding-bottom: 0 !important;
+  margin-bottom: 10px;
+}
+
+#action-popup {
+  left: -12px !important;
+}
+.back-drop{position:absolute;width: 100%;height: 100%;background: #000;opacity: 0.7;}
+
+#detail-action-popup {
+  left: -7.5% !important;
+}
+
+::ng-deep .mat-checkbox-checked .mat-checkbox-background,
+::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background {
+  background-color: #00afe2 !important;
+}
+
+::ng-deep .mat-select-arrow {
+  background-image: url("../../../../assets/images/dropdown_Icon.svg");
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: bottom;
+  border-left: 10px solid transparent !important;
+  border-right: 15px solid transparent !important;
+  border-top: 12px solid transparent !important;
+  margin: 0px 6px;
+}
+
+// for 150%
+@media screen and (max-width: 1400px) and (min-width: 901px) {
+  .bottom-btns {
+    margin-top: 0;
+  }
+}
+
+// for 125%
+@media screen and (max-width: 1600px) and (min-width: 1401px) {
+  .bottom-btns {
+    margin-top: 0;
+  }
+}
+
+//////////////////////////////////////// custom checkbox CSS - START ////////////////////////////////////////
+#myDropdown {
+  a {
+    position: relative;
+  }
+}
+
+input.checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  left: 10px;
+  background-color: #c6cbd4;
+  border: none;
+  border-radius: 2px;
+  margin-top: 3px;
+  position: absolute;
+  height: 16px;
+  width: 16px;
+}
+
+.dropdown_mul_hide .price_download_sub {display: none;}
+// .dropdown_mul .price_download_sub {display: block;}
+.dropdown_mul{
+  background: #fff !important;
+  opacity: 1  !important;
+}
+.list.checkmark {
+  position: absolute;
+  top: -2px;
+  left: 25px;
+  height: 16px;
+  width: 16px;
+  border: 3px solid #778893;
+  border-radius: 2px;
+}
+
+.checkmark.terms {
+  width: 18px;
+  height: 18px;
+  top: 4px;
+}
+
+.checkmark.terms.disable {
+  opacity: 0.5;
+}
+
+/* On mouse-over, add a grey background color */
+
+.check-container input ~ .checkmark {
+  background-color: #c6cbd4;
+  z-index: -1;
+}
+
+.check-container:hover input ~ .checkmark.disable {
+  background-color: #fff;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+
+.check-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+
+.check-container .checkmark:after {
+  left: 5.6px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border: solid $pdp-font-color;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.check-container .checkmark.terms:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+}
+
+.cus-checkbox {
+  top: 15px !important;
+}
+
+///////////////////////////////////////// custom checkbox CSS - END ////////////////////////////////////////
+::ng-deep
+  .mat-sort-header-container:not(.mat-sort-header-sorted)
+  .mat-sort-header-arrow {
+  transform: rotate(180deg) !important;
+}
+
+// for 150%
+@media screen and (max-width: 1400px) and (min-width: 901px) {
+  ::ng-deep mat-dialog-container {
+    transform: scale(0.7) !important;
+  }
+}
+
+// for 125%
+@media screen and (max-width: 1600px) and (min-width: 1401px) {
+  ::ng-deep mat-dialog-container {
+    transform: scale(0.9) !important;
+  }
+}
+
+/* Absolute Center Spinner */
+
+.loading {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Transparent Overlay */
+
+.loading:before {
+  content: "";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(rgba(20, 20, 20, 0.8), rgba(0, 0, 0, 0.8));
+  background: -webkit-radial-gradient(
+    rgba(20, 20, 20, 0.8),
+    rgba(0, 0, 0, 0.8)
+  );
+}
+
+/* :not(:required) hides these rules from IE9 and below */
+
+.loading:not(:required) {
+  /* hide "loading..." text */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.loading:not(:required):after {
+  content: "";
+  display: block;
+  font-size: 10px;
+  width: 1em;
+  height: 1em;
+  margin-top: -0.5em;
+  -webkit-animation: spinner 150ms infinite linear;
+  -moz-animation: spinner 150ms infinite linear;
+  -ms-animation: spinner 150ms infinite linear;
+  -o-animation: spinner 150ms infinite linear;
+  animation: spinner 150ms infinite linear;
+  border-radius: 0.5em;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0,
+    rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0,
+    rgba(255, 255, 255, 0.75) 0 1.5em 0 0,
+    rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0,
+    rgba(255, 255, 255, 0.75) -1.5em 0 0 0,
+    rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0,
+    rgba(255, 255, 255, 0.75) 0 -1.5em 0 0,
+    rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+  box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0,
+    rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0,
+    rgba(255, 255, 255, 0.75) 0 1.5em 0 0,
+    rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0,
+    rgba(255, 255, 255, 0.75) -1.5em 0 0 0,
+    rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0,
+    rgba(255, 255, 255, 0.75) 0 -1.5em 0 0,
+    rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+}
+
+/* Animation */
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: $Largescreen-1600) and (min-width: $ipadScreen-768) {
+  .searchbox .form-control {
+    // height: 40px;
+    font-size: var(--fontsize18);
+    &::placeholder {
+      font-size: var(--fontsize18);
+    }
+  }
+  .search{top: 13px;}
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+  .list-options {
+    display: flex;
+    margin-left: 0px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    .email-btn,
+    .print-web-btn,
+    .dwnld-btn,
+    .print-list-btn,
+    .dwnld-btn.csv {
+      margin-bottom: 5px;
+    }
+  }  
+  .container {
+    max-width: 100%;
+  }
+  .heading {
+    // font-size: var(--fontsize22);
+    padding-left: 2px;
+  }
+  .heading-row {
+    padding: 0.75rem 0.938rem;
+    width: 100%;
+  }
+  .custom-width-navigation {
+    margin-top: 0rem !important;
+    margin-left: 0px;
+    margin-right: 0px;
+    max-width: 100%;
+    min-width: 100% !important;
+    padding-right: 15px;
+  }
+  .my_statements {
+    margin: 0 auto;
+  }
+  .background-list {
+    background-color: $white-color;
+    margin: 15px 0px;
+    padding: 10px 12px 10px;
+    border-radius: 5px;
+  }
+  .custom-width-grid {
+    max-width: 100% !important;
+    padding-left: 15px;
+  }
+  .update-preference {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+  .update-preference-button {
+    margin-left: 0px !important;
+    width: 100%;
+    margin-top: 40px;
+    border-radius: 2px !important;
+    max-height: var(--buttonHeight60);
+    padding: 0px;
+  }
+  .datepicker-width {
+    width: 100%;
+  }
+  .searchbox-row {
+    margin-top: 4rem;
+  }
+  .dateRangeLabel {
+    max-height: var(--buttonHeight60);
+    padding-left: 0px;
+  }
+  .filters {
+    background-color: $white-color !important;
+    width: 100%;
+    color: $blue-color !important;
+    border: none;
+    margin-top: 15px;
+    font-size: var(--fontsize18) !important;
+    border-radius: 2px !important;
+    border: 1px solid $filter-order-color;
+    height: 40px;
+  }
+  .leftlist {
+    font-size: var(--fontsize18) !important;
+    font-family: "NiveauGroteskBold";
+    color: $pdp-font-color;
+    line-height: 1;
+    span {
+      font-family: "NiveauGrotesk";
+    }
+  }
+  .rightlist {
+    font-size: var(--fontsize18) !important;
+    font-family: "NiveauGrotesk";
+    color: $pdp-font-color;
+    line-height: 1;
+  }
+  .headmob {
+    font-size: var(--fontsize19) !important;
+    font-family: "NiveauGroteskBold";
+    color: $pdp-font-color;
+    margin: 0px;
+  }
+  .right {
+    justify-content: flex-end;
+    display: flex;
+    right: -7px;
+  }
+  .ico-img.settings {
+    height: 14px;
+  }
+  mat-checkbox::ng-deep.mat-checkbox-inner-container {
+    height: 16px !important;
+    width: 16px !important;
+  }
+  .vertical-align {
+    align-items: center;
+    display: inline-flex;
+    margin-left: 12px;
+  }
+  .dropdown-contenttype {
+    min-width: 230px;
+  }
+  .marginhr {
+    margin-top: 0.5rem;
+  }
+  .inline {
+    display: inline-flex;
+  }
+  ::ng-deep.mat-checkbox-frame {
+    border-radius: 2px !important;
+    border-width: 2px !important;
+  }
+  ::ng-deep.mat-checkbox-layout {
+    margin-bottom: 2px;
+  }
+  .marg {
+    margin: 0px;
+  }
+  .back-button {
+    width: auto;
+    height: 25px;
+    padding: 0px 15px;
+    margin: 10px 0px;
+    font-size: var(--fontsize18);
+    border-radius: 2px !important;
+  }
+  .warrantyhd {
+    font-size: var(--fontsize19) !important;
+  }
+  .headdetail {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+  }
+  .font-18 {
+    font-size: var(--fontsize16);
+    font-family: "NiveauGrotesk";
+  }
+  .box {
+    margin-top: 10px !important;
+    padding: 10px 15px;
+    .for-p {
+      font-size: var(--fontsize16);
+      max-width: inherit;
+      color: $pdp-font-color;
+      font-family: "NiveauGrotesk";
+      line-height: 1.4;
+    }
+    .title {
+      font-size: var(--fontsize20);
+    }
+    .cus-col-3 {
+      .inner-bottom-price {
+        margin-bottom: 0px;
+        line-height: 1.4;
+        .price-bottom {
+          font-size: var(--fontsize17);
+        }
+        .price-bottom.price-value {
+          font-size: var(--fontsize22);
+        }
+        .sub-title {
+          font-size: var(--fontsize17);
+          font-family: "NiveauGrotesk";
+          color: $pdp-font-color;
+        }
+        .gst-type {
+          color: $pdp-font-color;
+          font-family: "NiveauGrotesk";
+        }
+        .sub-title.invoice-total {
+          font-size: var(--fontsize22);
+        }
+      }
+    }
+  }
+  .margbtm {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .warranty {
+    border-radius: 5px;
+    .title {
+      margin-bottom: 10px;
+    }
+  }
+  .invoicedetail .leftlist {
+    font-family: "NiveauGrotesk" !important;
+  }
+  .invoicedetail .rightlist {
+    font-family: "NiveauGroteskBold" !important;
+  }
+  .margtp {
+    margin-top: 20px;
+  }
+  .margtp:first-child {
+    margin-top: 0px;
+  }
+  .settingdetail {
+    width: 3px;
+  }
+  .aligncenter {
+    display: flex;
+    align-items: center;
+  }
+  .view-more {
+    background-color: $white-color !important;
+    color: $pdp-font-color !important;
+    border: 1px solid $pdp-font-color;
+    width: 100%;
+    border-radius: 25px !important;
+    padding: 5px 0px;
+    margin-bottom: 40px;
+    font-size: var(--fontsize18) !important;
+    font-family: "NiveauGroteskBold";
+  }
+  .invoicedetail {
+    font-size: var(--fontsize19) !important;
+  }
+  .invoicemain {
+    font-size: var(--fontsize21) !important;
+  }
+  .marginhr1 {
+    margin-top: 0.25em;
+  }
+  .emptyList {
+    margin-top: 10px;
+    background-color: #e0e7ef;
+    font-family: "NiveauGrotesk";
+    font-size: var(--fontsize18);
+    padding: 5px;
+    color: $pdp-font-color;
+  }
+}
+@media screen and (max-width: 375px) {
+  .vertical-align {
+    margin-left: 10px;
+  }
+}
+@media screen and (max-width: $smallmobileScreenPotrait360) {
+  .box {
+    .title {
+      font-size: var(--fontsize18);
+    }
+  }
+}
+
+.jn_end{
+  justify-content: flex-start;
+}
+
+.searchbox-row .flex-display{justify-content: start; max-width: 20%;}
+.pd-l-0{padding-left: 0px !important;padding-right: 0px !important;}
+.pd-R-0{padding-right: 0px !important;}
+.price_download button.price_download:after{display: none;}
+.selectdiv.price_download{right: 0px;width: 100%;position: relative;background: #fff;opacity: 0.2;}
+.price_download_sub
+{
+  position: absolute !important;
+  top: 44px !important;
+  left: 0 !important;
+  background: #fff;
+  padding: 10px 5px !important;
+  width: 100% !important;
+  z-index: 9;
+  transform: translate(0px) !important;
+  border: 2px solid #b9c3cd;
+  border-radius: 5px;
+  margin: 0px;
+  padding: 0px;
+  inset: auto !important;
+   
+    li{
+      list-style: none;
+      border-bottom: 2px solid #b9c3cd;
+      padding: 5px 0;
+      &:last-child{
+        border-bottom: 0px;
+      }
+      button{
+        text-decoration: none;
+        color: #495a64;
+        font-size: 14px;
+        font-family: "NiveauGrotesk";
+        background: transparent;
+        border: 0px;
+      }
+    }
+  }
+
+
+
+.dropdown-toggle, .dropdown-menu { width: 300px }
+.btn-group img { margin-right: 10px }
+.dropdown-toggle { padding-right: 50px }
+.dropdown-toggle .glyphicon { margin-left: 20px; margin-right: -40px }
+.dropdown-menu>li>a:hover { background: #f1f9fd } /* $search-blue */
+.dropdown-header { background: #ccc; font-size: 14px; font-weight: 700; padding-top: 5px; padding-bottom: 5px; margin-top: 10px; margin-bottom: 5px }
+
+.invoice-btn button,.invoice-btn button:active{border: 0px;height: 44px;background: #003d7a;font-family: 'NiveauGroteskBold';font-size: 14px;}
+.searchbox-row .col-3.custom-col-2{max-width: 100%;}
+.searchbox-row .col-3.custom-col-2 .searchbox{position: relative;}
+.searchbox-row .col-3.invoice-btn .col-6{max-width: 45%;}
+.col-3.invoice-btn{margin-top: 6px;}
+
+
+@media (min-width: 1100px) and (max-width: 1300px){
+  // .selectdiv.price_download{width: 84%;}
+  .searchbox-row .flex-display{max-width: 22%;}
+}
+
+@media (min-width: 1400px) and (max-width: 1500px){
+  // .selectdiv.price_download{width: 88%;}
+  // .price_download_sub{left: -68px;}
+  // .selectdiv.price_download:after{top: -2px;}
+}
+
+@media (min-width: 1501px) and (max-width: 1600px){
+  // .selectdiv .price_download{min-height: 44px;line-height: 24px;}
+  // .price_download_sub{left: -32px;top: 42px;}
+}
+
+@media (min-width: 1601px) and (max-width: 1700px){
+  // .datepicker-width{width: 61%;}
+  // .selectdiv.price_download{width: 86%;padding: 5px 7px 5px 5px;border: 1px solid #77889380;}
+  // .selectdiv.price_download:after{right: -10px;}
+  // .selectdiv .price_download{border: 0px;padding: 5px 10px;font-size: 16px;}
+  .selectdiv select{font-size: 16px;}
+  // .price_download_sub{left: -44%;}
+  .searchbox-row .flex-display{max-width: 23%;}
+  // .border-search {
+  //   min-width: -39% !important;
+  // }
+  // .selectdiv .price_download{min-height: 37px;line-height: 32px;}
+
+}
+
+@media (min-width: 1800px) and (max-width: 1950px){
+  .selectdiv{width: 175px;}
+  // .price_download_sub{top: 43px;left: 0px;width: 100%;}
+  // .selectdiv .price_download{padding: 9px 20px;}
+  .clear-filter-btn{height: 48px;}
+}
+
+// New code
+.dropdown-container {
+  margin-top: 6px;
+  margin-left: 10px;
+}
+.search-drp {
+  border-radius: 1px !important;
+  border-color: transparent !important;
+}
+.border-search{
+  border-radius: 0px !important;
+  margin-left: -32%;
+}
+.searchClear{
+  margin-top: 6px;
+}
+// .search-filter{
+//   width: 100%;
+// }
+// .flex-container{
+//   display: flex;
+//   flex-wrap: wrap;
+// }
+// .flex-container > div {
+//   flex: 1 1 50%;
+//   box-sizing: border-box;
+// }
+
+.dd-button {
+  width: max-content;
+}
+.fa-search, .search {
+  right: 2%;
+  top: 10px;
+  cursor: pointer;
+}
+.search-filter {
+  font-size: var(--fontsize14);
+  width: 100% !important;
+  // max-width: 90px;
+  height: 44px;
+}
+.clear-filter-btn {
+  height: 44px;
+}
+.drop {
+  padding: 0%;
+}
+.drop-search {
+  padding: 0%;
+}
+.invoice-search{
+  width: 166px;
+}
+.invoiceTable{
+  padding: 0px;
+}
+.fa-info-circle{
+  margin: 5px;
+}
+.disabled {
+  cursor: context-menu;
+  opacity: 0.5;
+}
+.disabled-button {
+  cursor: context-menu !important;
+}
+.headingDetail {
+  font-weight: bolder;
+    color: #495a64;
+    margin-bottom: 40px;
+    font-size: var(--fontsize40);
+    font-family: NiveauGroteskbold;
+}

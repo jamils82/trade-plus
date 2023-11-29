@@ -1,0 +1,105 @@
+@import '../quotes.component.scss';
+@import '../../custom-customerQuotes/create-new-quotes-popup/create-new-quotes-popup.component.scss';
+@import '../../../shared/styles/variables.scss';
+
+.form-group label {
+    @include font-NiveauGrotesk();
+}
+
+.parallal-fields {
+    overflow: hidden;
+    label, .input-area {
+        display: inline-block;
+        width: 20%;
+        vertical-align: middle;
+    }
+    .input-area {
+        width: 80%;
+        .form-control {
+            margin: 0;
+        }
+    }
+}
+
+.info {
+    font-size: 18px;
+    color:$mediumBlue; 
+    line-height: 24px;
+    margin: 8px 0;
+    @include font-NiveauGrotesk();
+}
+.sub-info {
+    font-size: 14px;
+    line-height: 22px;
+    color:$grey;
+    margin-bottom: 38px;
+    @include font-NiveauGrotesk();
+}
+.form-control[readonly] {
+    background-color: $white;
+    @include font-NiveauGrotesk();
+}
+.form-control[readonly][disabled] {
+    cursor: default;
+}
+.pos-value {
+    position: relative;
+    input {
+        cursor: pointer;
+    }
+}
+.browse-file-btn {
+    min-width:110px;
+    height: 36px;
+    background: #ECEFF4;
+    border-radius: 8px;
+    color: #00B4CD;
+    font-size: 14px;
+    font-family: "OpenSans-Bold";
+    text-align: center;
+    padding: 7.5px 13.5px;
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    cursor: pointer;
+    @include font-NiveauGrotesk();
+}
+.clear-upload-image{
+    position: absolute;
+    right: 25px;
+    top: 10px;
+    .tick-icon {
+        margin-right: 18px;
+        width:19.5px;
+    }
+    .clear-icon {
+        cursor: pointer;
+        margin-top: 1px;
+    }
+}
+
+.btn-wrapper {
+    float:none !important;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 660px) {    
+    .parallal-fields {
+        label, .input-area {
+            width: 100%;
+        }
+        .input-area {
+            width: 100%;
+        }
+    }
+}
+.btn-cancel{
+    background: #77889380 !important;
+    color: #495A64 !important;
+}
+button[disabled] {
+    opacity: 1 !important;
+    background-color: #003D7A !important;
+    color: #FFFFFF !important;
+}

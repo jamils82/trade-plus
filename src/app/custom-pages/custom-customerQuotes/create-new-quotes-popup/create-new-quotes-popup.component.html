@@ -1,0 +1,178 @@
+<div class="quotes-container container-fluid createQuotePopup">
+    <div class="container">
+      <div class="quotes-header">
+        <h1>{{quoteConstants.myQuoteLabel}}</h1>
+        <!-- <div>
+            <p>Request a quote using the Search field, or add from My Lists or My Quotes. You will be notified
+                via SMS when your quote is available to view in your My Quotes page. </p>
+        </div> -->
+    </div>
+</div>
+    <div class="row-container container-fluid">
+      <div class="sidebar">
+        <p class="selectedTab">{{labelData.jobDetails}}</p>
+        <a class="notSelectedTab">{{labelData.materials}} </a>
+        <a class="notSelectedTab">
+          {{labelData.labourOtherCosts}}
+  
+        </a>
+  
+      </div>
+      <div class="right-container">
+        <div class="container-sec">
+          <p class="sub-title" *ngIf="!editMode">{{quoteConstants.jobDetailsText}}</p>
+          <p class="sub-title" *ngIf="editMode">{{quoteConstants.jobDetailsUpdateText}}</p>
+          <div _ngcontent-roo-c515="" class="cost-detail"></div>
+          <form [formGroup]="createQuoteForm">
+            <div formGroupName="jobAddress">
+              <div class="form-row form-group mr-t-40">
+                <div class="col-md-2 col-2">
+                  <label for="firstName">{{quoteConstants.jobReferenceLabel}} <span class="mandatory">*</span></label>
+                </div>
+                <div class="col-md-10 col-10">
+                  <input type="text" class="form-control lo_sensitive" maxlength="255" id="firstName"
+                    placeholder="Enter a reference for this quote" formControlName="firstName">
+                  <div
+                    *ngIf="!createQuoteForm.get('jobAddress.firstName')?.valid && (createQuoteForm.get('jobAddress.firstName')?.dirty ||createQuoteForm.get('jobAddress.firstName')?.touched)"
+                    class="error" [hidden]="!createQuoteForm.get('jobAddress.firstName').errors.required">
+                    {{quoteConstants.errorMsgJobreference}}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group form-row">
+                <div class="col-md-2 col-2">
+                  <label for="line1">{{quoteConstants.jobLocationLabel}} <span class="mandatory">*</span></label>
+                </div>
+                <div class="col-md-10 col-10">
+                  <input type="text" class="form-control lo_sensitive" maxlength="255" id="jobLocation"
+                    placeholder="Enter an address for this quote" (focusout)='getAdressName($event,"jobAddress")'
+                    formControlName="jobLocation">
+                  <div
+                    *ngIf="!createQuoteForm.get('jobAddress.jobLocation')?.valid && (createQuoteForm.get('jobAddress.jobLocation')?.dirty ||createQuoteForm.get('jobAddress.jobLocation')?.touched)"
+                    class="error" [hidden]="!createQuoteForm.get('jobAddress.jobLocation').errors.required">
+                    {{quoteConstants.errorMsgAddress }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row">
+              <div class="col-md-2 col-2">
+                <label for="notes"> {{quoteConstants.notesLabel}}</label>
+              </div>
+              <div class="col-md-10 col-2 col-sm-10">
+                <textarea type="text" class="form-control lo_sensitive" maxlength="500" id="notes"
+                  placeholder="Enter additional comments" formControlName="notes"></textarea>
+              </div>
+            </div>
+            <p class="sub-title mt-32">{{quoteConstants.customerDetailsText}}</p>
+            <div formGroupName="consumerAddress">
+              <div class="form-group form-row">
+                <div class="col-md-2 col-2">
+                  <label for="firstName">{{quoteConstants.customerNameLabel}}</label>
+                </div>
+                <div class="col-md-10 col-10">
+                  <input type="text" class="form-control lo_sensitive" maxlength="255" id="firstName" placeholder="Enter client name"
+                    formControlName="firstName">
+                </div>
+              </div>
+              <div class="form-group form-row">
+                <div class="col-md-2 col-2">
+                  <label for="phone">{{quoteConstants.mobileLabel}}</label>
+                </div>
+                <div class="col-md-10 col-10">
+                  <!-- <input id="nzCode" type="text" value="+64" disabled> -->
+                  <input type="text" class="form-control lo_sensitive" maxlength="11" id="phone" placeholder="Enter phone number"
+                    formControlName="phone">
+                  <div *ngIf="createQuoteForm.get('consumerAddress.phone').errors">
+                    <div class="error clearFloat" *ngIf="createQuoteForm.get('consumerAddress.phone').errors.pattern">
+                      {{quoteConstants.errorMsgMobile}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group form-row">
+                <div class="col-md-2 col-2">
+                  <label for="email">{{quoteConstants.emailLabel}}</label>
+                </div>
+                <div class="col-md-10 col-10">
+                  <input type="text" class="form-control lo_sensitive" maxlength="255" id="email" placeholder="Enter email address"
+                    formControlName="email">
+                  <div class="error" *ngIf="createQuoteForm.get('consumerAddress.email').errors">
+                    <div *ngIf="createQuoteForm.get('consumerAddress.email').errors.pattern">
+                      {{quoteConstants.errorMsgEmail}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group form-row">
+                <div class="col-md-2 col-2 custAddress">
+                  <label for="line1">{{quoteConstants.customerAddressLabel}}</label>
+                </div>
+                <div class="col-md-10 col-10">
+                  <input type="text" class="form-control lo_sensitive" maxlength="255" id="jobLocation"
+                    placeholder="Enter client address" (focusout)='getAdressName($event,"customerAddress")'
+                    formControlName="jobLocation">
+                  <div
+                    *ngIf="!createQuoteForm.get('jobAddress.jobLocation')?.valid && (createQuoteForm.get('jobAddress.jobLocation')?.dirty ||createQuoteForm.get('jobAddress.jobLocation')?.touched)"
+                    class="error" [hidden]="!createQuoteForm.get('jobAddress.jobLocation').errors.required">
+                    {{quoteConstants.errorMsgAddress }}
+                  </div>
+                  <div *ngIf="customeradrressError && adrressEditmode==false" class="error">
+                    {{quoteConstants.errorMsgAddress}}</div>
+                </div>
+              </div>
+              <p class="sub-title mt-32">{{quoteConstants.scopeofworkText}}</p>
+              <div class="form-group">
+                <textarea type="text" class="form-control scopeOfWork lo_sensitive" maxlength="10000" id="scopeOfWork"
+                  placeholder="Enter details about the scope of work you’re quoting" formControlName="scopeOfWork"
+                  (input)="scopeOfWorkVal = $event.target.value" [value]="scopeOfWorkVal"></textarea>
+                <label>Max 10,000 characters</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="container-three" *ngIf="!editMode">
+          <h1>{{MaterialsLabel.costSummary}}</h1>
+          <div class="materialDataSection">
+            <!-- <div class="cost-summary" >
+                          <div class="cost-detail">
+                            
+                          </div>
+                          <div class="cost-sub-total">
+                              <span>{{MaterialsLabel.subTotal}}</span>
+                              
+                          </div>
+                      </div> -->
+          </div>
+        </div>
+        <div class="container-three" *ngIf="editMode">
+          <h1>{{MaterialsLabel.costSummary}}</h1>
+          <div class="materialDataSection">
+            <div class="cost-summary">
+              <div class="cost-detail">
+  
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group btn-wrapper">
+         <button type="button" class="btn btn-cancel" aria-label="Close" (click)="openModalCancelPopup()">
+            {{quoteConstants.cancelText}}                                
+        </button>
+      <button *ngIf="!editMode" (click)="onSubmit('create'); clicked= true" class="btn btn-blue"
+        [disabled]="!createQuoteForm.valid || jobadrressError || customeradrressError || clicked">
+        {{quoteConstants.AddNewProducts}}
+      </button>
+      <!-- <button *ngIf="editMode" [routerLink]="['/quoteMaterials',quoteDetailData.code]"  class="btn btn-blue" [disabled]="!createQuoteForm.valid  || jobadrressError || customeradrressError || clicked">
+              {{quoteConstants.AddProductQuote}}
+          </button> -->
+      <button *ngIf="editMode" (click)="onSubmit('edit'); clicked= true" class="btn btn-blue"
+        [disabled]="!createQuoteForm.valid || disbaledBtn || jobadrressError || customeradrressError || clicked">
+        {{quoteConstants.updateBtn}}
+      </button>
+    </div>
+  
+  </div>

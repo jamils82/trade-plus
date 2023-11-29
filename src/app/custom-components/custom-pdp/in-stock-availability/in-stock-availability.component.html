@@ -1,0 +1,200 @@
+<div class="in-stock-availability container">
+    <div class="row top-heading">
+      <div class="col-md-12 close-btn">
+        <img (click)="closePopUp()" class="cls-icon fa fa-times" src='../../../../assets/images/close-icon.PNG'>
+        <!-- <i (click)="closePopUp()" class="fas fa-times"></i> -->
+      </div>
+      <div class="col-md-12 heading">
+        <div class="heading-label">AVAILABILITY</div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <!-- <div class="text-label">
+              Delivery only available from your Home branch. Alternate branches are Click & Collect only.
+          </div> -->
+      <div class="col-md-12 searchField">
+        <div class="form-group searchBar">
+          <div class="location icon">
+            <img src="../../../assets/images/Icon material-edit-location (1).svg">
+          </div>
+          <input type="text" class="form-control searchBarInput" (keyup.enter)='storeLocation($event.target.value)'
+            placeholder="Search store by address, city or postcode" #search>
+          <i class="searchIcon fa fa-search" (click)='storeLocation(search.value)' aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="col-md-12 nearestBranch">
+        <div class="nearestBranch-label">Nearest Branch</div>
+      </div>
+      <div class="col-md-12 accordionsList" *ngIf="!noBranchAvaialble">
+        <div *ngFor="let accordion of accordions; let i= index" class="tab">
+          <input type="checkbox" class="accordion-checkbox" name="radioCheck" id={{i}}>
+          <label class="tab-label checkbox-inline" [ngClass]="i%2?'even':'odd'" for={{i}}>
+            <div class="heading">
+              <div class="row">
+                <span class="heading1 col-5 col-md-3">{{accordion.name}}</span>
+                <div class="col-3 col-md-2 sub-distance">
+                  <div class="heading2 distance"><span class="dist"
+                      title="{{accordion.formattedDistance}}">{{accordion.formattedDistance}}</span>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3 sub-stockAvailability">
+                      <!-- <span class="heading2 stockAvailability POAColor" *ngIf="accordion?.formattedValue == 'POA' || accordion?.formattedValue == '$0.00'" title="POA">POA </span> -->
+                      <span class="heading2 stockAvailability instockColor" *ngIf="accordion?.stockLevel >= 1" title="In stock">{{accordion.stockLevel}} In stock </span>
+                      <span class="heading2 stockAvailability availableToOrderColor" *ngIf="accordion?.leadTimeDays >= 1 && accordion?.stockLevel <= 0" title="{{accordion?.leadTimeDays + ' Days Lead time'}}">{{accordion?.leadTimeDays + ' Days Lead time'}}</span>
+                      <span class="heading2 stockAvailability availableToOrderColor" *ngIf="accordion?.leadTimeDays == 0 || accordion?.leadTimeDays == '' || accordion?.leadTimeDays == 'undefined' && accordion?.stockLevel == 0" title="Available to Order">Available to Order </span>
+                      <!-- <span class="heading2 stockAvailability POAColor" *ngIf="accordion?.stockLevel == -1" title="Low Stock">Low Stock </span> -->
+                      <!-- <span 
+                        class="heading2 stockAvailability" 
+                        *ngIf="accordion.stockLevelStatus == 'inStock'"
+                        title="In stock">In Stock
+                      </span>
+                      <span 
+                        class="heading2 stockAvailability availableToOrderColor"
+                        *ngIf="accordion.stockLevelStatus != 'inStock'" 
+                        title="Available to order">Available to order
+                      </span> -->
+                      <!-- <span class="heading2 stockAvailability" title="In stock" [ngClass]="hasStock ? 'instockColor' : 'availableToOrderColor'">{{ hasStock ? (('addToCart.inStock' | cxTranslate) ): 'Available to order' }}</span> -->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-9 col-md-9 sub-heading">
+                  <span class="heading2"
+                    title="{{accordion.address.formattedAddress}}">{{accordion.address.formattedAddress}}</span>
+                </div>
+                <!-- <div class="col-md-2 sub-distance">
+                          <span class="heading2 distance" title="{{accordion.formattedDistance}}">{{accordion.formattedDistance}}</span>
+                      </div> -->
+                <!-- <div class="col-md-6 sub-stockAvailability">
+                          <span class="heading2 stockAvailability" title="In stock">In Stock</span>
+                      </div> -->
+              </div>
+            </div>
+            <div class="icon-design" [ngClass]="i%2?'even':'odd'"></div>
+          </label>
+          <div class="tab-content inner-tab-content">
+            <label class="tab-label checkbox-inline innerCheckbox" for="chck1">
+              <div class="heading">
+                <div class="row">
+                  <div class="col-md-5">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <span class="inner-heading1">Contact Details</span>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="inner-value-email" title="{{accordion.address.email}}">Email :
+                          {{accordion.address.email}}</div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="inner-value-phone" title="{{accordion.address.phone}}">Phone :
+                          <a (click)="phoneNumberClicked()"
+                            href="tel:{{accordion?.address?.phone}}">{{accordion?.address?.phone}}</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7" *ngIf="accordion.buOpeningSchedule">
+                    <!-- <div class="row" *ngFor="let openHours of accordion.buOpeningSchedule">
+                                      <div class="col-md-12">
+                                          <span class="openHours-heading" *ngIf="openHours.code == 'Trade'">Opening Hours - Trade</span>
+                                          <span class="openHours-heading" *ngIf="openHours.code == 'Showroom'">Opening Hours - Showroom</span>
+                                      </div>
+                                      <div class="row openHours" *ngFor="let openHour of openHours.weekDayOpeningList">
+                                          <div class="col-md-6">
+                                              <span class="day">{{openHour.weekDay}}</span>
+                                          </div>
+                                          <div class="col-md-6 day-timings">
+                                              <span class="day-timings" *ngIf="openHour.openingTime">{{openHour.openingTime?.formattedHour}} - {{openHour.closingTime?.formattedHour}}</span>
+                                              <span class="day-timings closed" *ngIf="!openHour.openingTime">Closed</span>
+                                          </div>
+                                      </div>                                        
+                                  </div> -->
+                    <div class="row" *ngIf="accordion.buOpeningSchedule[0].code == 'Trade'">
+                      <div class="col-md-12">
+                        <span class="openHours-heading">Opening Hours - Trade</span>
+                      </div>
+                      <div class="row openHours"
+                        *ngFor="let openHour of accordion.buOpeningSchedule[0].weekDayOpeningList">
+                        <div class="col-3 col-md-6">
+                          <span class="day">{{openHour.weekDay}}</span>
+                        </div>
+                        <div class="col-9 col-md-6 day-timings">
+                          <span class="day-timings"
+                            *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}}
+                            - {{openHour?.closingTime?.formattedHour}}</span>
+                          <span class="day-timings closed"
+                            *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" *ngIf="accordion.buOpeningSchedule[1].code == 'Trade'">
+                      <div class="col-md-12">
+                        <span class="openHours-heading">Opening Hours - Trade</span>
+                      </div>
+                      <div class="row openHours"
+                        *ngFor="let openHour of accordion.buOpeningSchedule[1].weekDayOpeningList">
+                        <div class="col-3 col-md-6">
+                          <span class="day">{{openHour.weekDay}}</span>
+                        </div>
+                        <div class="col-9 col-md-6 day-timings">
+                          <span class="day-timings"
+                            *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}}
+                            - {{openHour?.closingTime?.formattedHour}}</span>
+                          <span class="day-timings closed"
+                            *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row"
+                      *ngIf="accordion.isShowroomBranch && accordion.buOpeningSchedule[0].code == 'Showroom'">
+                      <div class="col-md-12">
+                        <span class="openHours-heading">Opening Hours - Showroom</span>
+                      </div>
+                      <div class="row openHours"
+                        *ngFor="let openHour of accordion.buOpeningSchedule[0].weekDayOpeningList">
+                        <div class="col-3 col-md-6">
+                          <span class="day">{{openHour.weekDay}}</span>
+                        </div>
+                        <div class="col-9 col-md-6 day-timings">
+                          <span class="day-timings"
+                            *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}}
+                            - {{openHour?.closingTime?.formattedHour}}</span>
+                          <span class="day-timings closed"
+                            *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row"
+                      *ngIf="accordion.isShowroomBranch && accordion.buOpeningSchedule[1].code == 'Showroom'">
+                      <div class="col-md-12">
+                        <span class="openHours-heading">Opening Hours - Showroom</span>
+                      </div>
+                      <div class="row openHours"
+                        *ngFor="let openHour of accordion.buOpeningSchedule[1].weekDayOpeningList">
+                        <div class="col-3 col-md-6">
+                          <span class="day">{{openHour.weekDay}}</span>
+                        </div>
+                        <div class="col-9 col-md-6 day-timings">
+                          <span class="day-timings"
+                            *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}}
+                            - {{openHour?.closingTime?.formattedHour}}</span>
+                          <span class="day-timings closed"
+                            *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12" *ngIf="noBranchAvaialble">
+        <p class="text-center">No branches are Available</p>
+      </div>
+      <div class="col-md-12 cls-btn">
+        <button (click)="closePopUp()" class="close-button">Close</button>
+      </div>
+    </div>
+  </div>

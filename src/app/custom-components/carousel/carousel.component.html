@@ -1,0 +1,22 @@
+<app-carousel-detail
+  [items]="getItems() | async"
+  [template]="template"
+  itemWidth="100%"
+  class="inline-navigation"
+></app-carousel-detail>
+
+<ng-template #template let-item="item">
+  <ng-container
+    [cxComponentWrapper]="{
+      flexType: item.typeCode,
+      typeCode: item.typeCode,
+      uid: item?.uid
+    }"
+  >
+  <a href={{item?.urlLink}} target="_blank">
+    <cx-media
+      [container]="item?.media"
+    ></cx-media>
+    </a>
+  </ng-container>
+</ng-template>

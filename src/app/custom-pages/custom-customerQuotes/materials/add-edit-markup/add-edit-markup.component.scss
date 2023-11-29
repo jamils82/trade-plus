@@ -1,0 +1,169 @@
+@import '../../../custom-customerQuotes/quotes.component.scss';
+::ng-deep .createQuotePopup  {
+    
+    .modal-dialog  {
+        @media (min-width: 1024px) {
+            min-width:946px !important;
+            max-width:946px !important;
+            .modal-content,.modal-body {
+                border-radius: 4px;
+            }
+        }
+        @media (max-width: 1023px) {
+            margin:0 !important;
+        }
+    }
+}
+.sub-title {
+    margin:20px 0 16px;
+    &.mt-32 {
+        margin-top: 32px;
+    }
+}
+.addMarkupSec {
+    padding-left: 24px;
+}
+.quantity-sec {
+    .incriment, .decriment {
+        background-color: #E6E6E6 !important;
+        @include font-NiveauGrotesk();
+        font-size: 24px;
+        color: #000;
+    }
+    .incriment {
+        border-bottom-right-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+    .decriment {
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
+    }
+}
+
+.form-group {
+    width: 56%;
+    margin-bottom: 20px;
+    label, .cost, .price {
+        color: #495A64;
+        font-size: var(--fontsize18);
+        @include font-NiveauGrotesk();
+        .mandatory {
+            color:$red;
+        }
+    }
+    .form-control {
+        color:$black;
+        font-size: 16px;
+        border:1px solid $lightGrey;
+        border-radius: 6px;
+        padding: 13px 24px;
+        &::placeholder{
+            color:$grey;
+        }
+        &:focus {
+            border-color:$grey;
+        }
+        &.ng-invalid.ng-touched {
+            border-color: $red;
+        }
+    }
+    label {
+        display: inline-block;
+        vertical-align: middle;
+        width: 45%;
+        & + div {
+            display: inline-block;
+            vertical-align: middle;
+            width: 53%;
+            text-align: right;
+        }
+    }
+}
+.quantity-input {
+    float: right;
+}
+.quantity-input button {
+    background-color: transparent;
+    border: none;
+    width: 25%;
+    margin-top: -1px;
+}
+.quantity-sec .input-wrap {
+    width: 75% !important;
+}
+.quantity-input input {
+    width: 58px;
+    border: none;
+    text-align: center;
+    font-size: var(--fontsize18);
+    line-height: 21px;
+    @include font-NiveauGroteskBold();
+    color: #00AFE2;
+    width: 50%;
+}
+.quantity-input {
+    border: 1px solid #ddd;
+    width: 139px;
+    border-radius: 7px;
+}
+.quantity-sec label {
+    width: 25%;
+    line-height: 22px;
+}
+.heading {
+    @include font-NiveauGroteskBold();
+    font-size: 32px;
+    line-height: 42px;
+    margin-bottom: 24px;
+    color: #495A60;
+    text-align: left;
+    margin-left: 20px;
+}
+// .heading {
+//     @include font-NiveauGrotesk();
+//     font-size: 32px;
+//     line-height: 38px;
+//     margin-bottom: 24px;
+//     color: #495A60;
+//     text-align: center;
+// }
+.add-quote {
+    text-transform: none;
+}
+.form-group.quantity-sec ~ .form-group {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+}
+.total-value {
+    @include font-NiveauGroteskBold();
+    font-size: 18px;
+}
+// .cost, .price, .total-value {
+//     padding-left: 12px;
+// }
+button.btn.btn-blue.add-quote {
+    padding: 12px 39.5px;
+}
+// .quantity-sec, .addMarkupSec .form-group {
+//     display: flex;
+//     justify-content: space-between;
+//     width: 74%;
+//     align-items: center;
+// }
+.editmarkupBtn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .btn-blue {
+        width: 34%;
+        padding: 12px 0 !important;
+    }
+    .btn-cancel {
+        width: 27%;
+        background-color: #77889380;
+        color: #495A64;
+    }
+}
+.form-group label.editTotalLabel {
+    @include font-NiveauGroteskBold();
+}

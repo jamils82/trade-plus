@@ -1,0 +1,18 @@
+@import '../../../shared/styles/variables.scss';
+@import '../../../shared/styles/fontSize.scss';
+.heading {
+    font-weight: bolder;
+    color: #495A64;
+    margin-bottom: 20px;
+    font-size: var(--fontsize40);
+    font-family: "NiveauGroteskbold";
+}
+
+.custom-width-navigation {
+    min-width: 21% !important;
+}
+
+.custom-width-grid {
+    min-width: 79% !important;
+    padding-left: 25px;
+}

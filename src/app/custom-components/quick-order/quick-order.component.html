@@ -1,0 +1,208 @@
+<div class="loading" *ngIf="dataShow |async">Loading&#8230;</div>
+<div class="quick-order-container container"  *ngIf="dataShow">
+
+    <div class="failure-message-container" *ngIf="errorInd">
+        <div class="failure-container">
+            <div class="error-message">Sorry, we are unable to add POA products to a Quick Order. Please add another or
+                contact your branch <span class="close-btn" (click)="error = false"><i class="fa fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="quick-order-heading-row row">
+        <div class="quick-order-heading-col col-md-12">
+            <div class="heading-name">
+                QUICK ORDER
+            </div>
+        </div>
+        <div class="quick-order-heading-label col-md-12">
+            <div class="heading-label">
+                Fast and super easy - just enter products and quantity to place an order. Save multiple items to lists
+                (or create a new one) to make ordering even faster next time.
+            </div>
+            <div class="heading-label font-weight-bold" style="font-weight: bold;">
+                IF YOU WISH TO SAVE THIS QUICK ORDER PLEASE 'ADD TO LIST' OR 'ADD TO CART'.&nbsp;&nbsp;IT WILL NOT SAVE
+                AUTOMATICALLY WHEN YOU EXIT.
+            </div>
+        </div>
+    </div>
+    <table *ngIf="!isMobile" class="table">
+        <thead>
+            <tr class="table-heading">
+
+                <th width="20%">Search</th>
+                <!-- <th width="20%">rowIndex</th> -->
+                <th width="8%">Brand</th>
+                <th width="27%">Item Details</th>
+                <th width="12%">Availability</th>
+                <ng-container *ngIf="isPricingPermission">
+                    <th width="13%">My Price<span> (excl. GST)</span></th>
+                </ng-container>
+                <th width="10%">Quantity</th>
+                <th width="7%" (click)="deleteAllMember(del)">Clear All</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <tr *ngFor="let row of rows; let i=index"></tr> -->
+            <tr *ngFor="let row of rowsProduct$ | async; let i=index" (click)="searchRowHander(i)">
+
+                <td (click)="searchRowHander(i)">
+                    <div class="searchtooltip">
+                        <app-product-search [fromPage]="true" [config]="searchConfig"
+                            [quickOrderIndex]="quickOrderIndex" [screenMode]="screenMode"
+                            (prodCodecallBack)="prodCodecallBack($event)" [selectedCode]="row?.productCode">
+                        </app-product-search>
+                        <!-- <span class="tooltiptext">Add "QUOTATION MARKS" around multiple words to narrow your search
+                        </span> -->
+                    </div>
+                </td>
+                <!-- <td title="{{row?.brand}}" class="name"> {{i}} </td> -->
+                <td title="{{row?.brand}}" class="name"> {{row?.brand ? row?.brand : 'Non-exclusive'}} </td>
+                <td title="{{row?.details}}" class="description">
+                    <span class="productName">{{row?.details}}</span>
+                    <div class="product-details">
+                        <span class="itemCode">{{row?.productDetails}}</span>
+                    </div>
+                    <div class="restrict-product" *ngIf="row?.addToCartDisabled == true">Product now obsolete. Cannot be added to the Cart.</div>
+                </td>
+                <td title="{{row?.stock}}" *ngIf="row?.stock.includes('In stock')" class="instock availability"> {{row?.stock}}
+                </td>
+                <td title="{{row?.stock}}" *ngIf="row?.stock == 'Available to order'" class="outOfStock availability">
+                    {{row?.stock}} </td>
+                <!-- <td title=" {{row?.stock}}" *ngIf="row?.stock == 'Low stock'" class="POA availability">
+                    {{row?.stock}} </td> -->
+                <td title=" {{row?.stock}}" *ngIf="row?.stock == 'POA'" class="POA availability">
+                    {{row?.stock}} </td>
+                <td title="{{row?.stock}}" *ngIf="row?.stock != 'Available to order' && (!row?.stock.includes('In stock')) && row?.stock != 'Low stock' && row?.stock != 'POA'" class="outOfStock availability">
+                    {{row?.stock}} </td>
+                <ng-container *ngIf="isPricingPermission">
+                    <td *ngIf="row.fommatedprice" title="{{row?.fommatedprice}}" class="price-col">
+                        {{row?.dollar}}{{row?.fommatedprice | number: '1.2-2'}} <span>{{row?.unit}}</span> </td>
+                    <td *ngIf="!row.fommatedprice" title="{{row?.fommatedprice}}" class="price-col">--</td>
+                </ng-container>
+                <td>
+                    <!-- <app-custom-addtocart [showQuantity]="true" [quickOrder]="true"></app-custom-addtocart>  -->
+
+                    <app-custom-itemcounter (quantityHandler)="quantityHandler($event)" [rowIndex]="i">
+                    </app-custom-itemcounter>
+
+
+
+
+                </td>
+                <td>
+                    <img src="../../../assets/images/Icon material-delete.svg" class="fas fa-trash"
+                        *ngIf="row?.productCode" (click)="deleteMember(del,i)">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Mobile Screen *********************************************************************  -->
+    <div *ngIf="isMobile" class="isMobile">
+        <div class="clearAll-div">
+            <span class="clearAll" (click)="deleteAllMember(del)">Clear All</span>
+        </div>
+        <div *ngFor="let row of rowsProduct$ | async; let i=index" (click)="searchRowHander(i)">
+            <div class="searchBox-label">Search</div>
+            <div class="searchBox" (click)="searchRowHander(i)">
+                <app-product-search [fromPage]="true" [config]="searchConfig" [quickOrderIndex]="quickOrderIndex"
+                    [screenMode]="screenMode" (prodCodecallBack)="prodCodecallBack($event)"
+                    [selectedCode]="row?.productCode"></app-product-search>
+            </div>
+            <div class="mobile-container">
+                <div class="row">
+                    <div class="item-details col-6 col-md-6 col-lg-6 col-sm-6 ">
+                        Item Details
+                    </div>
+                    <div class="del-icon col-6 col-md-6 col-lg-6 col-sm-6">
+                        <img src="../../../assets/images/Icon material-delete.svg" class="fas fa-trash"
+                            *ngIf="row?.productCode" (click)="deleteMember(del,i)">
+                    </div>
+                    <div class="col-md-12 description">
+                        <span class="productName">{{row?.details}}</span>
+                        <div class="product-details">
+                            <span class="itemCode">Item Code : {{row?.itemCode}} | Supplier Code :
+                                {{row?.supplierCode}}</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-6 col-lg-6 col-sm-6 brand-label">
+                        Brand
+                    </div>
+                    <div class="col-6 col-md-6 col-lg-6 col-sm-6 name">
+                        {{row?.brand ? row?.brand : 'Non-exclusive'}}
+                    </div>
+                    <div class="col-6 col-md-6 col-lg-6 col-sm-6 availability-label">
+                        Availability
+                    </div>
+                    <div title="{{row?.stock}}" *ngIf="row?.stock == 'In stock'"
+                        class="col-6 col-md-6 col-lg-6 col-sm-6 instock availability"> {{row?.stock}} </div>
+                    <div title="{{row?.stock}}" *ngIf="row?.stock != 'In stock'"
+                        class="col-6 col-md-6 col-lg-6 col-sm-6 outOfStock availability"> {{row?.stock}} </div>
+                    <div class="col-6 col-md-6 col-lg-6 col-sm-6 myPrice-label">
+                        My Price<span> (excl. GST)</span>
+                    </div>
+                    <!-- <div class="col-6 col-md-6 col-lg-6 col-sm-6 name"> -->
+                    <div *ngIf="row.fommatedprice" title="{{row?.fommatedprice}}"
+                        class="col-6 col-md-6 col-lg-6 col-sm-6 price-col"> {{row?.dollar}}{{row?.fommatedprice |
+                        number: '1.2-2'}} <span>{{row?.unit}}</span> </div>
+                    <div *ngIf="!row.fommatedprice" title="{{row?.fommatedprice}}"
+                        class="col-6 col-md-6 col-lg-6 col-sm-6 price-col">-- --</div>
+                    <!-- </div> -->
+                    <div class="col-6 col-md-6 col-lg-6 col-sm-6 quantity-label">
+                        Quantity
+                    </div>
+                    <div class="col-6 col-md-6 col-lg-6 col-sm-6 quantity">
+                        <app-custom-itemcounter (quantityHandler)="quantityHandler($event)" [rowIndex]="i">
+                        </app-custom-itemcounter>
+                    </div>
+                    <div class="col-12 restrict-product" *ngIf="row?.addToCartDisabled == true">Product now obsolete. Cannot be added to the Cart.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Screen *********************************************************************  -->
+    <div class="row">
+        <div class="addRows col-md-12">
+            <button class="addRowsLabel" [disabled]="rowCount < 25 ? false:true"
+                (click)="intiallizeQuickOrderForm(1)">{{addRowLabel}}</button>
+        </div>
+    </div>
+    <div class="sticky-bottom row">
+        <div class="subtotal col-12 col-md-6 col-lg-6 col-sm-12">
+            <ng-container *ngIf="isPricingPermission">
+                <span class="subtotalLabel">Subtotal</span>
+                <div class="subtotalValue">${{formattedSubTotal | number: '1.2-2'}}<span> (excl. GST)</span></div>
+            </ng-container>
+        </div>
+        <div class="buttons col-12 col-md-6 col-lg-6 col-sm-12">
+            <!-- <app-add-to-list-view [screenName]="'quickOrderMultiItem'" [selectedItemCount]="selectedItemCount" ></app-add-to-list-view>  -->
+            <div class="row addAllToCart">
+                <div class="col-md-5 addAllToList">
+                    <div class="wishlist-btn addAllToList">
+                        <app-add-to-list-view [screenName]="'quickOrderMultiItem'"
+                            [selectedItemCount]="selectedItemCount"></app-add-to-list-view>
+                        <!-- <img class="addAllToList" src="../../../assets/images/Icon material-playlist-add.svg">
+                        <button class="btn btn-block wishlist addAllToList" type="button" >
+          Add all to List
+        </button> -->
+
+                    </div>
+
+                </div>
+                <div class="col-md-5 addAllToCart">
+                    <div class="addToCart-btn addAllToCart">
+                        <button class="btn btn-block addToCart addAllToCart" type="button" [disabled]="isDisabled"
+                            (click)="addAlltoCart()">
+                            <img class="addAllToCart" src="../../../assets/images/Icon material-shopping-cart.svg">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loading " *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+<ng-template #del let-modal>
+    <app-delete-popup [data]="currentItem" (clearAllData)="clearAll()" (afterDeleteResponse)="deleteSelRow($event)">
+    </app-delete-popup>
+</ng-template>

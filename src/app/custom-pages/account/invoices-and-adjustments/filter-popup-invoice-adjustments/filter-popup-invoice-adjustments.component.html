@@ -1,0 +1,99 @@
+<div class="container">
+    <div class="row margfilter">
+        <div class="col-10">
+            <h2 class="pageHeading">Filters</h2>
+        </div>
+        <div class="col-2 close-pos">
+            <div class="cls-btn" (click)="closePopup()">
+                <img class="cls-icon fa fa-times" src='../../../../assets/images/close-icon.PNG'>
+            </div>
+        </div>
+    </div>
+    <div class="row margclear">
+        <div class="col-12">
+            <h4 (click)="clearAll()" class="text-right clrflt">Clear All Filters</h4>
+        </div>
+    </div>
+    <div class="row marbtm">
+        <div class="col-12 tab">
+            <input type="checkbox" class="accordion-checkbox" name="radioCheck" id="0">
+            <label class="tab-label checkbox-inline" for="0">
+                <div class="heading">
+                    <div class="row">
+                        <span class="heading1 col-md-3">Type</span>
+                    </div>
+                </div>
+
+            </label>
+
+            <div class="tab-content inner-tab-content">
+                <label class="tab-label checkbox-inline innerCheckbox" for="chck1">
+                    <div class="heading">
+                        <div>
+                            <label class="check-container notification">
+                                <input type="checkbox" (change)="typeCheckClick($event)" [checked]="(typeChecked) ? true :(selectedTypeArray) ? selectedTypeArray.indexOf('INV') >= 0 : false"
+                                    id="inv" value="INV">
+                                <span class="checkmark terms"></span>
+                                <span class="terms-and-conditions-label">INV</span>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="check-container notification">
+                                <input type="checkbox" (change)="typeCheckClick($event)" [checked]="(typeChecked) ? true : (selectedTypeArray) ? selectedTypeArray.indexOf('CRD') >= 0 : false"
+                                    id="crd" value="CRD">
+                                <span class="checkmark terms"></span>
+                                <span class="terms-and-conditions-label">CRD</span>
+                            </label>
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+        </div>
+        <div class="col-12 tab">
+            <input type="checkbox" class="accordion-checkbox" name="radioCheck" id="1">
+            <label class="tab-label checkbox-inline" for="1">
+                <div class="heading">
+                    <div class="row">
+                        <span class="heading1 col-md-3">Status</span>
+                    </div>
+                </div>
+            </label>
+            <div class="tab-content inner-tab-content">
+                <label class="tab-label checkbox-inline innerCheckbox" for="chck1">
+                    <div class="heading">
+                        <label class="check-container notification">
+                            <input type="checkbox" [checked]="(selectAllStatus) ? true :(selectedStatusArray) ? selectedStatusArray.indexOf('ALL') >= 0 : false" (change)="statusAllChecked($event)"
+                                value="All">
+                            <span class="checkmark terms"></span>
+                            <span class="terms-and-conditions-label">All</span>
+                        </label>
+                        <label class="check-container notification">
+                            <input type="checkbox" [checked]="(statusChecked) ? true : (selectedStatusArray) ? selectedStatusArray.indexOf('OPEN') >= 0 : false" (change)="statusCheckClicked($event)"
+                                id="open" value="OPEN">
+                            <span class="checkmark terms"></span>
+                            <span class="terms-and-conditions-label">Open</span>
+                        </label>
+                        <label class="check-container notification">
+                            <input type="checkbox" [checked]="(statusChecked) ? true : (selectedStatusArray) ? selectedStatusArray.indexOf('PAID') >= 0 : false" (change)="statusCheckClicked($event)"
+                                id="paid" value="PAID">
+                            <span class="checkmark terms"></span>
+                            <span class="terms-and-conditions-label">Paid</span>
+                        </label>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row buttons">
+        <div class="col-md-12 btngrp">
+            <button class="btn cancelBtn col-6" (click)="closePopup()">
+                Cancel
+            </button>
+            <button class="btn confirmBtn col-6" type="submit" (click)="applyFilter()">
+                Apply
+            </button>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="ng-autocomplete">
+  <ng-autocomplete 
+    [data]="data"
+    [searchKeyword]="keyword"
+    (selected)='selectEvent($event)'
+    [placeholder]=placeholderCustom
+    (inputChanged)='getcoreLogicAddress($event)'
+    (inputFocused)='onFocused($event)'
+    [itemTemplate]="itemTemplate"
+    (inputCleared)="searchCleared()"
+    [isLoading]="isLoadingResult" 
+    [focusFirst]="false"
+    [debounceTime]="400" 
+    [(ngModel)]=setEditAddress
+    [notFoundTemplate]="notFoundTemplate" #auto>                                 
+  </ng-autocomplete>
+  
+  <ng-template #itemTemplate let-item>
+  <a [innerHTML]="item"></a>
+  </ng-template>
+  
+  <ng-template #notFoundTemplate let-notFound>
+    {{quoteConstants.noResultsFound}}
+  </ng-template>
+  </div>
+  

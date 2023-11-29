@@ -1,0 +1,19 @@
+{
+    "activitycontinuation": {
+        "apps": [
+            "3H49YJX8WY.com.fbu.tradelink"
+        ]
+    },
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "3H49YJX8WY.com.fbu.tradelink",
+                "paths": [
+                    "/ios/com.fbu.tradelink/*",
+                    "/tlAuthLandingPage/*"
+                ]
+            }
+        ]
+    }
+}

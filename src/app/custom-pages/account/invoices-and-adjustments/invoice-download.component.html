@@ -1,0 +1,25 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+  <div id="statement-email-popup">
+        <h1 mat-dialog-title style="font-size: 1.5em;margin-top: 20px;">DOWNLOAD SELECTED</h1>
+        <div mat-dialog-content class="fields" style="margin-bottom: 45px; margin-top: 80px;">
+            <div class="form-container">
+                <div class="row">
+                    <div class="col-12 selectdiv">
+                        <input type="text" class="form-control" id="to" placeholder="Choose Format" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div mat-dialog-actions> -->
+        <div class="row">
+            <div class='col-sm-6'>
+                <button mat-button class="cancel-btn" (click)="close()">Cancel</button>
+            </div>
+            <div class='col-sm-6'>
+                <button mat-button class="send-email_button" cdkFocusInitial>Download</button>
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>

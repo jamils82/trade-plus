@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 close-pos">
+      <img (click)="closePopup()" class="cls-icon fa fa-times" src='../../../../assets/images/close-icon-mobile.PNG'
+        alt="Close">
+    </div>
+  </div>
+  <div class="row-content">
+    <div class="col-md-12 pageHeading-col">
+      <h2>Field Properties</h2>
+    </div>
+    <div class="col-md-12 pageLabel quickOrder">
+      <table>
+        <tr>
+          <td>Field Name</td>
+          <td>
+            <input 
+              [(ngModel)]=showFieldName
+              (keyup)="valueChange($event.target.value)"
+              (keydown)="valueChange($event.target.value)" 
+              (change)="valueChange($event.target.value)" />
+          </td>
+        </tr>
+        <tr *ngIf="dateTimeFormat.length != 0">
+          <td>
+            <div class="dateLabel">Date Format</div>
+          </td>
+          <td>
+            <div class="selectdiv">
+              <label>
+                <select class="form-control classic" (change)="doFilterStatus($event.target.value)">
+                  <option *ngFor="let obj of dateTimeFormat; let i = index"
+                    [selected]="fieldName.validations? fieldName.validations.validationKey == obj.key ? true : false : false"
+                    [value]="i"> {{ obj.value }} </option>
+                </select>
+              </label>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="row buttons">
+      <div class="col-md-12 btngrp">
+        <button class="btn cancelBtn" (click)="closePopup()">
+          Cancel
+        </button>
+        <button class="btn confirmBtn" [disabled]="showFieldName.length == 0" (click)="saveDate()" type="submit">
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

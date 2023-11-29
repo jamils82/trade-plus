@@ -1,0 +1,27 @@
+<div class="row filterHeading">
+  <div class="col-md-6">
+    <div class="filter label">FILTERS</div>
+  </div>
+  <div class="col-md-6 clearAll" (click)="resetFacets()" style="display: none;">
+    <a class="clearAllFilters">Clear all filters</a>
+  </div>
+</div>
+<button
+  #trigger
+  class="btn btn-action btn-block dialog-trigger"
+  (click)="launch()"
+>
+  <cx-icon [type]="iconTypes.FILTER"></cx-icon>
+  Filters
+</button>
+
+<cx-active-facets></cx-active-facets>
+
+<app-custom-facet-list
+  *ngIf="isOpen$ | async"
+  [isDialog]="hasTrigger"
+  (closeList)="close()"
+  [class.active]="isActive$ | async"
+  [class.dialog]="hasTrigger"
+></app-custom-facet-list>
+<div class="loading " *ngIf="commonService.showWaitCursor | async "></div>

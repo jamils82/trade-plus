@@ -1,0 +1,555 @@
+<div *ngIf="!showViewQuote" class="my_orders">
+    <div class="">
+        <div class="quotes-row row">
+            <!-- <div class="heading-row row">
+                <div class="col-md-12 heading">
+                    MY QUOTES
+                </div>
+                <br />
+            </div> -->
+            <div class="col-12 col-sm-12 col-md-3 custom-width-navigation">
+                <div>
+                    <app-account-left-nav [selectedTab]="'quotes'"></app-account-left-nav>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-9 custom-width-grid">
+                <div class="heading-row row  mr-pd-r">
+                    <div class="col-md-8 heading mr-pd-l">
+                        MY QUOTES
+                    </div>
+                    <div class="col-md-4 float-right mr-pd-r">
+                        <label class="searchbox">
+                            <input autocomplete="off" (keyup)="doFilter($event.target.value)" [(ngModel)]="searchVal"
+                                aria-describedby="initialDescription" #searchKeyValue class="form-control border-search"
+                                aria-controls="results" aria-autocomplete="both" placeholder="Search Specific Quote"
+                                aria-label="Search">
+
+                            <i class="fas fa-search" ng-reflect-type="SEARCH"></i>
+                            <!-- <mat-icon class="search">search</mat-icon> -->
+                        </label>
+                        </div>
+                    <br />
+                </div>
+                <div class="searchbox-row row">
+                    
+                     <div class="col-12 col-sm-12 col-md-4 filter-quotes selectall_quote">
+                        <mat-checkbox  (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">Select All
+                    </mat-checkbox>
+
+                         <div class="list-options"  *ngIf="selection.selected.length > 1">
+                    <button class="dwnld-btn csv" (click)="multipleDownloadCSV(selection.selected)">
+                        <img src="assets/icons/MicrosoftTeams-image-(9).png" class="ico-img">&ensp;Download as CSV
+                    </button>
+                </div>
+                        
+                    </div> 
+                    <div class="col-12 col-sm-12 col-md-4 date-col flex-display">
+                        
+                        <label class="form-check-label dateRangeLabel">Date Range</label>
+                        <div class="datepicker-width">
+                            <label class="datebox">
+                                <!-- <input autocomplete="off" (click)="openDateFilterPopUp(data)" readonly aria-describedby="initialDescription" class="form-control date-filter border-search"
+                         aria-controls="results" [value]="fromDate + ' - ' + toDate" aria-autocomplete="both" placeholder="dd/MM/yyyy"   aria-label="Search"> -->
+                                <!-- <app-ngb-date-rangepicker [startDate]="fromDate" [pageName]="currentPage"
+                                    [endDate]="toDate" [disableDate]="false"
+                                    (dateRangeEmitter)="dateRangeEmitter($event);"></app-ngb-date-rangepicker> -->
+
+                                    <input type="text"
+                                    ngxDaterangepickerMd
+                                    [(ngModel)]="selected"
+                                    [showCustomRangeLabel]="true"
+                                    [alwaysShowCalendars]="true"
+                                    [ranges]="ranges"
+                                    (datesUpdated)="datesUpdated($event)"
+                                    [linkedCalendars]="true"
+                                    [showClearButton]="true"
+                                    placeholder="Select Date Range">
+
+
+                                <!-- <i class="fas fa-search" ng-reflect-type="SEARCH"></i> -->
+                                <!-- <img class="calendar-icon" src="../../../assets/images/ic_calender.svg"> -->
+                            </label>
+
+                        </div>
+                    </div>
+                    <div *ngIf="isMobile" class="col-12 col-sm-12 filter-col">
+                        <button class="filter-button" (click)="openFilterPopup(filter)"> <i
+                                class="fa fa-filter"></i>&nbsp;
+                            Filters </button>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 select-col flex-display">
+                        <label class="form-check-label dateRangeLabel">Filter By</label>
+                        <div class="selectdiv">
+                            <select (change)="doFilterStatus($event.target.value)" class="form-control classic">
+                                <option selected hidden>Status</option>
+                                <option value="">ALL</option>
+                                <option value="Active">ACTIVE</option>
+                                <option value="EXPIRED">EXPIRED</option>
+                                <option value="SUBMITTED">SUBMITTED</option>
+                                <option value="PENDING">PENDING</option>
+                                <option value="CONVERTED">CONVERTED</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 select-col switch-view flex-display">
+                        <div class="buttons">
+                            <button (click)="changeViewMode(false)" [ngClass]="!viewListMode ? 'gridClick':''" class="grid-btn"><img id="grid-img" class="grid-img"
+                                    [src]="viewListMode ? '../../../assets/images/ic_grid_white.svg' : '../../../assets/images/ic_grid_grey.svg'">Grid</button>
+                            <button (click)="changeViewMode(true)" [ngClass]="viewListMode ? 'listClick':''" class="list-btn"><img id="list-img" class="list-img"
+                                    [src]="viewListMode ? '../../../assets/images/ic_list_grey.svg' : '../../../assets/images/ic_list_white.svg'">List</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <p class="staticMessageText">Custom-ordered products (i.e. those not part of our standard stock) will not be included in Quotes, Orders or Lists.  Please contact your branch about these products.</p> -->
+                <!-- <div class="">
+                    <button class="clear-filter-btn" (click)="clearFilterData()">Clear Filter</button>
+                </div> -->
+               
+
+                <div *ngIf="!viewListMode" class="data-row row">
+                    <div class="quote-data-list-desk" *ngIf="!isMobile">
+                        <div *ngFor="let element of listData; let ind = index" class="col-md-4">
+                            <div (click)="showViewQuoteClick(element.code)" class="list-data-background" >
+                                <div class="row">
+                                    <div class="col-md-12" >
+
+                                        <!-- <div class="quote_r_button" *ngIf="element.state == 'ACTIVE' || element.state == 'Active'">
+                                            <button (click)="redirectToCheckout(element.code,$event)">Convert to Order</button>     
+                                             </div>
+
+                                             <div class="quote_r_button" *ngIf="element.state == 'EXPIRED' || element.state == 'SUBMITTED'">
+                                                <button (click)="redirectToQuote($event, element.code)">Request Quote</button>     
+                                          </div> -->
+                                          
+                                          <!-- <label class="check-container"> 
+                                            <input type="checkbox"  class="list checkbox" (click)="checkboxClick($event)" />
+                                            <span class="list checkmark"></span>
+                                        </label> -->
+
+                                        <mat-checkbox class="quote_r_button" *ngIf="element.state != 'SUBMITTED' && element.state != 'PENDING' && element.state != 'CONVERTED'" (click)="$event.stopPropagation()"
+                                        (change)="$event ? selection.toggle(element) : null"
+                                        [checked]="selection.isSelected(element)"> 
+                                    </mat-checkbox>
+
+
+                                        <mat-chip-list aria-label="Status selection">
+                                            
+                                            <mat-chip class="chips" style="text-transform: uppercase;" [ngStyle]="status(element.state)">
+                                                {{ element.state }}
+                                            </mat-chip>
+                                        </mat-chip-list>
+                                    
+
+                                    
+                                        
+
+                             
+
+                                          
+
+                                       
+                                  
+                                    
+                                </div>
+                                </div>
+                                <div class="quote-number-row row" *ngIf="element.erpCode">
+                                    <div class="col-md-12">
+                                        <h3 class="quote-number"> Quote No: <span class="lo_sensitive">{{ element.erpCode }}</span></h3>
+                                    </div>
+
+                                </div>
+                                <div class="quote-number-row row" *ngIf="!element.erpCode">
+                                    <div class="col-md-12">
+                                        <h3 class="quote-number"> Quote No: <span class="lo_sensitive">{{ element.code }}</span></h3>
+                                    </div>
+
+                                </div>
+                                <div class="row border-bottom-big">
+                                    <div class="col-md-12"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="label col-6 col-sm-6 col-md-6">
+                                        <label>
+                                            Order / Job Ref.
+                                        </label>
+                                    </div>
+                                    <div class="value col-6 col-sm-6 col-md-6">
+                                        <span class="lo_sensitive"> {{ element.purchaseOrderNumber }} </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="label col-6 col-sm-6 col-md-6">
+                                        <label>
+                                            Branch
+                                        </label>
+                                    </div>
+                                    <div class="value col-6 col-sm-6 col-md-6">
+                                        <span> {{element.quoteProcessedBranch}} </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="label col-6 col-sm-6 col-md-6">
+                                        <label>
+                                            Prepared by
+                                        </label>
+                                    </div>
+                                    <div class=" value col-6 col-sm-6 col-md-6">
+                                        <span class="lo_sensitive"> {{element.quoteProcessedBy}} </span>
+                                    </div>
+                                </div>
+                                <!-- <div class="row">
+                                <div class="label col-6 col-sm-6 col-md-6">
+                                    <label>
+                                Requested Date
+                            </label>
+                                </div>
+                                <div class="value col-6 col-sm-6 col-md-6">
+                                    <span> {{ element.requestedDeliveryDate | date: 'dd/MM/yyyy' }} </span>
+                                </div>
+                            </div> -->
+                                <div class="row">
+                                    <div class="label col-6 col-sm-6 col-md-6">
+                                        <label>
+                                            Quote Date
+                                        </label>
+                                    </div>
+                                    <div class="value col-6 col-sm-6 col-md-6">
+                                        <span> {{ element.createdDate | date: 'dd/MM/yyyy' }} </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="label col-6 col-sm-6 col-md-6">
+                                        <label>
+                                            Expiry Date
+                                        </label>
+                                    </div>
+                                    <div class="value col-6 col-sm-6 col-md-6">
+                                        <span> {{ element.expirationDate | date: 'dd/MM/yyyy' }} </span>
+                                    </div>
+                                </div>
+                                
+                              
+                                <div class="row">
+                                    <div class="label col-6 col-sm-6 col-md-6">
+                                        <label>
+                                            Total (excl. GST)
+                                        </label>
+                                    </div>
+                                    <div class=" value col-6 col-sm-6 col-md-6">
+                                        <span> {{element.subTotal?.value}} </span>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-30">
+                                    <div class="label col-10 col-sm-10 col-md-10 con_qu_btn">
+                                       
+                                      
+          <button *ngIf="element.state == 'ACTIVE' || element.state == 'Active'" (click)="redirectToCheckout(element.code,$event)">Convert to Order</button>    
+          <button class="converted_btn" (click)="checkboxClick($event)" *ngIf="element.state == 'CONVERTED'">Convert to Order</button>   
+         <button  *ngIf="element.state == 'Active' || element.state == 'ACTIVE' || element.state == 'CONVERTED'  || element.state == 'EXPIRED' || element.state == 'SUBMITTED' " (click)="redirectToQuote($event, element.code)">Re-Quote</button>  
+         
+           
+                                         
+                                       
+                                    </div>
+                                    <div class="value col-2 col-sm-2 col-md-2 float-right" *ngIf="element.state == 'Active' || element.state == 'ACTIVE'  || element.state == 'EXPIRED' || element.state == 'SUBMITTED'">
+                                        <span title="Download Quote File" (click)="downloadCSV(element.code, $event)"><img
+                                            src="assets/icons/download.svg" class="ico-img" alt="download" > &nbsp;
+                                    </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quote-data-list-mob" *ngIf="isMobile">
+                        <div *ngFor="let element of viewMoreItems; let ind = index" class="col-md-4">
+                            <div (click)="showViewQuoteClick(element.code)" class="list-data-background">
+                                <div class="row statusrow">
+                                    <div class="col-md-12">
+                                        <mat-chip-list aria-label="Status selection">
+                                            <mat-chip class="chips" style="text-transform: uppercase;" [ngStyle]="status(element.state)">
+                                                {{ element.state }}
+                                            </mat-chip>
+                                        </mat-chip-list>
+                                    </div>
+                                </div>
+                                <div class="quote-number-row row">
+                                    <div class="col-md-12">
+                                        <h3 class="quote-number"> Quote No: <span class="lo_sensitive">{{ element.code }}</span></h3>
+                                    </div>
+
+                                </div>
+                                <div class="row border-bottom-big">
+                                    <div class="col-md-12"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <label>
+                                            Order / Job Ref 123.
+                                        </label>
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <span class="quotetxt"> {{ element.purchaseOrderNumber }} </span>
+                                    </div>
+                                </div>
+                                <!-- <div class="row">
+                                <div class="col-6 col-sm-6 col-md-6">
+                                    <label>
+                                Requested Date
+                            </label>
+                                </div>
+                                <div class="col-6 col-sm-6 col-md-6">
+                                    <span> {{ element.requestedDeliveryDate | date: 'dd/MM/yyyy' }} </span>
+                                </div>
+                            </div> -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <label>
+                                            Quote Date
+                                        </label>
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <span> {{ element.createdDate | date: 'dd/MM/yyyy' }} </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <label>
+                                            Expiry Date
+                                        </label>
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <span> {{ element.expirationDate | date: 'dd/MM/yyyy' }} </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <label>
+                                            Branch
+                                        </label>
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <span> {{element.quoteProcessedBranch}} </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <label>
+                                            Created by
+                                        </label>
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-6">
+                                        <span class="lo_sensitive"> {{element.quoteProcessedBy}} </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- <div *ngIf="viewMoreItems && !isMobFilter && viewMoreItems.length == 0" style="padding: 20px 0px; width: 100%;">
+                            <div class="emptyList" *ngIf="viewMoreItems && viewMoreItems.length == 0">
+                                <div style="text-align: center;" [attr.colspan]="displayedColumns.length">
+                                    No Records Found
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="noDataTable" *ngIf="listData && !isMobFilter && listData.length == 0">
+                        <div class="noDataAvailable">
+                            No Quotes Found
+                        </div>
+                    </div>
+                    <div class="noDataTable" *ngIf="isMobFilter && dataAfterFilter.length == 0">
+                        <p class="noOrdersMsgForMob">No Records Found</p>
+                    </div>
+                </div>
+                <div [hidden]="!viewListMode">
+                    <table mat-table [dataSource]="dataSource" (matSortChange)="sortData($event)" matSort>
+                       
+                          <!-- checkbox Column -->
+                          <ng-container matColumnDef="select">
+                            
+                            <th mat-header-cell *matHeaderCellDef 
+                                class="custom-table-bottom-align">
+                                <!-- <mat-checkbox  (change)="$event ? masterToggle() : null"
+                                    [checked]="selection.hasValue() && isAllSelected()"
+                                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+                                </mat-checkbox> -->
+                            </th>
+                            <td mat-cell *matCellDef="let row">
+                                <mat-checkbox *ngIf="row.state != 'SUBMITTED' && row.state != 'PENDING'" (click)="$event.stopPropagation()"
+                                    (change)="$event ? selection.toggle(row) : null"
+                                    [checked]="selection.isSelected(row)"> 
+                                </mat-checkbox>
+                            </td>
+                        </ng-container>
+                       
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="code">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Quote No. </th>
+                            <td style="padding-left: 10px" (click)="showViewQuoteClick(element.code)" mat-cell *matCellDef="let element" class="lo_sensitive">
+                                {{element.erpCode ? element.erpCode : element.code }}   </td>
+                        </ng-container>
+
+                        <!-- Role Column -->
+                        <ng-container matColumnDef="orderRef">
+                            <th width="13%" class="position-relative" mat-header-cell *matHeaderCellDef> Order / Job Ref. &nbsp;
+
+                            </th>
+                            <td (click)="showViewQuoteClick(element.code)" mat-cell *matCellDef="let element" class="lo_sensitive">
+                                {{element.purchaseOrderNumber }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="branch">
+                            <th width="7%" mat-header-cell *matHeaderCellDef> Branch </th>
+                            <td (click)="showViewQuoteClick(element.code)" mat-cell *matCellDef="let element">
+                                {{element.quoteProcessedBranch}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="createdBy">
+                            <th mat-header-cell *matHeaderCellDef class="status-class" style="justify-content: center">
+                                Prepared by&nbsp;
+
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="lo_sensitive">
+                                {{element.quoteProcessedBy}}
+                            </td>
+                        </ng-container>
+
+                        <!-- <ng-container matColumnDef="requestedDeliveryDate">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Requested Date </th>
+                            <td (click)="showViewQuoteClick(element.code)" mat-cell *matCellDef="let element"> {{element.requestedDeliveryDate | date: 'dd/MM/yyyy' }} </td>
+                        </ng-container> -->
+                        <ng-container matColumnDef="createdDate">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Quote Date </th>
+                            <td (click)="showViewQuoteClick(element.code)" mat-cell *matCellDef="let element">
+                                {{element.createdDate | date: 'dd/MM/yyyy' }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="expirationDate">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Expiry Date </th>
+                            <td (click)="showViewQuoteClick(element.code)" mat-cell *matCellDef="let element">
+                                {{element.expirationDate | date: 'dd/MM/yyyy' }} </td>
+                        </ng-container>
+                          <ng-container matColumnDef="total">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total (excl. GST) </th>
+                            <td  mat-cell *matCellDef="let element">
+                                {{element.subTotal?.value}}   </td>
+                        </ng-container>
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell  *matHeaderCellDef>Status
+                                <!-- <mat-icon id="navbarDropdownMenuLink2" data-bs-toggle="dropdown" class="date-filter search_filter">filter_alt</mat-icon>
+
+                                <div id="myDropdown" class="dropdown-contenttype px-3 dropdown-menu dropdown-menu-end">
+                                    <a class="text-left ml-4">
+                                        <label class="check-container">
+                                    <input type="checkbox" (change)="$event.stopPropagation(); doFilterSelect($event,'ALL', 'state')" class="list checkbox"  value="list"/>
+                                    <span class="list checkmark"></span>
+                                </label> All
+                                    </a>
+                                    <a class="text-left ml-4">
+                                        <label class="check-container">
+                                    <input type="checkbox" (change)="$event.stopPropagation(); doFilterSelect($event,'VALID', 'state')" class="list checkbox"  value="list"/>
+                                    <span class="list checkmark"></span>
+                                </label> VALID
+                                    </a>
+                                    <a class="text-left ml-4" style="margin-bottom: 15px;">
+                                        <label class="check-container">
+                                    <input type="checkbox" (change)="$event.stopPropagation(); doFilterSelect($event,'EXPIRED', 'state')" class="list checkbox"  value="list"/>
+                                    <span class="list checkmark"></span>
+                                </label> EXPIRED
+                                    </a>
+
+                                </div> -->
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <mat-chip-list aria-label="Status selection">
+                                    <mat-chip class="chips list-state" style="text-transform: uppercase;" [ngStyle]="status(element.state)">
+                                        {{ element.state }}
+                                    </mat-chip>
+                                </mat-chip-list>
+                            </td>
+                        </ng-container>
+
+                      
+
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef style="width: 10%;"
+                                class="custom-table-bottom-align">
+                                &nbsp;&nbsp;Actions </th>
+                            <td mat-cell *matCellDef="let element" class="icon-td">
+                                <span id="navbarDropdownMenuLink1" data-bs-toggle="dropdown" *ngIf="element.state == 'Active' || element.state == 'ACTIVE'  || element.state == 'EXPIRED' || element.state == 'SUBMITTED'" >
+                                    <img src="assets/icons/ellipsis.svg" style="transform: scale(1.3);"
+                                        class="ico-img" alt="ellipsis"> &nbsp; </span>
+                                <div id="action-popup"
+                                    class="dropdown-contenttype px-3 dropdown-menu dropdown-menu-end">
+                                    
+                                    <a class="text-left" (click)="redirectToCheckout(element.code,$event)" *ngIf="element.state == 'ACTIVE' || element.state == 'Active'">
+                                        <img src="assets/icons/MicrosoftTeams-image-(5).png" class="ico-img"
+                                            alt="Download as PDF"> &nbsp;Convert to Order </a>
+                                    <a class="text-left" (click)="redirectToQuote($event, element.code)" *ngIf="element.state == 'Active' || element.state == 'ACTIVE'  || element.state == 'EXPIRED' || element.state == 'SUBMITTED'" >
+                                        <span>
+                                            <img src="assets/icons/MicrosoftTeams-image-(8).png" class="ico-img" alt="email">
+                                            &nbsp;Re-quote
+                                        </span>
+                                    </a>
+                                    <!-- <a class="text-left" (click)="downloadCSV(element.code, $event)" *ngIf="element.state == 'Active' || element.state == 'ACTIVE'  || element.state == 'EXPIRED' || element.state == 'SUBMITTED'" >
+                                        <span>
+                                            <img src="assets/icons/MicrosoftTeams-image-(8).png" class="ico-img" alt="email">
+                                            &nbsp;Download as CSV
+                                        </span>
+                                    </a> -->
+                                </div>
+                                <span title="Download Quote File" (click)="downloadCSV(element.code, $event)" *ngIf="element.state == 'Active' || element.state == 'ACTIVE'  || element.state == 'EXPIRED' || element.state == 'SUBMITTED'"> <img
+                                        src="assets/icons/download.svg" class="ico-img" alt="download"> &nbsp;
+                                </span>
+                               
+                            </td>
+                        </ng-container>
+
+                        
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns "></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
+
+                    </table>
+                    <table class="noDataTable">
+                        <tr *ngIf="dataSource?.filteredData && dataSource?.filteredData?.length == 0">
+                            <td style="text-align: center;" [attr.colspan]="displayedColumns.length">
+                                No Quotes Found
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+              
+            <ng-container>
+                <mat-paginator *ngIf="dataSource?.filteredData?.length != 0 && listData?.length != 0 && !isMobile" [hidden]="dataSource?.filteredData?.length == 0 && listData?.length == 0" appPagination [length]="testPaginator.length " [pageSizeOptions]="[12,24,36]"
+                    [pageSize]="testPaginator.pageSize " [pageIndex]="testPaginator.pageIndex " [hidePageSize]="false " (page)="pageEvent($event) ">
+                </mat-paginator>
+            </ng-container>
+
+                <div *ngIf="isMobile && viewMoreVisible">
+                    <button (click)="viewMoreClick()" class="view-more">View More</button>
+                </div>
+            </div>
+        </div>
+        <div class="loading" *ngIf="commonService.showWaitCursor | async">Loading&#8230;</div>
+    </div>
+</div>
+<div *ngIf="showViewQuote" class="view_orders">
+    <div *ngIf="showViewQuote" class="row">
+        <div class="col-md-12">
+            <app-view-quote [quoteDetailViewData]="quoteDetailViewData"></app-view-quote>
+        </div>
+    </div>
+</div>
+<ng-template #data let-modal>
+    <app-date-filter-popup (dateRangeEmitter)="dateRangeEmitter($event)"></app-date-filter-popup>
+</ng-template>
+
+<ng-template #filter let-modal>
+    <app-my-quotes-filter-popup [data]="currentItem " [status]="paramsFromFilter.status" (doMobFilter)="mobFilter($event)"></app-my-quotes-filter-popup>
+</ng-template>

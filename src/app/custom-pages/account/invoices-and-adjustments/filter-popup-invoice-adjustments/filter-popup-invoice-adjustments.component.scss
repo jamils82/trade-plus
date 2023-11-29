@@ -1,0 +1,415 @@
+
+@import "../../../../shared/styles/fontSize.scss";
+@import "../../../../shared/styles/variables.scss";
+.close-icon {
+    cursor: pointer;
+    right: 0;
+    position: absolute;
+    top: 0;
+}
+.cls-icon {
+    cursor: pointer;
+    color: $pdp-font-color;
+    width: 18px;
+    height: 18px;
+}
+.cls-btn {
+    text-align: right;
+}
+.cls-btn i.fa.fa-times {
+    color: #b5bec3;
+}
+.margclear
+{
+    margin-top: 25px;
+}
+.margfilter
+{
+    margin-top: 15px;
+}
+
+
+.tab {
+    width: 100%;
+    color: white;
+    overflow: hidden;
+    padding: 0px 10px 0px 15px;
+}
+.tab-label.child::after{
+ display: none;
+}
+
+.tab-label {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    padding: 5px 1em;
+    margin-bottom: 0px;
+    color:$pdp-font-color;
+    font-weight: bold;
+    cursor: pointer;
+   /* Icon */
+}
+.tab-label:hover {
+      color:#627079;
+}
+.tab-label::after {
+    content: "";
+  position: absolute;
+  top: 40%;
+  right: 0.6em;
+    border: solid $blue-color;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    width: 12px;
+    height: 12px;
+    text-align: center;
+    transition: all 0.35s;
+}
+.innerCheckbox::after {
+   content: none;
+}
+.innerCheckbox,.innerCheckbox:hover  {
+   background: none;
+   padding: 0em;
+}
+
+.heading {
+ margin-left: 0em;
+ width: 100%;
+ text-align: left;
+ padding-top: 5px;
+ padding-bottom: 5px;
+ display: flex;
+ flex-direction: column;
+
+}
+
+.heading1
+{
+ font-size: var(--fontsize30);
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+ width: 100%;
+ font-family: 'NiveauGroteskBold';
+ padding-left: 0px !important;
+}
+.clrflt{
+    color:$anchor-color;
+    text-decoration: underline;
+    font-family: 'NiveauGroteskBold';
+}
+.pageHeading
+{
+    text-transform: uppercase;
+    font-family: 'NiveauGroteskBold';
+    color:$pdp-font-color;
+    font-size: var(--fontsize30);
+}
+.tab-content {
+    max-height: 100vh;
+    padding: 0 0em;
+    color: $pdp-font-color;
+    background: white;
+    transition: all 0.35s;
+}
+.tab-label.odd {
+    background: #f1f3f5;
+}
+.tab-label.even {
+    background: #fff;
+}
+input.accordion-checkbox {
+    display: none;
+}
+
+input:checked + .tab-label.odd {
+    background: #f1f3f5;
+}
+input:checked + .tab-label.even {
+    background: #fff;
+}
+input:not(:checked) + .tab-label {
+       border-bottom: 1px solid $filter-border-color;
+}
+input:checked + .tab-label::after {
+    top: 45%;
+    transform: rotate(45deg);
+}
+input:checked ~ .tab-content {
+    max-height: 0;
+    padding: 0em;
+    border-top: 0;
+}
+input:checked ~ .inner-tab-content {
+    max-height: 0;
+    padding: 0em 0em;
+}
+
+.icon-design {
+ position: absolute;
+   background-color: #E6EAED;
+   width: 70px;
+   height: 100%;
+   right: 0;
+   top: 0px;
+}
+input[type=checkbox]
+{
+    margin-top: .18rem !important;
+    margin-inline-start: -1.8rem !important;
+}
+.cancelBtn {
+    background-color: #77889380;
+    color: #495A64;
+    outline: none;
+    border: 1px solid #77889380;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    min-height: var(--buttonHeight60);
+    font-size: var(--fontsize26);
+    max-width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+}
+.confirmBtn {
+    float: right;
+    background-color: #003D7A;
+    color: #ffffff;
+    outline: none;
+    border: 1px solid #003D7A;
+    border-radius: 5px;
+    font-weight: bold;
+    max-width: 45%;
+    margin-bottom: 15px;
+    min-height: var(--buttonHeight60);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fontsize26);
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+    &:hover {
+        color: $white-color !important;
+    }
+}
+.marbtm
+{
+    margin-bottom: 50px;
+}
+.buttons {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.btngrp
+{
+    display: inline-flex;
+    justify-content: space-between;
+}
+.check-container {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-top: 5px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 10px;
+  }
+
+  .terms-and-conditions {
+    .check-container {
+      margin-top: 40px;
+    }
+    .check-container.notification {
+      margin-top: 100px;
+    }
+  }
+
+  .check-container.inner {
+    text-align: left;
+  }
+  
+.check-container input {
+    position: relative;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+      top: 0;
+      left: 0;
+      height: 13px;
+      width: 13px;
+      background-color:$filter-background;
+      border: 1px solid $pdp-font-color;
+      border-radius: 2px;
+  }
+
+  .input-icons .checkmark {
+    position: absolute;
+      top: 8px;
+      left: 1px;
+      height: 18px;
+      width: 18px;
+      background-color: $filter-background;
+      border: 1px solid $pdp-font-color;
+      border-radius: 50%;
+  }
+  
+  .terms-and-conditions {
+    .checkmark {
+      border: 2px solid #003D7A;
+    }
+  }
+  .checkmark.terms {
+    width: 18px;
+    height: 18px;
+    top: 6px;
+    border-color:$filter-background;
+  }
+
+  .checkmark.terms.disable {
+    opacity: 0.5;
+  }
+   /* On mouse-over, add a grey background color */
+   .check-container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+
+  .check-container:hover input ~ .checkmark.disable {
+    background-color: $filter-background;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .check-container input:checked ~ .checkmark {
+    background-color: $filter-background;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .check-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .check-container .checkmark:after {
+    left: 3px;
+    top: 1px;
+    width: 5px;
+    height: 7px;
+    border: solid $blue-color;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  .input-icons .check-container .checkmark:after {
+    left: 4px;
+    top: 4px;
+    width: 8px;
+    height: 8px;
+    border: solid $pdp-font-color;
+    // border-width: 1px 2px 5px 5px;
+    background-color: $pdp-font-color;
+    border-radius: 50%;
+  }
+  
+  .check-container .checkmark.terms:after {
+    left: 5px;
+      top: 1px;
+      width: 6px;
+      height: 12px;
+  }
+  .terms-and-conditions-label {
+    position: absolute;
+    left: 2rem;
+    top: 0;
+    text-align: left;
+    font-weight: 300;
+    font-family: 'NiveauGrotesk';
+    font-size: var(--fontsize26);
+  }
+@media screen and (max-width:$mobileScreenPotrait) and (min-width:$smallmobileScreenPotrait568) {
+    .container
+    {
+        max-width:100% !important;
+    }
+}
+@media screen and (max-width:$mobileScreenPotrait) {
+  .pageHeading
+  {
+    font-size: var(--fontsize26);
+    padding-top: 4px;
+  }
+  .clrflt
+  {
+    font-size: var(--fontsize19);
+  }
+  .heading1{
+    font-size: var(--fontsize21);
+  }
+  .margclear {
+    margin-top: 20px;
+  }
+  .cls-icon
+  {
+    margin-top: -10px;
+    width: 14px;
+    height: 14px;
+  }
+  .margfilter{
+    margin-top: 12px !important;
+  }
+  .terms-and-conditions-label
+  {
+    font-size: var(--fontsize21);
+  }
+  .checkmark.terms {
+    width: 15px;
+    height: 15px;
+  }
+  .check-container
+  {
+    padding: 10px 10px 0px;
+    max-height: var(--buttonHeight60);
+  }
+  .terms-and-conditions-label
+  {
+    left: 1.6rem;
+  }
+  .cancelBtn,.confirmBtn
+  {
+     max-height: var(--buttonHeight60);
+     font-size: var(--fontsize24);
+  }
+  .marbtm
+  {
+    margin-bottom: 100px;
+  }
+}

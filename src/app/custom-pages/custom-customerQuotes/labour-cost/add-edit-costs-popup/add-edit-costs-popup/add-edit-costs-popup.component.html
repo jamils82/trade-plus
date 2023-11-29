@@ -1,0 +1,178 @@
+<div class=" modal-header modal-head container">
+  <button type="button" class="close" aria-label="Close" (click)="addEditCostCancelPopup()">
+    <span aria-hidden="true">×</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <div class="row">
+    <div *ngIf="editCost && loader==false" class="loading">Loading&#8230;</div>
+    <div class="col-xs-12 col-md-12">
+      <ng-container *ngFor="let costName of costType;">
+        <h1 *ngIf='costName.includes(currentTabTitle)'>
+          <span *ngIf="!editCost">{{costConstants.add}}</span>
+          <span *ngIf="editCost">{{costConstants.edit}}</span>
+          {{costName=='SubContractor'?'Sub Contractor':costName}}
+          {{costName=='Overheads'?'':costConstants.cost}}
+        </h1>
+      </ng-container>
+      <!-- <p class="costTip">
+                {{
+                currentTabTitle=='Labour'?costConstants.labourCostTip:
+                currentTabTitle=='Overheads'?costConstants.overheadsCostTip:
+                currentTabTitle=='Other'?costConstants.otherCostTip:
+                costConstants.subContractorCostTip      
+                }}
+            </p> -->
+      <form [formGroup]="addEditCostForm" *ngIf="editCost && loader|| !editCost">
+        <div class="form-group hide-label">
+          <ng-container for='name' *ngFor="let costName of costType;">
+            <label *ngIf='costName.includes(currentTabTitle)'>
+              {{costName=='SubContractor'?'Sub Contractor':costName }}
+              {{costName=='Overheads' || costName=='SubContractor' ?'name':'Cost Name'}}
+              <span class="starick">*</span>
+            </label>
+          </ng-container>
+          <div class="input-wrap">
+            <input 
+              type="text" 
+              class="form-control" 
+              maxlength="255" 
+              id="labourCostName" 
+              formControlName="name"
+              (keyup)='existNameClear()' 
+              (focus)='existNameClear()' 
+              [placeholder]='labourCostNamePlaceholder' />
+            <div class="input-error"
+              *ngIf="!addEditCostForm.get('name')?.valid && (addEditCostForm.get('name')?.dirty ||addEditCostForm.get('name')?.touched)"
+              [hidden]="!addEditCostForm.get('name').errors.required">
+              {{costConstants.errorMsgName}}
+            </div>
+          </div>
+        </div>
+        
+        <div class="error">{{existCostnameErrorMsg}}</div>
+        <div class="form-group" *ngIf="currentTabTitle != 'Other'">
+          <label for="quantity">{{costConstants.hours}}<span class="starick">&nbsp;*</span></label>
+          <div class="input-wrap">
+            <input 
+              type="text" 
+              (input)="numberOnly($event)" 
+              (paste)="onPaste($event)" 
+              id="quantity" 
+              class="form-control"
+              name='quantity' 
+              autocomplete="off" 
+              [attr.maxlength]=quantityMaxLength
+              placeholder="Enter the number of hours expected to complete the job eg 7.5" 
+              formControlName="quantity" />  
+              <div class="input-error"
+              *ngIf="!addEditCostForm.get('quantity')?.valid && (addEditCostForm.get('quantity')?.dirty ||addEditCostForm.get('quantity')?.touched)"
+              [hidden]="!addEditCostForm.get('quantity').errors.required">
+              {{costConstants.errorNumHours}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group" *ngIf="currentTabTitle == 'Other'">
+          <label for="quantity">{{costConstants.hoursOther}}<span class="starick">&nbsp;*</span></label>
+          <div class="input-wrap">
+            <input 
+            type="text" 
+            (input)="numberOnly($event)" 
+            (paste)="onPaste($event)" 
+            id="quantity" 
+            class="form-control"
+            name='quantity' 
+            autocomplete="off" 
+            [attr.maxlength]=quantityMaxLength 
+            placeholder="Enter cost price"
+            formControlName="quantity" />
+            <div class="input-error"
+              *ngIf="!addEditCostForm.get('quantity')?.valid && (addEditCostForm.get('quantity')?.dirty ||addEditCostForm.get('quantity')?.touched)"
+              [hidden]="!addEditCostForm.get('quantity').errors.required">
+              {{costConstants.errorCostPrice}}
+            </div>
+          </div>
+          
+        </div>
+        <div class="form-group" *ngIf="currentTabTitle != 'Other'">
+          <label for="price">{{costConstants.chargeRate}}</label>
+          <div class="input-wrap">
+            <input 
+              type="text" 
+              class="form-control" 
+              (input)="numberOnly($event)" 
+              (paste)="onPaste($event)" 
+              id="price"
+              class="form-control" 
+              autocomplete="off" 
+              [placeholder]='chargeRatePlaceholder' 
+              name='price'
+              [attr.maxlength]=quantityMaxLength 
+              formControlName="price">
+          </div>
+        </div>
+        <div class="form-group" *ngIf="currentTabTitle == 'Other'">
+          <label for="price">{{costConstants.chargeRateOther}}</label>
+          <div class="input-wrap">
+            <input 
+              type="text" 
+              class="form-control" 
+              (input)="numberOnly($event)" 
+              (paste)="onPaste($event)" 
+              id="price"
+              class="form-control" 
+              autocomplete="off" 
+              [placeholder]='chargeRatePlaceholder' 
+              name='price'
+              [attr.maxlength]=quantityMaxLength 
+              formControlName="price">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="notes">{{costConstants.note}}</label>
+          <div class="input-wrap">
+            <input 
+              type="text" 
+              class="form-control" 
+              maxlength="500" 
+              placeholder="Enter Additional details"
+              formControlName="notes" />
+          </div>
+        </div>
+        <div class="form-group btn-wrapper">
+          <button 
+            type="button" 
+            class="btn btn-cancel" 
+            aria-label="Close" 
+            (click)="addEditCostCancelPopup()">
+            {{quoteConstants.cancelText}}
+          </button>
+          <!-- <div class="btnCancel"> -->
+            <!-- <div class="row"> -->
+            <!-- <button type="button" class="btn btn-cancel" aria-label="Close" (click)="addEditCostCancelPopup()">
+                            {{quoteConstants.cancelText}}                                
+                        </button> -->
+            <button 
+              *ngIf="!editCost" 
+              type="button" 
+              [disabled]="!addEditCostForm.valid" 
+              class="btn btn-blue"
+              (click)="onSubmit('create')">
+              {{quoteConstants.addToQuoteBtn}}
+            </button>
+            <button 
+              *ngIf="editCost" 
+              type="button" 
+              [disabled]="!addEditCostForm.valid" 
+              (click)="onSubmit('edit')"
+              class="btn btn-blue">
+              {{quoteConstants.updateBtn}}
+            </button>
+            <!-- </div> -->
+          <!-- </div> -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

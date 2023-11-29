@@ -1,0 +1,488 @@
+@import "../../../shared/styles/variables.scss";
+// ::ng-deep .cx-product-image img {
+//     max-width: 190px;
+//     padding: 15px;
+// }
+.mobile-header {
+    position: absolute;
+    right: 2rem;
+    top: 7rem;
+}
+::ng-deep .show-facet-modal{
+    display: block;
+}
+::ng-deep .hide-facet-modal{
+    display: none;
+}
+::ng-deep .hide-facet-modal .modal{
+    opacity: 0 !important;
+}
+
+.loading {
+    position: fixed;
+    z-index: 9999;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+
+  /* Transparent Overlay */
+
+  .loading:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+    background: -webkit-radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+  }
+
+
+  /* :not(:required) hides these rules from IE9 and below */
+
+  .loading:not(:required) {
+    /* hide "loading..." text */
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+  }
+
+  .loading:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 10px;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+    -webkit-animation: spinner 150ms infinite linear;
+    -moz-animation: spinner 150ms infinite linear;
+    -ms-animation: spinner 150ms infinite linear;
+    -o-animation: spinner 150ms infinite linear;
+    animation: spinner 150ms infinite linear;
+    border-radius: 0.5em;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+    box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+  }
+
+  /* Animation */
+
+@-webkit-keyframes spinner {
+  0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes spinner {
+  0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes spinner {
+  0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+::ng-deep .item-container a:before {
+    content: "✓";
+    color: transparent;
+    flex-shrink: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    width: 1.3rem;
+    height: 1.35rem;
+    border-radius: 0.2rem;
+    border: 1px solid var(--cx-color-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline-end: 0.5rem;
+}
+::ng-deep .item-container .selected:before {
+    background-color: #fff;
+    border-color: $grey-color;
+    color: $grey-color;
+}
+.accordion-body {
+    padding-left: 0.85rem;
+}
+.accordion-body a {
+    color: $heading-dark-grey;
+    text-decoration: none;
+    padding: 0.75rem 0;
+    font-size: 0.98rem;
+    outline-style: hidden !important;
+    outline-color: transparent;
+}
+.form-wrapper {
+    margin: 0 auto;
+    width: 95%;
+    margin-bottom: 20rem;
+    .changeMinusToPlus {
+        content: "\f067";
+    }
+    cx-product-grid-item .cx-product-image {
+        margin: 0;
+    }
+    cx-product-grid-item .cx-product-name {
+        height: auto;
+    }
+
+    .main-heading {
+        a {
+            color: $grey-color !important;
+            text-decoration: underline;
+            font-size: 0.9375rem;
+            &:hover {
+                color: $grey-color;
+            }
+            &:visited {
+                color: $grey-color;
+            }
+        }
+        .invert {
+            transform: rotate(180deg);
+            margin-left: 5px;
+        }
+    }
+    .productHeading {
+        font-size: 1.5rem;
+        color: $grey-color;
+    }
+
+    ::ng-deep .productDiv {
+        box-shadow: 4px 4px 5px #0000004d;
+        border: 1px solid #d8d8d8;
+        border-radius: 4px;
+        opacity: 1;
+        height: auto;
+        > p {
+            margin-bottom: 0px;
+            color: $grey-color;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        h3 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: $grey-color;
+        }
+        label {
+            color: $grey-color;
+            font-size: 0.9375rem;
+            font-weight: 400;
+        }
+        .btn {
+            background: #545859 0% 0% no-repeat padding-box;
+            border-radius: 4px;
+            opacity: 1;
+            font-size: 0.875rem;
+            border-color: #545859;
+            max-width: 150px;
+            margin-right: 3rem;
+        }
+        .col-lg-6 {
+            > p {
+                margin-bottom: 0px;
+                color: $grey-color;
+                font-size: 0.9375rem;
+            }
+        }
+        .quantityCol {
+            margin-top: 2.5rem;
+        }
+    }
+
+    ul.thermalInsulationList {
+        list-style-type: none;
+    }
+    .btn-sm {
+        border-color: lightgrey;
+        border-radius: 0px;
+        background: white;
+    }
+    .decreamentButton,
+    .increamentButton {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        border-left: none;
+        min-width: 30px;
+        border-left: 1px solid lightgrey;
+    }
+}
+h2,
+h3,
+h5,
+h4,
+p {
+    color: $grey-color;
+}
+.form-check input + .form-check-label {
+    font-size: 0.9375rem;
+}
+.form-check input[type="radio"]:checked::after {
+    background: $grey-color;
+}
+input[type="radio"]:checked {
+    border-color: $box-shadow-grey !important;
+    outline: none;
+}
+.form-check input[type="checkbox"]:checked {
+    background-color: white;
+    border-width: 2px;
+    border-color: $box-shadow-grey;
+    &::after {
+        border-color: $grey-color;
+    }
+}
+.mobileViewTemplate {
+    width: 25%;
+    margin-right: 15px;
+}
+::ng-deep .quantity .info {
+    display: none;
+}
+::ng-deep .quantity label {
+    display: inline;
+    padding-right: 1rem;
+    font-weight: normal;
+}
+::ng-deep cx-add-to-cart .quantity {
+    padding-left: 1rem;
+    margin: 0;
+}
+::ng-deep cx-add-to-cart form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+::ng-deep .facet-container {
+    .modal-dialog {
+        .modal-content {
+            position: absolute;
+            left: 5%;
+            top: 14.5% !important;
+            width: 90%;
+            min-height: 90% !important;
+            bottom: -2%;
+            justify-self: center;
+            align-self: center;
+            border-radius: 0px;
+            border: 0rem none !important;
+
+            .modal-head {
+                h4 {
+                    font-size: 18px;
+                    width: 220px;
+                }
+                .closeIcon {
+                    position: absolute;
+                    right: 3px;
+                    top: 3px;
+                    height: 5px;
+                    width: 5px;
+                    cursor: pointer;
+                }
+            }
+            .modal-body {
+                > *input {
+                    &:-webkit-autofill,
+                    &:-webkit-autofill:hover,
+                    &:-webkit-autofill:focus,
+                    &:-webkit-autofill:active {
+                        background-color: $white-color !important;
+                        box-shadow: none;
+                    }
+                }
+            }
+            .totalFormCheck {
+                left: 0;
+                width: 97%;
+                margin-left: 0.4rem !important;
+            }
+        }
+    }
+}
+.facet-container {
+    width: 86%;
+}
+.subFacetContainer{
+    padding-left: 0;
+}
+
+.form-check input[type=radio] {
+    outline: none;
+}
+
+.facetValCount {
+    display: flex;
+    flex-wrap: wrap;
+}
+.btn-clear-filter {
+    background-color: #DDDDDE;
+    height: 2.9rem;
+    padding: 0.5rem;
+    font-size: 0.95rem;
+    margin-left: 1rem;
+    outline: none;
+    box-shadow: none;
+}
+
+@media screen and (max-width: $screenMedium-1200) {
+    ::ng-deep cx-add-to-cart form {
+        justify-content: center !important;
+        align-items: center !important;
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    // .mobileViewTemplate {
+    //     width: 100%;
+    // }
+    // .qtylabel {
+    //     text-align: center;
+    //     margin-top: 1rem;
+    //     margin-bottom: 1rem;
+    // }
+    // .quantityCol {
+    //     text-align: center;
+    //     margin-top: 2.5rem;
+    //     margin-left: -4rem;
+    //     margin-bottom: 2.5rem;
+    // }
+    // .productDiv {
+    //     margin-top: 0;
+    //     min-width: 97%;
+    // }
+    // // ::ng-deep .quantity cx-item-counter input[type="number"] {
+    // //     width: 1.2rem !important;
+    // // }
+    // .closeIcon {
+    //     position: absolute;
+    //     right: 1rem;
+    //     top: 0.5rem;
+    //     cursor: pointer;
+    // }
+    // .closeIcon img {
+    //     width: 1.2rem;
+    // }
+    // .facet-container {
+    //     width: 100%;
+    //     padding: 2%;
+    // }
+    // .accordion-body a {
+    //     padding: 0.15rem 0;
+    // }
+    // // ::ng-deep .modal-dialog .modal-content {
+    // //     transform: translate(-50%, -19%) !important;
+    // // }
+    // ::ng-deep cx-add-to-cart form {
+    //     justify-content: center !important;
+    //     align-items: center !important;
+    //     flex-wrap: wrap;
+    // }
+}
+// ::ng-deep .ProductLeftRefinements {
+//     display: none;
+// }
+::ng-deep .ProductGridSlot {
+    width: 100%;
+}
+
+.row.filterHeading {
+    padding-top: 30px;
+    align-items: center;
+    .filter.label {
+        font-size: var(--fontsize24);
+        font-family: 'NiveauGroteskBold';
+        color: $pdp-font-color;
+    }
+    .col-md-6.clearAll {
+        text-align: right;
+        display: flex;
+        justify-content: flex-end;
+        .clearAllFilters {
+            font-size: var(--fontsize16);
+            font-family: 'NiveauGrotesk';
+            color: $blue-color;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}
+@media (min-width: 992px) {
+button.dialog-trigger {
+display: none;
+}
+}
+
+@media (max-width: 992px) {
+    .row.filterHeading {
+        display: none;
+    }
+}

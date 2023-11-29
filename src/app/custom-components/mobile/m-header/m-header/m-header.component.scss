@@ -1,0 +1,64 @@
+@import "../../../../shared/styles/variables.scss";
+
+.mobileMenu {
+    .mobileMenuContainer {
+        min-width: 3rem;
+        .fa-bars:before {
+            align-items: center;
+        }
+    }
+    .menuItemContainer {
+        width: 4rem;
+        background-color: aqua;
+    }
+}
+
+.menubgbackground {
+    width: 40rem;
+    height: 133vh;
+    background-color: #000;
+    opacity: 0.8;
+    position: fixed;
+    top: -6.4rem;
+    right: -3rem;
+    z-index: 10;
+}
+
+.totalMenuContainer {
+    width: 19rem;
+    height: 100vh;
+    background-color: $white-color;
+    position: fixed;
+    top: 0;
+    z-index: 11;
+    button {
+        background-color: $grey-color;
+        color: $white-color;
+        border: none;
+        width: 90%;
+        height: 2.7rem;
+        position: absolute;
+        bottom: 7rem;
+        left: 0.3rem;
+        border-radius: 4px;
+    }
+}
+
+.m-accountIcon {
+    color: $dark-grey;
+    font-size: 25px;
+}
+
+@media screen and(max-width: $mobileScreenPotrait) {
+    .mobileMenu {
+        position: absolute;
+        right: -16rem;
+        top: 2rem;
+        > *span {
+            .fas {
+                color: $grey-color;
+                font-size: 1.3rem;
+            }
+        }
+    }
+}

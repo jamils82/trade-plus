@@ -1,0 +1,777 @@
+@import '../../../shared/styles/variables.scss';
+
+// .loader {
+//   display: none;
+//   top: 50%;
+//   left: 50%;
+//   z-index: 1;
+//   padding-left: 100%;
+//   position: sticky;
+//   transform: translate(-50%, -50%);
+// }
+
+// .loading {
+//   border: 2px solid #ccc;
+//   width: 60px;
+//   height: 60px;
+//   border-radius: 50%;
+//   border-top-color: red;
+//   border-left-color: red;
+//   animation: spin 1s infinite ease-in;
+// }
+
+// @keyframes spin {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }
+
+.container {
+  min-width: 87%;
+  padding: 0;
+}
+
+.success-message-container,
+.failure-message-container {
+    width: 50%;
+    // display: none;
+    margin: 0 auto 15px auto;
+}
+
+.loading {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+
+/* Transparent Overlay */
+
+.loading:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+  background: -webkit-radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+}
+
+
+/* :not(:required) hides these rules from IE9 and below */
+
+.loading:not(:required) {
+  /* hide "loading..." text */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.loading:not(:required):after {
+  content: '';
+  display: block;
+  font-size: 10px;
+  width: 1em;
+  height: 1em;
+  margin-top: -0.5em;
+  -webkit-animation: spinner 150ms infinite linear;
+  -moz-animation: spinner 150ms infinite linear;
+  -ms-animation: spinner 150ms infinite linear;
+  -o-animation: spinner 150ms infinite linear;
+  animation: spinner 150ms infinite linear;
+  border-radius: 0.5em;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+  box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+}
+
+
+/* Animation */
+
+@-webkit-keyframes spinner {
+  0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes spinner {
+  0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes spinner {
+  0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+.success-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #0B961B;
+    background-color: #0B961B1A;
+    color: #0B961B;
+    font-family: 'NiveauGrotesk';
+    padding: 10px;
+    font-size: 12px;
+}
+
+.failure-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid $failure-border-color;
+    background-color: $failure-background-color;
+    color: #973937;
+    font-family: 'NiveauGrotesk';
+    padding: 10px;
+    font-size: 12px;
+}
+
+.addToCartDisableCheck {
+  color: red;
+  font-family: 'NiveauGrotesk'
+}
+
+.close-btn {
+  position: absolute;
+  right: 8px;
+  top: 2px;
+  cursor: pointer;
+}
+
+.tick-icon,
+.alert-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.alert-message {
+    line-height: 1;
+}
+
+.heading-row {
+    margin-top: 50px;
+    .heading-col {
+      display: flex;
+      align-items: baseline;
+        .heading-label {
+            color: $pdp-font-color;
+            font-size: var(--fontsize40);
+            font-family: 'NiveauGroteskBold';
+        }
+        img {
+          width: 14px;
+          height: 14px;
+          margin-left: 10px;
+          cursor: pointer;
+        }
+        .editLabel {
+          font-size: var(--fontsize18);
+          font-family: 'NiveauGrotesk';
+          color: $blue-color;
+          margin-left: 3px;
+          cursor: pointer;
+        }
+    }
+}
+
+.selectAll-row {
+  margin-bottom: 15px;
+  align-items: center;
+    .selectAll-col {
+        .selectAll-label {
+            font-family: 'NiveauGroteskBold';
+            font-size: var(--fontsize24);
+            color: $pdp-font-color;
+            padding-left: 3rem;
+        }
+    }
+    .downloadButton-col {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        min-height: var(--buttonHeight60);
+        font-size: var(--fontsize24);
+        .btn-block.download {
+            width: 26%;
+            font-family: 'NiveauGroteskBold';
+            font-size: var(--fontsize20);
+            background-color: #E8EFF7;
+            border: 1px solid $anchor-color;
+            color: $anchor-color;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &:focus {
+              box-shadow: 0 0 0 transparent;
+            }
+        }
+        .btn-block.save {
+          width: 26%;
+          font-family: 'NiveauGroteskBold';
+          font-size: var(--fontsize20) !important;
+          background-color: #aebbc5;
+          border: 1px solid #aebbc5;
+          color: $pdp-font-color;
+          min-height: var(--buttonHeight60) !important;
+          text-transform: inherit;
+          float: right;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 0;
+          margin-left: 20px;
+          &:focus {
+            box-shadow: 0 0 0 transparent;
+          }
+        }
+    }
+}
+
+.products-list {
+    background-color: #F6F6F6;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    .product-list-row {
+      align-items: center;
+      justify-content: space-between;
+      .product-list-checkbox {
+        max-width: 4%;
+      }
+      .product-list-image {
+        padding: 0 25px;
+        //height: 86px;
+      }
+      .poduct-list-details {
+        padding: 0;
+        a {
+          &:hover {
+            text-decoration: none;
+            color: transparent;
+          }
+        }
+        .product-name {
+          font-size: var(--fontsize24);
+          font-family: 'NiveauGroteskBold';
+          color: $pdp-font-color;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .itemCode {
+          font-size: var(--fontsize18);
+          font-family: 'NiveauGrotesk';
+          color: $pdp-font-color;
+          font-weight: 100;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: pre-line;
+        }
+      }
+
+      .product-list-price {
+        padding: 0 180px;
+      }
+
+      .product-list-quantity {
+        span {
+          font-size: 1rem;
+          font-family: 'NiveauGrotesk';
+          color: $pdp-font-color;
+          font-weight: 100;
+          padding-right: 10px;
+        }
+        text-align: right;
+        display: flex;
+        max-width: 15.6%;
+      }
+
+      .product-list-delete {
+        display: flex;
+        justify-content: flex-end;
+        color: #778893;
+        font-size: 1rem;
+        max-width: 4%;
+        .deleteIcon {
+          cursor: pointer;
+        }
+      }
+    }
+}
+
+.products-list.even {
+  background-color: $white-color;
+}
+
+.editQtyText {
+  font-size: var(--fontsize20) !important;
+  position: relative;
+  top: 5px;
+}
+
+.buttons {
+  margin: 50px 0;
+  .back-button-col {
+    padding: 0;
+    .back-button {
+      width: 8.75rem;
+      font-family: 'NiveauGroteskBold';
+      font-size: var(--fontsize22) !important;
+      background-color: #77889380;
+      border: 1px solid #77889380;
+      color: $pdp-font-color;
+      min-height: var(--buttonHeight60) !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:focus {
+        box-shadow: 0 0 0 transparent;
+      }
+    }
+  }
+
+  .save-and-addAllToCart-buttons-row {
+    justify-content: flex-end;
+    .save-button-col {
+      padding: 0;
+      margin-right: 20px;
+      .btn-block.save {
+        width: 19.188rem;
+        font-family: 'NiveauGroteskBold';
+        font-size: var(--fontsize24) !important;
+        background-color: #E8EFF7;
+        border: 1px solid $blue-color;
+        color: $blue-color;
+        min-height: var(--buttonHeight60) !important;
+        text-transform: inherit;
+        float: right;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:focus {
+          box-shadow: 0 0 0 transparent;
+        }
+      }
+    }
+    .addAllToCart-buttons-col {
+      padding: 0;
+      .btn-block.addToCart {
+        width: 19rem;
+        font-family: 'NiveauGroteskBold';
+        font-size: var(--fontsize22) !important;
+        background-color: $blue-color;
+        border: 1px solid $blue-color;
+        color: $white-color;
+        height: 60px !important;
+        text-transform: inherit;
+        float: right;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:focus {
+          box-shadow: 0 0 0 transparent;
+        }
+      }
+    }
+  }
+}
+
+.noDataAvailable-row {
+  margin: 30px 0;
+  .noDataAvailable {
+    text-align: center;
+    font-family: 'NiveauGroteskBold';
+    font-size: 1.5rem;
+    color: $pdp-font-color;
+  }
+}
+
+.noData.row {
+  margin-bottom: 20px;
+  .back-button-col {
+    display: flex;
+    justify-content: center;
+    .back-button {
+      width: 10%;
+      font-family: 'NiveauGroteskBold';
+      font-size: 1rem;
+      background-color: #77889380;
+      border: 1px solid #77889380;
+      color: $pdp-font-color;
+      height: 60px;
+      &:focus {
+        box-shadow: 0 0 0 transparent;
+      }
+    }
+  }
+}
+
+
+///////////////////////////////////////// custom checkbox CSS - START ////////////////////////////////////////
+
+input.checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  position: absolute;
+    top: 15px;
+    left: 35px;
+    height: 20px;
+    width: 20px;
+    background-color: $white-color;
+    border: 2px solid $pdp-font-color;
+    border-radius: 2px;
+}
+
+.list.checkmark {
+  position: absolute;
+    top: -2px;
+    left: 25px;
+    height: 20px;
+    width: 20px;
+    background-color: $white-color;
+    border: 2px solid #778893;
+    border-radius: 2px;
+}
+
+.checkmark.terms {
+  width: 18px;
+  height: 18px;
+  top: 4px;
+}
+
+.checkmark.terms.disable {
+  opacity: 0.5;
+}
+
+/* On mouse-over, add a grey background color */
+.check-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.check-container:hover input ~ .checkmark.disable {
+  background-color: #fff;
+}
+          
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.check-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.check-container .checkmark:after {
+  left: 4.5px;
+  top: 0px;
+  width: 6px;
+  height: 13px;
+  border: solid $pdp-font-color;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.check-container .checkmark.terms:after {
+  left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+}
+.fa-trash:before
+{
+  font-size: 22px;
+  position: relative;
+  top: -25px;
+}
+///////////////////////////////////////// custom checkbox CSS - END ////////////////////////////////////////
+@media screen and (min-width:$mobileScreenPotrait-768) {
+   .mobiledel
+   {
+     display: none !important;
+   }
+   .product-list-delete 
+   {
+     top: 23px;
+     right: 12px;
+   }
+}
+@media screen and (max-width: $mobileScreenPotrait) {
+  .noData.row .back-button-col .back-button {
+    width: 30%;
+  }
+  .fa-trash:before
+  {
+    font-size: unset;
+    position: inherit;
+    top:unset;
+  }
+  .container {
+    max-width: 100%;
+    .heading-row {
+      margin: 10px 0 0 0;
+      .heading-col {
+        .heading-label {
+          font-size: var(--fontsize26);
+        }
+        img {
+          width: 16px;
+          height: 16px;
+        }
+        .editLabel {
+          font-size: var(--fontsize26);
+        }
+      }
+    }
+  }
+   .products-list 
+  {
+    .product-list-row 
+    {
+      .product-list-price
+      {
+        padding: 0px 50px 15px 15px;
+        text-align: left;
+      }
+      .poduct-list-details
+      {
+        padding: 15px 15px 10px;
+      }
+    }
+  }
+  
+  .products-list{
+    background-color: #ffffff;
+    margin: 10px;
+  }
+  
+  
+  .deskdelete
+  {
+    display: none !important;
+  }
+  .checkmark {
+    top: 10px;
+  }
+  
+  .buttons 
+  {
+    .save-and-addAllToCart-buttons-row 
+    {
+      .addAllToCart-buttons-col
+      {
+        .btn-block.addToCart
+        {
+          width:95% !important;
+          border-radius: 2px !important;
+          max-height: var(--buttonHeight60);
+          font-size: var(--fontsize20) !important;
+        }
+      } 
+    }
+    .back-button-col .back-button
+    {
+      width:95% !important;
+      border-radius: 2px !important;
+      max-height: var(--buttonHeight60);
+      font-size: var(--fontsize20) !important;
+    }
+  } 
+  
+  .buttons-row
+  {
+     margin: 0px;
+  }
+  .selectAll-row
+  {
+    margin:15px 10px 15px 10px;
+  }
+  .selectAll-col
+  {
+    margin-left: -35px;
+  }
+  .selectAll-row .downloadButton-col
+  {
+    justify-content: space-between;
+    padding: 0px;
+  }
+  .products-list{
+    .product-list-row
+    {
+      .poduct-list-details
+      {
+        .product-name
+        {
+          white-space: pre-line !important;
+        }
+      }
+    }
+
+  }
+  .view-more {
+    background-color: #fff!important;
+    color: #495a64!important;
+    border: 1px solid #495a64;
+    width: 100%;
+    border-radius: 25px!important;
+    padding: 5px 0;
+    font-family: 'NiveauGroteskBold';
+    font-size: var(--fontsize18);
+ }
+ .marview
+ {
+   margin: 25px 10px;
+ }
+ .buttons {
+    margin: 30px 0 50px;
+  }
+  .download,.save{
+    padding:0px 5px;
+    width:40% !important;
+    max-height: 40px;
+    font-size: var(--fontsize20) !important;
+ }
+ .checkmark,.list.checkmark
+ {
+    border: 2px solid $pdp-font-color;
+ }
+ .list.checkmark
+ {
+   left: 15px;
+   z-index: 1;
+ }
+ .editQtyText
+ {
+   top:2px;
+ }
+}
+@media screen and (max-width:$smallmobileScreenPotrait420) {
+.container {
+  max-width: 100%;
+  .heading-row {
+    margin: 10px 0 0 0;
+    .heading-col {
+      .heading-label,.editLabel {
+        font-size: var(--fontsize24);
+      }
+      img
+      {
+        width: 13px;
+        height: 13px;
+      }
+    }
+  }
+}
+.checkmark,.list.checkmark
+ {
+    height: 14px;
+    width: 14px;
+    border: 2px solid $pdp-font-color;
+ }
+ .checkmark
+ {
+    top:10px;
+ }
+ .check-container{ 
+   .checkmark:after {
+      left: 3.5px;
+      top: 0px;
+      width: 4px;
+      height: 8px;
+   }
+ }
+ .selectAll-row{
+ .selectAll-col{
+    .selectAll-label {
+      font-size: var(--fontsize18);
+    }
+  } 
+ }
+  
+}
+@media screen and (max-width:$smallmobileScreenPotrait360) {
+  .product-list-image cx-media img {
+    max-width: 180px !important;
+  }
+  
+}

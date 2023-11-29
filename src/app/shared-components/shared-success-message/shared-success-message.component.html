@@ -1,0 +1,7 @@
+<div class="success-message-container" *ngIf="successInd$ | async">
+    <div class="success-container">
+        <img class="tick-icon" src="../../../assets/images/Icon ionic-ios-checkmark-circle-outline.svg">
+        <div class="success-message">{{infoMessage}}<span class="close-btn" (click)="closeSuccessMsg()"><i class="fa fa-times"></i></span>
+        </div>
+    </div>
+</div>

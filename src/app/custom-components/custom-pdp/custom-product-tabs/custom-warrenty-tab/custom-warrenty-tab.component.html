@@ -1,0 +1,18 @@
+<ng-container *ngIf="specification$ | async as spec">
+    <div class="container">
+      <table>
+        <tr>
+            <td *ngFor="let data of warrentyData; let i=index">
+                <a target="_blank" href={{data}}>
+                <div class="box">
+                    <img src='../../../../../assets/images/Icon awesome-file-pdf.svg'>
+                    <span class="name">Warranty Downloads_{{i + 1}}</span>
+                </div>
+            </a>
+            </td>
+          <!-- <td *ngIf="spec?.warrantyDownloads" class="key">Warranty Downloads</td>
+          <td><a target="_blank" href={{spec?.warrantyDownloads}}>{{ spec.warrantyDownloads }}</a></td> -->
+        </tr>
+      </table>
+    </div>
+  </ng-container>

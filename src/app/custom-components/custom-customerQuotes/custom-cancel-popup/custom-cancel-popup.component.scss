@@ -1,0 +1,24 @@
+
+@import "../../../shared/styles/variables.scss";
+@import '../../../custom-pages/custom-customerQuotes//quotes.component.scss';
+@import "../../../shared/styles/variables.scss";
+
+::ng-deep .createQuotePopup.d-block + .modal-backdrop.fade.show{
+    opacity: 0;
+}
+
+.btn-red { 
+    width:121px;
+    @include font-NiveauGroteskBold();
+}
+
+.btn-cancel {
+    @include font-NiveauGroteskBold();
+
+}
+.cancel-info {
+    color:$grey;
+    font-size: 16px;
+    margin: 25px 0 15px;
+    @include font-NiveauGrotesk();
+}

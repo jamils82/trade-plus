@@ -1,0 +1,181 @@
+<!-- Item Start Outlet -->
+<ng-template [cxOutlet]="CartOutlets.ITEM">
+    <!-- Item Information -->
+    <div *ngIf="!isMobile" class="cx-info-container cart-item-row row">
+
+        <!-- Item Image -->
+        <div class="col-1 pr-0 cx-image-container">
+            <a [routerLink]="['/p',item.product.code]" cxModal="dismiss" tabindex="-1">
+                <cx-media class="custom-height" [alt]="''" [container]="item.product.images?.PRIMARY" format="cartIcon"></cx-media>
+            </a>
+        </div>
+        <!-- Item Description -->
+        <div [ngClass]="compact ? '' : 'col-product-name col-md-3 col-lg-3 col-xl-3 pl-0'">
+            <div *ngIf="item.product.name" class="cx-name">
+                <a class="cx-link prdouct-link" [routerLink]="['/p',item.product.code]" cxModal="dismiss">
+                    <h2 class="product-name">{{ item.product.name }}</h2>
+                </a>
+            </div>
+            <span *ngIf="item.product.code" class="itemCode">Item Code : </span><span *ngIf="item.product.code" class="itemCode" [innerHtml]="item.product.code"></span>
+            <span *ngIf="item.product.productSupplierCode" class="itemCode"> | Supplier Code : </span><span *ngIf="item.product.productSupplierCode" class="itemCode" [innerHtml]="item.product.productSupplierCode"></span>
+            <ng-template [cxOutlet]="CartOutlets.ITEM_DETAILS"> </ng-template>
+
+            <ng-container *ngIf="item.product.baseOptions?.length">
+                <div *ngFor="
+                let variant of item.product.baseOptions[0]?.selected
+                  ?.variantOptionQualifiers
+              " class="cx-property">
+
+                </div>
+            </ng-container>
+        </div>
+
+        <!-- stock-->
+        <!-- Availability -->
+        <!-- <div [ngClass]="compact ? '' : ' col-md-2 col-lg-2 col-xl-2'" *ngIf="isProductOutOfStock(item.product)" class="cx-labe stock-label availableToOrderColor">
+            {{item?.product?.showEmptyPrice ?'':'Available to order'}}
+        </div> -->
+        <div [ngClass]="compact ? '' : ' col-md-2 col-lg-2 col-xl-2'" *ngIf="(item?.product?.stock?.leadTimeDays == 1 && item?.product?.stock?.stockLevel == 0)" class="cx-labe stock-label availableToOrderColor">
+            {{item?.product?.stock?.leadTimeDays + ' Day Lead time'}}
+        </div>
+        <div [ngClass]="compact ? '' : ' col-md-2 col-lg-2 col-xl-2'" *ngIf="(item?.product?.stock?.leadTimeDays > 1 && item?.product?.stock?.stockLevel == 0)" class="cx-labe stock-label availableToOrderColor">
+            {{item?.product?.stock?.leadTimeDays + ' Days Lead time'}}
+        </div>
+        <div [ngClass]="compact ? '' : ' col-md-2 col-lg-2 col-xl-2'" *ngIf="item?.product?.price?.formattedValue == 'POA' || item?.product?.price?.formattedValue == '$0.00'" class="cx-labe stock-label instockColor">
+            {{item?.product?.showEmptyPrice ? '':'POA'}}
+        </div>
+        <div [ngClass]="compact ? '' : ' col-md-2 col-lg-2 col-xl-2'" *ngIf="((item?.product?.stock?.leadTimeDays == 0 && item?.product?.stock?.stockLevel <= 0) ||  item?.product?.stock?.stockLevel < 0)" class="cx-labe stock-label availableToOrderColor">
+            Available to order
+        </div>
+        <div [ngClass]="compact ? '' : ' col-md-2 col-lg-2 col-xl-2'" *ngIf="item?.product?.stock?.stockLevel >= 1" class="cx-labe stock-label instockColor">
+            {{item?.product?.stock.stockLevel}} In stock
+        </div>
+        <div [ngClass]="compact ? '' : ' col-md-1 col-lg-1 col-xl-1 col-product-price'">
+            <app-product-price [showEmptyPrice]="item?.product?.showEmptyPrice" [myPrice]="item?.product?.price?.formattedValue" [screenName]="screenName" [retailPrice]="item?.product?.m2Price?.formattedValue">
+            </app-product-price>
+        </div>
+        <!-- Item Quantity -->
+        <div class="cx-quantity" [ngClass]="compact ? '' : ' col-2'">
+            <div class="quantity">
+                <label [ngClass]="(item.product.stock.stockLevel < item.quantity && item.product.stock.stockLevelStatus == 'inStock')? 'quantity-label-red': 'quantity-label'">{{ 'addToCart.quantity' | cxTranslate }}</label>
+                <cx-item-counter [ngClass]="(item.product.stock.stockLevel < item.quantity && item.product.stock.stockLevelStatus == 'inStock')? 'colorRed': 'colorNormal'" [control]="quantityControl" [readonly]=" !item.updateable || readonly || options.isSaveForLater" [max]="999" [allowZero]="true">
+                </cx-item-counter>
+            </div>
+        </div>
+        <!-- Total -->
+        <ng-container [ngClass]="compact ? '' : ' col-md-2 col-lg-2 col-xl-2'" *ngIf="item.product.price?.formattedValue; else total">
+            <div class="cx-label" [ngClass]="compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'">
+                {{ 'cartItems.total' | cxTranslate }}
+            </div>
+            <div class="cx-value col-md-2 cart-price-value"> {{ item.totalPrice.formattedValue }} <span> (excl. GST) </span> </div>
+        </ng-container>
+        <div class="col-md-1 col-remove-btn cx-remove-btn">
+            <button class="link cx-action-link delete-cart-item" [disabled]="quantityControl.disabled" (click)="deleteItem(del)" attr.aria-label="{{ 'addToCart.removeFromCart' | cxTranslate }}">
+                      <mat-icon class="cart-icon-color" >delete</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="item.rejected == true" class="col-1 rejected-message"></div>
+        <div *ngIf="item.rejected == true" class="col-md-11 rejected-message">Product now obsolete. Please remove from Cart to complete Checkout.</div>
+    </div>
+
+    <div *ngIf="isMobile" class="cx-info-container mobile-cart-item-row row">
+
+        <!-- Item Image -->
+        <div class="col-4 pr-0 cx-image-container">
+            <a [routerLink]="['/p',item.product.code]" cxModal="dismiss" tabindex="-1">
+                <cx-media class="custom-height" [container]="item.product.images?.PRIMARY" format="cartIcon"></cx-media>
+            </a>
+        </div>
+        <!-- Item Description -->
+        <div [ngClass]="compact ? '' : 'col-product-name col-7 col-md-3 pl-0'">
+            <div *ngIf="item.product.name" class="cx-name">
+                <a class="cx-link prdouct-link" [routerLink]="['/p',item.product.code]" cxModal="dismiss">
+                    <h2 class="product-name">{{ item.product.name }}</h2>
+                </a>
+            </div>
+            <div class="itemCode-div" *ngIf="item.product.code">
+                <span class="itemCode">Item Code : </span><span *ngIf="item.product.code" class="itemCode" [innerHtml]="item.product.code"></span>
+            </div>
+            <div class="supplierCode-div" *ngIf="item.product.code">
+                <span class="supplierCode">Supplier Code : </span><span *ngIf="item.product.productSupplierCode" class="supplierCode" [innerHtml]="item.product.productSupplierCode"></span>
+            </div>
+            <ng-template [cxOutlet]="CartOutlets.ITEM_DETAILS"> </ng-template>
+
+            <ng-container *ngIf="item.product.baseOptions?.length">
+                <div *ngFor="
+                let variant of item.product.baseOptions[0]?.selected
+                  ?.variantOptionQualifiers
+              " class="cx-property">
+
+                </div>
+            </ng-container>
+
+            <!-- stock-->
+            <!-- Availability -->
+            <span style="padding-right: 0px;" *ngIf="product?.price?.formattedValue != 'POA' && product?.stock?.stockLevel > 0" class="stock-label">
+                {{product?.stock?.stockLevel }}
+            </span>
+            <span *ngIf="!showEmptyPrice && !product?.addToCartDisabled" class="stock-label"
+                [ngClass]="product?.price?.formattedValue == 'POA' || product?.price?.formattedValue == '$0.00' || product?.stock?.stockLevel < 0 ? 'POAColor' : hasStock ? 'instockColor' : 'availableToOrderColor'">
+                    {{product?.price?.formattedValue == 'POA' || product?.price?.formattedValue == '$0.00' ? 'POA' : 
+                    (product?.stock?.leadTimeDays >= 1 && product?.stock?.stockLevel == 0) ? (product?.stock?.leadTimeDays == 1 ? (product?.stock?.leadTimeDays + ' Day Leadtime') : (product?.stock?.leadTimeDays + ' Days Lead time')) :  
+                    (product?.stock?.leadTimeDays == 0 || product?.stock?.leadTimeDays == '') ? 'Available to order': hasStock ? ('addToCart.inStock' | cxTranslate) : (product?.stock?.stockLevel < 0) ? 'Low stock' : ''}}</span>
+            <div *ngIf="isProductOutOfStock(item.product)" class="cx-labe stock-label availableToOrderColor">
+                {{item?.product?.showEmptyPrice ? '': 'Available to order'}}
+            </div>
+            <div *ngIf="!isProductOutOfStock(item.product)" class="cx-labe stock-label instockColor">
+                {{item?.product?.showEmptyPrice? '':'In stock'}}
+            </div>
+            <div [ngClass]="compact ? '' : 'col-product-price'">
+                <app-product-price [showEmptyPrice]="item?.product?.showEmptyPrice" [myPrice]="item?.product?.price?.formattedValue" [screenName]="screenName" [retailPrice]="item?.product?.m2Price?.formattedValue">
+                </app-product-price>
+            </div>
+            <!-- Item Quantity -->
+            <div class="cx-quantity">
+                <div class="quantity">
+                    <label class="quantity-label">{{ 'addToCart.quantity' | cxTranslate }}</label>
+                    <cx-item-counter [control]="quantityControl" [readonly]=" !item.updateable || readonly || options.isSaveForLater" [max]="999" [allowZero]="true">
+                    </cx-item-counter>
+                </div>
+            </div>
+            <!-- Total -->
+            <ng-container [ngClass]="compact ? '' : ' col-md-2 col-lg-2 col-xl-2'" *ngIf="item.product.price?.formattedValue; else total">
+                <!-- <div class="cx-label" [ngClass]="compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'">
+                {{ 'cartItems.total' | cxTranslate }}
+            </div> -->
+                <div class="cx-value cart-price-value"> {{ item.totalPrice.formattedValue }} <span> (excl. GST) </span> </div>
+            </ng-container>
+        </div>
+        <div class="col-1 col-md-1 col-remove-btn cx-remove-btn">
+            <button class="link cx-action-link delete-cart-item" [disabled]="quantityControl.disabled" (click)="deleteItem(del)" attr.aria-label="{{ 'addToCart.removeFromCart' | cxTranslate }}">
+                      <mat-icon class="cart-icon-color" >delete</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="item.rejected == true" class="col-md-12 rejected-message">Product now obsolete. Please remove from Cart to complete Checkout.</div>
+    </div>
+
+    <div *ngIf="(!readonly || options.isSaveForLater) && item.updateable" class="cx-actions col-12">
+        <ng-container *ngIf="!isProductOutOfStock(item.product)">
+            <ng-container *ngTemplateOutlet="
+              options.optionalBtn;
+              context: {
+                $implicit: { loading: quantityControl.disabled, item: item }
+              }
+            "></ng-container>
+        </ng-container>
+
+    </div>
+
+    <ng-template #total>
+        <div class="cx-total" [ngClass]="compact ? '' : ' col-md-2 col-xl-2'">
+            <div class="cx-label" [ngClass]="compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'">
+                {{ 'cartItems.total' | cxTranslate }}
+            </div>
+            <div class="cx-value cart-price-value"> {{ item?.totalPrice?.formattedValue }} <span *ngIf="item.totalPrice" class="cart-price-gst"> (excl. GST) </span> </div>
+        </div>
+    </ng-template>
+</ng-template>
+
+<ng-template #del let-modal>
+    <app-custom-delete-cart-item></app-custom-delete-cart-item>
+</ng-template>

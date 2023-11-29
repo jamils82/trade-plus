@@ -1,0 +1,677 @@
+<div *ngIf="!isMobile">
+    <div class="my_statements" *ngIf="isParticularStatement">
+        <div class="loading" *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+        <div class="">
+            <div class="row topHeading">
+                <div class="heading-row row">
+                    <div class="col-md-9 heading">
+                        STATEMENTS
+                    </div>
+                    <div class="col-md-3 update-preference" style="z-index: 1;">
+                        <button class="update-preference-button" (click)="updatePrefRoute()"> Update Preferences
+                        </button>
+                    </div>
+                    <br />
+                </div>
+                <div class="col-md-3 custom-width-navigation" style="margin-top: 7rem;">
+                    <div>
+                        <app-account-left-nav [selectedTab]="'statements'"></app-account-left-nav>
+                    </div>
+                </div>
+                <div class="col-md-9 custom-width-grid">
+                    <div class="row searchbox-row">
+                        <div class="col-4 flex-display cus-padding-right">
+
+                            <label class="form-check-label dateRangeLabel">Date Range</label>
+                            <div class="datepicker-width">
+                                <label class="datebox">
+                                    <!-- <input autocomplete="off" (click)="openDateFilterPopUp(data)" readonly aria-describedby="initialDescription" class="form-control date-filter border-search"
+                         aria-controls="results" [value]="fromDate + ' - ' + toDate" aria-autocomplete="both" placeholder="dd/MM/yyyy"   aria-label="Search"> -->
+                                    <!-- <app-ngb-date-rangepicker pageName="statement" [disableDate]="false"
+                                        (dateRangeEmitter)="dateRangeEmitter($event);">
+                                    </app-ngb-date-rangepicker> -->
+                                    <input type="text"
+                         ngxDaterangepickerMd
+                         [(ngModel)]="selected"
+                         [showCustomRangeLabel]="true"
+                         [alwaysShowCalendars]="true"
+                         [ranges]="ranges"
+                         (datesUpdated)="datesUpdated($event)"
+                         [linkedCalendars]="true"
+                         [showClearButton]="true"
+                         placeholder="Select Date Range">
+                                    <!-- <i class="fas fa-search" ng-reflect-type="SEARCH"></i> -->
+                                    <!-- <img class="calendar-icon" src="../../../assets/images/ic_calender.svg"> -->
+                                </label>
+
+                            </div>
+                        </div>
+                        <div class="col-2 pl-0">
+                            <a class="clear-filters" (click)="clearFilter()">Clear All Filters</a>
+                        </div>
+                        <div class="col-3">
+
+                        </div>
+
+                        <div class="col-3">
+                            <label class="searchbox">
+                                <input autocomplete="off" aria-describedby="initialDescription" #searchKey
+                                    class="form-control border-search" aria-controls="results" aria-autocomplete="both"
+                                    placeholder="Enter Statement No." aria-label="Search"
+                                    (keyup)="doFilter($event.target.value)">
+                                <mat-icon class="search">search</mat-icon>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <table mat-table [dataSource]="dataSource" (matSortChange)="sortData($event)"
+                            matSortDirection="desc" matSort>
+                            <!-- checkbox Column -->
+                            <ng-container matColumnDef="select">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                                        [checked]="selection.hasValue() && isAllSelected()"
+                                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+                                    </mat-checkbox>
+                                </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <mat-checkbox (click)="$event.stopPropagation()"
+                                        (change)="$event ? selection.toggle(row) : null"
+                                        [checked]="selection.isSelected(row)">
+                                    </mat-checkbox>
+                                </td>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="date">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date</th>
+                                <td mat-cell *matCellDef="let element" (click)="statementDetails(element.docNumber)">
+                                    {{element.docDate}} </td>
+                            </ng-container>
+
+                            <!-- Role Column -->
+                            <ng-container matColumnDef="statementNumber">
+                                <th class="position-relative" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    Statement No. &nbsp;
+                                </th>
+                                <td mat-cell *matCellDef="let element" (click)="statementDetails(element.docNumber)" class="lo_sensitive">
+                                    {{element.docNumber }} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="customerName">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name </th>
+                                <td mat-cell *matCellDef="let element" (click)="statementDetails(element.docNumber)" class="lo_sensitive">
+                                    {{element.customerContext?.name }} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="branch">
+                                <th mat-header-cell *matHeaderCellDef style="width: 15%;" mat-sort-header> Branch &nbsp;
+                                </th>
+                                <td mat-cell *matCellDef="let element" (click)="statementDetails(element.docNumber)">
+                                    {{ element.branch.name}}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="total">
+                                <th mat-header-cell *matHeaderCellDef> Total<span class="span-gst"> (incl. GST) </span>
+                                </th>
+                                <td mat-cell *matCellDef="let element" (click)="statementDetails(element.docNumber)" class="lo_sensitive"> {{
+                                    negativeConverter(element.totalOutstandingAmount)}}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Actions">
+                                <th mat-header-cell *matHeaderCellDef style="width: 10%;"> &nbsp;&nbsp;&nbsp;Actions
+                                </th>
+                                <td mat-cell *matCellDef="let element" class="icon-td">
+                                    <span id="navbarDropdownMenuLink1" data-bs-toggle="dropdown"
+                                        style="transform: scale(1.3);">
+                                        <img src="assets/icons/ellipsis.svg" class="icon-actions" alt="ellipsis"> &nbsp;
+                                    </span>
+                                    <div id="statement-action-popup"
+                                        class="dropdown-contenttype px-3 dropdown-menu dropdown-menu-end">
+                                        <a class="text-left" (click)="statementDialogOpen(element)">
+                                            <img src="assets/icons/Icon simple-email.svg" class="ico-img" alt="email">
+                                            &nbsp;Email </a>
+                                        <a class="text-left" (click)="downloadPDF(element.docNumber)">
+                                            <img src="assets/icons/Icon awesome-file-pdf.svg" class="ico-img"
+                                                alt="Download as PDF"> &nbsp;Download as PDF </a>
+                                        <a class="text-left" (click)="statementDetails(element.docNumber)">
+                                            <img src="assets/icons/Icon ionic-ios-eye.svg" class="ico-img"
+                                                alt="View More Details"> &nbsp;View More Details </a>
+                                    </div>
+                                    <span (click)="downloadPDF(element.docNumber)"> <img src="assets/icons/download.svg"
+                                            class="ico-img" alt="download" title="Download as PDF"> &nbsp;
+                                    </span>
+                                    <!-- <span (click)="downloadCSV(element.docNumber)"> <img src="assets/icons/download.svg"
+                                        class="ico-img" alt="download"> &nbsp;
+                                </span> -->
+                                    <!-- <span> <img src="assets/icons/greater_than.svg" class="ico-img" alt="greater_than">
+                                        &nbsp; </span> -->
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns "></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
+
+                        </table>
+                        <table class="noDataTable">
+                            <tr *ngIf="dataSource?.filteredData && dataSource?.filteredData?.length == 0">
+                                <td style="text-align: center;" [attr.colspan]="displayedColumns.length">
+                                    No Records Found!
+                                </td>
+                            </tr>
+                        </table>
+                        <ng-container *ngIf="getdataSource != null">
+                        <mat-paginator *ngIf="isPagination" appPagination [length]="testPaginator.length " [pageSizeOptions]="[36,''] " [pageSize]="testPaginator.pageSize " [pageIndex]="testPaginator.pageIndex " [hidePageSize]="false " (page)="pageEvent($event) ">
+                        </mat-paginator>
+                    </ng-container>
+
+                    <ng-container *ngIf="getdataSource == null">
+                        <mat-paginator *ngIf="isPagination" appPagination [length]="testPaginator.length " [pageSizeOptions]="[12,24,36] " [pageSize]="testPaginator.pageSize " [pageIndex]="testPaginator.pageIndex " [hidePageSize]="false " (page)="pageEvent($event) ">
+                        </mat-paginator>
+                    </ng-container>
+
+                    </div>
+                    <div class="bottom-btns" *ngIf="isPagination">
+                        <div class="">
+                        </div>
+                        <div class="">
+                            <button class="dwnld-button" type="button" style="width: 307px;border: none;"
+                                (click)="multipleDownloadPDF(selection.selected)">
+                                <img src="assets/icons/download.svg" class="" alt="download"
+                                    style="filter: brightness(10);"> &nbsp;
+                                Download Selected
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="isMobile">
+    <div class="container" *ngIf="isParticularStatement">
+        <div class="loading" *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+        <div class="">
+            <div class="row lo_sensitive">
+                <div class="heading-row row">
+                    <div class="col-md-9 heading statementhd">
+                        STATEMENTS
+                    </div>
+                    <div class="col-md-3 update-preference" style="z-index: 1;">
+                        <button class="update-preference-button" (click)="updatePrefRoute()"> Update Preferences
+                        </button>
+                    </div>
+                    <br />
+                </div>
+                <div class="col-md-3 custom-width-navigation" style="margin-top: 7rem;">
+                    <div>
+                        <app-account-left-nav [selectedTab]="'statements'"></app-account-left-nav>
+                    </div>
+                </div>
+                <div class="col-md-9 custom-width-grid statments">
+                    <div class="row searchbox-row">
+                        <div class="col-9 flex-display cus-padding-right">
+
+                            <label class="form-check-label dateRangeLabel">Date Range</label>
+                            <div class="datepicker-width">
+                                <label class="datebox">
+                                    <!-- <input autocomplete="off" (click)="openDateFilterPopUp(data)" readonly aria-describedby="initialDescription" class="form-control date-filter border-search"
+                             aria-controls="results" [value]="fromDate + ' - ' + toDate" aria-autocomplete="both" placeholder="dd/MM/yyyy"   aria-label="Search"> -->
+                                    <app-ngb-date-rangepicker [disableDate]="false" pageName="statement"
+                                        (dateRangeEmitter)="dateRangeEmitter($event);">
+                                    </app-ngb-date-rangepicker>
+                                    <!-- <i class="fas fa-search" ng-reflect-type="SEARCH"></i> -->
+                                    <!-- <img class="calendar-icon" src="../../../assets/images/ic_calender.svg"> -->
+                                </label>
+
+                            </div>
+                        </div>
+                        <div class="col-3 pl-0 aligncenter">
+                            <a class="clear-filters" (click)="clearFilter()">Clear All Filters</a>
+                        </div>
+                    </div>
+                    <div *ngIf="mobData?.length > 0" class="row top">
+                        <div class="col-12">
+                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()" class="matselect">
+                            </mat-checkbox>&nbsp;<span class="font-18">Select All</span>
+                        </div>
+                    </div>
+                    <div *ngFor="let data of mobData" class="background-list" style="margin-top:5px">
+                        <div class="row">
+                            <div class="col-8 verti-center">
+                                <div class="left">
+                                    <mat-checkbox (click)="$event.stopPropagation()"
+                                        (change)="$event ? selection.toggle(data) : null"
+                                        [checked]="selection.isSelected(data)">
+                                    </mat-checkbox>
+
+                                </div>
+                                <div (click)="statementDetails(data.docNumber)">
+                                    <h2 class="headmob statementmain">Statement No : {{data.docNumber}} </h2>
+                                </div>
+                            </div>
+                            <div class="col-4 right">
+                                <span id="navbarDropdownMenuLink1" data-bs-toggle="dropdown"
+                                    style="transform: scale(1.3);" class="padright">
+                                    <img src="assets/icons/ellipsis.svg" class="icon-actions" alt="ellipsis"> &nbsp;
+                                </span>
+                                <div id="statement-action-popup"
+                                    class="dropdown-contenttype px-3 dropdown-menu dropdown-menu-end">
+                                    <a class="text-left" (click)="statementDialogOpen(data)">
+                                        <img src="assets/icons/Icon simple-email.svg" class="ico-img" alt="email">
+                                        &nbsp;Email </a>
+                                    <a class="text-left" (click)="downloadPDF(data.docNumber)">
+                                        <img src="assets/icons/Icon awesome-file-pdf.svg" class="ico-img"
+                                            alt="Download as PDF"> &nbsp;Download as PDF </a>
+                                    <a class="text-left" (click)="statementDetails(data.docNumber)">
+                                        <img src="assets/icons/Icon ionic-ios-eye.svg" class="ico-img"
+                                            alt="View More Details"> &nbsp;View More Details </a>
+                                </div>
+                                <span (click)="downloadPDF(data.docNumber)"> <img src="assets/icons/download.svg"
+                                        class="ico-img" alt="download" title="Download as PDF"> &nbsp;
+                                </span>
+
+                            </div>
+                        </div>
+                        <hr class="marginhr1" />
+                        <div (click)="statementDetails(data.docNumber)">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 class="leftlist">Date</h4>
+                                </div>
+                                <div class="col-6 pl-0">
+                                    <h4 class="rightlist text-right">{{data.docDate | date: 'dd/MM/yyyy'}}</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 class="leftlist">Customer Name</h4>
+                                </div>
+                                <div class="col-6 pl-0">
+                                    <h4 class="rightlist text-right">{{data.customerContext?.name}}</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 class="leftlist">Branch</h4>
+                                </div>
+                                <div class="col-6 pl-0">
+                                    <h4 class="rightlist text-right">{{ data?.branch?.name}}</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 class="leftlist">Total (incl.GST)</h4>
+                                </div>
+                                <div class="col-6 pl-0">
+                                    <h4 class="rightlist text-right">${{ data.totalOutstandingAmount | number:'1.2-2'}}
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="noDataTable mob">
+                        <tr *ngIf="mobData && mobData?.length == 0">
+                            <td style="text-align: center;" [attr.colspan]="displayedColumns.length">
+                                No Records Found!
+                            </td>
+                        </tr>
+                    </table>
+                    <div *ngIf="isMobile && viewMoreVisible">
+                        <button class="view-more" (click)="viewMoreClick()">View More</button>
+                    </div>
+
+                    <div class="row buttons">
+                        <div class="col-md-12 btngrp">
+                            <button class="btn cancelBtn col-3">
+                                Back
+                            </button>
+                            <button class="btn confirmBtn col-9" type="submit"
+                                (click)="multipleDownloadPDF(selection.selected)">
+                                <img src="assets/icons/download.svg" class="" alt="download"
+                                    style="filter: brightness(10);"> &nbsp; Download Selected
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!isMobile">
+    <div class="my_statements isparticular-statement" *ngIf="!isParticularStatement">
+        <div class="loading" *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+        <div class="row">
+            <div class="col-md-9 heading lo_sensitive">
+                CUSTOMER REF. {{ statementDataSource.customer.id }}
+            </div>
+            <div class="col-md-3 update-preference">
+                <button class="back-button statement-back-button" type="button" style="width: 124px;" (click)="back()">
+                    Back
+                </button>
+            </div>
+        </div>
+        <div class="row box lo_sensitive">
+            <div class="col-md-3 col">
+                <div style="margin-left: 10px;">
+                    <div class="divide">
+                        <p class="title">Customer Details</p>
+                        <!-- <p class="font-18">{{statementDataSource.customerContext.name}}</p> -->
+                        <p class="font-18">{{statementDataSource?.customerContext?.name}}</p>
+                        <p class="font-18">{{obsKeysToString(statementDataSource?.customerContext?.address)}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col">
+                <div style="margin-left: 10px;">
+                    <div class="divide lo_sensitive">
+                        <p class="title">Statement No.</p>
+                        <p class="font-18">{{ statementDataSource.docNumber }}</p>
+                    </div>
+                    <div class="divide">
+                        <p class="title">Statement Date</p>
+                        <p class="font-18">{{ statementDataSource.docDate }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col">
+                <div style="margin-left: 10px;">
+                    <div class="divide">
+                        <p class="title">Due Date</p>
+                        <p class="font-18">{{ statementDataSource.dueDate }}</p>
+                    </div>
+                    <div class="divide">
+                        <p class="title">Total Owing</p>
+                        <p class="font-18">{{ negativeConverter(statementDataSource.totalOutstandingAmount) }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col">
+                <div style="margin-left: 10px;">
+                    <div class="divide">
+                        <p class="title">Overdue</p>
+                        <p class="font-18">{{ negativeConverter(statementDataSource.currentOverdueAmount)}}</p>
+                    </div>
+                    <div class="divide">
+                        <p class="title">Current</p>
+                        <p class="font-18">{{ negativeConverter(statementDataSource.currentAmount) }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <p class="font-18 spacing-p">
+                    Overdue accounts will incur a late payment fee of $10.00. Additional fees and interest charges may
+                    be applied, if account remains in arrears.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <table mat-table [dataSource]="statementDataSource.statementLines">
+                <!-- checkbox Column -->
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="documentNo">
+                    <th mat-header-cell *matHeaderCellDef style="width: 18%;" class="custom-table-bottom-align">
+                        Document No.
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="cursor: default;" class="lo_sensitive">
+                        {{element.documentReference}} </td>
+                </ng-container>
+
+                <!-- Role Column -->
+                <ng-container matColumnDef="date">
+                    <th class="position-relative custom-table-bottom-align" mat-header-cell *matHeaderCellDef
+                        style="width: 13%;"> Date
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="cursor: default;">
+                        {{element.transactionDate }} </td>
+                </ng-container>
+                <ng-container matColumnDef="jobName">
+                    <th mat-header-cell *matHeaderCellDef style="width: 13%;" class="custom-table-bottom-align"> Job
+                        Name
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="cursor: default;" class="lo_sensitive">
+                        {{ element.jobName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef class="status-class custom-table-bottom-align"
+                        style="justify-content: center;width: 13%;cursor: default;">
+                        Type &nbsp;
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="cursor: default;">
+                        {{ element.transactionType}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="order ref">
+                    <th mat-header-cell *matHeaderCellDef style="width: 20%;" class="custom-table-bottom-align"> Order /
+                        Job Ref. </th>
+                    <td mat-cell *matCellDef="let element" style="cursor: default;" class="lo_sensitive"> {{ element.customerReference}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="amountDue">
+                    <th mat-header-cell *matHeaderCellDef style="line-height: 1.2;width: 18%;"
+                        class="custom-table-align custom-table-bottom-align"> Amount Due <br><span class="span-gst">
+                            (incl. GST) </span> </th>
+                    <td mat-cell *matCellDef="let element" style="cursor: default;" class="lo_sensitive"> {{
+                        negativeConverter(element.openAmount)}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Actions">
+                    <th mat-header-cell *matHeaderCellDef> Actions </th>
+                    <td mat-cell *matCellDef="let element" class="icon-td" style="margin-left: 25%"
+                        class="custom-table-bottom-align">
+                        <span id="navbarDropdownMenuLink1" data-bs-toggle="dropdown">
+                            <img src="assets/icons/ellipsis.svg" class="icon-actions" style="transform: scale(1.8);"
+                                alt="ellipsis"> &nbsp; </span>
+                        <div id="statement-detail-action-popup"
+                            class="dropdown-contenttype px-3 dropdown-menu dropdown-menu-end">
+                            <a class="text-left" (click)="detailStatementDialogOpen(element.documentReference,true)">
+                                <img src="assets/icons/Icon simple-email.svg" class="icon-actions" alt="email">
+                                &nbsp;Email </a>
+                            <a class="text-left" (click)="detailDownloadPDF(element.documentReference)">
+                                <img src="assets/icons/Icon awesome-file-pdf.svg" class="icon-actions"
+                                    alt="Download as PDF"> &nbsp;Download as PDF </a>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="statementDisplayedColumns "></tr>
+                <tr mat-row *matRowDef="let row; columns: statementDisplayedColumns; "></tr>
+
+            </table>
+            <table class="noDataTable">
+                <tr *ngIf="statementDataSource?.filteredData && statementDataSource?.filteredData?.length == 0">
+                    <td style="text-align: center;" [attr.colspan]="statementDisplayedColumns.length">
+                        No Records Found!
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div *ngIf="isMobile">
+    <div class="container" *ngIf="!isParticularStatement">
+        <div class="loading" *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+        <div class="row marg">
+            <div class="col-md-9 col-sm-9 col-9 heading headdetail">
+                STATEMENT NO. {{ statementDataSource.docNumber }}
+            </div>
+            <div class="col-md-3 col-sm-3 col-3 update-preference">
+                <button class="back-button statement-back-button" type="button" (click)="back()">
+                    Back
+                </button>
+            </div>
+        </div>
+
+        <div class="background-list box lo_sensitive">
+            <div class="row margtp">
+                <div class="col-12">
+                    <div class="divide">
+                        <p class="title">Customer Details</p>
+                        <!-- <p class="font-18">{{statementDataSource.customer.id}}</p> -->
+                        <p class="font-18">{{statementDataSource?.customerContext?.name}}</p>
+                        <p class="font-18">{{obsKeysToString(statementDataSource?.customerContext?.address)}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row margtp">
+                <div class="col-6">
+                    <div class="divide">
+                        <p class="title">Statement No.</p>
+                        <p class="font-18">{{ statementDataSource.docNumber }}</p>
+                    </div>
+
+                </div>
+                <div class="col-6">
+                    <div class="divide">
+                        <p class="title">Statement Date</p>
+                        <p class="font-18">{{ statementDataSource.docDate }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row margtp">
+                <div class="col-6">
+                    <div class="divide">
+                        <p class="title">Due Date</p>
+                        <p class="font-18">{{ statementDataSource.dueDate }}</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="divide">
+                        <p class="title">Total Owing</p>
+                        <p class="font-18">${{ statementDataSource.totalOutstandingAmount | number: '1.2-2' }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row margtp">
+                <div class="col-6">
+                    <div class="divide">
+                        <p class="title">Overdue</p>
+                        <p class="font-18">${{ statementDataSource.currentOverdueAmount | number: '1.2-2' }}</p>
+                    </div>
+
+                </div>
+                <div class="col-6">
+                    <div class="divide">
+                        <p class="title">Current</p>
+                        <p class="font-18">${{ statementDataSource.currentAmount | number: '1.2-2' }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row margtp">
+                <div class="col-12">
+                    <div class="divide">
+                        <p class="font-18 spacing-p">
+                            Overdue accounts will incur a late payment fee of $10.00. Additional fees and interest
+                            charges may be applied, if account remains in arrears.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngFor="let data1 of mobData1" class="background-list invoicedetail">
+            <div class="row">
+                <div class="col-10 verti-center">
+                    <h2 class="headmob headdoc">Document No. : <span class="lo_sensitive">{{data1.documentReference}}</span> </h2>
+                </div>
+                <div class="col-2 right1">
+                    <span id="navbarDropdownMenuLink1" data-bs-toggle="dropdown">
+                        <img src="assets/icons/ellipsis.svg" class="icon-actions" style="transform: scale(1.8);"
+                            alt="ellipsis"> &nbsp; </span>
+                    <div id="statement-detail-action-popup"
+                        class="dropdown-contenttype px-3 dropdown-menu dropdown-menu-end">
+                        <a class="text-left" (click)="statementDialogOpen(statementDataSource.docNumber, true)">
+                            <img src="assets/icons/Icon simple-email.svg" class="icon-actions" alt="email"> &nbsp;Email
+                        </a>
+                        <a class="text-left" (click)="downloadPDF(statementDataSource.docNumber)">
+                            <img src="assets/icons/Icon awesome-file-pdf.svg" class="icon-actions"
+                                alt="Download as PDF"> &nbsp;Download as PDF </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="marginhr" />
+            <div class="row">
+                <div class="col-6">
+                    <h4 class="leftlist">
+                        Date
+                    </h4>
+                </div>
+                <div class="col-6">
+                    <h4 class="rightlist text-right">
+                        {{data1.transactionDate | date: 'dd/MM/yyyy' }}
+                    </h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <h4 class="leftlist">
+                        Job Name
+                    </h4>
+                </div>
+                <div class="col-6">
+                    <h4 class="rightlist text-right lo_sensitive">
+                        {{data1.jobName }}
+                    </h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <h4 class="leftlist">
+                        Type
+                    </h4>
+                </div>
+                <div class="col-6">
+                    <h4 class="rightlist text-right">
+                        {{data1.transactionType }}
+                    </h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <h4 class="leftlist">
+                        Order/Job Ref
+                    </h4>
+                </div>
+                <div class="col-6">
+                    <h4 class="rightlist text-right lo_sensitive">
+                        {{data1.customerReference}}
+                    </h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <h4 class="leftlist">
+                        Amount Due(incl.GST)
+                    </h4>
+                </div>
+                <div class="col-6">
+                    <h4 class="rightlist text-right lo_sensitive">
+                        ${{ data1.openAmount | number: '1.2-2'}}
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="isMobile && viewMoreVisible1" class="statementinner">
+            <button class="view-more" (click)="viewMoreClickDetailPage()">View More</button>
+        </div>
+        <div class="row marg">
+
+            <table class="noDataTable">
+                <tr *ngIf="statementDataSource?.filteredData && statementDataSource?.filteredData?.length == 0">
+                    <td style="text-align: center;" [attr.colspan]="statementDisplayedColumns.length">
+                        No Records Found!
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

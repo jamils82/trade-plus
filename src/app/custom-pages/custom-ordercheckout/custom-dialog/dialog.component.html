@@ -1,0 +1,235 @@
+<!-- <div class="dialog-component-css"> -->
+<div [ngClass]="{'for-contact-padding': data.templateName == 'contactList_Template','for-branch':data.templateName=='addBranch_Template'}">
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon">close</mat-icon>
+    </button>
+
+    <ng-container [ngTemplateOutlet]="isDelivery() ? deliveryAddress_Template :
+            (isContactList() ? contactList_Template : addBranch_Template)" [ngTemplateOutletContext]="{ $implicit: true }">
+    </ng-container>
+</div>
+
+<ng-template #contactList_Template>
+    <div class="custom-edit-popup">
+        <h1 mat-dialog-title class="mat-h1">EDIT CONTACT</h1>
+        <div mat-dialog-content style="margin-bottom: 5%;">
+            <p class="marker" style="margin-bottom: 10px;">*Required Fields</p>
+            <form #editForm="ngForm">
+                <div class="form-container">
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="createContact" class="form-label job-ref custom-contact-dialog ">Name<span
+                                    class="marker">*&nbsp;</span></label>
+                        </div>
+                        <div class="col-10">
+                            <div class="row" style="margin-bottom: 15px !important;font-family: 'NiveauGrotesk';">
+                                <div class="col-sm-6 ">
+                                    <input type="text" class="form-control lo_sensitive" [(ngModel)]="firstName" id="firstname" ngModel name="firstname" #name="ngModel" style="font-size: var(--fontsize18);" (input)="testFormValid(editForm)" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)"
+                                        placeholder="First Name" required />
+                                </div>
+                                <div class="col-sm-6 lastName-edit">
+                                    <input type="text" class="form-control lo_sensitive" [(ngModel)]="lastName" id="lastname" ngModel name="lastname" #name="ngModel" style="font-size: var(--fontsize18);" (input)="testFormValid(editForm)" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)"
+                                        placeholder="Last Name" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-container">
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="createContact" class="form-label job-ref custom-contact-dialog">Mobile</label>
+                        </div>
+                        <div class="col-10 input-group prefix lo_sensitive">
+                            <!-- changes -->
+                            <span class="input-group-addon">+61</span>
+                            <label class="static-value" >0</label>
+                            <input type="text" class="form-control" [(ngModel)]="mobile" id="Mobile" ngModel name="mobile" #name="ngModel" (input)="testFormValid(editForm)" (keypress)="numberOnly($event)" maxlength="15" placeholder="Mobile Number" required>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- <div mat-dialog-actions> -->
+        <div class="row button-sec">
+            <div class='col-6'>
+                <button mat-button (click)="onNoClick()" class="cancel_button contact-dial-cancel-btn">Cancel</button>
+            </div>
+            <div class='col-6'>
+                <button id="save_button" mat-button class="crete_button contact-dial-save-btn" (click)="onNoClick(true)" [mat-dialog-close]="data.animal" cdkFocusInitial>Save</button>
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>
+</ng-template>
+
+<ng-template #deliveryAddress_Template>
+    <div class="del-add-popup">
+        <h1 mat-dialog-title>DELEVERY ADDRESS DETAILS</h1>
+        <div mat-dialog-content>
+            <p class="marker">*Required Fields</p>
+            <div class="dialog-form-container">
+                <label for="createContact" class="form-label job-ref">Address<span class="marker">*</span></label>
+                <textarea class="form-control" id="address" required [(ngModel)]="dialogData.address"></textarea>
+            </div>
+        </div>
+        <!-- <div mat-dialog-actions> -->
+        <div class="row">
+            <div class='col-sm-6'>
+                <button mat-button (click)="onNoClick()" class="cancel_button">Cancel</button>
+            </div>
+            <div class='col-sm-6'>
+                <button mat-button class="crete_button" [mat-dialog-close]="data.animal" (click)="onNoClick(true)" cdkFocusInitial>Create
+                </button>
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>
+</ng-template>
+
+<ng-template #addBranch_Template>
+    <div id="addBranch">
+        <h1 mat-dialog-title class="add-branch" style="text-transform: uppercase">Add Branch</h1>
+        <p class="para-sub-title cus-para-sub-title">Select the branch you wish to collect from.</p>
+        <mat-form-field appearance="outline" class="branch-search-input" style="width: 100%!important;">
+            <mat-icon class="branch-prefix-icon" matPrefix>location_on</mat-icon>
+            <input #searchKey type="tel" matInput placeholder="Search store by address, city or postcode" (input)="searchBranch(searchKey.value)" class="input-custom">
+            <mat-icon matSuffix class="custom-search-icon">search</mat-icon>
+        </mat-form-field>
+        <h4 class="sub_header custom-sub-header">Home Branch</h4>
+        <div class="branch-acc-wh homeBranch" id="branch-accordian">
+            <mat-accordion class="example-headers-align add-branch-dialog-content" multi>
+                <mat-expansion-panel class="panel" *ngFor="let data of homeBranchData;let i=index;let even = even;" [expanded]="i == 0 ? true : false">
+                    <mat-expansion-panel-header [ngClass]="even ? 'odd-background' : 'odd-background'">
+                        <mat-panel-title style="display: block;">
+                            <div class="custom-spacing-popuplist">
+                                <div class="data-segment">
+                                    <div class="for-km">
+                                        <p class="panel_header">{{data.name}}</p>
+                                        <mat-chip-list aria-label="Fish selection">
+                                            <mat-chip color="primary" style="width: auto;
+                                            display: inline-block;
+                                            line-height: 1px;" selected>{{data?.formattedDistance}}</mat-chip>
+                                        </mat-chip-list>
+                                    </div>
+                                    <div class="mob-change-font">
+                                        <p class="para-sub-title custom-font-size-em">{{data.address.formattedAddress}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <button mat-button class="popup-select_button" (click)="branchSelectClick(data)">Select
+                                    </button>
+                                </div>
+                            </div>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="container branch_container" style="font-family:'NiveauGrotesk';">
+                        <div class="row">
+                            <div class="col col-12 col-md-6 col-inside-p">
+                                <p class="col_header">Contact Details</p>
+                                <p>Email: {{data.address.email}}</p>
+                                <p>Phone: +{{contactNumber(data.address.phone)}}</p>
+                            </div>
+                            <div class="col col-6 col-md-3 col-inside-p">
+                                <p class="col_header"> Opening Hours</p>
+                                <div *ngFor="let data of data?.buOpeningSchedule[0]?.weekDayOpeningList">
+                                    <p *ngIf="data.closed">{{ data?.weekDay }}</p>
+                                    <p *ngIf="!data.closed">{{ data?.weekDay }}</p>
+                                </div>
+                            </div>
+                            <div class="col col-7 col-md-3 col-inside-p timing-columns">
+                                <div *ngFor="let data of data?.buOpeningSchedule[0]?.weekDayOpeningList">
+                                    <!-- <p *ngIf="data.closed" style="color: #973937;">Closed</p>
+                                    <p
+                                        *ngIf="!data.closed && data?.openingTime?.formattedHour && data?.closingTime?.formattedHour;then closedSpan">
+                                        {{ data?.openingTime?.formattedHour }} - {{
+                                        data?.closingTime?.formattedHour }}</p>
+                                    <ng-template #closedSpan>
+                                        <p style="color: #973937;">Closed</p>
+                                    </ng-template> -->
+
+                                    <p *ngIf="data?.openingTime?.formattedHour || data?.closingTime?.formattedHour">
+                                        {{data?.openingTime?.formattedHour}} - {{data?.closingTime?.formattedHour}}</p>
+                                    <p style="color: #973937" *ngIf="!data?.openingTime?.formattedHour && !data?.closingTime?.formattedHour">
+                                        Closed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <h4 class="sub_header custom-sub-header">Nearest Branch</h4>
+        <div class="branch-acc-wh" id="branch-accordian">
+            <mat-accordion class="example-headers-align add-branch-dialog-content" multi>
+                <mat-expansion-panel class="panel" *ngFor="let data of tempBranchListAllData;let i=index;let even = even;">
+                    <mat-expansion-panel-header [ngClass]="even ? 'transparent-background' : 'odd-background'">
+                        <mat-panel-title style="display: block;">
+                            <div class="custom-spacing-popuplist">
+                                <div class="data-segment">
+                                    <div class="for-km">
+                                        <p class="panel_header">{{data.name}}</p>
+                                        <mat-chip-list aria-label="Fish selection">
+                                            <mat-chip color="primary" style="width: auto;
+                                            display: inline-block;
+                                            line-height: 1px;" selected>{{data?.formattedDistance}}</mat-chip>
+                                        </mat-chip-list>
+                                    </div>
+                                    <div class="mob-change-font">
+                                        <p class="para-sub-title custom-font-size-em">{{data.address.formattedAddress}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <button mat-button class="popup-select_button" (click)="branchSelectClick(data)">Select
+                                    </button>
+                                </div>
+                            </div>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="container branch_container" style="font-family:'NiveauGrotesk';">
+                        <div class="row">
+                            <div class="col col-12 col-md-6 col-inside-p">
+                                <p class="col_header">Contact Details</p>
+                                <p>Email: {{data.address.email}}</p>
+                                <p>Phone: +{{contactNumber(data.address.phone)}}</p>
+                            </div>
+                            <div class="col col-6 col-md-3 col-inside-p">
+                                <p class="col_header"> Opening Hours</p>
+                                <div *ngFor="let data of data?.buOpeningSchedule[0]?.weekDayOpeningList">
+                                    <p *ngIf="data.closed">{{ data?.weekDay }}</p>
+                                    <p *ngIf="!data.closed">{{ data?.weekDay }}</p>
+                                </div>
+                            </div>
+                            <div class="col col-7 col-md-3 col-inside-p timing-columns">
+                                <div *ngFor="let data of data?.buOpeningSchedule[0]?.weekDayOpeningList">
+                                    <!-- <p *ngIf="data.closed" style="color: #973937;">Closed</p>
+                                    <p
+                                        *ngIf="!data.closed && data?.openingTime?.formattedHour && data?.closingTime?.formattedHour;then closedSpan">
+                                        {{ data?.openingTime?.formattedHour }} - {{
+                                        data?.closingTime?.formattedHour }}</p>
+                                    <ng-template #closedSpan>
+                                        <p style="color: #973937;">Closed</p>
+                                    </ng-template> -->
+
+                                    <p *ngIf="data?.openingTime?.formattedHour || data?.closingTime?.formattedHour">
+                                        {{data?.openingTime?.formattedHour}} - {{data?.closingTime?.formattedHour}}</p>
+                                    <p style="color: #973937" *ngIf="!data?.openingTime?.formattedHour && !data?.closingTime?.formattedHour">
+                                        Closed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <!-- <div mat-dialog-actions> -->
+        <div style="display: flex;justify-content: center;">
+            <button mat-button (click)="onNoClick()" class="custom-close-btn">Close</button>
+        </div>
+        <!-- </div> -->
+    </div>
+</ng-template>
+
+<!-- </div> -->

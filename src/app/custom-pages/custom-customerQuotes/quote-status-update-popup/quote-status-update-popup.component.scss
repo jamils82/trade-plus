@@ -1,0 +1,22 @@
+@import '../quotes.component.scss';
+
+.cancel-info { 
+    margin: 25px 0 15px;
+    color: #666666;
+    font-size: 16px;
+}
+::ng-deep .quoteStatusUpdate  {
+    
+    .modal-dialog  {    
+        @media (min-width: 1024px) {
+            min-width:946px !important;
+            max-width:946px !important;
+            .modal-content,.modal-body {
+                border-radius: 16px;
+            }
+        }
+        @media (max-width: 1023px) {
+            margin:0 !important;
+        }
+    }
+}

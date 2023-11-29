@@ -1,0 +1,49 @@
+<ng-container *ngIf="specification$ | async as product">
+  <div class="container">
+    <table *ngFor="let class of product?.classifications">
+      <tr *ngFor="let feature of class.features">
+        <td class="key">{{ feature.name }}</td>
+        <td *ngFor="let featureValue of feature?.featureValues">
+          {{ featureValue?.value }}
+            <span *ngIf="feature.featureUnit?.symbol?.length > 0 && feature.featureUnit.unitType != '300'">
+              {{ feature.featureUnit.symbol }}
+            </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="specification$ | async as spec">
+    <div class="container">
+      <table>
+        <!-- <tr>
+          <td *ngIf="spec?.rangeOverview" class="key">Range Overview</td>
+          <td>{{ spec.rangeOverview }}</td>
+        </tr>
+        <tr>
+          <td *ngIf="spec?.warrantyDownloads" class="key">Warranty Downloads</td>
+          <td>{{ spec.warrantyDownloads }}</td>
+        </tr>
+        <tr>
+          <td *ngIf="spec?.maintenanceCare" class="key">Maintenance Care</td>
+          <td>{{ spec.maintenanceCare }}</td>
+        </tr>
+        <tr>
+          <td *ngIf="spec?.msds" class="key">MSDS</td>
+          <td >{{ spec.msds }}</td>
+        </tr> -->
+        <tr>
+          <!-- <td *ngIf="spec?.video" class="key">Video</td> -->
+          <td *ngFor="let data of videoData">
+            <!-- <video autoplay="" loop="" src={{video}} controls="" width="640" height="480">
+              <source type="video/mp4" src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_data_driven_testing_csv.mp4">
+              </video> -->
+            <video width="151" height="106" src={{data}} controls>
+              Your browser does not support the video tag.
+            </video>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </ng-container>

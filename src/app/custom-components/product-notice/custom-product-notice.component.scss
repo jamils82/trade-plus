@@ -1,0 +1,23 @@
+@import "../../shared/styles/variables.scss";
+
+.notice-page-wrapper {
+    margin-bottom: 100px;
+}
+.main-notice-heading {
+    color: #4d5963;
+    font-size: 1.875rem;
+    @include font-NiveauGroteskBold
+}
+.notice-heading {
+    font-size: 22px;
+    @include font-NiveauGroteskBold
+}
+
+.notice-section {
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+

@@ -1,0 +1,468 @@
+@import "../../shared/styles/fontSize.scss";
+
+.order_summary {
+  margin: 20px;
+  padding: 20px;
+  background: white;
+  font-family: "NiveauGrotesk" !important;
+  color: #495a64;
+  .title {
+    font-weight: bold;
+    padding: 30px;
+    margin: 0px;
+  }
+  .order_info {
+    padding: 0px 30px 30px 30px;
+    .row {
+      margin: 0px;
+    }
+    .col {
+      margin: auto;
+      p {
+        margin: 20px 0px;
+        font-size: 1em;
+      }
+    }
+    cx-media {
+      width: 86px;
+      height: 86px;
+    }
+  }
+  .bottom {
+    margin-top: 40px !important;
+    .info {
+      p {
+        max-width: 65%;
+        font-size: 12px;
+      }
+    }
+    .total {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 1em;
+      span {
+        font-weight: normal;
+        font-size: 1em;
+      }
+    }
+    .price {
+      margin: auto;
+      text-align: end;
+      padding-left: 0;
+      p {
+        font-weight: bold;
+        margin-bottom: 0;
+      }
+    }
+    .subtotal {
+      margin: auto;
+      left: 2rem;
+      padding-right: 0;
+      p {
+        margin-bottom: 0;
+      }
+      .sub {
+        font-weight: 500;
+        span {
+          font-weight: normal;
+          font-size: 1em;
+        }
+      }
+      .gst {
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.confirmation {
+  margin: 20px;
+  font-family: "NiveauGrotesk" !important;
+  color: #495a64;
+  h4 {
+    margin-bottom: 20px;
+  }
+  .box {
+    background: white;
+    padding: 50px 50px 50px 60px;
+    .img {
+      width: 70px;
+      height: 70px;
+    }
+  }
+  .for-mobile {
+    display: none;
+  }
+  .for-desktop {
+    display: block;
+  }
+}
+
+.delivery_information {
+  margin: 20px;
+  font-family: "NiveauGrotesk" !important;
+  color: #3f3f3fc4;
+  .box {
+    background: white;
+    padding: 20px 20px 20px 0;
+    .col {
+      margin: auto;
+      p {
+        margin: 5px;
+        font-size: 1em;
+      }
+      .divide {
+        padding: 10px 0px;
+      }
+    }
+  }
+  .box_img {
+    height: 150px;
+    width: 150px;
+    border: solid 3px lightgrey;
+    border-radius: 10px;
+    text-align: center;
+    margin: auto;
+  }
+  .delivery-box {
+    border: 2px solid #c3c1c1c4;
+    border-radius: 20px;
+    opacity: 1;
+    background: #e0e1e233 0% 0% no-repeat padding-box;
+    display: inline-flex;
+    width: 331px;
+    height: 237px;
+    padding: 95px;
+    .delivery-img {
+      width: 142px;
+      height: 84px;
+    }
+    .pickup-img {
+      width: 75px;
+      height: 50px;
+    }
+  }
+}
+
+.font-bold {
+  font-family: "NiveauGroteskBold" !important;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+.crete_button {
+  float: right;
+  background: #00afe2 0 0 no-repeat padding-box;
+  color: #fff !important;
+  width: 174px;
+  font-size: var(--fontsize24);
+  height: 55px;
+}
+
+.button_set {
+  margin: 0;
+  padding: 0 0 0 5px;
+}
+
+.for-space-qty {
+  border: 1px solid #d8d8d8;
+  border-radius: 5px;
+  padding: 4px;
+}
+
+.title-info {
+  padding: 10px 0 5px 4%;
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+.cus-margin {
+  margin-left: 55px;
+}
+.margin-left-20 {
+  margin-left: 20px;
+}
+.fix-min-height {
+  min-height: 8.3rem;
+}
+
+.font-size-34 {
+  font-size: var(--fontsize34) !important;
+}
+
+.font-size-24 {
+  font-size: var(--fontsize24) !important;
+}
+
+.font-size-23 {
+  font-size: var(--fontsize23) !important;
+}
+
+.font-size-20 {
+  font-size: var(--fontsize20) !important;
+}
+
+.font-size-18 {
+  font-size: var(--fontsize18) !important;
+}
+.for-mob-view,
+.for-dm-view {
+  display: none;
+}
+.for-desktop-view,
+.for-mob-line {
+  display: block;
+}
+.hr-line {
+  display: block;
+}
+.excl-gst-css{
+  padding-left: 5px;
+  position: relative;
+  top:-2px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 920px) {
+  .delivery_information {
+    margin: 20px 10px !important;
+  }
+  .delivery-box {
+    width: 124px!important;
+    height: 90px!important;
+    border-radius: 10px !important;
+    border-width: 1.3px !important;
+    border-color: #707070 !important;
+    .delivery-img {
+      width: 60px !important;
+      height: 35px !important;
+      margin: auto;
+    }
+  }
+
+  .for-dm-view {
+    display: contents;
+    color: #495a64;
+    font-size: 14px !important;
+    font-family: "NiveauGrotesk";
+  }
+
+  .cc-delivery-box {
+    width: 124px!important;
+    height: 90px!important;
+    border-radius: 10px!important;
+    border-color: #707070!important;
+    padding: 0px !important;
+    .cc-img {
+      width: 45px !important;
+      height: 45px !important;
+    }
+  }
+
+  .for-space-qty {
+    border: 1px solid #d8d8d8;
+    border-radius: 5px;
+    padding: 4px 10px;
+    font-family: "NiveauGroteskBold";
+  }
+
+  .divide-top {
+    padding-top: 0px !important;
+  }
+
+  .divide-first-top {
+    margin-top: 1.75rem !important;
+  }
+
+  .img-content {
+    text-align: left;
+    margin-left: 15px;
+  }
+
+  .delivery_information .box,
+  .button_set {
+    padding: 0;
+  }
+  .crete_button {
+    width: 75px;
+    height: 35px;
+    font-size: 18px !important;
+    margin-top: 8px;
+  }
+  .title-info {
+    font-size: 14px !important;
+    padding: 10px 0 5px 0%;
+    margin-right: -20px !important;
+  }
+  .cus-margin {
+    margin-left: 0;
+  }
+  .margin-left-20 {
+    margin-left: 0;
+  }
+  .button_set {
+    margin-bottom: 20px !important;
+  }
+  .mob-row {
+    display: contents;
+  }
+  .cus-mob-view {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px !important;
+  }
+
+  .fix-min-height {
+    min-height: auto !important;
+  }
+
+  .order_summary {
+    margin: 10px;
+    padding: 0px;
+    .bottom {
+      margin-top: 0 !important;
+      .total {
+        margin-top: 15px;
+        color: #495A64 !important;
+        font-family: 'NiveauGroteskBold' !important;
+      }
+    }
+    .title {
+      padding: 15px 0 11px 10px!important;
+      font-size: var(--fontsize18) !important;
+    }
+    .order_info {
+      padding: 0 10px 30px;
+      display: flex;
+      flex-direction: column-reverse;
+      cx-media {
+        width: 50px;
+        height: 50px;
+      }
+    }
+    .bottom .info p {
+      max-width: 100% !important;
+      font-size: 12px !important;
+    }
+
+    .bottom .subtotal {
+      left: 0 !important;
+      top: -30px;
+      color: #495a64;
+      font-family: 'NiveauGroteskBold' !important;
+    }
+  }
+
+  .for-mob-view {
+    display: block;
+    margin: 0 -10px -30px;
+    p {
+      margin-bottom: 0px !important;
+    }
+  }
+  .for-desktop-view,
+  .for-mob-line {
+    display: none;
+  }
+
+  .for-img,
+  .for-details {
+    margin: 10px;
+  }
+  .hr-line {
+    margin-left: 0;
+    display: none !important;
+  }
+  .price {
+    margin-top: -80px !important;
+    margin-bottom: 20px !important;
+    .total {
+      border-bottom: 1px solid #ededed;
+      border-top: 1px solid #d7d7d7 !important;
+      padding-bottom: 8px;
+      padding-top: 2px;
+    }
+  }
+  .confirmation {
+    .for-mobile {
+      display: block;
+    }
+    .for-desktop {
+      display: none;
+    }
+    .confirm-img {
+      width: 55px !important;
+      height: 55px !important;
+    }
+    margin: 10px;
+    font-family: "NiveauGrotesk" !important;
+    color: #495a64;
+    h4 {
+      margin-bottom: 20px;
+    }
+    .box {
+      background: white;
+      padding: 10px;
+      margin-bottom: -10px;
+    }
+  }
+  .mob-confirm {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .line-height-p {
+    line-height: 15px;
+  }
+  .order-summary {
+    font-size: 14px;
+  }
+
+  .info-align {
+    padding: 0 !important;
+  }
+
+  .mob-font-total,.mob-font-value {
+    font-size: 20px !important;
+    font-family: 'NiveauGroteskBold' !important;
+  }
+  .delivery_information .box .col p{
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+      .font-size-18{
+        font-size: var(--fontsize16)!important;
+      }
+  }
+  .delivery_information {
+    .box {
+      .col {
+        .divide {
+          padding: 0.8rem 0;
+        }
+        p.font-size-18{
+          font-size: var(--fontsize16)!important;
+          color: #495A64 !important;
+        }
+        p.font-size-24{
+          font-size: var(--fontsize18)!important;
+        }
+      }
+    }
+  }
+  .excl-gst-css{
+    font-size: var(--fontsize18) !important;
+    display: inline-block;
+    color: #495A64;
+    font-family: 'NiveauGrotesk';
+    padding-left: 5px;
+  }
+}
+
+.poduct-list-details .font-bold.font-size-24{
+  display: -webkit-box;
+   -webkit-line-clamp: 3;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   margin-bottom: 0px;
+  //  padding: 10px 0;
+   line-height: 25px;
+}

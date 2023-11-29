@@ -1,0 +1,114 @@
+<div class=" modal-header modal-head container">
+  <button type="button" class="close" aria-label="Close" (click)="cancelModalPopup()">
+    <span aria-hidden="true">×</span>
+  </button>
+</div>
+<div class="modal-body ">
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <h1>{{companyProfileConstants.companysetUp}}</h1>
+      <!-- <p class="info">{{companyProfileConstants.infoText}}</p> -->
+      <p class="sub-info">{{companyProfileConstants.subInfo}}</p>
+      <div>
+        <form [formGroup]="form" enctype="multipart/form-data">
+          <div formGroupName="companyAddress">
+            <div class="form-group parallal-fields">
+              <label for="companyName">{{companyProfileConstants.companyName}}</label>
+              <div class="input-area">
+                <input type="text" (input)="changeEvent($event)" formControlName="companyName" class="form-control"
+                  maxlength="255" placeholder="Enter your company name">
+              </div>
+            </div>
+            <div class="form-group parallal-fields">
+              <label for="file">{{companyProfileConstants.companyLogo}}</label>
+              <div class="input-area">
+                <div class="pos-value">
+                  <input type="file" [disabled]="fileUplpoadError" #uploader (change)="uploadFile($event)" hidden
+                    class="form-control" placeholder="Upload your company logo" accept=".png,.jpg,.jpeg">
+                  <input type="text" [disabled]="fileUplpoadError" [value]=[fileName] (click)="uploader.click()"
+                    class="form-control" placeholder="Upload your company logo" accept=".png,.jpg,.jpeg"
+                    [readonly]="true">
+                  <span *ngIf='!this.fileName' class="browse-file-btn" (click)="uploader.click()">Browse files</span>
+                  <span *ngIf='this.fileName' class="clear-upload-image">
+                    <img class="tick-icon" src="../../../assets/images/tick-icon.svg">
+                    <img class="clear-icon" (click)="clearUploadFile()" src="../../../assets/images/remove-icon.svg">
+                  </span>
+                </div>
+                <div class="error"
+                  [ngStyle]="{'color':fileErrorMsg?'#CE1141':'#666','font-family':fileErrorMsg?'OpenSans-Bold':'OpenSans-Regular'}">
+                  {{companyProfileConstants.fileUploadErr}}
+                </div>
+              </div>
+            </div>
+            <div class="form-group parallal-fields">
+              <label for="phone">{{companyProfileConstants.phNumber}}</label>
+              <div class="input-area">
+                <input type="text" (input)="changeEvent($event)" class="form-control" maxlength="14"
+                  formControlName="phone" placeholder="Enter your company contact number">
+                <div *ngIf="form.get('companyAddress.phone').errors">
+                  <div class="error" *ngIf="form.get('companyAddress.phone').errors">
+                    {{quoteConstants.errorMsgPhone}}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="form-group parallal-fields">
+              <label>{{companyProfileConstants.address}}</label>
+              <!-- <app-custom-job-address (inputFieldJobaddress)='inputFieldJobaddress($event)'
+                            (getAdressName)='getAdressName($event)' (clearSearchField)="clearSearchField()" [placeholderCustom]='placeholderCustom' 
+                            [setEditAddress]='setEditAddress' [ngClass]="jobadrressError && adrressEditmode==false ? 'iput-err' : ''"> 
+                            </app-custom-job-address> -->
+              <div class="input-area">
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="address"
+                  placeholder="Enter your company address" 
+                  (focusout)='getAdressName($event)'
+                  (input)="changeEvent($event)">
+                <div *ngIf="form.get('companyAddress.address').errors">
+                  <div class="error" *ngIf="form.get('companyAddress.address').errors">
+                    {{quoteConstants.errorMsgPhone}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group parallal-fields">
+              <label for="email">{{companyProfileConstants.email}}</label>
+              <div class="input-area">
+                <input type="text" (input)="changeEvent($event)" class="form-control" formControlName="email"
+                placeholder="Enter company email address">
+                <div class="error" *ngIf="form.get('companyAddress.email').errors">
+                  <div *ngIf="form.get('companyAddress.email').errors.pattern">
+                    {{quoteConstants.errorMsgEmail}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="termsAndConditions">{{companyProfileConstants.termsAndCondition}}</label>
+            <textarea class="form-control" (input)="changeEvent($event)" formControlName="termsAndConditions"
+              maxlength="500" placeholder="Enter your terms and conditions"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="paymentTerms">{{companyProfileConstants.paymentTerms}}</label>
+            <textarea class="form-control" (input)="changeEvent($event)" formControlName="paymentTerms" maxlength="500"
+              placeholder="Enter your payment terms"></textarea>
+          </div>
+          <div class="form-group btn-wrapper">
+            <button type="button" class="btn btn-cancel" aria-label="Close" (click)="cancelModalPopup()">
+              {{quoteConstants.cancelText}}
+
+            </button>
+            <button class="btn btn-blue" (click)="submitUploadForm()"
+              [disabled]="!form.valid || jobadrressError && adrressEditmode==false ||fileErrorMsg ||isDisabled">
+              {{companyProfileConstants.saveDetails}}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

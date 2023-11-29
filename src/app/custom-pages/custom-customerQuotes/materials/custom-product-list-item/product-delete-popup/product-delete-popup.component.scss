@@ -1,0 +1,36 @@
+@import '../../../../custom-customerQuotes/quotes.component.scss';
+
+.btn-red { 
+    width:121px;
+    @include font-NiveauGroteskBold();
+}
+.cancel-info {
+    color:$grey;
+    font-size: 16px;
+    margin: 25px 0 15px;
+}
+::ng-deep .createQuotePopup.d-block + .modal-backdrop.fade.show{
+    opacity: 0;
+}
+::ng-deep .createQuotePopup  {
+    
+    .modal-dialog  {    
+        @media (min-width: 1024px) {
+            min-width:946px !important;
+            max-width:946px !important;
+            .modal-content,.modal-body {
+                border-radius: 4px;
+            }
+        }
+        @media (max-width: 1023px) {
+            margin:0 !important;
+        }
+    }
+}
+.sub-title {
+    margin:20px 0 16px;
+    &.mt-32 {
+        margin-top: 32px;
+    }
+} 
+

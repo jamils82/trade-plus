@@ -1,0 +1,265 @@
+@import '../../shared/styles/variables.scss';
+.wishlist-btn.plpList {
+    width: 100%;
+    padding-right: 10px;
+    cursor: pointer;
+    img {
+        width: var(--addToListImgWidth30);
+        height: var(--addToListImgHeight21);
+        text-align: center;
+    }
+    .wishlist.plpList {
+        background-color: $anchor-color;
+        border: 1px solid $anchor-color;
+        color: $white-color;
+        font-family: "NiveauGroteskBold";
+        font-size: var(--fontsize20);
+        min-height: 46px;
+        min-width: 0;
+        border-radius: 5px;
+        text-transform: none;
+        padding: 0;
+    }
+}
+
+.wishlist-btn.plpGrid {
+    width: 100%;
+    padding-right: 0px;
+    cursor: pointer;
+    img {
+        width: var(--addToListImgWidth30);
+        height: var(--addToListImgHeight21);
+        text-align: center;
+    }
+    .wishlist.plpGrid {
+        background-color: $anchor-color;
+        border: 1px solid $anchor-color;
+        color: $white-color;
+        font-family: "NiveauGroteskBold";
+        font-size: var(--fontsize24);
+        min-height: var(--buttonHeight60);
+        min-width: 0;
+        border-radius: 5px;
+        text-transform: none;
+        padding: 0;
+    }
+}
+
+.wishlist-btn.pdp {
+    display: flex;
+    position: relative;
+    width: 100%;
+    padding-right: 20px;
+    cursor: pointer;
+    img {
+        width: var(--addToListImgWidth30);
+        height: var(--addToListImgHeight21);
+        margin-right: 20px;
+        margin-top: 2px;
+    }
+    .wishlist {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $anchor-color;
+        border: 1px solid $anchor-color;
+        color: $white-color;
+        font-family: "NiveauGroteskBold";
+        font-size: var(--fontsize24);
+        min-height: var(--buttonHeight60);
+        border-radius: 8px;
+        text-transform: none;
+        &:focus {
+            box-shadow: 0 0 0 transparent;
+        }
+    }
+}
+
+.wishlist-btn {
+    display: flex;
+    position: relative;
+    width: 100%;
+    padding-right: 20px;
+    cursor: pointer;
+    img {
+        width: 15px;
+        height: 15px;
+    }
+    .wishlist {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $anchor-color;
+        border: 1px solid $anchor-color;
+        color: $white-color;
+        font-family: "NiveauGroteskBold";
+        font-size: 1rem;
+        min-height: var(--buttonHeight60);
+        border-radius: 8px;
+        text-transform: none;
+        &:focus {
+            box-shadow: 0 0 0 transparent;
+        }
+    }
+}
+
+.buttons {
+    display: flex;
+    align-items: flex-end;
+    margin: 20px 0px;
+    .wishlist-btn {
+        display: flex;
+        position: relative;
+        width: 100%;
+        padding-right: 20px;
+        cursor: pointer;
+        img {
+            position: absolute;
+            top: 13px;
+            left: 19%;
+            width: 15px;
+            height: 15px;
+        }
+        .wishlist {
+            background-color: $anchor-color;
+            border: 1px solid $anchor-color;
+            color: $white-color;
+            font-family: "NiveauGroteskBold";
+            font-size: 1rem;
+            height: 40px;
+            border-radius: 8px;
+            text-transform: none;
+            &:focus {
+                box-shadow: 0 0 0 transparent;
+            }
+        }
+    }
+}
+
+.addAllToCart {
+    .wishlist-btn {
+        display: flex;
+        position: relative;
+        width: 100%;
+        padding-right: 0px;
+        cursor: pointer;
+        img {
+            width: var(--addToListImgWidth30);
+            height: var(--addToListImgHeight21);
+            z-index: 1;
+            margin-right: 20px;
+        }
+        .wishlist {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $anchor-color;
+            border: 1px solid $anchor-color;
+            color: $white-color;
+            font-family: "NiveauGroteskBold";
+            font-size: var(--fontsize24);
+            min-height: var(--buttonHeight60);
+            border-radius: 8px;
+            padding: 0;
+            text-transform: none;
+            &:focus {
+                box-shadow: 0 0 0 transparent;
+            }
+        }
+    }
+    .plp.wishlist-btn {
+        width: 307px;
+    }
+}
+
+.save-as-list {
+    background-color: #AEBBC5;
+    color: #495A64;
+    border: 1px solid #AEBBC5;
+    width: 17.5rem;
+    margin: 5px 10px 5px 5px;
+    height: 60px;
+    border-radius: 10px;
+    font-family: 'NiveauGroteskBold';
+    font-size: 1.5rem;
+}
+
+.add-from-list {
+    background-color: #00AFE2;
+    color: white;
+    width: 220px;
+    border: 1px solid #00AFE2;
+    margin: 5px 0px 5px 5px;
+    height: 40px;
+    border-radius: 5px;
+    font-family: 'NiveauGroteskBold';
+    opacity: 1;
+    font-size: 1.5rem;
+}
+
+.add-from-list-img {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.addlist {
+    height: 14px;
+    width: 20px;
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    .save-as-list {
+        width: 100%;
+        min-height: var(--buttonHeight60);
+        height: auto;
+        border-radius: 2px;
+        font-size: var(--fontsize26);
+        margin-left: 0px;
+    }
+    .addAllToCart .wishlist-btn .wishlist {
+        border-radius: 2px;
+    }
+    .wishlist-btn.pdp .wishlist {
+        border-radius: 2px;
+        max-height: 35px;
+        img {
+            margin-right: 5px;
+        }
+    }
+    .addAllToCart .plp.wishlist-btn {
+        width: 100%;
+        button {
+            border-radius: 2px;
+            max-height: var(--buttonHeight60);
+            padding: 7px;
+            line-height: 1;
+            img {
+                margin-right: 10px;
+            }
+        }
+    }
+    .addAllToList.quickOrder {
+        .wishlist {
+            max-height: var(--buttonHeight60);
+            img {
+                margin-right: 5px;
+            }
+        }
+    }
+    .wishlist-btn.plpGrid .wishlist.plpGrid {
+        max-height: var(--buttonHeight60);
+        border-radius: 2px;
+    }
+}
+
+@media screen and (max-width: 485px) {
+    .save-as-list {
+        font-size: var(--fontsize20);
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .save-as-list {
+        font-size: var(--fontsize20);
+    }
+}

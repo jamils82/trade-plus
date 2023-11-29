@@ -1,0 +1,677 @@
+@import '../quotes.component.scss';
+@import '../../../shared/styles/variables.scss';
+@import '../../../shared/customerQuotes/styles/custom-variables.scss';
+
+.quotes-container {
+    display: block;
+    clear: both;
+    padding: 19px 30px;
+        .container-sec {
+            width: 100%;
+            padding-left: 8px;
+        }
+}
+.review-quote-heading {
+    font-size: 40px;
+    line-height: 45px;
+    color: #495a64;
+    margin-bottom: 70px;
+}
+
+// material
+.product-wrapper {
+    float: left;
+    width: 100%;
+    div {
+        float: left;
+    }
+    .product-img {
+        img {
+            height: auto;
+            width: 100%;
+            max-height: 124px;
+        }
+        background: #f5f5f5;
+        height: 110px;
+        text-align: center;
+        width: 110px;
+    }
+    .product-detail {
+        width: calc(100% - 126px);
+        margin-left: 16px;
+        max-height: 110px;
+        margin-top: 21px;
+        .title {
+            margin-bottom: 6px;
+            font-size: 17px;
+            color: #495A64;            
+            @include font-NiveauGroteskBold();
+            line-height: 21px;
+            max-height: 43px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .sku-sec {
+            color: #495A64;
+            @include font-NiveauGrotesk();
+            font-size: 14px;
+            float: left;
+        }
+        .timber-sec {
+            width: 100%;
+            margin-top: 8px;
+            display: flex;
+            @include font-NiveauGrotesk();
+            .leftItems{
+                width: 80%;
+            }
+            .rightItems{
+                width: 20%;
+                span{
+                    width: 100%;
+                }
+            }
+            .timber{
+            width: 38%;
+            float: left;
+            @include font-NiveauGrotesk();
+            }
+            .rrp-sec,  .qty-sec{
+            float: left;
+            @include font-NiveauGrotesk();
+            }
+            .pipe{
+                margin: 0px 8px;
+                float: left;
+            }
+            .timber { 
+                label {
+                float: left;
+                }
+            }
+            .timber, .qty-sec {
+                font-size: 14px;
+                @include font-NiveauGrotesk();
+                color: #495A64;
+            }
+            .qty-sec{
+                text-align: right;
+            }
+            .rrp-sec {
+                font-size: 14px;
+                color: #495A64;
+            }
+        }
+    }
+}
+.datesection > div {
+    display: inline-block;
+    width: 50%;
+}
+.date-value-sec {
+    text-align: right;
+}
+.date-value-sec {
+    text-align: right;
+    padding-right: 0px    
+}
+.datesection {
+    width: 100%;
+    line-height: 21.79px;
+    margin: 20px 0 15px;
+    .date-sec label {
+        color: #495A64;
+        font-size: var(--fontsize18);
+        @include font-NiveauGrotesk();
+        line-height: 21.79px;
+        margin-top: 12px;
+        margin-bottom: 0PX;
+    }
+    label.date {
+        color: #495A60 !important;
+        font-size: var(--fontsize18);
+        @include font-NiveauGroteskBold();
+        margin-top: 12px;
+        line-height: 21px;
+        margin-bottom: 0px;
+        font-weight: 600;
+    }
+}
+.customer-details {
+    border-bottom: 2px solid $grey-border;
+    margin-bottom: 20px;
+    padding: 0 0 10px 0px;
+    .cust-title {
+        padding-bottom: 16px;        
+        font-size: 20px;
+        color: #495A64;
+        @include font-NiveauGroteskBold();
+        line-height: 24px;
+    }
+}
+.job-add {
+    margin: 0 0 0px 1px;
+    label.job-title {
+        padding-bottom: 16px;
+        border-bottom: 1px solid $grey-border;
+    }
+}
+.name-sec .name, .job-add > label {
+    font-size: 24px;
+    color: #666;
+    @include font-NiveauGroteskBold();
+    margin: 0px 0px 24px;
+    line-height: 32.68px;
+}
+
+.scope-work {
+    margin: 0 0 0px 1px;
+    border-bottom: 2px solid $grey-border;
+    label{
+    font-size: 20px;
+    color: #495A64;
+    @include font-NiveauGroteskBold();
+    margin: 0px;
+    line-height: 24px;
+    padding: 0 0 10px;
+    }
+    .scope-desc {
+        font-size: 18px;
+        line-height: 21.79px;
+        margin: 15px 0 15px;
+        color: #495A64;
+        @include font-NiveauGrotesk();
+    }
+}
+
+.name-sec > .container-name-sec {
+    margin: 0 15px;
+}
+.customer-details {
+    table tr td:first-child{
+        width: 15%;
+    }
+    table tr td:nth-child(2){
+        width:85%;
+        text-align: left;
+        @include font-NiveauGroteskBold();
+    }
+    &label {
+        margin-bottom: 11px;
+    }
+    table {
+        width: calc(100% - 40px);
+        margin-top: 0px;
+        tr {
+            td {
+                width: 50%;
+                color: #495A64;
+                vertical-align: top;
+                font-size: 16px;
+                line-height: 21px;
+                padding-bottom: 8px;
+        }
+        .consumer-value {
+            text-align: right;
+            line-height: 21px;
+            color: #495A60;
+            font-size: 16px;
+        }
+    }   
+    }
+} 
+
+.customer-price {
+    border-bottom: 2px solid $grey-border;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    &label {
+        margin-bottom: 11px;
+    }
+    .cust-title {
+        padding-bottom: 13px;
+        font-size: 20px;
+        color: #495A64;
+        @include font-NiveauGroteskBold();
+        margin: 41px 0 16px;
+        line-height: 24px;
+    }
+    table {
+        width: calc(100% - 40px);
+        margin-top: 0px;
+        tr {
+            td {
+                color: #495A64;
+                vertical-align: top;
+                font-size: 16px;
+                line-height: 21px;
+                padding-bottom: 0px;
+        }
+        .consumer-value {
+            text-align: right;
+            line-height: 21px;
+            color: #495A60;
+            font-size: 16px;
+        }
+    }   
+    }
+} 
+
+
+
+.quotes-container{
+    .container-sec {
+        padding-left:0px;
+        min-height: 50vh;
+        @include font-NiveauGroteskBold();
+        h1 {
+            color: #495A64;
+            font-size: 1.5rem;
+            line-height: 24px;
+                  
+        }
+        .lineMark{
+            width: 100%;
+            border-bottom: 3px solid #495A64;
+            margin-top: 22px;
+            margin-left: 2px;
+         }
+        .list-title {
+            font-size: 16px;
+            color: $grey;
+            @include font-NiveauGroteskBold();
+            border-bottom: 1px solid $lightGrey;
+            margin-top: 35px;
+            padding-bottom: 10px;
+        }
+        .materials-landing-page {
+            display: block;
+            clear: both;
+            overflow: hidden;
+            font-size: 18px;
+            @include font-NiveauGrotesk();
+
+            .addProduct {
+                padding:8px 20px 8px 55px;
+                color:$grey;
+                display: block;
+                width: 100%;
+                text-align: left;
+                border: 0;
+                border-radius: 8px;
+                margin: 24px 0;
+                
+            }
+            .addOwnProduct {
+                color:$lightBlue;
+                cursor: pointer;
+                display: inline-block;
+                padding-left: 55px;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+
+
+.edit-icon {
+    float: right;
+    //margin-top: -7px;
+    cursor: pointer;
+    img{
+        width: 65%;
+    }
+}
+.container-name-sec p, .job-add p label {
+    font-size: 16px;
+    color: #666666;
+    margin-bottom: 0px;
+    padding: 0px;
+    line-height: 22px;
+}
+.container-name-sec > div:nth-child(1) > div {
+    display: inline-block;
+}
+.quotes-container .name-sec > div:nth-child(1) > div.job-sec {
+    width: 90%;
+    float: left;
+}
+.container-name-sec > div:nth-child(1) > div {
+    display: inline-block;
+}
+.name-sec .edit-sec {
+    width: 10%;
+    float: right;
+}
+
+p.job-loc {
+        width: 100%;
+        label {
+            font-size: var(--fontsize18);
+            @include font-NiveauGrotesk();
+            color: #495A64;
+            margin: 0px;
+            width: 95%;
+            word-break: break-word;
+            padding-left: 10px;
+            margin-top: 3px;
+        }
+        img {
+            width: 2%;
+            vertical-align: top;
+            padding-top: 3px;
+        }
+        img, label {
+            display: inline-block;
+        }
+}
+p.notes span {
+    color: #666666;
+    font-size: 16px;
+    @include font-NiveauGrotesk();
+    margin: 9px 0 0px;
+    display: inline-block;
+}
+
+label.edit-icon {
+    text-align: right;
+    //padding-top: 8px;
+}
+.job-add {
+    padding-bottom: 0px;
+    border-bottom: none;
+    float: left;
+    width: 100%;
+     p img {
+        margin-right: 10px;
+     }
+}
+.customer-details table tr td:nth-child(3) label {
+    margin-top: -7px;
+}
+
+.customer-details table tr td:nth-child(3) {
+    min-width: 61px !important;
+}
+
+
+.cost-summary {
+   position: fixed;
+   bottom: 6.6rem;    
+   width: 13.8rem;
+   padding-right: 1rem;
+}
+h4.cost-title {
+   font-size: 16px;
+   color: #000000;
+   @include font-NiveauGroteskBold();
+   line-height: 21px;    
+   border-bottom: 1px solid $grey-border;
+   padding-bottom: 15px;
+   margin-bottom: 0px;
+}
+.cost-detail {
+   border-bottom: 1px solid $grey-border;
+   padding-bottom: 14px;
+   padding-top: 16px;
+   margin-bottom: 12px;
+}
+.cost-detail table tr td {
+   font-size: 14px;
+   line-height: 22px;
+   color: #000000;
+   @include font-NiveauGrotesk();
+}
+.cost-detail table tr td:nth-child(2) {
+   text-align: right;
+}
+.cost-detail table {
+   width: 100%;
+}
+.cost-sub-total span {
+   width: 50%;
+   display: inline-block;
+   font-size: 16px;
+   line-height: 21px;
+   color: #000000;
+   @include font-NiveauGroteskBold();
+}
+.cost-sub-total span:nth-child(2) {
+   text-align: right;
+}
+.cost-detail table tr:nth-child(1) td {
+   padding-bottom: 10px;
+}
+
+.wrapper-review.container {
+    padding: 0;
+    margin-top: 20px;
+    min-width: 88% !important;
+    margin-bottom: 22px;
+    .row-container{
+        display: flex;
+    }
+    .left-job-details {
+        width: 62%;
+        float: left;
+        clear: left;
+        padding-right: 2%;
+        border-radius: 3px;
+        .quotes-container {
+            background-color: white;
+            padding: 19px 30px;            
+        }
+    }
+    .right-material {
+        width: 38%;
+        float: right;
+        padding-bottom: 46px;
+        background-color: white;
+        border-radius: 3px;
+    }
+    .edit-company-details-btn{
+        @include font-NiveauGroteskBold();
+    }
+}
+
+.customer-price table .text-bold {
+    font-weight: bold;
+    color: #000 !important;
+}
+.customer-price table, .custPrice {
+    width: 100%;
+    margin-top: 17px;
+    td {
+        @include font-NiveauGrotesk();
+    }
+    td:first-child{
+        width:22%;
+    }
+    td:nth-child(2){
+        width: 14%;
+        text-align: left;
+    }
+    td:nth-child(3){
+        width: 60%;
+        text-align: left;
+    }
+    td:nth-child(4){
+        width:5%
+    }
+    .small-text td {
+        font-size: 16px !important;
+        color: #00AFE2 !important;
+    }
+}
+.markup {
+    border-bottom: 0px solid white;
+    margin-top: 45px;
+}
+.timber label:nth-child(2) {
+    padding-left: 4px;
+}
+.customer-price table tr:nth-child(1) td {
+    padding-bottom: 0px !important;
+}
+@media only screen and (max-width: 1024px) {
+    .row-container{
+        display: block !important;
+        .left-job-details{
+            margin-bottom: 20px;
+            padding-right: 0% !important;
+        }
+    }
+    .wrapper-review.container { 
+        .left-job-details {
+            width: 100%;
+            float: left;
+            clear: left;
+            .quotes-container {
+                padding-right: 0px;
+                border-right: none;
+            }
+        }
+        .right-material {
+            width: 100%;
+            float: right;
+            padding-bottom: 46px;
+        }
+    }
+}
+
+.right-material .abel.edit-icon{
+    padding-top: 0px;
+}
+.finalPrice{
+    border-top: 2px solid $grey-border;
+    margin-top: 36px;
+    padding-top: 24px;
+    table {
+        width: 100%;
+    }
+}
+.finalPrice tr td{
+    text-align: right !important;
+}
+.finalPrice .totPrice, .finalPrice .consumerValue{
+    font-size: 24px;
+    @include font-NiveauGroteskBold();
+    color: #495A64;
+}
+.finalPrice .gstUp{
+    font-size: 14px;
+    color: #495a64;
+}
+
+.name-sec{
+    .rowJob{
+        display: flex;
+        .edit-icon img{
+            width: 64%;
+        }
+    }
+    .job-sec{
+        float: left;
+        width: 100%;
+    }
+    .edit-sec{
+        width: 50%;
+    }
+    background-color: white;
+    padding: 19px 30px;
+    p.job-loc{
+        margin-bottom: 0px;
+    }
+    h2.job-name {
+        font-size: 25px;
+        color: $searchBar-text-color;
+        font-weight: bolder;
+        line-height: 43.58px;
+        @include font-NiveauGroteskBold();
+        margin-bottom: 0px;
+    }
+    .scope-desc{
+        border-bottom: 1px solid black;
+        margin: 15px 0 15px;
+    }
+}
+.previewBtn{
+    width: 100%;
+    text-align: right;
+   
+    button{
+        margin: 40px 0px;
+        padding: 15px 60px;
+        background-color: #003D7A;
+        @include font-NiveauGroteskBold();
+    }
+}
+
+@media screen and (max-width:$mobileScreenPotrait) {
+    .wrapper-review.container .left-job-details,.wrapper-review.container .right-material{
+        width: 92%;
+        float: none;
+        margin: 0 auto;
+    }
+    .wrapper-review.container .right-material{
+        margin-top: 20px;
+    }
+
+    .customer-price table, .custPrice {
+        width: 100%;
+        margin-top: 17px;
+        td {
+            @include font-NiveauGrotesk();
+        }
+        td:first-child{
+            width:75%;
+        }
+    }
+    .review-quote-heading{
+        margin-bottom: 20px;
+        margin-left: 20px;
+    }
+
+    .finalPrice{
+
+        tr{
+
+            td{
+
+                padding-right: 20px;
+            }
+        }
+    }
+
+    .previewBtn{
+
+        button{
+
+            margin: 40px 20px;
+        }
+    }
+
+}
+
+
+@media (min-width: 1800px) and (max-width: 1950px){
+    .previewBtn
+    {
+    button{
+        font-size: 24px;
+    }
+}
+
+}
+
+.scope-desc pre {
+    font-size: var(--fontsize18);
+    @include font-NiveauGrotesk();
+    color: #495A64;
+}

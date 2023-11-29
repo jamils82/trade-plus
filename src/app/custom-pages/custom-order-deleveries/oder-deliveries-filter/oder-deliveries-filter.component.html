@@ -1,0 +1,156 @@
+<div class="container">
+    <div class="row margfilter">
+        <div class="col-10">
+            <h2 class="pageHeading">Filters</h2>
+        </div>
+        <div class="col-2 close-pos">
+            <div class="cls-btn" (click)="closePopup()">
+                <img class="cls-icon fa fa-times" src='../../../../assets/images/close-icon.PNG'>
+            </div>
+        </div>
+    </div>
+    <div class="row margclear">
+        <div class="col-12">
+            <h4 class="text-right clrflt" (click)="clearAll()">Clear All Filters</h4>
+        </div>
+    </div>
+    <div class="row marbtm">
+        <div class="col-12 tab">
+            <input type="checkbox" class="accordion-checkbox" name="radioCheck" id="0">
+            <label class="tab-label checkbox-inline" for="0">
+                <div class="heading">
+                    <div class="row">
+                        <span class="heading1 col-md-3">Order Type</span>
+                    </div>
+                </div>
+
+            </label>
+
+            <div class="tab-content inner-tab-content">
+                <label class="tab-label checkbox-inline innerCheckbox" for="chck1">
+                    <div class="heading">
+                        <div>
+                            <!--<input type="checkbox" id="all" value="all">
+                            <label>All</label><br>-->
+                            <label class="check-container notification">
+                                <input type="checkbox" value="" [checked]="(typesChecked) ? typesChecked.indexOf('Pick up') >= 0 : false" (change)="filterSelect($event,'Pick up', 'type')">
+                                <span class="checkmark terms"></span>
+                                <span class="terms-and-conditions-label">Click & Collect</span>
+                            </label>
+                        </div>
+                        <div>
+                            <!--<input type="checkbox" id="mylist" value="My List">
+                            <label>My List</label><br>-->
+                            <label class="check-container notification">
+                                <input type="checkbox" value="" [checked]="(typesChecked) ? typesChecked.indexOf('Delivery') >= 0 : false" (change)="filterSelect($event,'Delivery', 'type')">
+                                <span class="checkmark terms"></span>
+                                <span class="terms-and-conditions-label">Delivery</span>
+                            </label>
+                        </div>
+                        <div>
+                            <!--<input type="checkbox" id="template" value="Template">
+                            <label>Template</label><br>-->
+
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+        </div>
+        <div class="col-12 tab">
+            <input type="checkbox" class="accordion-checkbox" name="radioCheck" id="1">
+            <label class="tab-label checkbox-inline" for="1">
+                <div class="heading">
+                    <div class="row">
+                        <span class="heading1 col-md-3">Status</span>
+                    </div>
+                </div>
+                <!-- <div class="icon-design" [ngClass]="i%2?'even':'odd'"></div> -->
+            </label>
+            <div class="tab-content inner-tab-content">
+                <label class="tab-label checkbox-inline innerCheckbox" for="chck1">
+                    <div class="heading">
+                        <!-- <div> <input type="checkbox" id="all" value="all">
+                            <label>All</label><br>
+                        </div> -->
+                        <label class="check-container notification">
+                            <input type="checkbox" value="" [checked]="(checkboxAll) ? true : (statusChecked) ? statusChecked.indexOf('ALL') >= 0 : false" (change)="filterSelect($event,'ALL', 'status')">
+                            <span class="checkmark terms"></span>
+                            <span class="terms-and-conditions-label">All</span>
+                        </label>
+                        <!-- <div> <input type="checkbox" id="active" value="active">
+                            <label>Active</label><br>
+                        </div> -->
+                        <label class="check-container notification">
+                            <input type="checkbox" value=""  [checked]="(checkAll) ? true : (statusChecked) ? statusChecked.indexOf('PENDING') >= 0 : false" (change)="filterSelect($event,'PENDING', 'status')">
+                            <span class="checkmark terms"></span>
+                            <span class="terms-and-conditions-label">Pending</span>
+                        </label>
+                        <!-- <div> <input type="checkbox" id="archieved" value="archived">
+                            <label>Archived</label><br>
+                        </div> -->
+                        <label class="check-container notification">
+                            <input type="checkbox" value="" [checked]="(checkAll) ? true : (statusChecked) ? statusChecked.indexOf('ORDER_RECEIVED') >= 0 : false" (change)="filterSelect($event,'ORDER_RECEIVED', 'status')">
+                            <span class="checkmark terms"></span>
+                            <span class="terms-and-conditions-label">Order Received</span>
+                        </label>
+
+                        <label class="check-container notification">
+                            <input type="checkbox" value="" [checked]="(checkAll) ? true : (statusChecked) ? statusChecked.indexOf('ORDER_PROCESSING') >= 0 : false" (change)="filterSelect($event,'ORDER_PROCESSING', 'status')">
+                            <span class="checkmark terms"></span>
+                            <span class="terms-and-conditions-label">Order Processing</span>
+                        </label>
+
+                        <label class="check-container notification">
+                            <input type="checkbox" value="" [checked]="(checkAll) ? true : (statusChecked) ? statusChecked.indexOf('AWAITING_DISPATCH') >= 0 : false" (change)="filterSelect($event,'AWAITING_DISPATCH', 'status')">
+                            <span class="checkmark terms"></span>
+                            <span class="terms-and-conditions-label">Awaiting Dispatch</span>
+                        </label>
+
+                        <label class="check-container notification">
+                            <input type="checkbox" value="" [checked]="(checkAll) ? true : (statusChecked) ? statusChecked.indexOf('BACK_ORDERED') >= 0 : false" (change)="filterSelect($event,'BACK_ORDERED', 'status')">
+                            <span class="checkmark terms"></span>
+                            <span class="terms-and-conditions-label">Back Ordered</span>
+                        </label>
+
+                        <label class="check-container notification">
+                            <input type="checkbox" value="" [checked]="(checkAll) ? true : (statusChecked) ? statusChecked.indexOf('PARTLY_DISPATCHED') >= 0 : false" (change)="filterSelect($event,'PARTLY_DISPATCHED', 'status')">
+                            <span class="checkmark terms"></span>
+                            <span class="terms-and-conditions-label">Partly Dispatched</span>
+                        </label>
+
+                        <label class="check-container notification">
+                            <input type="checkbox" value="" [checked]="(checkAll) ? true : (statusChecked) ? statusChecked.indexOf('DISPATCHED') >= 0 : false" (change)="filterSelect($event,'DISPATCHED', 'status')">
+                            <span class="checkmark terms"></span>
+                            <span class="terms-and-conditions-label">Dispatched</span>
+                        </label>
+                        
+                        <label class="check-container notification">
+                            <input type="checkbox" value="" [checked]="(checkAll) ? true : (statusChecked) ? statusChecked.indexOf('PARTLY_COMPLETED') >= 0 : false" (change)="filterSelect($event,'PARTLY_COMPLETED', 'status')">
+                            <span class="checkmark terms"></span>
+                            <span class="terms-and-conditions-label">Partly Completed</span>
+                        </label>
+
+                        <label class="check-container notification">
+                            <input type="checkbox" value="" [checked]="(checkAll) ? true : (statusChecked) ? statusChecked.indexOf('COMPLETED') >= 0 : false" (change)="filterSelect($event,'COMPLETED', 'status')">
+                            <span class="checkmark terms"></span>
+                            <span class="terms-and-conditions-label">Completed</span>
+                        </label>
+                    </div>
+                </label>
+            </div>
+
+        </div>
+    </div>
+    <div class="row buttons">
+        <div class="col-md-12 btngrp">
+            <button class="btn cancelBtn col-6" (click)="closePopup()">
+                Cancel
+            </button>
+            <button class="btn confirmBtn col-6" type="submit" (click)="applyFilter()">
+                Apply
+            </button>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,177 @@
+@import '../../shared/styles/variables.scss';
+.cart-total-display {
+    font-size: var(--fontsize20);
+    vertical-align: middle;
+    color: #778893;
+    font-family: "NiveauGrotesk";
+    padding-left: 10px;
+    opacity: 0.8;
+}
+
+.container {
+    width: 95%;
+}
+
+::ng-deep cx-page-layout.CartPageTemplate {
+    padding: 0;
+    min-width: 86.5%;
+}
+
+.position-right {
+    text-align: right;
+}
+
+.save-as-list {
+    background-color: #AEBBC5;
+    color: black;
+    border: 1px solid #AEBBC5;
+    width: 200px;
+    margin: 5px 10px 5px 5px;
+    height: 40px;
+    border-radius: 5px;
+    font-family: 'NiveauGroteskBold';
+    font-size: 17px;
+}
+
+.add-from-list {
+    background-color: #00AFE2;
+    color: white;
+    width: 19.2rem;
+    border: 1px solid #00AFE2;
+    margin: 5px 0px 5px 20px;
+    height: 60px;
+    border-radius: 10px;
+    font-family: 'NiveauGroteskBold';
+    opacity: 1;
+    font-size: var(--fontsize24);
+}
+
+.mt-46 {
+    margin-top: 60px;
+}
+
+.mt-40 {
+    margin-top: 40px;
+}
+
+.heading {
+    font-weight: bolder;
+    color: #495A64;
+    margin-bottom: 20px;
+    font-size: var(--fontsize40);
+    font-family: "NiveauGroteskbold";
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.addlist {
+    height: 21px;
+    width: 30px;
+    margin-right: 10px;
+}
+
+.success-message-container {
+    width: 50%;
+    margin: 0 auto 15px auto;
+}
+
+.success-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #0B961B;
+    background-color: #0B961B1A;
+    color: #0B961B;
+    font-family: 'NiveauGrotesk';
+    padding: 10px;
+    font-size: 12px;
+}
+
+.tick-icon,
+.alert-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.alert-message {
+    line-height: 1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 6px;
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    .cardDetail {
+        padding: 0 10px;
+    }
+    .cart-details-wrapper {
+        .row {
+            margin-top: 0px !important;
+            display: flex;
+            .cart-total-display {
+                display: block;
+                font-size: var(--fontsize18);
+                padding: 10px 0;
+                color: $pdp-font-color;
+        }
+        .heading {
+            font-size: var(--fontsize21);
+        }
+        .clearCart-col {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+            .clearCart {
+                color: #00AFE2;
+                text-decoration: underline;
+                font-family: 'NiveauGroteskBold';
+                font-size: var(--fontsize20);
+                text-align: right;
+                margin-top: -10px;
+            }
+            .position-right {
+                max-width: 100%;
+                display: flex;
+                align-items: center;
+                .add-from-list {
+                    width: 60%;
+                    min-height: var(--buttonHeight60);
+                    height: auto;
+                    border-radius: 2px;
+                    font-size: var(--fontsize26);
+                    margin: 5px 0 5px 10px;
+                    img {
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+    }
+    .cart-list {
+        margin-top: 20px !important;
+    }
+    app-add-to-list-view {
+        width: 40% !important;
+    }
+}
+
+@media screen and (max-width: 485px) {
+    .cart-details-wrapper .row .position-right .add-from-list {
+        font-size: var(--fontsize20);
+        img {
+            width: 24px;
+            height: 18px;
+        }
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .cart-details-wrapper .row .position-right .add-from-list {
+        font-size: var(--fontsize20);
+    }
+}

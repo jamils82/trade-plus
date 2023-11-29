@@ -1,0 +1,93 @@
+<div class="menuContainer" id="sideMenu">
+    <div class="row">
+        <div class="text-center col-10">
+            <label class="p-2 w-auto headerTitle offset-2">Search</label>
+        </div>
+        <div class="col-2 close-pos">
+            <div class="cls-btn" (click)="closePopup()">
+                <img class="cls-icon fa fa-times" src='../../../../assets/images/close-icon.PNG'>
+            </div>
+        </div>
+    </div>
+    <div class="pr-3 pl-3">
+        <div class="">
+            <div class="row col-12">
+                <div class=" col-12 custom-control custom-radio custom-control">
+                    <input type="radio" id="rd_1" name="product_search" class="custom-control-input" (change)="onItemChange('product')" [checked]="searchALL ==  'product'" value="product">
+                    <label class="custom-control-label gray" for="rd_1">Product Search</label>
+                </div>
+                <div class="col-12 custom-control custom-radio custom-control">
+                    <input type="radio" id="rd_2" name="order_delivery_search" [checked]="searchALL == 'orderDelivery'" (change)="onItemChange('orderDelivery')" [disabled]="selectedPage !=  'orderDelivery'" class="custom-control-input" value="orderDelivery">
+                    <label class="custom-control-label gray" for="rd_2">Order & Delivery Search</label>
+                </div>
+            </div>
+
+            <div class="row col-12 mt-1">
+                <div class=" col-12 custom-control custom-radio custom-control">
+                    <input type="radio" id="rd_3" name="quote_search" class="custom-control-input" [checked]="searchALL ==  'quote'" (change)="onItemChange('quote')" [disabled]="selectedPage !=  'quote'" value="quote">
+                    <label class="custom-control-label gray" for="rd_3">Quote Search</label>
+                </div>
+                <div class="col-12 custom-control custom-radio custom-control">
+                    <input type="radio" id="rd_4" name="invoice_search" class="custom-control-input" [checked]="searchALL == 'invoice'" (change)="onItemChange('invoice')" [disabled]="selectedPage !=  'invoice'" value="invoice">
+                    <label class="custom-control-label gray" for="rd_4">Invoice & Adjustments Search</label>
+                </div>
+            </div>
+            <div class="row col-12 mt-1">
+                <div class=" col-12 custom-control custom-radio custom-control">
+                    <input type="radio" id="rd_6" name="statement_search" class="custom-control-input" [checked]="searchALL == 'statement'" (change)="onItemChange('statement')" [disabled]="selectedPage !=  'statement'" value="statement">
+                    <label class="custom-control-label gray" for="rd_6">Statement Search</label>
+                </div>
+            </div>
+
+            <div class="row col-12 mt-1">
+                <div class=" col-12 custom-control custom-radio custom-control">
+                    <input type="radio" id="rd_7" name="list_search" class="custom-control-input" [checked]="searchALL == 'mylist'" (change)="onItemChange('mylist')" [disabled]="selectedPage !=  'mylist'" value="listTeam">
+                    <label class="custom-control-label gray" for="rd_7">List Search</label>
+                </div>
+            </div>
+
+            <div class="row col-12 mt-1">
+                <div class=" col-12 custom-control custom-radio custom-control">
+                    <input type="radio" id="rd_5" name="member_search" class="custom-control-input" [checked]="searchALL == 'memberTeam'" (change)="onItemChange('memberTeam')" [disabled]="selectedPage !=  'memberTeam'" name="team" value="memberTeam">
+                    <label class="custom-control-label gray" for="rd_5">Team Member Search</label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="productsContainer productSearchBox mt-4" *ngIf="searchALL === 'product';else other_search">
+            <div class="searchBoxBlock">
+                <div class="searchTextBox">
+                    <label class="searchbox mobileGlobalSearch">
+                        <app-product-search #product [fromPage]="true" [config]="searchConfig" [quickOrderIndex]="'0'"
+                            [screenMode]="'quickOrder'" (srpSearch)="srpSearch($event)" (prodCodecallBack)="prodCodecallBack($event)">
+                        </app-product-search>
+                    </label>
+                </div>
+                <div class="searchResetIcons">
+                    <button (click)="onClearSearch()" class="cancelBtn col-6">
+                        Clear All</button>
+
+                    <button (click)="sendEvent();" class="confirmBtn col-6"> Search</button>
+                </div>
+            </div>
+        </div>
+        <ng-template #other_search>
+            <div class="searchBoxBlock">
+                <div class="searchTextBox">
+                    <label class="searchbox">
+                        <input class="searchField" #searchInput placeholder="Search" [(ngModel)]="searchText" />
+                        <span _ngcontent-gou-c360="" role="presentation" class="search">
+                            <cx-icon _ngcontent-gou-c360="" class="cx-icon fas fa-search"></cx-icon>
+                        </span>
+                    </label>
+                </div>
+                <div class="searchResetIcons">
+                    <button (click)="onClearSearch()" class="cancelBtn col-6"> Clear All</button>
+
+                    <button (click)="sendEvent();" class="confirmBtn col-6"> Search</button>
+                </div>
+            </div>
+        </ng-template>
+        <!-- <hr class="mt-1 mb-1"> -->
+    </div>

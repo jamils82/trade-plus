@@ -1,0 +1,27 @@
+<form class="form-inline" id="flyout-example">
+    <div class="form-group hidden">
+        <div #parent class="input-group">
+
+            <!-- (focusout)="onFocusOutEvent($event)"> -->
+            <input name="datepicker" placeholder="dd-mm-yyyy" class="form-control" on-mouseleave="datepicker.close()" ngbDatepicker #datepickerComp="ngbDatepicker" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
+                [outsideDays]="'visible'" [startDate]="fromDate!" [minDate]="minDate" [navigation]="navigation" tabindex="-1">
+            <ng-template #t let-date let-focused="focused">
+                <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                    {{ date.day }}
+                </span>
+            </ng-template>
+        </div>
+    </div>
+    <div [ngClass]="pageName == 'MyTeam' ? '' : 'quotes'" class="form-group">
+        <div class="input-group">
+            <input [ngClass]="pageName == 'MyTeam' ? '' : 'quotes'" #dpFromDate class="form-control" readonly placeholder="dd/MM/yyyy" name="dpFromDate" [disabled]="disableDate" [value]="formatFromDate + ' - ' + formatToDate">
+        </div>
+
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" [disabled]="disableDate" (click)="datepicker.toggle()" type="button">
+                <img class="calendar-icon" src="../../../assets/images/ic_calender.svg">
+            </button>
+        </div>
+    </div>
+
+</form>

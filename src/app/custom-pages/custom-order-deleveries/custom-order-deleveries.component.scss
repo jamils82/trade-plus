@@ -1,0 +1,1192 @@
+@import "../../shared/styles/variables.scss";
+@import "../../shared/styles/fontSize.scss";
+// Custom sorting icon
+.mat-sort-header-arrow {
+    opacity: 1 !important;
+}
+
+::ng-deep .mat-sort-header-arrow {
+    color: #003d7a;
+}
+
+::ng-deep .mat-sort-header-arrow :focus :hover {
+    color: #003d7a;
+    opacity: 1 !important;
+}
+
+::ng-deep .mat-sort-header-arrow {
+    color: #003d7a;
+}
+
+::ng-deep .mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {
+    transform: rotate(180deg) !important;
+}
+
+// End
+::ng-deep .mat-table th {
+    font-family: "NiveauGroteskBold";
+}
+
+.mat-table td {
+    font-family: "NiveauGrotesk";
+}
+
+.add-from-list {
+    background-color: #00afe2;
+    color: white;
+    width: 220px;
+    border: 1px solid #00afe2;
+    margin: 5px 0px 5px 5px;
+    height: 40px;
+    border-radius: 5px;
+    font-family: "NiveauGroteskBold";
+    opacity: 1;
+    font-size: 17px;
+}
+
+.re-order-btn {
+    float: right;
+    background: #003d7a 0 0 no-repeat padding-box;
+    color: #fff;
+    margin-top: 16px;
+    width: 212px !important;
+    min-height: var(--buttonHeight60) !important;
+    font-size: var(--fontsize24) !important;
+}
+
+.calendar-icon {
+    position: absolute;
+    right: 24px;
+    width: 18px;
+    top: 14px;
+    opacity: 0.8;
+    color: #003d7a !important;
+}
+
+.border-search {
+    border: 1px solid #bbc3c9;
+}
+
+.addlist {
+    height: 14px;
+    width: 20px;
+}
+
+.my_list {
+    padding: 20px;
+    table {
+        width: 100%;
+        margin-top: 30px;
+        th {
+            color: #495a64;
+            font-size: 1.2rem;
+            font-family: "NiveauGroteskBold";
+        }
+        td {
+            color: #495a64;
+            font-family: "NiveauGrotesk";
+            font-size: 1rem;
+        }
+    }
+    h3 {
+        font-weight: 500;
+        font-size: 20px;
+        color: darkblue;
+        margin: auto;
+    }
+    .container {
+        padding: 0;
+        min-width: 90%;
+    }
+    .col-lg {
+        margin: auto;
+    }
+    button {
+        background: #003d7a;
+        color: white;
+        border-radius: 7px;
+    }
+    mat-icon {
+        color: grey;
+    }
+}
+
+.custom-row {
+    justify-content: space-between;
+    margin-top: 25px;
+    margin-bottom: -25px;
+}
+
+.fa-search,
+.search {
+    position: absolute;
+    right: 30px;
+    top: 11px;
+    color: #003d7a !important;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.fa-search:before {
+    content: "\f002";
+}
+
+.addList {
+    font-weight: 700;
+    padding: 0 38px;
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+}
+
+.heading {
+    // font-weight: bolder;
+    color: #495a64;
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-family: "NiveauGroteskbold";
+}
+
+tr.mat-header-row {
+    height: 56px;
+    background-color: #fff !important;
+}
+
+tr:nth-child(odd) {
+    background-color: #e8eff7;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.mat-standard-chip {
+    border-radius: 5px !important;
+}
+
+.mat-sort-header-arrow {
+    opacity: 0.54 !important;
+}
+
+.success-message-container,
+.failure-message-container {
+    width: 50%;
+    // display: none;
+    margin: 0 auto 15px auto;
+}
+
+.success-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #0b961b;
+    background-color: #0b961b1a;
+    color: #0b961b;
+    font-family: "NiveauGrotesk";
+    padding: 10px;
+    font-size: 12px;
+}
+
+.failure-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid $failure-border-color;
+    background-color: $failure-background-color;
+    color: #973937;
+    font-family: "NiveauGrotesk";
+    padding: 10px;
+    font-size: 12px;
+}
+
+.tick-icon,
+.alert-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.alert-message {
+    line-height: 1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 6px;
+}
+
+.image-container {
+    background: url("https://auth0assets.blob.core.windows.net/assets/loginbg.jpg") no-repeat center center fixed;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+}
+
+.status {
+    justify-content: space-around;
+}
+
+::ng-deep .mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {
+    opacity: 1 !important;
+}
+
+::ng-deep .mat-sort-header-arrow {
+    color: #003d7a;
+}
+
+::ng-deep .mat-sort-header-arrow :focus :hover {
+    color: #003d7a;
+}
+
+::ng-deep .mat-select-value {
+    text-align: center;
+}
+
+
+/* Absolute Center Spinner */
+
+.loading {
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+
+/* Transparent Overlay */
+
+.loading:before {
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(rgba(20, 20, 20, 0.8), rgba(0, 0, 0, 0.8));
+    background: -webkit-radial-gradient( rgba(20, 20, 20, 0.8), rgba(0, 0, 0, 0.8));
+}
+
+
+/* :not(:required) hides these rules from IE9 and below */
+
+.loading:not(:required) {
+    /* hide "loading..." text */
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+.loading:not(:required):after {
+    content: "";
+    display: block;
+    font-size: 10px;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+    -webkit-animation: spinner 150ms infinite linear;
+    -moz-animation: spinner 150ms infinite linear;
+    -ms-animation: spinner 150ms infinite linear;
+    -o-animation: spinner 150ms infinite linear;
+    animation: spinner 150ms infinite linear;
+    border-radius: 0.5em;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+    box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+}
+
+
+/* Animation */
+
+@-webkit-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+::ng-deep .form-control {
+    font-family: NiveauGrotesk !important;
+}
+
+::ng-deep .mat-sort-header-stem {
+    height: 13px !important;
+    width: 1.5px !important;
+}
+
+::ng-deep .mat-sort-header-arrow {
+    height: 13px !important;
+    width: 1.5px !important;
+}
+
+::ng-deep .mat-sort-header-pointer-left {
+    width: 6px;
+    height: 1.5px !important;
+}
+
+::ng-deep .mat-sort-header-pointer-right {
+    width: 6px;
+    height: 1.5px !important;
+}
+
+::ng-deep .status-class .mat-sort-header-container .mat-sort-header-content {
+    margin-left: 20px !important;
+}
+
+::ng-deep .mat-paginator-navigation-previous {
+    svg {
+        color: transparent;
+        // display: none !important;
+    }
+    width: 25px !important;
+    margin-left: 10px !important;
+    color: $blue-color;
+    //   display: none !important;
+    &::before {
+        content: "↖";
+        position: absolute;
+        background-color: #e8eff7;
+        transform: rotate(315deg);
+        -webkit-transform: rotate(315deg);
+        font-weight: bold;
+        font-size: 1.3rem;
+        // width: 19px;
+    }
+}
+
+ ::ng-deep .mat-paginator-navigation-next {
+    margin-left: 8px !important;
+    width: 25px !important;
+    top: 1px !important;
+    color: $blue-color;
+    //  display: none !important;
+    &::before {
+        content: "↖";
+        position: absolute;
+        background-color: #e8eff7;
+        transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
+        font-weight: bold;
+        font-size: 1.3rem;
+        //  width: 19px;
+    }
+}
+
+::ng-deep .mat-paginator-page-size-label {
+    margin: 0 33px;
+    color: #495a64;
+}
+
+.status-class {
+    justify-content: space-around;
+}
+
+.icon-btn {
+    background: transparent !important;
+    outline: none;
+    border: none !important;
+}
+
+.search_filter {
+    position: absolute;
+    color: #003d7a !important;
+}
+
+.dropbtn {
+    background-color: #4caf50;
+    position: fixed;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    right: 0.4em;
+    // width: 140px;
+}
+
+.dropdown-content {
+    //  display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 100%;
+    right: 90%;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #dedfdf;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.dropdown-contenttype input[type="checkbox"] {
+    height: 14px;
+    width: 14px;
+    vertical-align: middle;
+    margin-inline-start: -1.5rem;
+}
+
+.dropdown-contenttype {
+    //  display: none;
+    position: relative;
+    margin-right: 60px;
+    background-color: #f9f9f9;
+    min-width: 240px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 14px !important;
+    left: -100px !important;
+}
+
+.dropdown-custom {
+    position: absolute;
+    inset: 0px auto auto 0px;
+    top: 55px !important;
+}
+
+.dropdown-custom-hide {
+    display: none;
+}
+
+.content-def {
+    left: -132px !important;
+    min-width: 177px !important;
+}
+
+::ng-deep .dropdown-menu {
+    padding: 5px !important;
+}
+
+.dropdown-contenttype a {
+    color: #495a64;
+    padding: 7px 7px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #dedfdf;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+    font-family: "NiveauGrotesk";
+    cursor: default;
+}
+
+.dropdown a:hover {
+    background-color: #f1f1f1;
+}
+
+.show {
+    display: inline-block;
+}
+
+.threedots {
+    position: relative;
+}
+
+// multi select dropdown
+.multiselect {
+    width: 200px;
+}
+
+.selectBox {
+    position: relative;
+}
+
+.selectBox select {
+    width: 100%;
+    font-weight: bold;
+}
+
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#checkboxes {
+    display: none;
+    border: 1px #dadada solid;
+}
+
+#checkboxes label {
+    display: block;
+}
+
+#checkboxes label:hover {
+    background-color: #1e90ff;
+}
+
+// btn group
+.deselect {
+    background-color: #fff !important;
+    color: #003d7a !important;
+}
+
+.btn-group {
+    top: 25px;
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+}
+
+.btn-group .btn {
+    border-radius: 0px;
+    border-color: transparent;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    .active {
+        color: #003d7a;
+    }
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.vertical-align {
+    vertical-align: middle;
+    font-size: 22px;
+    margin-right: 5px;
+}
+
+.my_list mat-icon {
+    cursor: pointer;
+}
+
+::ng-deep .my_list .mat-paginator {
+    background-color: transparent !important;
+    margin-top: 20px;
+}
+
+::ng-deep .mat-icon-button {
+    font-family: "NiveauGroteskBold";
+    height: 24px;
+    line-height: 27px;
+}
+
+a.disabled {
+    color: gray;
+    cursor: not-allowed;
+}
+
+a {
+    cursor: pointer;
+}
+
+.pl-15 {
+    padding-left: 15px !important;
+}
+
+.actionimg {
+    height: 1.5rem;
+}
+
+.track-order-title {
+    font-size: 24px;
+    font-family: "NiveauGroteskBold";
+    color: #495a64;
+}
+
+.custom-width {
+    width: auto !important;
+}
+
+.custom-place-holder {
+    width: 60%;
+    font-size: 17px;
+    font-family: "NiveauGrotesk";
+    color: #495a64;
+}
+
+.catg-title {
+    font-family: "NiveauGroteskBold";
+    font-size: 18px;
+    color: #003d7a;
+}
+
+.my_list.table.th {
+    color: #495a64;
+    font-size: 18px;
+    font-family: "NiveauGroteskBold";
+    text-align: center;
+}
+
+.order-ref-header .mat-sort-header-content {
+    width: 50% !important;
+}
+
+.chips_style {
+    border-radius: 5px;
+    opacity: 1;
+    width: auto;
+    display: inline-block;
+    font-size: var(--fontsize16) !important;
+    background-color: #e0e0e0;
+    margin-left: 35px !important;
+}
+
+.Complete {
+    background: #0b961b1a 0% 0% no-repeat padding-box;
+    color: #287631;
+}
+
+.on_way {
+    background: #aeebfd 0% 0% no-repeat padding-box;
+    color: #175f74;
+}
+
+.ready_collect {
+    background: #df4a5e1a 0% 0% no-repeat padding-box;
+    color: #973937;
+}
+
+.received {
+    background: #00afe21a 0% 0% no-repeat padding-box;
+    color: #008db5;
+}
+
+.await_dispatch {
+    background: #ff7d394d 0% 0% no-repeat padding-box;
+    color: #973937;
+}
+
+.part_await_dispatch {
+    background: #77889333 0% 0% no-repeat padding-box;
+    color: #495a64;
+}
+
+.part_order_complete {
+    background: #ffd50066 0% 0% no-repeat padding-box;
+    color: #287631;
+}
+
+.back_order {
+    background: #d0d4d5 0% 0% no-repeat padding-box;
+    color: #175f74;
+}
+
+// order details section
+.crete_button {
+    float: right;
+    background: #003d7a 0% 0% no-repeat padding-box;
+    color: #fff;
+    width: 25%;
+    margin-top: 16px;
+}
+
+.button_set {
+    margin: 0;
+    padding: 0 5px 0 5px;
+}
+
+h2 {
+    margin: 20px;
+    font-weight: 700;
+    color: #495a64;
+    opacity: 1;
+}
+
+.font-bold {
+    font-family: "NiveauGroteskBold" !important;
+    font-size: 1.1em;
+    height: 45px;
+}
+
+.mat-cell,
+.mat-header-cell {
+    border: none !important;
+}
+
+.type-delivery-img {
+    height: 24px;
+    width: 24px;
+    margin-top: -5px;
+}
+
+table {
+    .mat-standard-chip {
+        padding: 4px 12px !important;
+    }
+}
+
+#track-mat-card {
+    .mat-card:not([class*="mat-elevation-z"]) {
+        box-shadow: none !important;
+    }
+    .mat-card {
+        border-radius: 0 !important;
+    }
+    .custom-col-md-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+    .custom-1-col-md-3 {
+        flex: 0 0 27%;
+        max-width: 27%;
+    }
+    .custom-2-col-md-3 {
+        flex: 0 0 23%;
+        max-width: 30%;
+    }
+}
+
+.date-filter {
+    cursor: pointer;
+    margin-left: 5px;
+    padding-right: 5px;
+}
+
+.my_list table th {
+    color: #495a64;
+    font-size: var(--fontsize20) !important;
+    font-family: NiveauGroteskBold;
+}
+
+.font-size-40 {
+    font-size: var(--fontsize40) !important;
+}
+
+.font-size-34 {
+    font-size: var(--fontsize34) !important;
+}
+
+.font-size-24 {
+    font-size: var(--fontsize24) !important;
+}
+
+.font-size-23 {
+    font-size: var(--fontsize23) !important;
+}
+
+.font-size-20 {
+    font-size: var(--fontsize20) !important;
+}
+
+.font-size-18 {
+    font-size: var(--fontsize18) !important;
+    cursor: pointer;
+}
+
+.font-size-16 {
+    font-size: var(--fontsize16) !important;
+}
+
+.noDataTable {
+    margin-top: 0;
+    width: 100%;
+    tr {
+        td {
+            color: #495a64;
+            font-family: "NiveauGrotesk";
+            font-size: var(--fontsize16);
+            padding: var(--fontsize14);
+        }
+    }
+}
+
+.noDataAvailable {
+    margin-top: 50px;
+    text-align: center;
+    color: #495a64;
+    font-family: "NiveauGrotesk";
+    font-size: var(--fontsize16);
+    padding: 12px;
+    background: #e0e7ef;
+}
+
+.btn-block.back {
+    width: 26%;
+    font-family: "NiveauGroteskBold";
+    font-size: var(--fontsize24) !important;
+    background-color: #aebbc5;
+    border: 1px solid #aebbc5;
+    color: $pdp-font-color;
+    min-height: var(--buttonHeight60) !important;
+    text-transform: inherit;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    margin-left: 20px;
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+}
+
+///////////////////////////////////////// custom checkbox CSS - START ////////////////////////////////////////
+input.checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 10px;
+    left: 35px;
+    height: 18px;
+    width: 18px;
+    background-color: $white-color;
+    border: 2px solid $pdp-font-color;
+    border-radius: 2px;
+}
+
+.list.checkmark {
+    position: absolute;
+    top: 10px;
+    left: -21px;
+    height: 14px;
+    width: 14px;
+    background-color: #c6cbd4;
+    border: 0px solid #495a64;
+    border-radius: 1px;
+    cursor: pointer;
+}
+
+.checkmark.terms {
+    width: 18px;
+    height: 18px;
+    top: 4px;
+}
+
+.checkmark.terms.disable {
+    opacity: 0.5;
+}
+
+
+/* On mouse-over, add a grey background color */
+
+.check-container:hover input~.checkmark {
+    background-color: #c6cbd4;
+}
+
+.check-container:hover input~.checkmark.disable {
+    background-color: #c6cbd4;
+}
+
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+/* Show the checkmark when checked */
+
+.check-container input:checked~.checkmark:after {
+    display: block;
+}
+
+
+/* Style the checkmark/indicator */
+
+.check-container .checkmark:after {
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    position: relative;
+    height: 9px;
+    border: solid $pdp-font-color;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.check-container .checkmark.terms:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+}
+
+label.check-container {
+    position: relative;
+}
+
+///////////////////////////////////////// custom checkbox CSS - END ////////////////////////////////////////
+
+/** Order Deliveries CSS Start **/
+
+.filters {
+    background-color: $white-color !important;
+    width: 100%;
+    color: $blue-color !important;
+    border: none;
+    font-size: var(--fontsize18) !important;
+    border-radius: 2px !important;
+    padding: 8px;
+    border: 1px solid $filter-order-color;
+}
+
+.marfltr {
+    margin: 15px 0px;
+}
+
+.view-more {
+    background-color: $white-color !important;
+    color: $pdp-font-color !important;
+    border: 1px solid $pdp-font-color;
+    width: 100%;
+    border-radius: 25px !important;
+    padding: 5px 0px;
+    margin-bottom: 40px;
+    font-size: var(--fontsize18) !important;
+    font-family: "NiveauGroteskBold";
+}
+
+.noOrdersMsgForMob {
+    text-align: center;
+    display: block;
+    font-family: 'NiveauGrotesk';
+}
+
+.date-lable-css {
+    width: 30% !important;
+    padding-right: 10px;
+}
+
+.date-picker-css {
+    width: 56%;
+}
+
+@media screen and (max-width:$mobileScreenPotrait) {
+    #track-mat-card {
+        background-color: $white-color;
+        padding: 15px 0px 2px;
+        border-radius: 5px;
+        .form-control {
+            margin-bottom: 0.75rem !important;
+        }
+    }
+    .pad-left {
+        padding-left: 10px !important;
+    }
+    .pad-right {
+        padding-right: 10px !important;
+    }
+    .font-size-40.orderdeli {
+        font-size: var(--fontsize20) !important;
+    }
+    .track-order-title {
+        font-size: 18px;
+    }
+    .my_list {
+        padding-bottom: 0px !important;
+        padding: 15px 20px 20px;
+    }
+    .background-list {
+        background-color: $white-color;
+        margin: 20px 0px;
+        padding: 0px 10px 10px;
+        border-radius: 5px;
+    }
+    .heading {
+        margin-bottom: 15px;
+    }
+    .headmob {
+        font-size: var(--fontsize18) !important;
+        font-family: "NiveauGroteskBold";
+        padding-top: 10px;
+        color: $pdp-font-color;
+        margin: 0px;
+    }
+    .leftlist {
+        font-size: var(--fontsize18) !important;
+        font-family: "NiveauGroteskBold";
+        color: $pdp-font-color;
+    }
+    .rightlist {
+        font-size: var(--fontsize18) !important;
+        font-family: "NiveauGrotesk";
+        color: $pdp-font-color;
+    }
+    .chips_style {
+        border-radius: 2px;
+        font-family: "NiveauGroteskBold";
+        padding: 5px 10px;
+        font-size: var(--fontsize18) !important;
+        margin-top: 10px;
+        margin-left: 0px !important;
+    }
+    .imgalign {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .font-size-40 {
+        font-size: var(--fontsize30) !important;
+    }
+    #track-mat-card .form-control {
+        border-radius: 2px;
+        height: 35px;
+    }
+    .my_list .container {
+        min-width: 100%;
+    }
+    .button_set {
+        padding: 0 0px !important;
+    }
+    .order-left {
+        margin-left: 0px;
+    }
+    .btn-block.back {
+        width: 65%;
+        max-height: var(--buttonHeight60);
+    }
+    .orderhead1 {
+        margin: 25px 0px 0px;
+    }
+    .padleft {
+        padding-left: 0px;
+    }
+    .alignvertical
+    {
+        align-items: center;
+    }
+    .statusalign
+    {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+@media screen and (max-width: $smallmobileScreenPotrait420) {
+    .track-order-title {
+        font-size: var(--fontsize20);
+    }
+    .font-size-20 {
+        font-size: 12px !important;
+    }
+    .font-size-40 {
+        font-size: var(--fontsize18) !important;
+    }
+    #track-mat-card .form-control {
+        font-size: 0.85rem;
+    }
+    .leftlist,
+    .rightlist {
+        font-size: var(--fontsize16-5) !important;
+        line-height: 1;
+    }
+    .type-delivery-img.delivery-icon {
+        height: 21px;
+        width: 27px;
+    }
+    .type-delivery-img.click-and-collect-icon {
+        height: 21px;
+        width: 16px;
+    }
+    .margimgtp {
+        margin-top: -4px;
+    }
+}
+.datebox{
+    width: 60%;
+input[type="text"]{
+    width: 100%;
+    border: 1px solid #778893;
+    min-height: 40px;
+    line-height: 40px;
+    padding-left: 15px;
+    border-radius: 3px;
+    background: #fff url("../../../assets/images/calendar_month.svg") no-repeat 93% 10px;
+  }
+}
+  
+  

@@ -1,0 +1,344 @@
+<div *ngIf="!isMobile">
+    <div class="team_members">
+        <div class="container">
+
+            <div class="success-message-container" *ngIf="successInd$ | async">
+                <div class="success-container">
+                    <img class="tick-icon" src="../../../assets/images/Icon ionic-ios-checkmark-circle-outline.svg">
+                    <div class="success-message">{{infoMessage}}<span class="close-btn"
+                            (click)="successInd$.next(false)"><i class="fa fa-times"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="failure-message-container" *ngIf="errorInd">
+                <div class="failure-container">
+                    <!-- <img class="tick-icon" src="../../../assets/images/Icon ionic-ios-checkmark-circle-outline.svg"> -->
+                    <div class="error-message">{{infoMessage}}<span class="close-btn" (click)="error = false"><i
+                                class="fa fa-times"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 heading">
+                    MY TEAM
+                </div>
+                <br />
+            </div>
+
+            <div *ngIf="!hasData" class="row">
+                <div fxLayout class=" col-md-4">
+                </div>
+                <div class="col-md-8" style="text-align: end;">
+                    <button class="btn confirmBtn float-right addMember" [disabled]="!isCreateInviteGroupPermissions"
+                        (click)="addMemberPopup(data);">Add Member</button>
+                </div>
+            </div>
+            <div *ngIf="hasData">
+                <div class="row">
+                    <!-- <div class="col-md-12" > -->
+                    <div fxLayout class=" col-md-4">
+                        <!-- <mat-form-field style="display: block;">
+                        <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+                    </mat-form-field> -->
+                        <label class="searchbox">
+                            <input autocomplete="off" aria-describedby="initialDescription" class="form-control"
+                                aria-controls="results" aria-autocomplete="both" placeholder="Search by Name"
+                                (keyup)="doFilter($event.target.value)" aria-label="Search">
+                            <!-- <button class="reset" aria-label="Reset"> -->
+                            <i class="fas fa-search" ng-reflect-type="SEARCH"></i>
+                            <!-- </button> -->
+
+                        </label>
+                    </div>
+                    <div class="col-md-8" style="text-align: end;">
+                        <!-- <button (click)="addMember(data);" mat-raised-button>Add Member</button> -->
+                        <button class="btn confirmBtn float-right addMember"
+                            [disabled]="!isCreateInviteGroupPermissions" (click)="addMemberPopup(data);">Add
+                            Member</button>
+                    </div>
+                    <!-- </div> -->
+
+                </div>
+                <!-- </div> -->
+
+                <table mat-table [dataSource]="dataSource" matSort>
+                    <!-- <table mat-table [dataSource]="dataSource" class="" matSort> -->
+                    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="firstName">
+                        <th width="15%" mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                        <td mat-cell *matCellDef="let element" class="lo_sensitive"> {{element.firstName}} {{element.lastName}} </td>
+                    </ng-container>
+
+                    <!-- Role Column -->
+                    <ng-container matColumnDef="userType">
+                        <th width="12%" mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.userType == 'TEAMMEMBER'? 'Team Member':
+                            (element.userType == 'TEAMSUPERVISOR'? 'Team Supervisor' : (element.userType ==
+                            'EXTERNALTRADIE'? 'Tradesperson' : (element.userType == 'ADMIN'? 'Admin' :element.userType )
+                            ))
+                            }} </td>
+                    </ng-container>
+
+                    <!-- Email -->
+                    <ng-container matColumnDef="email">
+                        <th width="15%" mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                        <td mat-cell *matCellDef="let element" class="lo_sensitive"> {{element.email}} </td>
+                    </ng-container>
+
+                    <!-- Mobile Number -->
+                    <ng-container matColumnDef="mobileNumber">
+                        <th width="13%" mat-header-cell *matHeaderCellDef mat-sort-header> Mobile Number </th>
+                        <td mat-cell *matCellDef="let element" class="lo_sensitive"> +610{{element.mobileNumber}} </td>
+                    </ng-container>
+
+                    <!-- Added On -->
+                    <ng-container matColumnDef="addedOn">
+                        <th width="9%" mat-header-cell *matHeaderCellDef mat-sort-header> Added On </th>
+                        <td mat-cell *matCellDef="let element"> {{element.invitedOn | date : 'dd/MM/yyyy' }} </td>
+                    </ng-container>
+
+
+                    <!-- Added By -->
+                    <ng-container matColumnDef="addedBy">
+                        <th width="9%" mat-header-cell *matHeaderCellDef> Added By </th>
+                        <td mat-cell *matCellDef="let element" class="lo_sensitive"> {{element.invitedByName}} </td>
+                    </ng-container>
+
+                    <!-- Status -->
+                    <ng-container matColumnDef="inviteStatus">
+                        <th width="11%" mat-header-cell *matHeaderCellDef mat-sort-header class="status-class"
+                            style="justify-content: center"> Status </th>
+                        <td mat-cell *matCellDef="let element">
+
+
+                            <mat-chip-list aria-label="Fish selection">
+                                <mat-chip [ngStyle]="status(element.inviteStatus)">
+                                    {{ element.inviteStatus == "INVITE_SENT" ? "PENDING" : element.inviteStatus ==
+                                    "INVITE_EXPIRED" ? "EXPIRED" : element.inviteStatus == "INVITE_ACCEPTED" ?
+                                    "ACCEPTED" :'UNKNOOWN'}}
+                                </mat-chip>
+                            </mat-chip-list>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <th class="align-text-right" width="7%" mat-header-cell *matHeaderCellDef> Actions </th>
+                        <td *matCellDef="let element">
+                            <button class="icon-btn"
+                                [ngClass]="element.inviteStatus =='INVITE_EXPIRED' ? 'disabled' : ''"
+                                (click)="editMember(data,element)" mat-icon-button
+                                [disabled]="!isCreateInviteGroupPermissions || element.inviteStatus =='INVITE_EXPIRED'">
+                                <mat-icon class="pointer" aria-hidden="false" aria-label="Example home icon">edits
+                                </mat-icon>
+                            </button>
+                            <button class="icon-btn" (click)="deleteMember(del,element)" mat-icon-button
+                                [disabled]="!isCreateInviteGroupPermissions">
+                                <mat-icon class="pointer" aria-hidden="false" aria-label="Example home icon">delete
+                                </mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                </table>
+                <table class="noDataTable">
+                    <tr *ngIf="dataSource?.filteredData && dataSource?.filteredData?.length == 0">
+                        <td style="text-align: center;" [attr.colspan]="displayedColumns.length">
+                            No Records Found!
+                        </td>
+                    </tr>
+                </table>
+                <!-- <mat-paginator appPagination [pageSizeOptions]="[12, 24, 36]" [length]="testPaginator.length"
+                [pageSize]="testPaginator.pageSize" [pageIndex]="testPaginator.pageIndex" [hidePageSize]="false"
+                (page)="pageEvent" aria-label="Select page of periodic elements">
+            </mat-paginator> -->
+                <mat-paginator appPagination
+                    [hidden]="dataSource?.filteredData && dataSource?.filteredData?.length == 0"
+                    [length]="testPaginator.length" [pageSizeOptions]="[12, 24, 36]" [pageSize]="testPaginator.pageSize"
+                    [pageIndex]="testPaginator.pageIndex" [hidePageSize]="false" (page)="pageEvent($event)">
+                </mat-paginator>
+            </div>
+
+            <div *ngIf="!hasData">
+                <table *ngIf="noDataMsg != ''" class="noDataAvailable">
+                    <tr>
+                        <td style="text-align: center;" [attr.colspan]="displayedColumns.length">
+                            {{noDataMsg}}
+                        </td>
+                    </tr>
+                </table>
+                <!-- {{noDataMsg}} -->
+            </div>
+            <div class="loading" *ngIf="commonService.showWaitCursor | async">Loading&#8230;</div>
+        </div>
+        <!-- <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="heading">My Team</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6"></div>
+            <div class="col-md-6 addToCart-btn">
+                <button class="btn float-right" (click)="addMemberPopup(data);">Add Member</button>
+            </div>
+        </div>
+    </div>
+
+
+
+</div> -->
+    </div>
+</div>
+
+<div *ngIf="isMobile">
+    <div class="team_members">
+        <div class="container">
+            <div class="success-message-container" *ngIf="successInd$ | async">
+                <div class="success-container">
+                    <img class="tick-icon" src="../../../assets/images/Icon ionic-ios-checkmark-circle-outline.svg">
+                    <div class="success-message">{{infoMessage}}<span class="close-btn"
+                            (click)="successInd$.next(false)"><i class="fa fa-times"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="failure-message-container" *ngIf="errorInd">
+                <div class="failure-container">
+                    <!-- <img class="tick-icon" src="../../../assets/images/Icon ionic-ios-checkmark-circle-outline.svg"> -->
+                    <div class="error-message">{{infoMessage}}<span class="close-btn" (click)="error = false"><i
+                                class="fa fa-times"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 heading">
+                    MY TEAM
+                </div>
+                <br />
+            </div>
+
+            <div *ngIf="!hasData" class="row">
+
+                <div class="col-12" style="text-align: end;padding-bottom: 20px;">
+                    <button class="btn confirmBtn float-right addMember" [disabled]="!isCreateInviteGroupPermissions"
+                        (click)="addMemberPopup(data);">Add Member</button>
+                </div>
+            </div>
+            <div *ngIf="hasData">
+                <div class="row">
+                    <!-- <div class="col-md-12" > -->
+
+                    <div class="col-12" style="text-align: end;">
+                        <!-- <button (click)="addMember(data);" mat-raised-button>Add Member</button> -->
+                        <button class="btn confirmBtn float-right addMember"
+                            [disabled]="!isCreateInviteGroupPermissions" (click)="addMemberPopup(data);">Add
+                            Member</button>
+                    </div>
+                    <!-- </div> -->
+
+                </div>
+                <div *ngFor="let data1 of mobData" class="background-list">
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="btn-status" [ngStyle]="status(data1.inviteStatus)">{{ data1.inviteStatus ==
+                                "INVITE_SENT" ? "PENDING" : data1.inviteStatus
+                                ==
+                                "INVITE_EXPIRED" ? "EXPIRED" : data1.inviteStatus == "INVITE_ACCEPTED" ?
+                                "ACCEPTED" :'UNKNOOWN'}}</button>
+                        </div>
+                        <div class="col-6 icon-align">
+                            <div class="pull-right">
+                                <button class="icon-btn" (click)="editMember(data,data1)" mat-icon-button
+                                    [disabled]="!isCreateInviteGroupPermissions || data1.inviteStatus =='INVITE_EXPIRED'">
+                                    <mat-icon class="pointer" aria-hidden="false" aria-label="Example home icon">edits
+                                    </mat-icon>
+                                </button>
+                                <button class="icon-btn" (click)="deleteMember(del,data1)" mat-icon-button
+                                    [disabled]="!isCreateInviteGroupPermissions">
+                                    <mat-icon class="pointer" aria-hidden="false" aria-label="Example home icon">delete
+                                    </mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="headmob"> Name: <span class="lo_sensitive">{{data1.firstName}}</span></h2>
+                        </div>
+                    </div>
+                    <hr class="marginhr" />
+                    <div class="row">
+                        <div class="col-5">
+                            <h4 class="leftlist">Role</h4>
+                        </div>
+                        <div class="col-7 pl-0">
+                            <h4 class="text-right rightlist"> {{ data1.userType == 'TEAMMEMBER'? 'Team Member':
+                                (data1.userType == 'TEAMSUPERVISOR'? 'Team Supervisor' : (data1.userType ==
+                                'EXTERNALTRADIE'? 'Tradesperson' : (data1.userType == 'ADMIN'? 'Admin' :data1.userType )
+                                )) }}
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <h4 class="leftlist">Email</h4>
+                        </div>
+                        <div class="col-7 pl-0">
+                            <h4 class="text-right rightlist lo_sensitive">{{data1.email}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <h4 class="leftlist">Mobile Number</h4>
+                        </div>
+                        <div class="col-7 pl-0">
+                            <h4 class="text-right rightlist">+610{{data1.mobileNumber}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <h4 class="leftlist">Added On</h4>
+                        </div>
+                        <div class="col-7 pl-0">
+                            <h4 class="text-right rightlist lo_sensitive"> {{data1.invitedOn | date : 'dd/MM/yyyy' }}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <h4 class="leftlist">Added By</h4>
+                        </div>
+                        <div class="col-7 pl-0">
+                            <h4 class="text-right rightlist lo_sensitive"> {{data1.invitedByName}} </h4>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="isMobile && viewMoreVisible">
+                    <button class="view-more" (click)="viewMoreClick()">View More</button>
+                </div>
+                <div *ngIf="!hasData || mobData.length == 0" style="padding: 20px 0px;">
+                    <div class="emptyList" *ngIf="mobData && mobData.length == 0">
+                        <div style="text-align: center;" [attr.colspan]="displayedColumns.length">
+                            No Records Found
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="loading " *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+        </div>
+    </div>
+</div>
+<ng-template #data let-modal>
+    <app-add-member-pop-up *ngIf="!showPermissionError" [data]="currentItem"></app-add-member-pop-up>
+    <app-shared-warning-popup *ngIf="showPermissionError" [heading]="heading" [infoMessage]="infoMessage">
+    </app-shared-warning-popup>
+</ng-template>
+
+<ng-template #del let-modal>
+    <app-delete-popup [data]="currentItem"></app-delete-popup>
+</ng-template>

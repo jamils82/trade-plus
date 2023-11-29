@@ -1,0 +1,149 @@
+<div class="container">
+    <div class="success-message-container" *ngIf="successInd$ | async">
+        <div class="success-container">
+            <img class="tick-icon" src="../../../assets/images/Icon ionic-ios-checkmark-circle-outline.svg">
+            <div class="success-message">{{infoMessage}}<span class="close-btn" (click)="successInd = false"><i
+                        class="fa fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="failure-message-container" *ngIf="errorInd">
+        <div class="failure-container">
+            <!-- <img class="tick-icon" src="../../../assets/images/Icon ionic-ios-checkmark-circle-outline.svg"> -->
+            <div class="error-message">{{infoMessage}}<span class="close-btn" (click)="error = false"><i
+                        class="fa fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="heading-row row">
+        <div class="heading-col col-md-12">
+            <div class="heading-label">{{listName}}</div>
+            <img src="../../../../assets/images/Icon material-edit.svg" (click)="editName(content)">
+            <span class="editLabel" (click)="editName(content)">Edit List Name</span>
+        </div>
+    </div>
+
+    <div *ngIf="selectedMyListData?.entriesList && selectedMyListData?.entriesList?.length > 0; else noData">
+        <div class="selectAll-row row">
+            <div class="selectAll-col col-md-6 deskdelete">
+                <label class="check-container">
+                    <input type="checkbox" [checked]="selectAllParent" [disabled]="addToCartDisabled || parentPoaProduct"
+                        (change)="selectAllChangeHandler($event.target.checked)" class="checkbox" value="Select All" />
+                    <span class="checkmark"></span>
+                </label>
+                <!-- [checked]="selectAllParent" (change)="selectAllChangeHandler($event)"  -->
+                <label class="selectAll-label">Select All</label>
+            </div>
+            <div class="downloadButton-col col-md-6">
+                <button class="btn btn-block download" type="button" (click)="downloadCSV(listName)">Download</button>
+                <button class="btn btn-block save" [ngClass]="quantityClicked ? '':'disabled'" (click)="saveClicked()"
+                    type="button">Save</button>
+            </div>
+            <div class="selectAll-col col-md-6 mobiledel">
+                <label class="check-container">
+                    <input type="checkbox" [checked]="selectAllParent"
+                        (change)="selectAllChangeHandler($event.target.checked)" class="checkbox" value="Select All" />
+                    <span class="checkmark"></span>
+                </label>
+                <!-- [checked]="selectAllParent" (change)="selectAllChangeHandler($event)"  -->
+                <label class="selectAll-label">Select All</label>
+            </div>
+        </div>
+
+        <div *ngFor="let product of mobData; let i=index" [ngClass]="i%2?'even':'odd'" class="products-list">
+            <div class="product-list-row row">
+                <div class="product-list-checkbox col-md-1">
+                    <label class="check-container">
+                        <input type="checkbox" [checked]="selectAll" [disabled]="product?.product?.addToCartDisabled || product?.product?.price.formattedValue == 'POA' || product?.product?.price.formattedValue == '$0.00'"
+                            (change)="itemToCartSelected(i,product.product,$event.target.checked)" class="list checkbox"
+                            value="product.product" />
+                        <!-- [checked]="selectAll" (change)="itemToCartSelected($event)"/> -->
+                        <span class="list checkmark"></span>
+                    </label>
+                </div>
+                <div class="product-list-delete mobiledel col-md-1">
+                    <i (click)="deleteMember(del,product.product)" class="deleteIcon fas fa-trash"></i>
+                </div>
+                <div class="product-list-image my-list col-md-1">
+                    <a [routerLink]="['/p',product.product.code]" tabindex="-1">
+                        <cx-media class="cx-product-image" [container]="product.product.images" format="product"
+                            [alt]="product.product.summary"></cx-media>
+                    </a>
+                </div>
+                <div class="poduct-list-details col-md-3">
+                    <a [routerLink]="['/p',product.product.code]">
+                        <div title="{{product.product.name}}" class="product-name">{{product.product.name}}</div>
+                    </a>
+                    <div title="Item Code : {{product.product.code}} | Supplier Code : {{product.product.productSupplierCode}}"
+                        class="itemCode">Item Code : {{product.product.code}} | Supplier Code :
+                        {{product.product.productSupplierCode}}
+                    </div>
+                    <div *ngIf="product?.product?.addToCartDisabled" class="addToCartDisableCheck deskdelete">Product now obsolete. Cannot be added to the Cart.</div>
+                </div>
+                <div class="product-list-price col-md-5">
+                    <app-product-price [myPrice]="product?.product?.price?.formattedValue" [screenName]="screenName"
+                        [retailPrice]="product?.product?.m2Price?.formattedValue"></app-product-price>
+                </div>
+                <div class="product-list-quantity col-md-2">
+                    <span class="editQtyText">Qty</span>
+                    <app-custom-itemcounter (click)="quantityFieldClicked()" (quantityHandler)="quantityHandler($event)"
+                        [rowIndex]="product.product.code" [quantity]="product.quantity"></app-custom-itemcounter>
+                </div>
+                <div class="product-list-delete deskdelete col-md-1">
+                    <i (click)="deleteMember(del,product.product)" class="deleteIcon fas fa-trash"></i>
+                </div>
+                <div class="col-md-1 addToCartDisableCheck mobiledel" *ngIf="product?.product?.addToCartDisabled"></div>
+                <div class="col-md-11 addToCartDisableCheck mobiledel" *ngIf="product?.product?.addToCartDisabled">
+                    <span>Product now obsolete. Cannot be added to the Cart.</span>
+                </div>
+            </div>
+        </div>
+        <div class="marview mobiledel" *ngIf="isMobile && viewMoreVisible">
+            <button class="view-more" (click)="viewMoreClick()">View More</button>
+        </div>
+        <div class="buttons col-md-12">
+            <div class="buttons-row row">
+                <div class="back-button-col col-md-6 col-4">
+                    <button class="btn btn-block back-button" type="button" (click)="backToMyListClick()">Back</button>
+                </div>
+
+                <div class="save-and-addAllToCart-buttons col-md-6 col-8">
+                    <div class="row save-and-addAllToCart-buttons-row">
+                        <div class="col-md-5 addAllToCart-buttons-col">
+                            <div class="addToCart-btn addAllToCart">
+                                <button class="btn btn-block addToCart addAllToCart"
+                                    [ngClass]="selectedArray.length > 0 ? '':'disabled'" (click)="addToCartProducts()"
+                                    type="button">
+                                    Add Selected to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <ng-template #noData>
+        <div class="noDataAvailable-row row">
+            <div class="col-md-12 noDataAvailable">
+                <span class="noDataAvailableLabel">No Products available in this list!</span>
+            </div>
+        </div>
+        <div class="noData row">
+            <div class="back-button-col col-md-12">
+                <button class="btn btn-block back-button" type="button" (click)="backToMyListClick()">Back</button>
+            </div>
+        </div>
+    </ng-template>
+    <div class="loading " *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+</div>
+
+<ng-template #content let-modal>
+    <app-edit-list-name (newNameEventEmitter)="newNameEventEmitter($event)" [listName]="listName"
+        [email]="selectedMyListData.userID"></app-edit-list-name>
+</ng-template>
+
+<ng-template #del let-modal>
+    <app-delete-popup [data]="currentItem" (afterDeleteResponse)="afterDeleteResponse($event)"></app-delete-popup>
+</ng-template>

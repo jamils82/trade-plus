@@ -1,0 +1,843 @@
+<div class="findStore-container container">
+    <div class="row heading">
+        <div class="col-md-12">
+            <h2 class="pageHeading">STORE FINDER<span class="close-icon" (click)="closePopUp()">
+                <img class="cls-icon fa fa-times" src='../../../../assets/images/close-icon.PNG'>
+            </span></h2>
+            <p class="para"> Please select a store from the list below or search by postcode.</p>
+        </div>
+    </div>
+    <div class="row content">
+        <div class="col-md-5">
+            <div class="homebranch top">Home Branch</div>
+            <div class="tab container homeBranch-row row">
+                <input class="accordion-checkbox" type="checkbox" name="radioCheck" id="home">
+            <div class="selectedBranch col-6 col-sm-8 col-md-8">
+                <div class="heading-container">
+                <span class="home-branch-heading">Trade </span>
+                <ng-container *ngIf="homeBranchData?.isShowroomBranch && !homeBranchData?.isTradeAndCivilBranch">
+                    <span class="home-branch-heading">+ </span><span class="home-branch-heading lightblue">Showroom</span>
+                </ng-container>
+                <ng-container *ngIf="homeBranchData?.isTradeAndCivilBranch && !homeBranchData?.isShowroomBranch">
+                    <span class="home-branch-heading">& </span><span class="home-branch-heading orange-color">Civil</span>
+                </ng-container>
+                <ng-container *ngIf="homeBranchData?.isTradeAndCivilBranch && homeBranchData?.isShowroomBranch">
+                    <span class="home-branch-heading">& </span><span class="home-branch-heading orange-color">Civil</span><span class="home-branch-heading"> + </span><span class="home-branch-heading lightblue">Showroom</span>
+                </ng-container>
+                </div>
+                <div class="home-branch-branch-name">{{homeBranchData?.name}}</div>
+                <div class="home-branch-address"> {{homeBranchData?.address?.formattedAddress}}</div>
+                <div class="home-branch-phone-number">Phone: <a (click)="phoneNumberClicked()" href="tel:{{homeBranchData?.address?.phone}}">{{homeBranchData?.address?.phone}}</a></div>
+            </div>
+            <div class="homeBranchButtons col-6 col-sm-4 col-md-4">
+                <button class="get-direction-btn"
+                    (click)="openMap(homeBranchData?.geoPoint?.latitude, homeBranchData?.geoPoint?.longitude )">Get
+                    Directions</button>
+                <button class="select-btn" (click)="onBranchChange(homeBranchData)">Select</button>
+            </div>
+            <label class="homeBranch viewMore-row row tab-row-container tab-label checkbox-inline" for="home">
+                <div class="col-md-12">
+                    <div class="viewMore" for="home">
+                        <span class="moreLabel" (click)="homeBranchViewMoreClicked()" id="homeBranchViewMore">View More</span>
+                        <span class="lessLabel" (click)="homeBranchViewLessClicked()" id="homeBranchViewLess">View Less</span>
+                    </div>
+        </div>
+        </label>
+            <div class="home tab-content inner-tab-content">
+                <div class="heading" *ngIf="homeBranchData?.buOpeningSchedule">
+                    <!-- <div class="row" *ngFor="let openHours of store.buOpeningSchedule">
+                        <div class="col-md-12">
+                            <span class="openHours-heading" *ngIf="openHours.code == 'Trade'">Opening Hours - Trade</span>
+                            <span class="openHours-heading" *ngIf="openHours.code == 'Showroom'">Opening Hours - Showroom</span>
+                        </div>
+                        <div class="row openHours" *ngFor="let openHour of openHours.weekDayOpeningList">
+                            <div class="col-md-6">
+                                <span class="day">{{openHour.weekDay}}</span>
+                            </div>
+                            <div class="col-md-6 day-timings">
+                                <span class="day-timings" *ngIf="openHour.openingTime">{{openHour.openingTime?.formattedHour}} - {{openHour.closingTime?.formattedHour}}</span>
+                                <span class="day-timings closed" *ngIf="!openHour.openingTime">Closed</span>
+                            </div>
+                        </div>                                        
+                    </div> -->
+                    <div class="row" *ngIf="homeBranchData?.buOpeningSchedule[0]?.code == 'Trade'">
+                        <div class="col-md-12">
+                            <span class="openHours-heading">Opening Hours - Trade</span>
+                        </div>
+                        <div class="row openHours" *ngFor="let openHour of homeBranchData?.buOpeningSchedule[0]?.weekDayOpeningList">
+                            <div class="col-6 col-md-6">
+                                <span class="day">{{openHour?.weekDay}}</span>
+                            </div>
+                            <div class="col-6 col-md-6 day-timings">
+                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                            </div>
+                        </div>                                        
+                    </div>
+                    <div class="row" *ngIf="homeBranchData?.buOpeningSchedule[1]?.code == 'Trade'">
+                        <div class="col-6 col-md-12">
+                            <span class="openHours-heading">Opening Hours - Trade</span>
+                        </div>
+                        <div class="row openHours" *ngFor="let openHour of homeBranchData?.buOpeningSchedule[1]?.weekDayOpeningList">
+                            <div class="col-6 col-md-6">
+                                <span class="day">{{openHour?.weekDay}}</span>
+                            </div>
+                            <div class="col-6 col-md-6 day-timings">
+                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                            </div>
+                        </div>                                        
+                    </div>
+                    <div class="row" *ngIf="homeBranchData?.isShowroomBranch && homeBranchData?.buOpeningSchedule[0]?.code == 'Showroom'">
+                        <div class="col-md-12">
+                            <span class="openHours-heading">Opening Hours - Showroom</span>
+                        </div>
+                        <div class="row openHours" *ngFor="let openHour of homeBranchData?.buOpeningSchedule[0]?.weekDayOpeningList">
+                            <div class="col-6 col-md-6">
+                                <span class="day">{{openHour?.weekDay}}</span>
+                            </div>
+                            <div class="col-6 col-md-6 day-timings">
+                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                            </div>
+                        </div>                                        
+                    </div>
+                    <div class="row" *ngIf="homeBranchData?.isShowroomBranch && homeBranchData?.buOpeningSchedule[1]?.code == 'Showroom'">
+                        <div class="col-md-12">
+                            <span class="openHours-heading">Opening Hours - Showroom</span>
+                        </div>
+                        <div class="row openHours" *ngFor="let openHour of homeBranchData?.buOpeningSchedule[1]?.weekDayOpeningList">
+                            <div class="col-6 col-md-6">
+                                <span class="day">{{openHour?.weekDay}}</span>
+                            </div>
+                            <div class="col-6 col-md-6 day-timings">
+                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                            </div>
+                        </div>                                        
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="homebranch">Nearest Branch</div>
+            <div class="tabs container">
+                <div class="tab-slider--nav">
+                    <ul class="tab-slider--tabs">
+                        <li class="tab-slider--trigger grey" [class.active]="viewMode == 'tab1'" rel="tab1"
+                            (click)="allTabClicked(gm)">ALL</li>
+                        <li class="tab-slider--trigger" [class.active]="viewMode == 'tab2'" rel="tab2"
+                            (click)="tradeTabClicked(gm)">TRADE</li>
+                        <li class="tab-slider--trigger" [class.active]="viewMode == 'tab3'" rel="tab3"
+                            (click)="tradeAndCivilTabClicked(gm)">TRADE & <span class="orange-color">CIVIL</span></li>
+                        <li class="tab-slider--trigger lightblue" [class.active]="viewMode == 'tab4'" rel="tab4"
+                            (click)="showroomTabClicked(gm)">SHOWROOM</li>
+                    </ul>
+                </div>
+                <div class="tab-slider--container" [ngSwitch]="viewMode">
+                    <div id="tab1" class="tab-slider--body" *ngSwitchCase="'tab1'">
+                        <div class="showData" *ngIf="stores && stores.length > 0">
+                        <div class="tab container" *ngFor="let store of stores; let i = index">
+                            <input class="accordion-checkbox" type="checkbox" name="radioCheck" id={{i}}>
+                            <div class="row">
+                                <div class="col-6 col-sm-8 col-md-8">
+                                    <div class="row">
+                                        <div class="heading-col-img col-7 col-md-7">
+                                            <ng-container *ngIf="store.isShowroomBranch && !store.isTradeAndCivilBranch">
+                                                <img src="../../../assets/images/Branch_Trade_Showroom.svg">
+                                              </ng-container>  
+                                              <ng-container *ngIf="store.isTradeAndCivilBranch && !store.isShowroomBranch">
+                                                <img src="../../../assets/images/Branch_Trade_Civil.svg">
+                                              </ng-container>  
+                                              <ng-container *ngIf="!store.isTradeAndCivilBranch && !store.isShowroomBranch">
+                                                <img src="../../../assets/images/Branch_Trade.svg">
+                                              </ng-container>  
+                                              <ng-container *ngIf="store.isTradeAndCivilBranch && store.isShowroomBranch">
+                                                <img src="../../../assets/images/Branch_Trade_Civil_Showroom.svg">
+                                              </ng-container>      
+                                            <div class="heading-container">
+                                    <span class="container-heading">Trade </span>
+                                    <ng-container *ngIf="store.isShowroomBranch && !store.isTradeAndCivilBranch">
+                                        <span class="container-heading">+ </span><span class="container-heading lightblue">Showroom</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="store.isTradeAndCivilBranch && !store.isShowroomBranch">
+                                        <span class="container-heading">& </span><span class="container-heading orange-color">Civil</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="store.isTradeAndCivilBranch && store.isShowroomBranch">
+                                        <span class="container-heading">& </span><span class="container-heading orange-color">Civil</span><span class="container-heading"> + </span><span class="container-heading lightblue">Showroom</span>
+                                    </ng-container>
+                                    </div>
+                                    </div>
+                                    <div class=" dist-col col-5 col-md-5">
+                                        <div class="heading2 distance"><span class="dist" title="{{store.formattedDistance}}">{{store.formattedDistance}}</span></div>
+                                    </div>
+                                </div>
+                                    <div class="tab-container-branch-name">{{store?.name}}</div>
+                                    <div class="tab-container-address"><span class="tab-container-label"> </span>
+                                        <span class="tab-container-value">{{store?.address?.formattedAddress}}</span>
+                                    </div>
+                                    <div class="tab-container-phone-number"><span
+                                            class="tab-container-label">Phone: </span><span
+                                            class="tab-container-value"><a (click)="phoneNumberClicked()" href="tel:{{store?.address?.phone}}">{{store?.address?.phone}}</a></span></div>
+                                </div>
+                                <div class="col-6 col-sm-4 col-md-4">
+                                    <button class="get-direction-btn"
+                                        (click)="openMap(store.geoPoint.latitude, store.geoPoint.longitude )">Get
+                                        Directions</button>
+                                    <button class="select-btn" (click)="onBranchChange(store)">Select</button>
+                                </div>
+                                </div>
+                                <label class="viewMore-row row tab-row-container tab-label checkbox-inline" for={{i}}>
+                                    <div class="col-md-12">
+                                <div for={{i}} class="viewMore">
+                                    <span class="moreLabel" (click)="viewMoreClicked(i)" id="viewMore.{{i}}">View More</span>
+                                    <span class="lessLabel" (click)="viewLessClicked(i)" id="viewLess.{{i}}">View Less</span>
+                                </div>
+                            </div>
+                            </label>
+                            <div class="tab-content inner-tab-content">
+                                <div class="heading" *ngIf="store.buOpeningSchedule">
+                                    <!-- <div class="row" *ngFor="let openHours of store.buOpeningSchedule">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading" *ngIf="openHours.code == 'Trade'">Opening Hours - Trade</span>
+                                            <span class="openHours-heading" *ngIf="openHours.code == 'Showroom'">Opening Hours - Showroom</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of openHours.weekDayOpeningList">
+                                            <div class="col-md-6">
+                                                <span class="day">{{openHour.weekDay}}</span>
+                                            </div>
+                                            <div class="col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour.openingTime">{{openHour.openingTime?.formattedHour}} - {{openHour.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour.openingTime">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div> -->
+                                    <div class="row" *ngIf="store.buOpeningSchedule[0].code == 'Trade'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Trade</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store.buOpeningSchedule[0]?.weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour?.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                    <div class="row" *ngIf="store?.buOpeningSchedule[1]?.code == 'Trade'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Trade</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store?.buOpeningSchedule[1]?.weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour?.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                    <div class="row" *ngIf="store?.isShowroomBranch && store?.buOpeningSchedule[0]?.code == 'Showroom'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Showroom</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store?.buOpeningSchedule[0]?.weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour?.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                    <div class="row" *ngIf="store?.isShowroomBranch && store?.buOpeningSchedule[1]?.code == 'Showroom'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Showroom</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store?.buOpeningSchedule[1]?.weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour?.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div *ngIf="stores && stores.length == 0">
+                            <div class="noDataAvailableLabel">
+                                <span class="noData">No branches available</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
+                        <div class="showData" *ngIf="stores && stores.length > 0">
+                        <div class="tab container" *ngFor="let store of stores; let i = index">
+                            <input class="accordion-checkbox" type="checkbox" name="radioCheck" id={{i}}>
+                            <div class="row">
+                                <div class="col-6 col-sm-8 col-md-8">
+                                    <div class="row">
+                                        <div class="heading-col-img col-7 col-md-7">
+                                            <ng-container *ngIf="store.isShowroomBranch && !store.isTradeAndCivilBranch">
+                                                <img src="../../../assets/images/Branch_Trade_Showroom.svg">
+                                              </ng-container>  
+                                              <ng-container *ngIf="store.isTradeAndCivilBranch && !store.isShowroomBranch">
+                                                <img src="../../../assets/images/Branch_Trade_Civil.svg">
+                                              </ng-container>  
+                                              <ng-container *ngIf="!store.isTradeAndCivilBranch && !store.isShowroomBranch">
+                                                <img src="../../../assets/images/Branch_Trade.svg">
+                                              </ng-container>  
+                                              <ng-container *ngIf="store.isTradeAndCivilBranch && store.isShowroomBranch">
+                                                <img src="../../../assets/images/Branch_Trade_Civil_Showroom.svg">
+                                              </ng-container>      
+                                    <div class="heading-container">
+                                    <span class="container-heading">Trade </span>
+                                    <ng-container *ngIf="store?.isShowroomBranch && !store?.isTradeAndCivilBranch">
+                                        <span class="container-heading">+ </span><span class="container-heading lightblue">Showroom</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="store?.isTradeAndCivilBranch && !store?.isShowroomBranch">
+                                        <span class="container-heading">& </span><span class="container-heading orange-color">Civil</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="store?.isTradeAndCivilBranch && store?.isShowroomBranch">
+                                        <span class="container-heading">& </span><span class="container-heading orange-color">Civil</span><span class="container-heading"> + </span><span class="container-heading lightblue">Showroom</span>
+                                    </ng-container>   
+                                    </div>         
+                                </div>
+                                <div class=" dist-col col-5 col-md-5">
+                                    <div class="heading2 distance"><span class="dist" title="{{store?.formattedDistance}}">{{store?.formattedDistance}}</span></div>
+                                </div>
+                            </div>                       
+                                    <div class="tab-container-branch-name">{{store?.name}}</div>
+                                    <div class="tab-container-address"><span class="tab-container-label"> </span>
+                                        <span class="tab-container-value">{{store?.address?.formattedAddress}}</span>
+                                    </div>
+                                    <div class="tab-container-phone-number"><span
+                                            class="tab-container-label">Phone: </span><span
+                                            class="tab-container-value"><a (click)="phoneNumberClicked()" href="tel:{{store?.address?.phone}}">{{store?.address?.phone}}</a></span></div>
+                                </div>
+                                <div class="col-6 col-sm-4 col-md-4">
+                                    <button class="get-direction-btn"
+                                        (click)="openMap(store?.geoPoint?.latitude, store?.geoPoint?.longitude )">Get
+                                        Directions</button>
+                                    <button class="select-btn" (click)="onBranchChange(store)">Select</button>
+                                </div>
+                            </div>
+                            <label class="viewMore-row row tab-row-container tab-label checkbox-inline" for={{i}}>
+                                <div class="col-md-12">
+                                    <div for={{i}} class="viewMore">
+                                        <span class="moreLabel" (click)="viewMoreClicked(i)" id="viewMore.{{i}}">View More</span>
+                                        <span class="lessLabel" (click)="viewLessClicked(i)" id="viewLess.{{i}}">View Less</span>
+                                    </div>
+                        </div>
+                        </label>
+                            <div class="tab-content inner-tab-content">
+                                <div class="heading" *ngIf="store?.buOpeningSchedule">
+                                    <!-- <div class="row" *ngFor="let openHours of store.buOpeningSchedule">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading" *ngIf="openHours.code == 'Trade'">Opening Hours - Trade</span>
+                                            <span class="openHours-heading" *ngIf="openHours.code == 'Showroom'">Opening Hours - Showroom</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of openHours.weekDayOpeningList">
+                                            <div class="col-md-6">
+                                                <span class="day">{{openHour.weekDay}}</span>
+                                            </div>
+                                            <div class="col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour.openingTime">{{openHour.openingTime?.formattedHour}} - {{openHour.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour.openingTime">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div> -->
+                                    <div class="row" *ngIf="store?.buOpeningSchedule[0]?.code == 'Trade'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Trade</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store?.buOpeningSchedule[0]?.weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour?.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                    <div class="row" *ngIf="store?.buOpeningSchedule[1]?.code == 'Trade'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Trade</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store?.buOpeningSchedule[1]?.weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                    <div class="row" *ngIf="store?.isShowroomBranch && store?.buOpeningSchedule[0]?.code == 'Showroom'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Showroom</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store?.buOpeningSchedule[0]?.weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                    <div class="row" *ngIf="store?.isShowroomBranch && store?.buOpeningSchedule[1]?.code == 'Showroom'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Showroom</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store?.buOpeningSchedule[1]?.weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour?.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="stores && stores.length == 0">
+                        <div class="noDataAvailableLabel">
+                            <span class="noData">No branches available</span>
+                        </div>
+                    </div>
+                    </div>
+                    
+                    <div id="tab3" class="tab-slider--body" *ngSwitchCase="'tab3'">
+                        <div class="showData" *ngIf="tradeCivilStores && tradeCivilStores.length > 0">
+                        <div class="tab container" *ngFor="let store of tradeCivilStores; let i = index">
+                            <input class="accordion-checkbox" type="checkbox" name="radioCheck" id={{i}}>
+                            <div class="row">
+                                <div class="col-6 col-sm-8 col-md-8">
+                                    <div class="row">
+                                        <div class="heading-col-img col-7 col-md-7">
+                                            <ng-container *ngIf="store.isShowroomBranch && !store.isTradeAndCivilBranch">
+                                                <img src="../../../assets/images/Branch_Trade_Showroom.svg">
+                                              </ng-container>  
+                                              <ng-container *ngIf="store.isTradeAndCivilBranch && !store.isShowroomBranch">
+                                                <img src="../../../assets/images/Branch_Trade_Civil.svg">
+                                              </ng-container>  
+                                              <ng-container *ngIf="!store.isTradeAndCivilBranch && !store.isShowroomBranch">
+                                                <img src="../../../assets/images/Branch_Trade.svg">
+                                              </ng-container>  
+                                              <ng-container *ngIf="store.isTradeAndCivilBranch && store.isShowroomBranch">
+                                                <img src="../../../assets/images/Branch_Trade_Civil_Showroom.svg">
+                                              </ng-container>      
+                                            <div class="heading-container">
+                                                <span class="container-heading">Trade </span>
+                                                <ng-container *ngIf="store.isShowroomBranch && !store.isTradeAndCivilBranch">
+                                                    <span class="container-heading">+ </span><span class="container-heading lightblue">Showroom</span>
+                                                </ng-container>
+                                                <ng-container *ngIf="store.isTradeAndCivilBranch && !store.isShowroomBranch">
+                                                    <span class="container-heading">& </span><span class="container-heading orange-color">Civil</span>
+                                                </ng-container>
+                                                <ng-container *ngIf="store.isTradeAndCivilBranch && store.isShowroomBranch">
+                                                    <span class="container-heading">& </span><span class="container-heading orange-color">Civil</span><span class="container-heading"> + </span><span class="container-heading lightblue">Showroom</span>
+                                                </ng-container>
+                                                </div>
+                                    <!-- <div class="heading-container">
+                                    <span class="container-heading">Trade & </span><span class="container-heading orange-color">Civil</span>
+                                    </div> -->
+                                </div>
+                                <div class=" dist-col col-5 col-md-5">
+                                    <div class="heading2 distance"><span class="dist" title="{{store?.formattedDistance}}">{{store?.formattedDistance}}</span></div>
+                                </div>
+                            </div>
+                                    <div class="tab-container-branch-name">{{store?.name}}</div>
+                                    <div class="tab-container-address"><span class="tab-container-label"> </span>
+                                        <span class="tab-container-value">{{store?.address?.formattedAddress}}</span>
+                                    </div>
+                                    <div class="tab-container-phone-number"><span
+                                            class="tab-container-label">Phone: </span><span
+                                            class="tab-container-value"><a (click)="phoneNumberClicked()" href="tel:{{store?.address?.phone}}">{{store?.address?.phone}}</a></span></div>
+                                </div>
+                                <div class="col-6 col-sm-4 col-md-4">
+                                    <button class="get-direction-btn"
+                                        (click)="openMap(store?.geoPoint?.latitude, store?.geoPoint?.longitude )">Get
+                                        Directions</button>
+                                    <button class="select-btn" (click)="onBranchChange(store)">Select</button>
+                                </div>
+                            </div>
+                            <label class="viewMore-row row tab-row-container tab-label checkbox-inline" for={{i}}>
+                                <div class="col-md-12">
+                                    <div for={{i}} class="viewMore">
+                                        <span class="moreLabel" (click)="viewMoreClicked(i)" id="viewMore.{{i}}">View More</span>
+                                        <span class="lessLabel" (click)="viewLessClicked(i)" id="viewLess.{{i}}">View Less</span>
+                                    </div>
+                        </div>
+                        </label>
+                            <div class="tab-content inner-tab-content">
+                                <div class="heading" *ngIf="store?.buOpeningSchedule">
+                                    <!-- <div class="row" *ngFor="let openHours of store.buOpeningSchedule">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading" *ngIf="openHours.code == 'Trade'">Opening Hours - Trade</span>
+                                            <span class="openHours-heading" *ngIf="openHours.code == 'Showroom'">Opening Hours - Showroom</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of openHours.weekDayOpeningList">
+                                            <div class="col-md-6">
+                                                <span class="day">{{openHour.weekDay}}</span>
+                                            </div>
+                                            <div class="col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour.openingTime">{{openHour.openingTime?.formattedHour}} - {{openHour.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour.openingTime">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div> -->
+                                    <div class="row" *ngIf="store?.buOpeningSchedule[0]?.code == 'Trade'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Trade</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store.buOpeningSchedule[0].weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                    <div class="row" *ngIf="store?.buOpeningSchedule[1]?.code == 'Trade'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Trade</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store?.buOpeningSchedule[1]?.weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour?.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                    <div class="row" *ngIf="store?.isShowroomBranch && store?.buOpeningSchedule[0]?.code == 'Showroom'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Showroom</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store?.buOpeningSchedule[0]?.weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour?.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                    <div class="row" *ngIf="store?.isShowroomBranch && store?.buOpeningSchedule[1]?.code == 'Showroom'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Showroom</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store?.buOpeningSchedule[1]?.weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour?.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="tradeCivilStores && tradeCivilStores.length == 0">
+                        <div class="noDataAvailableLabel">
+                            <span class="noData">No branches available</span>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div id="tab4" class="tab-slider--body" *ngSwitchCase="'tab4'">
+                        <div class="showData" *ngIf="showRoomStores && showRoomStores.length > 0">
+                        <div class="tab container" *ngFor="let store of showRoomStores; let i= index ">
+                            <input class="accordion-checkbox" type="checkbox" name="radioCheck" id={{i}}>
+                            <div class="row">
+                                <div class="col-6 col-sm-8 col-md-8">
+                                    <div class="row">
+                                        <div class="heading-col-img col-7 col-md-7">
+                                            <ng-container *ngIf="store.isShowroomBranch && !store.isTradeAndCivilBranch">
+                                                <img src="../../../assets/images/Branch_Trade_Showroom.svg">
+                                              </ng-container>  
+                                              <ng-container *ngIf="store.isTradeAndCivilBranch && !store.isShowroomBranch">
+                                                <img src="../../../assets/images/Branch_Trade_Civil.svg">
+                                              </ng-container>  
+                                              <ng-container *ngIf="!store.isTradeAndCivilBranch && !store.isShowroomBranch">
+                                                <img src="../../../assets/images/Branch_Trade.svg">
+                                              </ng-container>  
+                                              <ng-container *ngIf="store.isTradeAndCivilBranch && store.isShowroomBranch">
+                                                <img src="../../../assets/images/Branch_Trade_Civil_Showroom.svg">
+                                              </ng-container>      
+                                            <div class="heading-container">
+                                                <span class="container-heading">Trade </span>
+                                                <ng-container *ngIf="store.isShowroomBranch && !store.isTradeAndCivilBranch">
+                                                    <span class="container-heading">+ </span><span class="container-heading lightblue">Showroom</span>
+                                                </ng-container>
+                                                <ng-container *ngIf="store.isTradeAndCivilBranch && !store.isShowroomBranch">
+                                                    <span class="container-heading">& </span><span class="container-heading orange-color">Civil</span>
+                                                </ng-container>
+                                                <ng-container *ngIf="store.isTradeAndCivilBranch && store.isShowroomBranch">
+                                                    <span class="container-heading">& </span><span class="container-heading orange-color">Civil</span><span class="container-heading"> + </span><span class="container-heading lightblue">Showroom</span>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                <div class=" dist-col col-5 col-md-5">
+                                    <div class="heading2 distance"><span class="dist" title="{{store?.formattedDistance}}">{{store?.formattedDistance}}</span></div>
+                                </div>
+                            </div>
+                                    <div class="tab-container-branch-name">{{store?.name}}</div>
+                                    <div class="tab-container-address"><span class="tab-container-label"> </span>
+                                        <span class="tab-container-value">{{store?.address?.formattedAddress}}</span>
+                                    </div>
+                                    <div class="tab-container-phone-number"><span
+                                            class="tab-container-label">Phone: </span><span
+                                            class="tab-container-value"><a (click)="phoneNumberClicked()" href="tel:{{store?.address?.phone}}">{{store?.address?.phone}}</a></span></div>
+                                </div>
+                                <div class="col-6 col-sm-4 col-md-4">
+                                    <button class="get-direction-btn"
+                                        (click)="openMap(store?.geoPoint?.latitude, store?.geoPoint?.longitude )">Get
+                                        Directions</button>
+                                    <button class="select-btn" (click)="onBranchChange(store)">Select</button>
+                                </div>
+                            </div>
+                            <label class="viewMore-row row tab-row-container tab-label checkbox-inline" for={{i}}>
+                                <div class="col-md-12">
+                                    <div for={{i}} class="viewMore">
+                                        <span class="moreLabel" (click)="viewMoreClicked(i)" id="viewMore.{{i}}">View More</span>
+                                        <span class="lessLabel" (click)="viewLessClicked(i)" id="viewLess.{{i}}">View Less</span>
+                                    </div>
+                        </div>
+                        </label>
+                            <div class="tab-content inner-tab-content">
+                                <div class="heading" *ngIf="store?.buOpeningSchedule">
+                                    <!-- <div class="row" *ngFor="let openHours of store.buOpeningSchedule">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading" *ngIf="openHours.code == 'Trade'">Opening Hours - Trade</span>
+                                            <span class="openHours-heading" *ngIf="openHours.code == 'Showroom'">Opening Hours - Showroom</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of openHours.weekDayOpeningList">
+                                            <div class="col-md-6">
+                                                <span class="day">{{openHour.weekDay}}</span>
+                                            </div>
+                                            <div class="col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour.openingTime">{{openHour.openingTime?.formattedHour}} - {{openHour.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour.openingTime">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div> -->
+                                    <div class="row" *ngIf="store?.buOpeningSchedule[0]?.code == 'Trade'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Trade</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store?.buOpeningSchedule[0]?.weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour?.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                    <div class="row" *ngIf="store?.buOpeningSchedule[1]?.code == 'Trade'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Trade</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store?.buOpeningSchedule[1]?.weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour?.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                    <div class="row" *ngIf="store?.isShowroomBranch && store?.buOpeningSchedule[0]?.code == 'Showroom'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Showroom</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store?.buOpeningSchedule[0]?.weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour?.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                    <div class="row" *ngIf="store?.isShowroomBranch && store?.buOpeningSchedule[1]?.code == 'Showroom'">
+                                        <div class="col-md-12">
+                                            <span class="openHours-heading">Opening Hours - Showroom</span>
+                                        </div>
+                                        <div class="row openHours" *ngFor="let openHour of store?.buOpeningSchedule[1]?.weekDayOpeningList">
+                                            <div class="col-6 col-md-6">
+                                                <span class="day">{{openHour?.weekDay}}</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 day-timings">
+                                                <span class="day-timings" *ngIf="openHour?.openingTime?.formattedHour || openHour?.closingTime?.formattedHour">{{openHour?.openingTime?.formattedHour}} - {{openHour?.closingTime?.formattedHour}}</span>
+                                                <span class="day-timings closed" *ngIf="!openHour?.openingTime?.formattedHour && !openHour?.closingTime?.formattedHour">Closed</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="tradeCivilStores && tradeCivilStores.length == 0">
+                        <div class="noDataAvailableLabel">
+                            <span class="noData">No branches available</span>
+                        </div>
+                    </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="form-group searchBar">
+                <div class="location icon">
+                    <img src="../../../assets/images/Icon material-edit-location (1).svg">
+                </div>
+                <input type="text" class="form-control searchBar" (keyup.enter)='storeLocation($event.target.value, gm)'
+                    placeholder="Search by postcode or branch name" #search>
+                <i class="searchIcon fa fa-search" (click)='storeLocation(search.value, gm)' aria-hidden="true"></i>
+            </div>
+
+            <agm-map #gm (mapClick)="close_window(gm)" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" [ngSwitch]="viewMode">
+                <!-- <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker> -->
+                <ng-container *ngSwitchCase="'tab1'">
+                <agm-marker *ngFor="let store of MAPstores; let i= index" [latitude]="store.geoPoint.latitude"
+                    [longitude]="store.geoPoint.longitude" [iconUrl]="store.iconUrl" (mouseOver)="onMouseOver(infoWindow,gm)">
+                    <agm-info-window #infoWindow>
+                      <div class="container">
+                          <div class="row">
+                              <div class="name col-md-12">
+                                  <span>{{store?.name}}</span>
+                              </div>
+                              <div class="phone col-md-12">
+                                  <img src="../../../assets/images/Icon awesome-phone-alt(1).svg">
+                                <span>{{store?.address?.phone}}</span>
+                            </div>
+                            <div class="address col-md-12">
+                                <img src="../../../assets/images/LocationIcon_Pin.svg">
+                                <span>{{store?.address?.formattedAddress}}</span>
+                            </div>
+                            <div class="getDirection col-md-12">
+                                <a (click)="openMap(store?.geoPoint?.latitude, store?.geoPoint?.longitude )">Get Directions</a>
+                            </div>
+                          </div>
+                      </div>
+                </agm-info-window>
+                </agm-marker>
+                </ng-container>
+                <ng-container *ngSwitchCase="'tab2'">
+                    <agm-marker *ngFor="let store of MAPstores; let i= index" [latitude]="store.geoPoint.latitude"
+                        [longitude]="store.geoPoint.longitude" [iconUrl]="store.iconUrl" (mouseOver)="onMouseOver(infoWindow,gm)">
+                        <agm-info-window #infoWindow>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="name col-md-12">
+                                        <span>{{store?.name}}</span>
+                                    </div>
+                                    <div class="phone col-md-12">
+                                        <img src="../../../assets/images/Icon awesome-phone-alt(1).svg">
+                                      <span>{{store?.address?.phone}}</span>
+                                  </div>
+                                  <div class="address col-md-12">
+                                      <img src="../../../assets/images/LocationIcon_Pin.svg">
+                                      <span>{{store?.address?.formattedAddress}}</span>
+                                  </div>
+                                  <div class="getDirection col-md-12">
+                                      <a (click)="openMap(store?.geoPoint?.latitude, store?.geoPoint?.longitude )">Get Directions</a>
+                                  </div>
+                                </div>
+                            </div>
+                      </agm-info-window>
+                        <!-- <agm-info-window #infoWindow>
+                          {{ marker.label }}
+                    </agm-info-window> -->
+                    </agm-marker>
+                    </ng-container>
+                <ng-container *ngSwitchCase="'tab3'">
+                <agm-marker *ngFor="let store of MAPtradeCivilStores; let i= index" [latitude]="store.geoPoint.latitude"
+                    [longitude]="store.geoPoint.longitude" [iconUrl]="store.iconUrl" (mouseOver)="onMouseOver(infoWindow,gm)">
+                    <agm-info-window #infoWindow>
+                        <div class="container">
+                            <div class="row">
+                                <div class="name col-md-12">
+                                    <span>{{store?.name}}</span>
+                                </div>
+                                <div class="phone col-md-12">
+                                    <img src="../../../assets/images/Icon awesome-phone-alt(1).svg">
+                                  <span>{{store?.address?.phone}}</span>
+                              </div>
+                              <div class="address col-md-12">
+                                  <img src="../../../assets/images/LocationIcon_Pin.svg">
+                                  <span>{{store?.address?.formattedAddress}}</span>
+                              </div>
+                              <div class="getDirection col-md-12">
+                                  <a (click)="openMap(store?.geoPoint?.latitude, store?.geoPoint?.longitude )">Get Directions</a>
+                              </div>
+                            </div>
+                        </div>
+                  </agm-info-window>
+                    <!-- <agm-info-window #infoWindow>
+                      {{ marker.label }}
+                </agm-info-window> -->
+                </agm-marker>
+            </ng-container>
+            <ng-container *ngSwitchCase="'tab4'">
+                <agm-marker *ngFor="let store of MAPshowRoomStores; let i= index" [latitude]="store.geoPoint.latitude"
+                    [longitude]="store.geoPoint.longitude" [iconUrl]="store.iconUrl" (mouseOver)="onMouseOver(infoWindow,gm)">
+                    <agm-info-window #infoWindow>
+                        <div class="container">
+                            <div class="row">
+                                <div class="name col-md-12">
+                                    <span>{{store?.name}}</span>
+                                </div>
+                                <div class="phone col-md-12">
+                                    <img src="../../../assets/images/Icon awesome-phone-alt(1).svg">
+                                  <span>{{store?.address?.phone}}</span>
+                              </div>
+                              <div class="address col-md-12">
+                                  <img src="../../../assets/images/LocationIcon_Pin.svg">
+                                  <span>{{store?.address?.formattedAddress}}</span>
+                              </div>
+                              <div class="getDirection col-md-12">
+                                  <a (click)="openMap(store?.geoPoint?.latitude, store?.geoPoint?.longitude )">Get Directions</a>
+                              </div>
+                            </div>
+                        </div>
+                  </agm-info-window>
+                    <!-- <agm-info-window #infoWindow>
+                      {{ marker.label }}
+                </agm-info-window> -->
+                </agm-marker>
+            </ng-container>
+            </agm-map>
+
+        </div>
+    </div>
+</div>

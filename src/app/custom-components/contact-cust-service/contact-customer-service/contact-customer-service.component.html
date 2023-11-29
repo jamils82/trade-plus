@@ -1,0 +1,103 @@
+<ng-template #contactCustomerServiceModal let-modal>
+
+  <div class=" modal-header modal-head container row mt-4">
+    <div class="col-lg-8 col-xs-12 col-sm-12 titleBottomStyle">
+      <h3 *ngIf='responseOpen'>Contact Customer Service</h3>
+      <h3 *ngIf='!responseOpen'>Thank you for contacting us</h3>
+    </div>
+
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 text-right requiredDiv" *ngIf='responseOpen'>
+      <label>Required *</label>
+    </div>
+    <span class="closeIcon "><img src="assets/images/closegrey.svg" (click)="resetAndCloseForm()"
+        alt="Menu Icon" /></span>
+  </div>
+  <div class="modal-body mt-3">
+    <ng-container *ngIf='responseOpen'>
+      <form (ngSubmit)="submit($event)" [formGroup]="contactCSRForm">
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12  email">
+            <div class="form-group searchformfld">
+              <input type="text" id="email" class="form-control" placeholder=" " (change)="emailInputVal()"
+                [ngClass]="{ error: emailCheck }" formControlName="email">
+              <label for="email">E-Mail *</label>
+              <span *ngIf="emailCheck" class="help-block text-danger">Required</span>
+              <span *ngIf="
+                !contactCSRForm.get('email').errors?.required &&
+                !contactCSRForm.get('email').valid &&
+                contactCSRForm.get('email').touched "
+                class="help-block text-danger font-smaller">{{createAccountFormConstants.emailValidationMessage}}<i
+                  class="fa fa-exclamation-triangle fa_custom"></i></span>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-4">
+            <div class="form-group searchformfld">
+              <input type="text" class="form-control" id="name" placeholder=" " (change)="nameInputVal()"
+                [ngClass]="{ error: nameCheck }" formControlName="name">
+              <label for="name">Name *</label>
+              <span *ngIf="nameCheck" class="help-block text-danger">Required</span>
+              <span *ngIf="
+                !contactCSRForm.get('name').errors?.required &&
+                !contactCSRForm.get('name').valid &&
+                contactCSRForm.get('name').touched " class="help-block text-danger font-smaller">Sorry, Name is
+                Invalid<i class="fa fa-exclamation-triangle fa_custom"></i></span>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt-4 form-group searchformfld">
+            <input type="text" class="form-control" id="phoneNumber" placeholder=" " formControlName="phoneNumber"
+              [ngClass]="{ error: validatePhoneNum() }">
+            <label for="phoneNumber">Phone</label>
+            <span *ngIf="
+                !contactCSRForm.get('phoneNumber').valid &&
+                contactCSRForm.get('phoneNumber').touched " class="help-block text-danger font-smaller">Sorry, Phone
+              Number is Invalid<i class="fa fa-exclamation-triangle fa_custom"></i></span>
+          </div>
+
+
+          <div class="mt-4 col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group searchformfld">
+            <input type="text" class="form-control" id="accountNumber" placeholder=" "
+              (change)="accountNumberCheckInputVal()" [ngClass]="{ error: accountNumberCheck }"
+              formControlName="accountNumber" disabled>
+            <label for="accountNumber">Account No *</label>
+            <span *ngIf="accountNumberCheck" class="help-block text-danger">Required</span>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="mt-4 col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group searchformfld">
+            <input type="text" class="form-control" id="accountName" placeholder=" " formControlName="accountName"
+              (change)="companyNameInputVal()" [ngClass]="{ error: companyNameCheck }" disabled>
+            <label for="accountName">Company Name *</label>
+            <span *ngIf="companyNameCheck" class="help-block text-danger">Required</span>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-4 text-left">
+            <label for="comments" class="queryDescription">How can we help you ? </label>
+            <textarea class="form-control" id="" rows="5" formControlName="comments"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-sm-12 col-xs-12 d-flex justify-content-start mt-4 mb-4 buttonContainer">
+            <button type="submit" class="btn btn-block font-weight-bold text-white submitBtn"
+              [ngClass]="{ disabled: formValidationCheck() }">Submit</button>
+          </div>
+        </div>
+
+      </form>
+    </ng-container>
+
+    <ng-container *ngIf='!responseOpen'>
+      <app-fi-confirmation-popup [isSuccess]="responseSuccess">
+      </app-fi-confirmation-popup>
+    </ng-container>
+
+  </div>
+</ng-template>

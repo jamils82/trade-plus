@@ -1,0 +1,24 @@
+<div class="container align-center">
+    <div class="row">
+        <div class="col-md-12 close-pos">
+            <img (click)="closePopup()" class="cls-icon fa fa-times" src='../../../../assets/images/close-icon-mobile.PNG'>
+        <!-- <div class="col-md-12 close-pos">
+            <div class="cls-btn" (click)="closePopup()"><i class="cls-icon fa fa-times"></i></div> -->
+        </div>
+        <div class="popup-heading col-md-12">
+            <h2 class="pageHeading">{{heading}}</h2>
+        </div>
+        <div class="modal-body">
+            <p class="info-message">{{infoMessage}}</p>
+        </div>
+    </div>
+
+    <div class="row buttons">
+        <div class="col-md-12 btngrp">
+
+            <button class="btn confirmBtn" (click)="closePopup()" type="submit">
+      Ok
+    </button>
+        </div>
+    </div>
+</div>

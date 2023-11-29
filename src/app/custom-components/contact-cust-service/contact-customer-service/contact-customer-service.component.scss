@@ -1,0 +1,324 @@
+@import "../../../shared/styles/variables.scss";
+
+::ng-deep .contactCSRForm {
+    .titleBottomStyle h3 {
+        margin-left: -1rem;
+    }
+
+    .titleBottomStyleSuccess {
+        padding-left: 1rem;
+        h3 {
+            margin-top: -1rem;
+        }
+    }
+
+    @include font-MyriadReg();
+    .modal-dialog {
+        .modal-content {
+            color: $grey-color;
+            border: 3rem solid rgba(84, 88, 89, 0.7);
+        }
+        .modal-head {
+            justify-content: left;
+            padding: 1.3rem 0 1.7rem 3.1rem;
+            .closeIcon {
+                position: absolute;
+                right: -2.4rem;
+                top: -2.3rem;
+                cursor: pointer;
+            }
+        }
+        .modal-header {
+            border-bottom: 0 none;
+            height: 0.6rem !important;
+        }
+        h3 {
+            color: #595959;
+        }
+
+        .modal-footer {
+            border-top: 0 none;
+        }
+        img {
+            vertical-align: middle;
+            height: 0.8rem;
+            width: 0.8rem;
+
+            margin-left: -1.5rem;
+
+            filter: invert(1);
+            border-style: none;
+            fill: grey;
+        }
+        .queryDescription {
+            color: #595959;
+        }
+        .modal-body {
+            > form {
+                > *input {
+                    color: $dark-grey;
+                    border: 1px solid $medium-gray;
+                    background-color: $white-color !important;
+                    z-index: 1;
+                    margin-bottom: 0;
+                    &:visited {
+                        background-color: $white-color;
+                    }
+                    &:focus {
+                        background-color: $white-color;
+                        box-shadow: none;
+                        outline-style: hidden !important;
+                        outline-color: transparent;
+                        border: 1px solid $medium-gray;
+                    }
+                    &:hover {
+                        background-color: $white-color;
+                        box-shadow: none;
+                    }
+                    &:disabled {
+                        color: $placeholder-grey;
+                    }
+                    &:-webkit-autofill {
+                        background-color: $white-color !important;
+                        box-shadow: none;
+                    }
+                    &:-webkit-internal-autofill-selected {
+                        background-color: $white-color !important;
+                        box-shadow: none;
+                    }
+                    &:-webkit-autofill,
+                    &:-webkit-autofill:hover,
+                    &:-webkit-autofill:focus,
+                    &:-webkit-autofill:active {
+                        background-color: $white-color !important;
+                        box-shadow: none;
+                    }
+                    &:disabled {
+                        opacity: 0.8;
+                        color: #666;
+                    }
+                }
+                input.ng-invalid.ng-touched,
+                input.error {
+                    border: 1px solid $error-text-red-color !important;
+                }
+                .fa_custom {
+                    color: $error-text-red-color;
+                    position: absolute;
+                    right: 1rem;
+                    top: 1rem;
+                    transform: scale(1.2);
+                }
+                .row {
+                    .form-group {
+                        position: relative;
+                        margin-bottom: 0.5rem !important;
+                        label {
+                            position: absolute;
+                            font-size: 0.875rem;
+                            color: $placeholder-grey;
+                            cursor: text;
+                            z-index: 0;
+                            transition: all 0.15s ease-in-out 0s;
+                            &.liftUp {
+                                top: 14px;
+                                left: 15px;
+                                color: $placeholder-grey;
+                                background-color: $white-color;
+                                top: -12px;
+                                padding: 0 2px;
+                                font-size: 0.875rem;
+                                transition: all 0.15s ease-in-out 0s;
+                            }
+                        }
+                    }
+                    > *p {
+                        margin-bottom: 0px;
+                        @include font-MyriadReg();
+                        font-size: 1rem;
+                        color: $dark-grey;
+                    }
+                    .submitBtn {
+                        background-color: $dark-grey;
+                        width: 20rem;
+                        color: $white-color;
+                        :disabled {
+                            color: $medium-gray;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.successHeader {
+    color: #595959;
+    font-weight: bold;
+}
+
+.message {
+    color: $placeholder-grey;
+    padding: 3rem 3rem 0rem 3rem;
+}
+
+.messageThankYou {
+    color: $placeholder-grey;
+    padding: 1rem 3rem 8rem 3rem;
+}
+
+.requiredInput {
+    color: #595959;
+}
+
+.searchformfld {
+    position: relative;
+    margin: 5px 0px;
+}
+
+.searchformfld label {
+    position: absolute;
+    padding-left: 10px;
+    top: 9px;
+    cursor: text;
+    color: $grey-color !important;
+}
+
+.searchformfld input:focus + label,
+.searchformfld input:not(:placeholder-shown) + label {
+    opacity: 1;
+    transform: scale(0.9) translateY(-100%) translateX(9px);
+    color: $placeholder-grey !important;
+    background-color: $white-color;
+    padding-right: 9px;
+}
+
+.searchformfld input:focus {
+    border: 1px solid #595959;
+    outline-color: #595959;
+    color: $grey-color;
+}
+
+.searchformfld input {
+    width: 100%;
+    padding-left: 10px;
+}
+
+.searchformfld label {
+    transition: all 0.2s;
+    transition-timing-function: ease;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    opacity: 0.9;
+    color: $grey-color;
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    .titleBottomStyle h5 {
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        margin-top: -2.2rem;
+        border-bottom: 1px solid $black-color;
+        text-align: center;
+    }
+
+    .requiredDiv {
+        text-align: left !important;
+        padding-left: 0rem;
+        color: $grey-color;
+        label {
+            color: $grey-color;
+        }
+    }
+
+    .buttonContainer {
+        justify-content: center !important;
+    }
+
+    .contactCSRForm .modal-dialog .modal-head {
+        padding: 1.3rem 0 1.7rem 1.1rem;
+    }
+
+    ::ng-deep .modal-backdrop {
+        width: 100%;
+        height: 100%;
+    }
+    ::ng-deep {
+        .modal-dialog {
+            .modal-content {
+                width: 90%;
+                height: fit-content;
+                bottom: -2%;
+                justify-self: center;
+                align-self: center;
+                border-radius: 0px;
+                border: 0rem none !important;
+                position: inherit;
+                transform: inherit;
+                margin: auto;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0 !important;
+
+                .modal-head {
+                    h4 {
+                        font-size: 18px;
+                        width: 220px;
+                    }
+                    .closeIcon {
+                        position: absolute;
+                        right: 3px;
+                        top: 3px;
+                        height: 5px;
+                        width: 5px;
+                        cursor: pointer;
+                    }
+                }
+                .modal-body {
+                    > *input {
+                        &:-webkit-autofill,
+                        &:-webkit-autofill:hover,
+                        &:-webkit-autofill:focus,
+                        &:-webkit-autofill:active {
+                            background-color: $white-color !important;
+                            box-shadow: none;
+                        }
+                    }
+                }
+                .totalFormCheck {
+                    left: 0;
+                    width: 97%;
+                    margin-left: 0.4rem !important;
+                }
+            }
+        }
+    }
+}
+
+.text-danger {
+    font-size: 1rem;
+    margin-top: 0.1rem;
+    margin-bottom: 0.8rem;
+    display: block;
+    padding-left: 0.3rem;
+    color: #f23c2b !important;
+    border-radius: 0.3rem;
+}
+
+.submitBtn {
+    background-color: $dark-grey;
+    width: 20rem;
+    color: $white-color;
+    :disabled {
+        background-color: $medium-gray;
+    }
+}
+// @media screen and (max-width: $smallmobileScreenPotrait360) {
+//     ::ng-deep {
+//         .modal-dialog {
+//             .modal-content {
+//                 transform: translate(-50%, -33%);
+//             }
+//         }
+//     }
+// }

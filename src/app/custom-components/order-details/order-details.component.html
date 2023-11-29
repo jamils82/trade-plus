@@ -1,0 +1,310 @@
+<ng-template #head>
+    <p style="padding: 10px 0 5px 4%;margin-bottom: 0;" class="font-bold">
+        CLICK & COLLECT INFORMATION</p>
+</ng-template>
+<ng-template #CCcontentData>
+
+    <div class="col-md-2 col-sm-12 col">
+        <div class="row">
+            <div class="col-sm-12">
+                <mat-chip [ngClass]="status(resultData.classStatus)" class="chips_style">
+                    {{ resultData?.status }}
+                </mat-chip>
+            </div>
+        </div>
+        <div class="divide col-12">
+            <p class="font-bold font-size-24">Order Information</p>
+            <p class="font-size-18 lo_sensitive">Order Number : <span class="font-bold font-size-18">{{resultData?.code}} </span></p>
+            <p class="font-size-18 lo_sensitive">Order Branch : <span class="font-bold font-size-18">{{resultData?.orderBranch}}</span></p>
+            <p class="font-size-18 lo_sensitive">Order Date : <span class="font-bold font-size-18">{{resultData?.orderDate }}</span></p>
+            <p class="font-size-18 lo_sensitive">Order / Job Ref. : <span class="font-bold font-size-18">{{resultData?.purchaseOrderNumber}}</span></p>
+            <p class="font-size-18 lo_sensitive">Order Taken By : <span class="font-bold font-size-18">{{resultData?.orderProcessedBy}}</span></p>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-12 col">
+        <div class="divide mt-32 lo_sensitive">
+            <p class="font-bold font-size-24">Account Information</p>
+            <p class="font-size-18">Account Number : {{resultData?.accountId}} <br> {{resultData?.accountName}} </p>
+            <p class="font-size-18">Address : {{resultData?.accountAddress?.formattedAddress}} </p>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 col">
+        <div class="divide mt-32">
+            <p class="font-bold font-size-24">Click & Collect Details</p>
+            <p class="font-size-18">Requested Date : {{resultData?.requestedDeliveryDate | date: 'dd/MM/yyyy'}}</p>
+            <p class="font-size-18">Requested Time : {{resultData?.requestedDeliveryTime }}</p>
+            <p class="font-size-18 lo_sensitive"> {{ resultData.contactFirstName }} {{ resultData.contactLastName}} <br> {{ resultData?.contactPhone }}
+                <br> {{ resultData?.pickupLocationPOS?.address?.formattedAddress }}
+            </p>
+            <p class="font-size-18 lo_sensitive"> <span class="font-bold font-size-18">Additional Instructions</span> : {{resultData?.customerInstructions}} </p>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #delContentData>
+
+
+    <div class="col-md-2 col-sm-12 col">
+        <div class="row">
+            <div class="col-sm-12">
+                <mat-chip [ngClass]="status(resultData.classStatus)" class="chips_style">
+                    {{ resultData?.status }}
+                </mat-chip>
+            </div>
+        </div>
+        <div class="divide">
+            <p class="font-bold font-size-24">Order Information</p>
+            <p class="font-size-18 lo_sensitive">Order Number : <span class="font-bold font-size-18">{{resultData?.code}} </span></p>
+            <p class="font-size-18 lo_sensitive">Order Branch : <span class="font-bold font-size-18">{{resultData?.orderBranch}}</span></p>
+            <p class="font-size-18 lo_sensitive">Order Date : <span class="font-bold font-size-18">{{resultData?.orderDate }}</span></p>
+            <p class="font-size-18 lo_sensitive">Order / Job Ref. : <span class="font-bold font-size-18">{{resultData?.purchaseOrderNumber}}</span></p>
+            <p class="font-size-18 lo_sensitive">Order Taken By : <span class="font-bold font-size-18">{{resultData?.orderProcessedBy}}</span></p>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-12 col">
+        <div class="divide mt-32 lo_sensitive">
+            <p class="font-bold font-size-24">Account Information</p>
+            <p class="font-size-18">Account Number : {{resultData?.accountId}} <br> {{resultData?.accountName}} </p>
+            <p class="font-size-18">Address : {{resultData?.accountAddress?.formattedAddress}} </p>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 col">
+        <div class="divide mt-32">
+            <p class="font-bold font-size-24">Delivery Information</p>
+            <p class="font-size-18">Requested Date : {{resultData?.requestedDeliveryDate | date: 'dd/MM/yyyy'}}</p>
+            <p class="font-size-18">Requested Time : {{resultData?.requestedDeliveryTime }}</p>
+            <p class="font-size-18 lo_sensitive"> {{ resultData.contactFirstName}} {{ resultData.contactLastName}} <br> {{ resultData?.contactPhone }}
+                <br> {{ resultData?.deliveryAddress?.formattedAddress }}
+            </p>
+            <p class="font-size-18 lo_sensitive"> <span class="font-bold font-size-18">Delivery Instructions</span> : {{resultData?.customerInstructions}} </p>
+        </div>
+    </div>
+</ng-template>
+
+<div class="delivery_information">
+    <div class="box">
+
+        <div class="row" style="margin-left: 5px;">
+            <div class="col-md-3 col-12 mobflex">
+                <div *ngIf="isDeliveryBox == true" class="delivery-box col-md-12 col-6">
+                    <img class="delivery-img delivery" src="assets/icons/delivery.svg" />
+                </div>
+                <div *ngIf="isDeliveryBox === false">
+                    <div class="delivery-box col-md-12 col-6">
+                        <img class="delivery-img" src="assets/icons/pickup.svg" />
+                    </div>
+                </div>
+                <div *ngIf="isDeliveryBox=== true" class="inlinemob col-md-12 col-6">
+                    <p class="font-bold font-size-24">Delivery</p>
+                    <p class="font-size-18">We will deliver right to your door.</p>
+                </div>
+                <div *ngIf="isDeliveryBox === false">
+                    <div class="col-6 col-md-12 inlinemob">
+                        <p class="font-bold font-size-24">Click & Collect</p>
+                        <p class="font-size-18">Collect from your nearest branch.</p>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isDeliveryBox=== true;then delContentData">
+            </div>
+            <div *ngIf="isDeliveryBox=== false;then CCcontentData">
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!isMobile">
+    <div class="order_summary">
+        <p class="title font-bold font-size-24">ORDER SUMMARY</p>
+        <div class="order_info">
+            <div class="row header-row" [style.background]="'#F6F6F6'">
+                <div class="col-sm-1 col">
+                    <p class="font-bold font-size-20">Item Code</p>
+                </div>
+                <div class="col-sm-3 col description-col">
+                    <p class="font-bold font-size-20">Item Description</p>
+                </div>
+                <div class="col-sm-1 col">
+                    <p class="font-bold font-size-20">UOM</p>
+                </div>
+                <div class="col-sm-1 col">
+                    <p class="font-bold font-size-20">Quantity Ordered</p>
+                </div>
+                <div class="col-sm-1 col">
+                    <p class="font-bold font-size-20">Quantity Shipped</p>
+                </div>
+                <div class="col-sm-1 quantity-back-col col">
+                    <p class="font-bold font-size-20">Quantity Back Ordered</p>
+                </div>
+                <div class="col-sm-1 col status-col">
+                    <p class="font-bold font-size-20">Status</p>
+                </div>
+                <div class="col-sm-1 col">
+                    <p class="font-bold mb-0 font-size-20">Unit Price <span class="gst"> (excl. GST)</span> </p>
+                </div>
+                <div class="col-sm-1 col">
+                    <p class="font-bold mb-0 font-size-20">EXT Price <span class="gst">(excl. GST) </span> </p>
+                </div>
+            </div>
+            <div class="row" *ngFor="let order of resultData.entries; let i = index" [style.background]="i % 2 == 0 ?  'white': '#F6F6F6'">
+                <div style="cursor: pointer;" class="col-sm-1 col">
+                    <p (click)="proofOfDelivery(order)" class="font-size-18">{{order?.product?.code}}</p>
+                </div>
+                <div class="col-sm-3 col description-col">
+                    <p class="font-size-18 mb-0">{{order?.product?.name}}</p>
+                </div>
+                <div class="col-sm-1 col">
+                    <p class="font-size-18">{{order?.unitOfMeasure}}</p>
+                </div>
+                <div class="col-sm-1 col">
+                    <p class="font-size-18">{{order?.quantity}}</p>
+                </div>
+                <div class="col-sm-1 col">
+                    <p class="font-size-18">{{order?.quantityShipped || 0}}</p>
+                </div>
+                <div class="col-sm-1 col">
+                    <p class="font-size-18">{{order?.quantityBackordered || 0}}</p>
+                </div>
+                <div class="col-sm-1 col status-col" style="display: flex;">
+                    <p (click)="proofOfDelivery(order)" [ngClass]="{ completed: resultData.deliveryMode.code == 'Delivery' && (order?.quantityStatus ==  'COMPLETED' || order?.quantityStatus ==  'Completed' ) && order.consignmentEntries && order.consignmentEntries.length > 0 }"
+                        class="font-size-18">{{ order?.quantityStatus }}
+                    </p>
+                    <mat-icon *ngIf="resultData.deliveryMode.code == 'Delivery' && (order?.quantityStatus ==  'COMPLETED' || order?.quantityStatus ==  'Completed') && order.consignmentEntries && order.consignmentEntries.length > 0" style="font-size: 18px;margin-left: 5px;margin-top: 1px;">info</mat-icon>
+                </div>
+                <div class="col-sm-1 col lo_sensitive">
+                    <p class="font-size-18">{{order?.product?.price?.formattedValue}}</p>
+                </div>
+                <div class="col-sm-1 col lo_sensitive">
+                    <p class="font-size-18">{{order?.subTotal?.formattedValue}}</p>
+                </div>
+            </div>
+            <div class="row bottom">
+                <div class="col-sm-8 info">
+                    <p class="font-size-18 mb-0">
+                        * All prices shown exclude GST <br /> * All information is subject to change without notice
+                    </p>
+                    <p *ngIf="isDeliveryBox=== true;" class="font-size-18"> * This order does not include delivery fees, if applicable. </p>
+                </div>
+                <!--- commenting GST as confirmed by Business. Ticker No # TLBP-1732 ----->
+                <!-- <div class="col-sm-2 subtotal">
+                <p class="sub font-size-20">Subtotal <span class="font-size-18">(excl. GST)</span></p>
+                <p class="gst font-size-20">GST</p>
+                <hr>
+                <p class="total font-size-24">Total&nbsp;<span class="font-size-18">(incl. GST)</span></p>
+            </div> -->
+                <div class="col-sm-2 subtotal">
+                    <p class="total totalfnt">Total&nbsp;<span class="font-size-18 pos">(excl. GST)</span></p>
+                </div>
+                <div class="col-sm-2 price">
+                    <!-- <p class="font-size-20">{{ resultData?.totalPrice?.formattedValue }}</p>
+                <p class="font-size-20">{{ resultData?.totalTax?.formattedValue }}</p> -->
+                    <p class="total font-size-34 lo_sensitive">{{resultData?.subTotal?.formattedValue}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="isMobile" class="bottom-margin">
+    <div class="background-list">
+        <div class="row">
+            <div class="col-12">
+                <p class="title font-bold orderhead">ORDER SUMMARY</p>
+            </div>
+            <div class="col-12 info">
+                <div class="brdr">
+                    <p class="font-size-18 mb-0">
+                        * All prices shown exclude GST <br /> * All information is subject to change without prior notice
+                    </p>
+                    <p *ngIf="isDeliveryBox=== true;" class="font-size-18"> * This order does not include delivery fees, if applicable. </p>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="col-6 pl-0 pt-2 totalinline">
+                    <h4 class="total">Total&nbsp;<span class="font-size-18">(excl. GST)</span></h4>
+                </div>
+                <div class="col-6 pr-0 right totalinline">
+                    <h4 class="total">{{resultData?.totalPriceWithTax?.formattedValue}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngFor="let data of mobData" class="background-list" (click)="proofOfDelivery(data)">
+        <div class="row">
+            <div class="col-6">
+                <h4 class="leftlist">Item Code</h4>
+            </div>
+            <div class="col-6">
+                <h4 class="text-right rightlist">{{data?.product?.code}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h4 class="leftlist">Item Description</h4>
+            </div>
+            <div class="col-6">
+                <h4 class="text-right rightlist">{{data?.product?.name}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h4 class="leftlist">UOM</h4>
+            </div>
+            <div class="col-6">
+                <h4 class="text-right rightlist">{{data?.unitOfMeasure}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h4 class="leftlist">Quantity Ordered</h4>
+            </div>
+            <div class="col-6">
+                <h4 class="text-right rightlist">{{data?.quantity}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h4 class="leftlist">Quantity Shipped</h4>
+            </div>
+            <div class="col-6">
+                <h4 class="text-right rightlist">{{data?.quantityShipped || 0}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h4 class="leftlist">Quantity Back Ordered</h4>
+            </div>
+            <div class="col-6">
+                <h4 class="text-right rightlist">{{data?.quantityBackordered || 0}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h4 class="leftlist">Status</h4>
+            </div>
+            <div class="col-6">
+                <h4 class="text-right rightlist">{{ data?.quantityStatus }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h4 class="leftlist">Unit Price(excl. GST)</h4>
+            </div>
+            <div class="col-6">
+                <h4 class="text-right rightlist">{{data?.product?.price?.formattedValue}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h4 class="leftlist">EXT Price(excl. GST)</h4>
+            </div>
+            <div class="col-6">
+                <h4 class="text-right rightlist">{{data?.subTotal?.formattedValue}}</h4>
+            </div>
+        </div>
+
+        <!-- <div class="col-sm-2 price">
+                <p class="font-size-20">{{ resultData?.totalPrice?.formattedValue }}</p>
+                <p class="font-size-20">{{ resultData?.totalTax?.formattedValue }}</p>
+                <p class="total font-size-34">{{resultData?.totalPriceWithTax?.formattedValue}}</p>
+            </div> -->
+    </div>
+</div>

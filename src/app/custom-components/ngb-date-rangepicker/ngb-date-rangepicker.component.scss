@@ -1,0 +1,158 @@
+@import '../../shared/styles/variables.scss';
+.form-group.hidden {
+    width: 0;
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+
+.custom-day.range,
+.custom-day:hover {
+    background-color: rgb(2, 117, 216);
+    color: white;
+}
+
+.custom-day.faded {
+    background-color: rgba(2, 117, 216, 0.5);
+}
+
+.form-inline {
+    padding-left: 17px;
+}
+
+.form-group {
+    width: 100%;
+    border: 1px solid #BBC3C9;
+    border-radius: 2px;
+    padding-right: 2px;
+}
+
+.form-group.quotes {
+    height: 45px;
+}
+
+.quotes.form-group {
+    background: $white-color;
+}
+
+.input-group {
+    width: 86%;
+    input {
+        height: 40px;
+        font-size: var(--fontsize18);
+        font-family: 'NiveauGrotesk';
+        width: 100%;
+        color: $pdp-font-color;
+        margin-bottom: 0;
+        border: 0;
+        outline: none;
+    }
+    input.quotes {
+        background-color: $white-color;
+    }
+}
+
+.input-group-append {
+    width: 14%;
+    border: 0;
+    display: flex;
+    justify-content: flex-end;
+    .btn.calendar {
+        height: 30px;
+        border: 0;
+        padding: 0;
+        &:hover {
+            background-color: $white-color;
+            border: 0;
+        }
+        .calendar-icon {
+            width: 20px;
+            height: 20px;
+            margin-bottom: 2px;
+            margin-left: 2px;
+            opacity: 0.8;
+        }
+    }
+}
+
+.bg {
+    // background-color: #fff;
+    input {
+        background-color: #fff;
+        color: #A5ADB2;
+    }
+}
+
+.bg1 {
+    background-color: #fff;
+}
+
+.btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 transparent
+}
+
+.btn-link {
+    color: $pdp-font-color;
+}
+
+::ng-deep .btn {
+    &:focus {
+        color: $pdp-font-color;
+        box-shadow: 0 0 0 transparent;
+    }
+    &:hover {
+        color: $pdp-font-color;
+        box-shadow: 0 0 0 transparent;
+    }
+}
+
+::ng-deep .custom-select {
+    &:focus {
+        color: $pdp-font-color;
+        box-shadow: 0 0 0 transparent;
+    }
+}
+
+.btn-outline-secondary:not(:disabled):not(.disabled):active:focus {
+    box-shadow: 0 0 0 transparent;
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    .quotes.form-group {
+        display: flex;
+        margin-bottom: 0;
+        .input-group {
+            width: 85%;
+            .form-control.quotes {
+                height: 34px;
+            }
+        }
+        .input-group-append {
+            width: 15%;
+            align-items: center;
+        }
+    }
+    .input-group-append {
+        .btn.calendar {
+            .calendar-icon {
+                opacity: 0 !important;
+            }
+        }
+    }
+    .form-group.quotes {
+        height: 37px;
+    }
+}

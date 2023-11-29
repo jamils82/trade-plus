@@ -1,0 +1,273 @@
+@import "../styles/variables.scss";
+
+.Footer {
+    background-color: $blue-color;
+    flex-wrap: nowrap;
+    min-height: 225px;
+    .col-md-3 cx-media {
+        img {
+            width: 100%;
+        }
+    }
+
+    .col-md-9 cx-media {
+        img {
+            width: 100%;
+            height: 255px;
+        }
+    }
+
+    cx-footer-navigation nav {
+        span {
+            font-family: 'NiveauGroteskBold';
+        }
+        .wrapper {
+                font-family: 'NiveauGrotesk';
+        }
+    }
+    cx-paragraph p div {
+        font-family: "NiveauGrotesk";
+        font-size: var(--fontsize18);
+        margin: 2.5rem 1rem 2.5rem 1rem;
+        text-align: left;
+        letter-spacing: 0px;
+        color: #ffffff;
+        opacity: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    cx-paragraph p div br {
+        display: none;
+    }
+
+    cx-paragraph p div b {
+        font-family: "NiveauGroteskBold";
+        height: 35px;
+        margin-bottom: 10px;
+    }
+
+    cx-paragraph p div a {
+        color: $white-color;
+        height: 25px;
+    }
+
+    cx-paragraph p div a:hover {
+        text-decoration: none;
+        // color: #6eb43f;
+    }
+
+        cx-banner {
+            margin: 3rem 2rem;
+            cx-generic-link a {
+                width: 100%;
+                cx-media img {
+                    width: 100%;
+                }
+            }
+        }
+        app-accountdropdown {
+            .dropdownData {
+                .m-accountIcon {
+                    margin-left: 0px !important;
+                    bottom: 0 !important;
+                }
+            }
+            .account{
+                display: none !important;
+            }
+            .contactNumber {
+                display: none;
+            }
+            .container {
+                font-family: "NiveauGrotesk";
+                font-size: var(--fontsize18);
+                margin: 2.5rem 1rem;
+                text-align: left;
+                letter-spacing: 0px;
+                color: #ffffff;
+                opacity: 1;
+                display: flex;
+                flex-direction: column;
+                .footer-heading {
+                    display: block;
+                    font-family: "NiveauGroteskBold";
+                    margin-bottom: 10px;
+                }
+                .dropdownData {
+                    padding: 0px;
+                    .m-accountIcon {
+                        padding: 0px;
+                        position: relative !important;
+                        margin-top: 0px !important;
+                        left: 0 !important;
+                    }
+                }
+                .nav-item.location {
+                    top: 14px !important;
+                    margin-left: 0 !important;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: $mobileScreenPotrait){
+        .Footer {
+            display: flex;
+            flex-direction: column;
+            cx-banner {
+                margin: 0;
+                padding: 1.2rem 1.5rem;
+                border-bottom: 1px solid #174F86;
+                cx-generic-link {
+                    a {
+                        width: 48%;
+                    }
+                }
+            }
+            cx-paragraph p div {
+                margin: 1rem 1.5rem 0.3rem;
+                font-size: var(--fontsize18);
+                b {
+                    margin-bottom: 0;
+                    height: 20px;
+                }
+                a {
+                    height: 18px;
+                    font-size: var(--fontsize16);
+                    opacity: 0.9;
+                }
+            }
+            app-accountdropdown {
+                .container {
+                    font-size: var(--fontsize18);
+                    margin: 1rem 1.5rem 1rem 1.5rem;
+                    .footer-heading {
+                        margin-bottom: 0;
+                        height: 15px; 
+                    }
+                }
+                .hamburger {
+                    display: none;
+                }
+                .dropdownData {
+                    display: block !important;
+                    top: 10px;
+                    .nav-item.location {
+                        top: 0px !important;
+                        background-color: #022c57;
+                        width: 60%;
+                        .icon {
+                            width: 10% !important;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding-left: 0 !important;
+                            padding-bottom: 0 !important;
+                        }
+                        #navbarDropdownMenuLink2 {
+                            width: 90% !important;
+                            padding: 5px 5px 5px 0px;
+                        }
+                    }
+                    .selectedText {
+                        padding: 0px 0px 0px 3px !important;
+                    }
+                }
+            }
+        }       
+    }
+    
+    @media screen and (max-width:577px) {
+        .Footer {
+            app-accountdropdown {
+                .container {
+                    max-width: 320px;
+                }
+                .dropdownData {
+                    display: block !important;
+                    top: 10px;
+                    .nav-item.location {
+                        top: 0px !important;
+                        background-color: #022c57;
+                        width: 75%;
+                    }
+                }
+            }
+        }
+    }
+//     @media screen and(max-width: 1300px) {
+//         app-accountdropdown {
+//             .container {
+//                 .nav-item.location {
+//                     min-width: 13rem !important;
+//                     .icon {
+//                         padding-left: 8px !important;
+//                     }
+//                 }
+//         }
+//     }
+// }
+
+//     @media screen and(max-width: 768px) {
+//         cx-paragraph p div {
+//             font-size: 0.6rem;
+//             margin: 2rem 1rem;
+//             text-align: left;
+//             letter-spacing: 0px;
+//             color: #ffffff;
+//             opacity: 1;
+//         }
+//         app-accountdropdown {
+//             .container {
+//                 font-size: 0.6rem;
+//                 margin: 2rem 1rem;
+//                 text-align: left;
+//                 color: #ffffff;
+//                 opacity: 1;
+//                 display: flex;
+//                 flex-direction: column;
+//         }
+//     }
+// }
+// }
+
+// @media screen and (min-width:$Largescreen-1440) {
+//     .Footer {
+//         cx-paragraph p div {
+//             font-size: 1.125rem;
+//         }
+//         cx-banner {
+//             cx-generic-link a {
+//                 cx-media img {
+//                     width: 100%;
+//                 }
+//             }
+//         }
+//         app-accountdropdown {
+//             .container {
+//                 font-size: 1.125rem;
+//             }
+//         }
+//     }
+// }
+
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    // .Footer cx-paragraph p .contact-us-info{
+    //     margin-top: 190px;
+    // }
+    .custom_logo_c{
+        width: 45%;
+        margin: 2rem 2rem;
+    }
+    .custom_logo_c img{
+        position: absolute;
+        left: -12px;
+        width: 100%;
+    }
+    .contact-us-info{
+        margin-top: 6rem !important;
+    }
+
+
+}

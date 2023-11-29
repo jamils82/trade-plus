@@ -1,0 +1,35 @@
+<div class="modal-wrapper">
+    <div class=" modal-header modal-head container">   
+    <button type="button" class="close" aria-label="Close" data-dismiss="modal"  data-toggle="modal" (click)="closeModal('close')">
+        <span aria-hidden="true">×</span>   
+    </button>
+</div>
+    
+<div class="modal-body ">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <h1>{{modalTitle}}</h1>
+            <p class="cancel-info" *ngIf="!statusValue">{{updatedMessage}}</p>
+            <ng-container *ngIf="statusValue == 'won'">
+                <p class="cancel-info" >{{updatedMessage.description[0]}}</p>
+                <p class="cancel-info" >
+                    {{updatedMessage.description[1]}} {{' ' + updatedMessage.branch + ' '}}
+                    {{updatedMessage.description[2]}}
+                </p>
+                <p class="cancel-info" >{{updatedMessage.description[3]}}</p>
+
+            </ng-container>
+            <ng-container *ngIf="statusValue == 'lost'">
+                <p class="cancel-info" >{{updatedMessage.description[0]}}</p>
+                <p class="cancel-info" >
+                    {{updatedMessage.description[1]}} 
+                </p>
+            </ng-container>
+            <div class="form-group btn-wrapper">
+                <button class="btn btn-cancel" (click)="closeModal('close')">{{quoteConstants.cancelText}}</button>
+                <button class="btn btn-red" [class.staus-button]="statusValue" (click)="dismissModal($event)">{{quoteConstants.ConfirmText}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

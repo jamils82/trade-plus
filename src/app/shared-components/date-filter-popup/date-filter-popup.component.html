@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [navigation]="navigation" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
+            </ngb-datepicker>
+
+            <ng-template #t let-date let-focused="focused">
+                <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+    {{ date.day }}
+  </span>
+            </ng-template>
+        </div>
+    </div>
+
+    <div class="row buttons">
+        <div class="col-md-12 btngrp">
+            <button class="btn cancelBtn" (click)="closePopup()">
+      Cancel
+    </button>
+            <button class="btn confirmBtn" (click)="applyDateFilters()" type="submit">
+      Apply
+    </button>
+        </div>
+    </div>
+</div>

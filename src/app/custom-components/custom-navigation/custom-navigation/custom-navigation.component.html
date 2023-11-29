@@ -1,0 +1,84 @@
+<div class="menu-control">
+  <span class="is-initialized ">
+    <a><img src="../../../../assets/images/Trade-Logo.png" (click)="routeURL('/')" style="cursor: pointer;"></a>
+  </span>
+  <span *ngFor="let item of customMenuItems; let i=index">
+    <img *ngIf="i == 0" class="home-icon" (click)="landingPageRouting('/')" src="../../../../assets/images/Icon ionic-ios-home.svg ">
+    <span *ngIf="item?.items && item.items.length > 0">
+      <button mat-menu-item [matMenuTriggerFor]="parentMenu">
+        {{ item.text }}
+        <mat-icon>expand_more</mat-icon>
+      </button>
+
+      <mat-menu #parentMenu="matMenu" class="parent-menu-container">
+        <button mat-menu-item *ngFor="let item of item?.items" id="child-menu">
+          <span *ngIf="item.items && item.items.length > 0">
+            <button mat-menu-item [matMenuTriggerFor]="childMenu">
+              {{ item.text }}
+            </button>
+            <!-- Array-base menu popup -->
+            <mat-menu #childMenu="matMenu" class="child-menu-container">
+              <button mat-menu-item *ngFor="let item of item?.items" id="inner-child-menu">
+                <span *ngIf="item.items && item.items.length > 0">
+                  <button mat-menu-item [matMenuTriggerFor]="innerChildMenu">
+                    {{ item.text }}
+                  </button>
+                  <!-- complex-base menu popup -->
+                  <mat-menu #innerChildMenu="matMenu" class="inner-child-menu-container">
+                    <button mat-menu-item *ngFor="let item of item?.items">
+                      <a [href]=""><button mat-menu-item (click)="routeURL(item.url)">{{ item.text }}</button></a>
+                      <!-- <app-menu-item #menu [items]="item.items"></app-menu-item> -->
+                    </button>
+                  </mat-menu>
+                </span>
+  <span *ngIf="!item.items || item.items.length === 0">
+                  <a [href]="item.url" >
+                    <button mat-menu-item>
+                      {{ item.text }}
+                  </button>
+                </a>
+                </span>
+  </button>
+  </mat-menu>
+  </span>
+  <span *ngIf="!item.items || item.items.length === 0">
+              <a >
+                <button (click)="routeURL(item.url)"  
+                [ngClass]="{'isDisabled':  getDisableStatus(item.url)}" 
+                [disabled]="getDisableStatus(item.url)"  
+                mat-menu-item>{{ item.text }}</button></a>
+          </span>
+  </button>
+  </mat-menu>
+  </span>
+  <span *ngIf="!item?.items || item?.items.length === 0">
+      <a [class.disabled]="item.url == '/my-orders-deliveries' && !disableViewOrders " >
+      <button  (click)="routeURL(item.url)" mat-menu-item> 
+        {{ item.text }}
+
+      </button>
+    </a>
+    </span>
+    <span class="QuickOrderButtonSlot">
+      <a [ngClass]="{'isDisabled':  !disableQuotes}"><button (click)="routeURL('/tpQuickOrderPage')" [ngClass]="{'isDisabled':  getDisableStatus(item.url)}" 
+        [disabled]="getDisableStatus('/tpQuickOrderPage')"  mat-menu-item> Quick Order </button></a>
+    </span>
+    <span class="RequestQuoteButtonSlot desk_mob">
+      <a [ngClass]="{'isDisabled':  !disableQuotes}"><button (click)="requestURL('/tpRequestQuotePage')" [ngClass]="{'isDisabled':  getDisableStatus(item.url)}" 
+        [disabled]="getDisableStatus('/tpRequestQuotePage')"  mat-menu-item> Quote Request</button></a>
+    </span>
+  </span>
+</div>
+<!-- <div class="QuickOrderButtonSlot ">
+  <a (click)="routeURL('/tpQuickOrderPage')"> Quick Order  </a>
+</div>
+<div class="RequestQuoteButtonSlot ">
+  <a (click)="requestURL('/tpRequestQuotePage')"> Request a Quote  </a>
+</div> -->
+<ng-template #emailmodal let-modal>
+  <app-save-preferred-email></app-save-preferred-email>
+</ng-template>
+
+<ng-template #quote let-modal>
+  <app-chnage-quote-popup></app-chnage-quote-popup>
+</ng-template>

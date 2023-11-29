@@ -1,0 +1,179 @@
+@import '../../../shared/styles/variables.scss';
+.editName-popUp {
+    .close-btn-row {
+        .close-btn-col {
+            text-align: right;
+            top: 5px;
+            .close-btn-icon {
+                cursor: pointer;
+                color: #495A64;
+                width: 15px;
+                height: 15px;
+            }
+        }
+    }
+    .heading-row {
+        padding: 40px 50px 10px;
+        .heading-col {
+            text-align: center;
+            .heading-label {
+                font-size: var(--fontsize24);
+                font-family: 'NiveauGroteskBold';
+                color: $pdp-font-color;
+            }
+        }
+    }
+    .mobbtn {
+        display: none
+    }
+    .edit-name-row {
+        padding: 0px 50px 5px;
+        .edit-name-col {
+            .edit-name-label {
+                text-align: center;
+                font-size: var(--fontsize18);
+                font-family: 'NiveauGroteskBold';
+                color: $pdp-font-color;
+                font-weight: 100;
+            }
+        }
+    }
+    .more-information-row {
+        padding: 0px 50px 60px;
+        .more-information-col {
+            .more-information-label {
+                font-size: var(--fontsize18);
+                font-family: 'NiveauGrotesk';
+                color: $pdp-font-color;
+                font-weight: 100;
+                text-align: center;
+                .more-information-label-anchor {
+                    font-family: 'NiveauGroteskBold';
+                    font-size: var(--fontsize16);
+                    color: $anchor-color;
+                    text-decoration: underline;
+                    outline: none;
+                }
+            }
+        }
+    }
+    .edit-name-input-row {
+        padding: 0px 50px 20px;
+        .edit-name-input-col {
+            .edit-name-input {
+                font-size: var(--fontsize20);
+                font-family: 'NiveauGrotesk';
+                color: $pdp-font-color;
+                height: var(--buttonHeight60);
+                width: 100%;
+                padding: 10px;
+                outline: none;
+                border: 1px solid #77889380;
+            }
+            .edit-name-input.ng-invalid.ng-touched {
+                border-color: #77889380;
+            }
+        }
+    }
+    .buttons-row {
+        padding: 0px 50px 40px;
+        .cancel-button-col {
+            .btn.cancel-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: var(--fontsize20);
+                font-family: 'NiveauGroteskBold';
+                border: 1px solid #77889380;
+                background-color: #77889380;
+                color: $pdp-font-color;
+                border-radius: 4px;
+                min-height: var(--buttonHeight60);
+                min-width: 250px;
+                &:focus {
+                    box-shadow: 0 0 0 transparent;
+                }
+            }
+        }
+        .save-button-col {
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            .btn.save-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: var(--fontsize20);
+                font-family: 'NiveauGroteskBold';
+                border: 1px solid $blue-color;
+                background-color: $blue-color;
+                color: $white-color;
+                border-radius: 8px;
+                min-height: var(--buttonHeight60);
+                min-width: 250px;
+                &:focus {
+                    box-shadow: 0 0 0 transparent;
+                }
+            }
+        }
+    }
+}
+.mobbtn
+{
+    display: none;
+}
+
+@media screen and (max-width:$mobileScreenPotrait) {
+    .container {
+        max-width: 100%;
+    }
+    .editName-popUp {
+        .buttons-row {
+            padding: 15px 10px 20px;
+            .cancel-button-col {
+                .btn.cancel-btn {
+                    min-width: auto;
+                    width: 100%;
+                    border-radius: 5px;
+                    max-height: var(--buttonHeight60);
+                }
+            }
+            .save-button-col {
+                .btn.save-btn {
+                    min-width: auto;
+                    width: 100%;
+                    border-radius: 5px;
+                    max-height: var(--buttonHeight60);
+                }
+            }
+        }
+        .more-information-row {
+            padding: 0 35px 45px;
+        }
+        .close-btn-row {
+            .close-btn-col {
+                top: 12px;
+                .close-btn-icon {
+                    width: 12px;
+                    height: 12px;
+                }
+            }
+        }
+        .heading-row {
+            padding: 20px 10px 20px;
+        }
+        .edit-name-input-row {
+            padding: 0 10px 5px;
+        }
+        .edit-name-row {
+            padding: 0 50px 25px;
+        }
+    }
+    .deskbtn {
+        display: none;
+    }
+    .mobbtn {
+        display: block;
+        margin-top: 15px;
+    }
+}

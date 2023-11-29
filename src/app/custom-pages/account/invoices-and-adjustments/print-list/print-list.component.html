@@ -1,0 +1,68 @@
+<div class="print-list">
+    <div class="loading" *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+    <div id="online_document">
+        <div id="onlineinvoice_header">
+            <table>
+                <tbody>
+                    <tr class="logocell">
+                        <td class="returnaddress"><b>TRADELINK PTY LIMITED</b><br>ABN 29000003832<br><br>Fax: 02 92967398<br>Internet: www.tradelink.com.au<br>Email: tl@tradelink.com.au</td>
+                        <td class="title"></td>
+                        <td align="right"><img src="../../../../../assets/images/wv-tradelink.jpg" class="logo" alt="">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="invoicedetail">
+            <table>
+                <thead>
+                    <tr id="head-print-list">
+                        <th>TYPE</th>
+                        <th>INVOICE</th>
+                        <th>TOTAL AMOUNT</th>
+                        <th>OUTSTANDING AMOUNT</th>
+                        <th>DATE</th>
+                        <th>S/O NO</th>
+                        <th style="min-width: 115px;">YOUR REF</th>
+                        <th>BRANCH</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of localStorageListViewData">
+                        <td>{{ data?.docType }}</td>
+                        <td>{{ data?.docNumber }}</td>
+                        <td>{{ negativeConverter(data?.totalInc) }}</td>
+                        <td>{{ negativeConverter(data?.outstandingAmount) }}</td>
+                        <td>{{ data?.docDate }}</td>
+                        <td>{{ data?.order?.orderId }}</td>
+                        <td>{{ data?.customerContext?.customerPOReference }}</td>
+                        <td>{{ data?.branch?.name }}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="btop" colspan="4">&nbsp;</td>
+                        <td colspan="3" class="right btop">Total exclusive of GST</td>
+                        <td class="right btop" style="text-align: right">{{ negativeConverter(totalEx) }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">&nbsp;</td>
+                        <td colspan="3" class="right btop">GST</td>
+                        <td class="right btop" style="text-align: right">{{ negativeConverter(totalGst)}}</td>
+                    </tr>
+                    <!-- <tr>
+                        <td colspan="4">&nbsp;</td>
+                        <td colspan="3" class="right btop">Total inclusive of GST $</td>
+                        <td class="right btop" style="text-align: right;">${{ totalInc | number : '1.2-2'}}</td>
+                    </tr> -->
+                    <tr>
+                        <td colspan="4">&nbsp;</td>
+                        <td colspan="3" class="right btop bbottom"><b> Invoice Total</b></td>
+                        <td class="right btop bbottom" style="text-align: right"><b>{{ negativeConverter(totalInc)}}</b>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

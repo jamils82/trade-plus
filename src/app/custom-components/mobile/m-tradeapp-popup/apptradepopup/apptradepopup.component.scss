@@ -1,0 +1,45 @@
+@import "../../../../shared/styles/variables.scss";
+
+.appTradePopup {
+    .modal-content {
+        background-color: transparent;
+    }
+}
+.tradeAppContent{
+    text-align: center;
+    padding: 11px;
+    h4 {
+        @include font-NiveauGroteskBold();
+        color: #495a64;
+        font-size: var(--fontsize26);
+        margin-bottom: 1.4rem; 
+    }
+    .mobile-view-modal-content {
+        p {
+            @include font-NiveauGrotesk();
+            color: #495a64;
+            font-size: var(--fontsize20);
+            padding: 0 4px;
+            span {
+                width: 100%;
+                display: block;
+            }
+        }
+    }
+
+    .switchBtn {
+        width: 89%;
+        background-color: #2f519b;
+        @include font-NiveauGroteskBold();
+        border-color: #2f519b;
+        font-size: var(--fontsize20);
+        text-transform: none;
+        color: #ffffff;
+    }
+    .notNowBtn {
+        @include font-NiveauGroteskBold();
+        color: #495a64;
+        font-size: var(--fontsize18);
+        text-transform: none;
+    }
+}

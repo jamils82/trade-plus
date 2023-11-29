@@ -1,0 +1,229 @@
+<!--- don't remove below  code-->
+<div class="loading " *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+<div class="newFormat newFormat-desk container">
+  <div class="success-message-container" *ngIf="successInd$ | async">
+    <div class="success-container">
+      <img class="tick-icon" src="../../../assets/images/Icon ionic-ios-checkmark-circle-outline.svg" alt="Tick Icon">
+      <div class="success-message">{{infoMessage}}<span class="close-btn" (click)="closeSuccessMsg()"><em
+            class="fa fa-times"></em></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-sm-12 heading">
+      <p>EDIT DOWNLOAD FORMAT</p>
+    </div>
+
+    <div class="col-md-2 col-sm-12 btngrp">
+      <button class="btn cancelBtn" (click)="deleteElement(del)">
+        Delete
+      </button>
+
+      <button class="btn confirmBtn" (click)="EditBtn()">
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+<div class="container newFormat form-wrapper">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-container">
+
+        <form class="mx-5" name="newFormatForm" [formGroup]="newFormatForm">
+          <div class="form-group row">
+            <label for="formatType" class="col-sm-2 col-form-label">Format Type</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="formatType" placeholder="Format Type"
+                formControlName="formatType">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="outputType" class="col-sm-2 col-form-label">Output Type</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="outputType" placeholder="Output Type"
+                formControlName="outputType">
+
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="fileFormat == 'FLAT'">
+            <label for="outputType" class="col-sm-2 col-form-label">Include Header Rows</label>
+            <div class="col-sm-10">
+
+              <div class="selectdiv">
+                <label>
+                  <select class="form-control classic" formControlName="headerRow" id="headerRow">
+                    <option *ngFor="let obj of headerRowArray" [value]="obj.key"> {{ obj.value }} </option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="fileFormat == 'FLAT' || fileFormat == 'TIERED'">
+            <label for="outputType" class="col-sm-2 col-form-label">Field Seperator</label>
+            <div class="col-sm-10">
+
+              <div class="selectdiv">
+                <label>
+                  <select class="form-control classic" formControlName="fieldSeperator" id="fieldSeperator">
+                    <option *ngFor="let obj of fieldSeperator" [value]="obj.key"> {{ obj.value }} </option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="fileFormat == 'FLAT' || fileFormat == 'TIERED'">
+            <label for="outputType" class="col-sm-2 col-form-label">Field Enclosure</label>
+            <div class="col-sm-10">
+
+              <div class="selectdiv">
+                <label>
+                  <select class="form-control classic" formControlName="fieldEnclosure" id="fieldEnclosure">
+                    <option *ngFor="let obj of fieldEnclosure" [value]="obj.key"> {{ obj.value }} </option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="Title" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Title" formControlName="title" id="title"
+                [ngClass]="{ 'is-invalid': submitted && f.title.errors }" required>
+              <span class="err-message"
+                *ngIf="newFormatForm.controls['title'].invalid && (newFormatForm.controls['title'].dirty || newFormatForm.controls['title'].touched)">You
+                must enter a title at least five characters long.
+              </span>
+            </div>
+
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Filename</label>
+            <div class="col-sm-10">
+
+              <div class="input-group">
+                <div class="input-group-text flex-size-1">{{ b2bUnit + '_' }}</div>
+                <input type="text" class="form-control input-custom flex-size-2" id="fileName" placeholder="FileName"
+                  formControlName="fileName">
+                <div class="selectdiv flex-size-1">
+                  <label>
+                    <select class="form-control classic" formControlName="ext" id="ext"
+                      *ngIf="fileExtension && fileExtension?.length > 0">
+
+                      <option *ngFor="let extension of fileExtension" [value]="extension.key"> {{extension.value}}
+                      </option>
+
+                    </select>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row px-5 pb-2 mobile-hidden">
+    <div class="col-md-6 col-sm-12">
+      <h6 class="form-tags-head">File Contents</h6>
+      <p class="form-tags-para">Click on the checkbox to add these fields from able headings into the format</p>
+    </div>
+    <div class="col-6">
+      <h6 class="form-tags-head">Available Headings</h6>
+    </div>
+  </div>
+
+  <div class="row add-pad">
+    <div class="col-md-6 col-sm-12">
+      <h6 class="tags-head head-underline">{{ invoiceCustomHeading }}<img class="edit-icon-grey"
+          src="../../../../assets/images/Icon material-edit (grey).svg" alt="Edit" (click)="editDateTimePopup(false, invoiceCustomHeading)"></h6>
+      <ul cdkDropList class="example-list exfirst" (cdkDropListDropped)="drop($event)">
+        <li class="liPlaceholder" *ngIf="invoiceCustomHeaderArray && invoiceCustomHeaderArray.length ==0 && fileFormat == 'XML'">Click on the checkbox to select Heading Fields</li>
+        <li class="liPlaceholder" *ngIf="invoiceCustomHeaderArray && invoiceCustomHeaderArray.length ==0 && fileFormat == 'TIERED'">Click on the checkbox to select Invoice Heading Fields</li>
+        <li class="liPlaceholder" *ngIf="invoiceCustomHeaderArray && invoiceCustomHeaderArray.length ==0 && fileFormat == 'FLAT'">Click on the checkbox to select Invoice Details Fields</li>
+        <li class="example-box" *ngFor="let head of invoiceCustomHeaderArray" cdkDrag>
+          <div class="example-pill">
+            {{ head.fieldName }} <img class="edit-icon-grey" (click)="editDateTimePopup(head, false)"
+              src="../../../../assets/images/Icon material-edit (grey).svg" alt="Edit">
+          </div>
+
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <h6 class="tags-head">{{ invoiceHeading }} </h6>
+      <ul class="tags-box-right exfirst">      
+        <li class="tags-item-right " *ngFor="let head of invoiceHeaderArray">
+
+          <input type="checkbox" (change)="selectInvoiceHeading($event, head)" [(ngModel)]="head.selected"> {{ head.fieldName }}
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6 col-sm-12" *ngIf="invoiceHeaderArray2 && invoiceHeaderArray2.length > 0">
+      <h6 class="tags-head head-underline">{{ invoiceCustomHeading2 }} <img class="edit-icon-grey"
+          src="../../../../assets/images/Icon material-edit (grey).svg" alt="Edit" (click)="editDateTimePopup(false, invoiceCustomHeading2)"></h6>
+      <ul cdkDropList class="example-list" (cdkDropListDropped)="drop2($event)">
+        <li class="liPlaceholder" *ngIf="invoiceCustomHeaderArray2 && invoiceCustomHeaderArray2.length ==0 && fileFormat == 'XML'">Click on the checkbox to select Invoice Heading Fields</li>
+        <li class="liPlaceholder" *ngIf="invoiceCustomHeaderArray2 && invoiceCustomHeaderArray2.length ==0 && fileFormat == 'TIERED'">Click on the checkbox to select Invoice Details Fields</li>
+        <li class="example-box" *ngFor="let head of invoiceCustomHeaderArray2; let i = index" cdkDrag>
+          <div class="example-pill" (click)="editDateTimePopup(head, false)">
+            {{ head.fieldName }} <img class="edit-icon-grey"
+              src="../../../../assets/images/Icon material-edit (grey).svg" alt="Edit">
+          </div>
+
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6 col-sm-12" *ngIf="invoiceHeaderArray2 && invoiceHeaderArray2.length > 0">
+      <h6 class="tags-head">{{ invoiceHeading2 }} </h6>
+      <ul class="tags-box-right">
+        <li class="tags-item-right " *ngFor="let head of invoiceHeaderArray2">
+          <input type="checkbox"  (change)="selectInvoiceHeading1($event, head)" [(ngModel)]="head.selected"> {{ head.fieldName }}
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6 col-sm-12" *ngIf="invoiceHeaderArray3 && invoiceHeaderArray3.length > 0">
+      <h6 class="tags-head head-underline">{{ invoiceCustomHeading3 }} <img class="edit-icon-grey"
+          src="../../../../assets/images/Icon material-edit (grey).svg" alt="Edit" (click)="editDateTimePopup(false, invoiceCustomHeading3)"></h6>
+      <ul cdkDropList class="example-list" (cdkDropListDropped)="drop3($event)">
+        <li class="liPlaceholder" *ngIf="invoiceCustomHeaderArray3 && invoiceCustomHeaderArray3.length ==0">Click on the checkbox to select Invoice Details Fields</li>
+        <li class="example-box" *ngFor="let head of invoiceCustomHeaderArray3" cdkDrag>
+          <div class="example-pill" (click)="editDateTimePopup(head, false)">
+            {{ head.fieldName }} <img class="edit-icon-grey"
+              src="../../../../assets/images/Icon material-edit (grey).svg" alt="Edit">
+          </div>
+
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6 col-sm-12" *ngIf="invoiceHeaderArray3 && invoiceHeaderArray3.length > 0">
+      <h6 class="tags-head">{{ invoiceHeading3 }}</h6>
+      <ul class="tags-box-right">
+        <li class="tags-item-right " *ngFor="let head of invoiceHeaderArray3">
+          <input type="checkbox"  (change)="selectInvoiceHeading3($event, head)" [(ngModel)]="head.selected"> {{ head.fieldName }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-sm-12">
+
+    </div>
+    <div class="col-md-2 col-sm-12 btngrp">
+      <button class="btn cancelBtn" (click)="deleteElement(del)">
+        Delete
+      </button>
+
+      <button class="btn confirmBtn" (click)="EditBtn()">
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+<ng-template #del let-modal>
+  <app-delete-popup [data]="currentItem" [downloadFormatData]="currentItem"></app-delete-popup>
+</ng-template>

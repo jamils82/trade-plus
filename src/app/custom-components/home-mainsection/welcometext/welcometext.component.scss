@@ -1,0 +1,12 @@
+@import "src/app/shared/styles/variables.scss";
+p {
+    color: #545859;
+    font-size: 1.3rem;
+}
+
+@media screen and(max-width: $mobileScreenPotrait) {
+    p {
+        font-size: 0.85rem;
+        text-align: center;
+    }
+}

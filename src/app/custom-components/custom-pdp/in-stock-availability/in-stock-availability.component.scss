@@ -1,0 +1,504 @@
+@import '../../../shared/styles/variables.scss';
+
+.in-stock-availability.container {
+    .row.top-heading {
+        padding-top: 10px;
+        .col-md-12.close-btn {
+            text-align: right;
+        }
+        .col-md-12.heading {
+            font-size: var(--fontsize24);
+            font-family: 'NiveauGroteskBold';
+            color: #627079;
+            padding: 0px 75px;
+        }
+    }
+    .modal-body {
+        padding: 27px 60px;
+        .text-label {
+            font-size: var(--fontsize20);
+            font-family: 'NiveauGrotesk';
+            color: #627079;
+        }
+        .searchField {
+            padding: 20px 0px 0px 0px;
+            .searchBar {
+                display: flex;
+                padding: 0;
+                min-height: var(--buttonHeight60);
+                font-family: 'NiveauGrotesk';
+                margin-bottom: 10px;
+                font-size: var(--fontsize24);
+                width: 100%;
+                .location.icon {
+                    background-color: #eee;
+                    width: 70px;
+                    min-height: var(--buttonHeight60);
+                    border: 1px solid #d3d6db;
+                    border-right-color: transparent;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    img {
+                      width: 18px;
+                      height: 26px;
+                    }
+                }
+                .searchBarInput {
+                    min-height: var(--buttonHeight60);
+                    border-radius: 0;
+                    padding-right: 35px;
+                    outline: none;
+                    width: 90%;
+                    margin-bottom: 0px;
+                    &:focus {
+                        border: 1px solid #d3d6db;
+                    }
+                }
+                .searchIcon{
+                cursor: pointer;
+                position: absolute;
+                top: 30px;
+                color: $blue-color;
+                right: 30px;
+                font-size: var(--fontsize28);
+                }
+                @media screen and (max-width: $Largescreen-1600) and (min-width: $ipadScreen-768) {
+                    .searchIcon{
+                        top: 33px;
+                    }
+                }        
+            }
+        }
+        .nearestBranch {
+            padding: 0;
+            .nearestBranch-label {
+                font-size: var(--fontsize18);
+                font-family: 'NiveauGroteskBold';
+                color: #627079;
+            }
+        }
+        .accordionsList {
+            padding: 10px 0px;
+            overflow-y: scroll;
+            scrollbar-width: thin;
+            padding-right: 10px;
+            max-height: 400px;
+            &::-webkit-scrollbar {
+                width: 4px;
+            }
+            &::-webkit-scrollbar-thumb {
+                -webkit-box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.25);
+                border-radius: 10px;
+            }
+            &::-webkit-scrollbar-track {
+                background-color: $scrollbar-track-color;
+                border-radius: 10px;
+            }
+        }
+        .cls-btn {
+            text-align: center;
+            padding: 40px 0px 10px 0px;
+            .close-button {
+                width: 142px;
+                min-height: var(--buttonHeight60);
+                border-radius: 5px;
+                background-color: $blue-color;
+                color: $white-color;
+                border: 1px solid $blue-color;
+                font-size: var(--fontsize24);
+                font-family: 'NiveauGroteskBold';
+            }
+        }
+    }
+}
+
+
+  /* Accordion styles */
+  
+  .tab {
+    width: 100%;
+    color: white;
+    overflow: hidden;
+}
+.tab-label.child::after{
+ display: none;
+}
+
+.tab-label {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    padding: 5px 1em;
+    margin-bottom: 0px;
+    background: #f1f3f5;
+    color:#627079;
+    font-weight: bold;
+    cursor: pointer;
+   /* Icon */
+}
+.tab-label:hover {
+   background: #f1f3f5;
+    color:#627079;
+}
+.tab-label::after {
+    content: "";
+  position: absolute;
+  top: 40%;
+  right: 1.8em;
+    border: solid $blue-color;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    width: 12px;
+    height: 12px;
+    text-align: center;
+    transition: all 0.35s;
+}
+.innerCheckbox::after {
+   content: none;
+}
+.innerCheckbox,.innerCheckbox:hover  {
+   background: none;
+   padding: 1em 1em;
+}
+
+.heading {
+ margin-left: 0em;
+ width: 100%;
+ text-align: left;
+ padding-top: 5px;
+ padding-bottom: 5px;
+ display: flex;
+ flex-direction: column;
+}
+
+.heading1
+{
+ font-size: var(--fontsize18);
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+ width: 100%;
+ font-family: 'NiveauGroteskBold';
+}
+.row {
+.heading2 {
+ font-size: var(--fontsize16);
+ text-align: left;
+ font-weight: 300;
+ font-family: 'NiveauGrotesk';
+}
+.heading2.distance {
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    background-color: #778893;
+    color: $white-color;
+    font-family: 'NiveauGroteskBold';
+    border-radius: 5px;
+    text-transform: lowercase;
+    min-width: 75px;
+    width: 100%;
+    text-align: center;
+}
+.heading2.stockAvailability {
+    font-size: 1rem;
+    font-family: 'NiveauGroteskBold';
+}
+// .heading2.stockAvailability.availableToOrderColor {
+//     color: $orange-color;
+// }
+.POAColor {
+    color: $anchor-color !important;
+}
+.availableToOrderColor {
+    color: $orange-color;
+}
+.instockColor {
+    color: $stock-label-color;
+}
+.sub-heading {
+    line-height: 1;
+    margin-top: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.sub-distance {
+    text-align: right;
+    padding-left: 25px;
+}
+.sub-stockAvailability {
+    text-align: right;
+    position: absolute;
+    right: 13%;
+    top: 30%;
+}
+}
+.inner-heading1
+{
+ font-size: var(--fontsize16);
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+ font-family: 'NiveauGroteskBold';
+ font-weight: 300;
+}
+.inner-value-email,
+.inner-value-phone {
+    font-size: var(--fontsize16);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: 'NiveauGrotesk';
+    font-weight: 300;
+    a {
+        color: $pdp-font-color;
+    }
+}
+.tab-content {
+    max-height: 0;
+    padding: 0 1em;
+    color: #2c3e50;
+    background: white;
+    transition: all 0.35s;
+}
+.tab-label.odd {
+    background: #EFF0F0;
+}
+.tab-label.even {
+    background: #fff;
+}
+input.accordion-checkbox {
+    display: none;
+}
+input:checked + .tab {
+    border: 1px solid #778893;
+}
+input:checked + .tab-label.odd {
+    background: #f1f3f5;
+}
+input:checked + .tab-label.even {
+    background: #fff;
+}
+input:checked + .tab-label {
+    border: 1px solid #E0E1E2;
+    border-bottom: 0;
+}
+input:checked + .tab-label::after {
+    top: 45%;
+    transform: rotate(-135deg);
+}
+input:checked ~ .tab-content {
+    max-height: 100vh;
+    padding: 1em;
+    border: 1px solid #E0E1E2;
+    border-top: 0;
+}
+input:checked ~ .inner-tab-content {
+    max-height: fit-content;
+    padding: 0em 1em;
+}
+
+.icon-design {
+ position: absolute;
+   background-color: #DCDEE0;
+   opacity: 0.9;
+   width: 70px;
+   height: 100%;
+   right: 0;
+   top: 0px;
+}
+
+.icon-design.odd {
+    background-color: #DCDEE0;
+    opacity: 1;
+}
+
+.openHours-heading {
+    font-size: var(--fontsize16);
+    font-family: 'NiveauGroteskBold';
+    color: #627079;
+}
+
+.row.openHours {
+    font-size: var(--fontsize16);
+    font-family: 'NiveauGrotesk';
+    width: 100%;
+    font-weight: 300;
+    padding: 0px 15px;
+    .col-md-6.day-timings {
+      padding-left: 30px;
+      padding-right: 0px;
+    }
+    .closed {
+        color: $red-color;
+      }
+  }
+
+  .cls-icon {
+      cursor: pointer;
+      color: #778893;
+      width: 18px;
+      height: 18px;
+      margin-right: 5px;
+      margin-top: 5px;
+  }
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    .in-stock-availability.container {
+        max-width: 100%;
+        .row.top-heading {
+            .col-md-12.heading {
+                padding: 0 15px !important;
+                margin-top: -25px;
+                font-size: var(--fontsize20);
+                color: $pdp-font-color;
+            }
+        }
+        .close-btn {
+            z-index: 1;
+            .cls-icon {
+                width: 15px;
+                height: 15px;
+                margin-right: 0px;
+                margin-top: 0px;
+            }
+        }
+        .modal-body {
+            padding: 10px 0px;
+            position: unset;
+            .text-label {
+                font-size: var(--fontsize16);
+                color: $pdp-font-color;
+                line-height: 1.2;
+            }
+            .searchField {
+                padding: 15px 0 0 0;
+                .searchBar {
+                    max-height: var(--buttonHeight60);
+                    .location.icon {
+                        width: 15%;
+                        img {
+                            width: 16px;
+                            height: 22px;
+                        }
+                    }
+                    .searchBarInput {
+                        width: 85%;
+                        padding-left: 5px;
+                        max-height: var(--buttonHeight60);
+                        font-size: var(--fontsize18);
+                    }
+                    .searchBarInput::placeholder {
+                        font-size: var(--fontsize18);
+                    }
+                    .searchIcon {
+                        top: 27px;
+                        right: 10px;
+                        font-size: var(--fontsize20);
+                    }
+                }
+            }
+            .nearestBranch {
+                .nearestBranch-label {
+                    font-size: var(--fontsize20);
+                    color: $pdp-font-color;
+                }
+            }
+            .accordionsList {
+                margin-bottom: 80px;
+                max-height: 450px;
+                .row {
+                    .heading1 {
+                        font-size: var(--fontsize18);
+                        color: $pdp-font-color;
+                    }
+                    .sub-distance {
+                        padding: 0;
+                        .heading2.distance {
+                            padding: 0px 5px;
+                            font-size: var(--fontsize14);
+                            width: 75px;
+                            font-family: 'NiveauGrotesk';
+                        }
+                    }
+                    .sub-stockAvailability {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        top: unset;
+                        right: unset;
+                        text-align: left;
+                        .stockAvailability {
+                            font-size: var(--fontsize18);
+                        }
+                    }
+                    .sub-heading {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        display: block;
+                        padding: 0 0 15px 15px;
+                        margin-top: 0;
+                        .heading2 {
+                            font-size: var(--fontsize16);
+                            color: $pdp-font-color;
+                        }
+                    }
+                }
+                .tab-content {
+                    .inner-heading1,
+                    .openHours-heading {
+                        font-size: var(--fontsize16);
+                    }
+                    .inner-value-email,
+                    .inner-value-phone,
+                    .row.openHours {
+                        font-size: var(--fontsize14);
+                        color: $pdp-font-color;
+                        line-height: 1.2;
+                    }
+                }
+            }
+            .cls-btn {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                padding: 20px 0;
+            }
+            .inner-tab-content {
+                .innerCheckbox {
+                    padding: 0;
+                }
+            }
+            .tab-label {
+                &::after {
+                    width: 10px;
+                    height: 10px;
+                    right: 1.9em;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $smallmobileScreenPotrait420) {
+    .in-stock-availability.container {
+        .modal-body {
+            .searchField {
+                .searchBar {
+                    .searchBarInput {
+                        font-size: var(--fontsize16);
+                    }
+                    .searchBarInput::placeholder {
+                        font-size: var(--fontsize16);
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+<div class=" modal-header modal-head container">   
+    <button type="button" class="close" aria-label="Close" data-dismiss="modal"  data-toggle="modal" (click)="closeModal('close')">
+        <span aria-hidden="true">×</span>   
+    </button>
+</div>
+    
+<div class="modal-body ">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <h1>{{cancelPopupTitle}}</h1>
+            <p class="cancel-info" *ngIf="cancelpopupTitle !='Remove logo'">{{quoteConstants.cancelInfoMsg}}</p>
+            <p class="cancel-info" *ngIf="cancelpopupTitle=='Remove logo'" >{{fileuploadMessage}}</p>
+            <div class="form-group btn-wrapper">
+                <button class="btn btn-cancel" (click)="closeModal('close')">{{quoteConstants.cancelText}}</button>
+                <button *ngIf="cancelpopupTitle!='Remove logo'" class="btn btn-blue" (click)="dismissModal()">{{quoteConstants.ConfirmText}}</button>
+                <button *ngIf="cancelpopupTitle=='Remove logo'"class="btn btn-blue" (click)="dismissModalfileUpload('close')">{{quoteConstants.ConfirmText}}</button>
+            </div>
+        </div>
+    </div>
+</div>

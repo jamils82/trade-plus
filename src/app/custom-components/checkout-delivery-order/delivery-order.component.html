@@ -1,0 +1,180 @@
+<ng-template #head>
+    <p class="font-bold font-size-23 title-info">
+        CLICK & COLLECT INFORMATION</p>
+</ng-template>
+<ng-template #image>
+
+    <div class="delivery-box cc-delivery-box">
+        <img class="delivery-img cc-img" src="assets/icons/pickup.svg" />
+    </div>
+</ng-template>
+<ng-template #content>
+    <div class="img-content">
+        <p class="font-bold font-size-24">Click & Collect</p>
+        <p class="font-size-18 line-height-p">Collect from your nearest branch.</p>
+    </div>
+</ng-template>
+
+<div class="delivery_information">
+    <div class="box">
+        <div class="row button_set">
+            <div class='col-8'>
+                <p *ngIf="isDeliveryBox === 'true'; else head" class="font-bold font-size-23 title-info"> DELIVERY INFORMATION
+                </p>
+            </div>
+            <div class='col-4' *ngIf="isSelectButton" style="padding-top: 1.3%;">
+                <button mat-button class="crete_button font-bold" (click)="edit()" cdkFocusInitial>Edit
+                </button>
+            </div>
+        </div>
+
+        <div class="row mob-row margin-left-20">
+            <div class="col-sm-3 col cus-mob-view" style="text-align:center">
+                <div *ngIf="isDeliveryBox=== 'true'; else image" class="delivery-box">
+                    <img class="delivery-img" src="assets/icons/delivery.svg" />
+                </div>
+                <div class="img-content" *ngIf="isDeliveryBox=== 'true'; else content">
+                    <p class="font-bold font-size-24">Delivery</p>
+                    <p class="font-size-18 line-height-p">We deliver right to your door</p>
+                </div>
+            </div>
+            <div class="col-sm-3 col" style="margin-top: -15px !important;">
+                <div class="cus-margin">
+                    <div class="divide divide-first-top fix-min-height">
+                        <p class="font-bold font-size-24">Account Information</p>
+                        <p class="font-size-18">{{cartDataObj?.accountName}}</p>
+                        <p class="font-bold font-size-18">Order / Job Ref. : {{cartDataObj?.purchaseOrderNumber || orderRef}}
+                        </p>
+                    </div>
+                    <div class="divide divide-top">
+                        <p class="font-bold font-size-24">Date and Time</p>
+                        <p class="font-size-18">Date : {{displayData?.requestedDate}}</p>
+                        <p class="font-size-18">Time : {{displayData?.requestedTime}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col" style="margin-top: -15px !important;" *ngIf="mode">
+                <div class="cus-margin">
+                    <div class="divide fix-min-height">
+                        <p class="font-bold font-size-24">{{ isDeliveryBox === 'true' ? 'Address Details' : "Branch Details"}}</p>
+                        <p class="font-size-18">{{ commaSpace(displayAddress?.formattedAddress) || commaSpace(manualAddress) }}</p>
+                    </div>
+                    <div class="divide divide-top">
+                        <p class="font-bold font-size-24">Contact Details</p>
+                        <p class="font-size-18">
+                            <b style="font-size: 0.9em;" class="font-bold font-size-18">{{displayData?.siteContacts ?
+                                displayData?.siteContacts.firstName : '' }} {{ displayData?.siteContacts ?
+                                displayData.siteContacts.lastName : ''}}</b> | {{displayData?.siteContacts ? displayData.siteContacts.mobile.substring(0, 3) + " " + displayData.siteContacts.mobile.substring(3, 7) + " " + displayData.siteContacts.mobile.substring(7,
+                            displayData.siteContacts.mobile.length): ''}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col" style="margin-top: -15px !important;" *ngIf="!mode">
+                <div class="cus-margin">
+                    <div class="divide fix-min-height">
+                        <p class="font-bold font-size-24">{{ isDeliveryBox === 'true' ? 'Address Details' : "Branch Details"}}</p>
+                        <p class="font-size-18">{{  commaSpace(displayAddress?.formattedAddress) || commaSpace(manualAddress)}}</p>
+                    </div>
+                    <div class="divide divide-top">
+                        <p class="font-bold font-size-24">Contact Details</p>
+                        <p class="font-size-18">
+                            <b style="font-size: 0.9em;" class="font-bold font-size-18">{{displayData?.siteContacts ?
+                                displayData?.siteContacts.firstName : '' }} {{ displayData?.siteContacts ?
+                                displayData.siteContacts.lastName : ''}}</b> | {{displayData?.siteContacts ? displayData.siteContacts.mobile.substring(0, 3) + " " + displayData.siteContacts.mobile.substring(3, 7) + " " + displayData.siteContacts.mobile.substring(7,
+                            displayData.siteContacts.mobile.length): ''}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="order_summary">
+    <p class="title font-bold font-size-24 order-summary">ORDER SUMMARY</p>
+    <div class="order_info">
+        <!-- ------------------ For Desktop --------------------- -->
+        <div class="for-desktop-view">
+            <div class="row" *ngFor="let order of cartItemsData; let i = index" [style.background]="i % 2 == 0 ? '#F6F6F6' : 'white'">
+                <div class="col-sm-1 col" style="margin: auto;">
+                    <cx-media [container]="order?.product?.images?.PRIMARY" format="thumbnail" role="presentation"></cx-media>
+                    <!-- <img [src]="order?.product?.images?.PRIMARY?.cartIcon?.url" alt="cart Icon" /> -->
+                </div>
+                <div class="col-sm-3 col poduct-list-details">
+                    <p class="font-bold font-size-24">{{ order?.product?.name }}</p>
+                </div>
+                <div class="col-sm-2 col">
+                    <p class="font-size-18">{{ order?.product?.manufacturer }}</p>
+                </div>
+                <div class="col-sm-2 col">
+                    <p class="font-size-18">Item Code : {{ order?.product?.code }}</p>
+                </div>
+                <div class="col-sm-1 col" style="padding: 0;">
+                    <p> <span class="font-size-20">Qty &nbsp;</span>
+                        <span class="for-space-qty">&emsp;{{order?.quantity }}&emsp;</span>
+                    </p>
+                </div>
+                <div class="col-sm-2 col">
+                    <p style="float: right;" class="font-size-18">Subtotal &nbsp;<b class="font-bold font-size-24">{{
+                            order?.totalPrice?.formattedValue }}</b></p>
+                </div>
+                <div class="col-sm-1 col">
+                    <p class="font-size-18">(excl. GST)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ------------------ For Mobile --------------------- -->
+        <div class="for-mob-view" *ngFor="let order of cartItemsData; let i = index" [style.background]="i % 2 == 0 ? '#F6F6F6' : 'white'">
+            <div style="display: flex;">
+                <div class="for-img">
+                    <div style="margin: auto;">
+                        <cx-media [container]="order?.product?.images?.PRIMARY" format="thumbnail" role="presentation"></cx-media>
+                        <!-- <img [src]="order?.product?.images?.PRIMARY?.cartIcon?.url" alt="cart Icon" /> -->
+                    </div>
+                </div>
+                <div class="for-details">
+                    <div>
+                        <p class="font-bold font-size-24">{{ order?.product?.name }}</p>
+                    </div>
+                    <div>
+                        <p class="font-size-18">{{ order?.product?.manufacturer }}</p>
+                    </div>
+                    <div>
+                        <p class="font-size-18">Item Code : {{ order?.product?.code }}</p>
+                    </div>
+                    <div style="margin: 5px 0;">
+                        <p> <span class="font-size-20">Qty &nbsp;</span>
+                            <span class="for-space-qty">&emsp;{{order?.quantity }}&emsp;</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="font-size-18">Subtotal &nbsp;<b class="font-bold font-size-24">{{
+                                order?.totalPrice?.formattedValue }}</b> (excl. GST)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row bottom">
+            <div class="col-sm-8 info info-align">
+                <p class="font-size-18">
+                    * All prices shown exclude GST <br /> * All information is subject to change without notice <br /> * This order does not include delivery fees, if applicable.
+                </p>
+            </div>
+            <div class="col-sm-2 subtotal">
+                <!--- commenting GST as confirmed by Business. Ticker No # TLBP-1732 ----->
+                <!-- <p class="sub font-size-24">Subtotal <span class="font-size-18">(excl. GST)</span></p>
+                <p class="gst font-size-24">GST</p> -->
+                <!-- <p class="total font-size-34">Total&nbsp;<span class="font-size-18">(incl GST)</span></p> -->
+                <p class="total font-size-34 mob-font-total">Total<span class="font-size-18 excl-gst-css">(excl. GST)</span></p>
+            </div>
+            <div class="col-sm-2 price">
+                <!--- commenting GST as confirmed by Business. Ticker No # TLBP-1732 ----->
+                <!-- <p class="font-size-24">{{ cartDataObj?.totalPrice?.formattedValue }}</p>
+                <p class="font-size-24">{{ cartDataObj?.totalTax?.formattedValue }}</p> -->
+                <p class="total font-size-34 mob-font-value">{{cartDataObj?.subTotal?.formattedValue}}</p>
+            </div>
+        </div>
+    </div>
+</div>

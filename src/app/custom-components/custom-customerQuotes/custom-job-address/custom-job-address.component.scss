@@ -1,0 +1,15 @@
+::ng-deep .autocomplete-container .input-container input {
+    padding: 13px 24px !important;
+    height: 46px;
+}
+
+::ng-deep .ng-autocomplete .autocomplete-container{
+    border: 1px solid #ddd;
+    box-shadow: none;
+    height: 48px;
+}
+
+.ng-autocomplete {
+    width: 100%;
+    
+}

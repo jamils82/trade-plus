@@ -1,0 +1,307 @@
+@import '../../../../shared/styles/variables.scss';
+@import '../../../../shared/styles/fontSize.scss';
+.product-name {
+    font-size: var(--fontsize22);
+    color: #495A64;
+    font-family: "NiveauGroteskBold";
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 0px;
+}
+
+.prdouct-link {
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+.custom-height {
+    height: 4.625rem;
+    margin-left: var(--fontsize12);
+    margin-right: 16px;
+    color: gray;
+}
+
+.cart-icon-color {
+    color: gray;
+    font-size: var(--fontsize36);
+}
+
+.itemCode {
+    font-size: var(--fontsize18);
+    color: #495A64;
+    font-family: "NiveauGrotesk";
+}
+
+.rejected-message {
+    color: red;
+    padding-left: 0;
+}
+
+.price-section {
+    font-family: "NiveauGrotesk";
+    display: inline-flex;
+    color: $pdp-font-color;
+    position: absolute;
+    top: 0;
+    .price {
+        background-color: #FFD500;
+        border-right: 1px solid #FFD500;
+        .price-value {
+            font-size: 0.9rem;
+            overflow-wrap: break-word;
+        }
+    }
+    .retailPrice {
+        background-color: $white-color;
+        border: 1px solid #77889380;
+        .price-value {
+            font-size: var(--fontsize16);
+            padding: 3px 0px 0px 0px;
+            overflow-wrap: break-word;
+        }
+    }
+    .price,
+    .retailPrice {
+        padding: 5px 10px 5px 10px;
+        width: 120px;
+        line-height: normal;
+        .price-heading {
+            font-size: 0.78rem;
+        }
+        .price-value {
+            font-family: "NiveauGroteskBold";
+            .EA {
+                font-size: 0.8rem;
+            }
+        }
+        .price-gst-section {
+            font-size: 0.7rem;
+        }
+    }
+}
+
+.stock-label {
+    font-family: "NiveauGroteskBold";
+    font-size: var(--fontsize18);
+    padding-top: var(--fontsize24);
+    text-align: center;
+    color: $stock-label-color;
+}
+
+.stock-label.availableToOrderColor {
+    color: $orange-color;
+}
+
+.quantity {
+    display: flex;
+    margin-top: var(--fontsize24);
+    position: absolute;
+    left: 60px;
+    align-items: center;
+    .quantity-label {
+        font-family: "NiveauGrotesk";
+        font-size: var(--fontsize20);
+        color: $pdp-font-color;
+        padding-right: 10px;
+    }
+    .quantity-label.plpList {
+        font-family: "NiveauGrotesk";
+        font-size: 14px;
+        color: $pdp-font-color;
+        padding-right: 10px;
+    }
+}
+
+.quantity-counter {
+    background-color: #D8D8D8;
+    border: 0.5px solid #D8D8D8;
+    color: #495A64;
+    height: 30px;
+}
+
+::ng-deep cx-item-counter {
+    background-color: $quantity-button-color;
+    border: 0.5px solid $quantity-button-color;
+    color: $pdp-font-color;
+    height: 39px;
+    button {
+        font-size: var(--fontsize24);
+        padding: 0px;
+        color: $pdp-font-color;
+        font-size: 36px;
+        line-height: 0;
+        &:hover {
+            color: $pdp-font-color;
+        }
+        &:disabled {
+            color: $pdp-font-color;
+            opacity: 0.5;
+        }
+    }
+    input {
+        font-family: "NiveauGroteskBold";
+        color: $pdp-font-color;
+        width: 60px;
+        font-size: var(--fontsize20);
+    }
+}
+
+.cx-total {
+    // min-width: 22% !important;
+}
+
+.cart-price-value {
+    // margin-top: var(--fontsize18);
+    font-family: 'NiveauGroteskBold';
+    font-size: var(--fontsize26);
+    font-weight: 500;
+    color: #495A64;
+    text-align: right;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+    justify-content: flex-end;
+    span {
+        font-family: 'NiveauGrotesk';
+        font-size: var(--fontsize20);
+        padding-left: 5px;
+    }
+}
+
+.col-remove-btn {
+    // max-width: 7%;
+}
+
+.cx-quantity {
+    // max-width: 14% !important;
+    z-index: 1;
+}
+
+.col-product-price {
+    min-width: 11% !important;
+}
+
+.col-product-name {
+    max-width: 21% !important;
+}
+
+.col-product-stock-label {
+    min-width: 17% !important;
+}
+
+.cart-price-gst {
+    font-size: var(--fontsize18);
+    font-weight: 100;
+    font-family: 'NiveauGrotesk';
+}
+
+.delete-cart-item {
+    float: right;
+    margin-top: 18px;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.cart-item-row {
+    min-height: 60px;
+    padding: 10px;
+}
+
+::ng-deep .deleteCartItem .modal-content {
+    width: 70% !important;
+    max-width: 100% !important;
+    border-radius: 5px !important;
+    margin: 0 auto;
+}
+
+::ng-deep .deleteCartItem {
+    align-items: center;
+    text-align: center;
+}
+
+app-product-price {
+    width: 8%;
+}
+
+.cx-image-container {
+    a:hover {
+        text-decoration: none !important;
+    }
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    .mobile-cart-item-row {
+        padding: 10px 0px 10px 10px;
+        width: 100%;
+        .cx-image-container {
+            a cx-media {
+                height: 7rem;
+            }
+        }
+        .rejected-message {
+            padding-left: 15px;
+        }
+        .col-product-name {
+            max-width: 58.3% !important;
+            padding-right: 0px;
+            .product-name {
+                font-size: var(--fontsize20);
+            }
+            .itemCode-div {
+                margin-top: 10px;
+            }
+            .itemCode-div,
+            .supplierCode-div {
+                display: block;
+                line-height: 1.3;
+            }
+            .supplierCode {
+                font-size: var(--fontsize18);
+                color: #495A64;
+                font-family: "NiveauGrotesk";
+            }
+            .stock-label {
+                text-align: left;
+                padding: 5px 0;
+            }
+            .quantity {
+                position: relative;
+                left: 0;
+                margin-bottom: 10px;
+                .quantity-label {
+                    margin-bottom: 0;
+                }
+            }
+            .cart-price-value {
+                justify-content: flex-start;
+                padding: 0;
+                span {
+                    font-size: var(--fontsize18) !important;
+                }
+            }
+        }
+        .cx-remove-btn {
+            padding: 0;
+            .delete-cart-item {
+                margin-top: 0;
+                margin-right: 0;
+                padding: 0;
+            }
+        }
+    }
+}
+.colorRed{
+    border: 1px solid #DF4A5E;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.quantity-label-red {
+    font-family: "NiveauGrotesk";
+    font-size: var(--fontsize20);
+    color: #973937;
+    padding-right: 10px;
+}

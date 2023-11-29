@@ -1,0 +1,9 @@
+@import '../../quotes.component.scss';
+.cancel-info {
+    color:$grey;
+    font-size: 16px;
+    margin: 25px 0 15px;
+}
+::ng-deep .createQuotePopup.d-block + .modal-backdrop.fade.show{
+    opacity: 0;
+}

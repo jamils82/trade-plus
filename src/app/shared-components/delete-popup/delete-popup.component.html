@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12 close-pos">
+            <img (click)="closePopup()" class="cls-icon fa fa-times" src='../../../../assets/images/close-icon-mobile.PNG'>
+            <!-- <i (click)="closePopup()" class="cls-icon fa fa-times"></i> -->
+        </div>
+        <!-- <div class="col-md-12">
+    <h2 class="pageHeading">{{ popUpTitle }}</h2>
+  </div> -->
+    </div>
+        <div class="row-content">
+            <!-- <div class="col-md-12">
+                <h2 class="pageHeading">{{ popUpTitle }}</h2>
+            </div> -->
+            <div class="col-md-12 pageHeading-col">
+                <div *ngIf="data?.heading" class="pageHeading quickOrder">{{data.heading}}</div>                
+                <div *ngIf="!(data?.heading)" class="pageHeading">Confirm</div>
+            </div>
+            <div *ngIf="data?.label" class="col-md-12 pageLabel quickOrder">
+                {{data.label}}
+                <br/>
+            </div>
+            <div *ngIf="!(data?.label)" class="col-md-12 pageLabel">
+                  Are you sure you want to delete?
+                  <br/>
+              </div>
+              <div class="row buttons">
+                  <div class="col-md-12 btngrp">
+                    <button class="btn cancelBtn" (click)="closePopup()">
+                      Cancel
+                    </button>
+                    <button *ngIf="data.clearButton" class="btn confirmBtn" type="submit" (click)="deleteMyList()" >
+                        {{data.clearButton}}
+                       </button>
+                       <button *ngIf="!(data.clearButton)" class="btn confirmBtn" type="submit" (click)="deleteMyList()" >
+                     Yes
+                    </button>
+                    
+                  </div>
+        </div>
+    </div>
+</div>

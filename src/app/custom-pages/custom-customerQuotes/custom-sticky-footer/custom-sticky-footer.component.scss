@@ -1,0 +1,66 @@
+
+@import '../../../shared/customerQuotes/styles/custom-variables.scss';
+
+.sticky-footer-area {
+    padding: 0;
+    color: #666666;
+    display: flex;
+    .total-price-area {
+        float: left;
+        width: 40%;
+        margin: 18px 0;
+        color:$black;
+        .price-area {
+            float: left;
+        }
+        p {
+            margin-bottom: 2px;
+            font-size: 14px;
+            line-height: 22px;
+            &.price {
+                font-size: 20px;
+                line-height: 24px;
+                font-family: 'OpenSans-ExtraBold';
+            }
+        }
+        .add-markup {
+            background: #ECEFF4;
+            margin-left:30px;
+            border-radius: 8px;
+            font-size: 18px;
+            line-height: 24px;
+            font-family: 'OpenSans-Bold';
+            padding: 12px 24px;
+            color:$black;
+            text-transform: none;
+        }
+    }
+
+    .button-area {
+        width: 60%;
+        text-align: right;
+        float: right;
+        margin: 18px 0;
+        button {
+            border: 0;
+            box-shadow: none;
+            font-size: 18px;
+            line-height: 24px;
+            font-family: 'OpenSans-Bold';
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin-left: 15px;
+            &:disabled {
+                background: #F5F5F5;
+                color: #666666;
+            }
+            &.reprice-btn {
+                position: relative;
+                width: 285px;
+                min-height: 48px;
+                vertical-align: bottom;
+            }
+        }
+    }
+
+}

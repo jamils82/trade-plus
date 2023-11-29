@@ -1,0 +1,39 @@
+@import '../../../custom-pages/custom-customerQuotes/quotes.component.scss';
+@import '../../../shared/customerQuotes/styles/global.scss';
+@import '../../../shared/customerQuotes/styles/custom-variables.scss';
+.btn-red { 
+    width:121px;
+}
+.btn-red.staus-button {
+    background: #2f519b;
+    @include font-NiveauGroteskBold();
+}
+::ng-deep .createQuotePopup  {    
+    .modal-dialog  {    
+        @media (min-width: 1024px) {
+            min-width:946px !important;
+            max-width:946px !important;
+        }
+        .modal-content,.modal-body {
+            border-radius: 4px;
+        }        
+        @media (max-width: 1023px) {
+            margin:0 !important;
+        }
+    }
+}
+.cancel-info {
+    color:$grey;
+    font-size: 16px;
+    margin: 25px 0 15px;
+}
+::ng-deep .createQuotePopup.d-block + .modal-backdrop.fade.show{
+    opacity: 0;
+}
+// .loading-wrapper {
+//     display: block;
+//     margin-top:70px;
+//     .loader-more {
+//         background: blue !important;
+//     }
+// }

@@ -1,0 +1,1094 @@
+@import "../../../shared/styles/variables.scss";
+::placeholder {
+  color: #bdbdbd;
+}
+.a-Icon {
+  cursor: pointer;
+}
+.accountPayments {
+  position: relative;
+  .dashboardHeading {
+    font-size: var(--fontsize40);
+    color: #495a64;
+    font-family: "NiveauGroteskBold";
+    margin-top: 1.75rem;
+    margin-bottom: 3.438rem;
+    @media screen and (min-width: $Largescreen-1600) {
+      margin-bottom: 0rem;
+      margin-top: 0rem;
+    }
+  }
+  .leftNavigation {
+    max-width: 20%;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 3rem;
+    .left-right
+    {
+      margin-left: 15px;
+      margin-right: 5px;
+    }
+    @media screen and (min-width: $Largescreen-1600) {
+      margin-top: 2rem;
+    }
+  }
+  .paymentsData {
+    max-width: 73%;
+    margin-top: 6rem;
+    margin-bottom: 3rem;
+  }
+  .cardView {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 19px;
+  }
+  .cardHeading {
+    border-bottom: 1px solid #e0e1e2;
+    font-family: "NiveauGroteskBold";
+    font-size: 20px !important;
+    color: #778893;
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--fontsize24);
+    margin-bottom: 1.138rem;
+    label {
+      margin-bottom: 0.47rem;
+    }
+    @media screen and (min-width: $Largescreen-1600) {
+      margin-bottom: 1.438rem;
+      label {
+        margin-bottom: 0.75rem;
+      }
+    }
+  }
+  .paymentDueContent {
+    span {
+      display: flex;
+      justify-content: space-between;
+      line-height: 18px;
+      margin-bottom: 18px;
+      label {
+        color: #778893;
+        font-size: var(--fontsize20);
+        font-family: "NiveauGrotesk";
+        margin-bottom: 0;
+      }
+      p {
+        margin-bottom: 0;
+        color: #495a64;
+        font-size: var(--fontsize20);
+        font-family: "NiveauGroteskBold";
+      }
+    }
+  }
+
+  input[disabled] {
+    background: #eff0f0;
+  }
+
+  .accountRightCard {
+    padding-left: 9px !important;
+    @media screen and (min-width: $Largescreen-1600) {
+      padding-left: 15px !important;
+    }
+  }
+  .onlinePaymentHistory {
+    .cardView {
+      min-height: 390px;
+      height: auto;
+    }
+    .paymentDueContent {
+      table {
+        margin-bottom: 4.4rem;
+        @media screen and (min-width: $Largescreen-1600) {
+          margin-bottom: 3.3rem;
+        }
+        thead {
+          tr:first-child {
+            width: 100%;
+            border-bottom: 1px solid #e0e1e2;
+            // @media screen and (min-width: $Largescreen-1600) {
+            //     margin-top: 20px;
+            //     margin-bottom: 10px;
+            // }
+          }
+          th {
+            text-align: left;
+            text-transform: none !important;
+            padding: 0 0 14px;
+            color: #778893;
+            font: normal normal normal 20px/18px NiveauGrotesk;
+            @media screen and (min-width: $Largescreen-1600) {
+              padding-bottom: 20px;
+            }
+          }
+        }
+        tbody {
+          tr:first-child {
+            td {
+              padding-top: 10px;
+              padding-bottom: 0px;
+              vertical-align: top;
+            }
+          }
+          td {
+            text-align: left;
+            text-transform: initial !important;
+            color: #495a64;
+            font-size: var(--fontsize18);
+            font-family: "NiveauGroteskBold";
+            padding: 0;
+            border: none !important;
+            padding-bottom: 13px;
+            line-height: 18px;
+            @media screen and (min-width: $Largescreen-1600) {
+              padding-bottom: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.card-align {
+  display: grid !important;
+}
+
+::ng-deep .mat-icon-button.cdk-program-focused .mat-button-focus-overlay {
+  opacity: 0 !important;
+}
+
+.table tbody + tbody {
+  border-top: none;
+}
+
+.online-pay {
+  font-size: 22px;
+  color: #495a64;
+}
+
+.table-inner-title {
+  font: normal normal normal 20px/23px NiveauGrotesk;
+  color: #495a64;
+}
+
+.due-lable {
+  font-size: 24px;
+  font-family: "NiveauGroteskBold";
+  color: #495a64;
+}
+
+.heading-row {
+  position: absolute;
+  max-width: 1920px !important;
+  width: 98%;
+  margin: auto;
+  align-items: flex-start;
+  background-color: #e8eff7;
+  font-family: NiveauGrotesk;
+  font-size: var(--fontsize14);
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: row;
+  left: 0;
+}
+.custom-card {
+  background: #fff;
+  margin: 0 0 20px 0;
+  border-radius: 10px;
+  .title {
+    padding: 24px 24px 0;
+    font-family: NiveauGroteskBold;
+    color: #495a64;
+    font-size: 24px;
+  }
+}
+
+.for-adjustment {
+  padding: 0 !important;
+}
+
+.inner-table-data {
+  background: #f8f8f8;
+  padding: 15px;
+}
+
+.min-card {
+  min-height: 340px;
+}
+
+.visa-img {
+  width: 69px;
+  height: 45px;
+  padding-bottom: 5px;
+  margin-left: 10px;
+}
+
+.card-visa-img {
+  height: 25px;
+  width: 45px;
+}
+
+.lock-img {
+  height: 23px;
+  width: 15px;
+}
+
+.right-margin {
+  margin-right: 10px;
+}
+
+.card-details {
+  font-size: 18px;
+  font-family: NiveauGrotesk;
+}
+
+.pay-button {
+  background: #003d7a;
+  // background: #b2c4d7;
+  color: #fff;
+  font-size: 18px;
+  width: 100px;
+  margin-top: 0px;
+  border: none;
+  height: 35px;
+  border-radius: 4px;
+  font-family: NiveauGroteskBold;
+}
+
+.pay-button-disable {
+  background: #b2c4d7;
+  pointer-events: none;
+  color: #fff;
+  font-size: 18px;
+  width: 100px;
+  margin-top: 0px;
+  border: none;
+  height: 35px;
+  border-radius: 4px;
+  font-family: NiveauGroteskBold;
+}
+
+::ng-deep .mat-radio-label-content {
+  font-family: NiveauGrotesk;
+  font-size: 20px;
+  color: #495a64;
+}
+
+.bottom-title {
+  padding: 0 24px 30px 24px;
+  display: flex;
+  justify-content: space-between;
+  .for-link {
+    font-size: 20px;
+    color: #00afe2;
+    font-family: "NiveauGroteskBold";
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.separation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.separation-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment-option-section {
+  ::ng-deep .mat-radio-label-content {
+    display: flex;
+    align-items: center;
+  }
+}
+.inner-td-heading {
+  min-height: 35px;
+}
+
+.left-title {
+  font-size: 18px;
+  font-family: NiveauGrotesk;
+}
+.right-value {
+  font-size: 20px;
+  font-family: NiveauGroteskBold;
+}
+
+// ---------------- For Input prefix
+
+.input-group-addon {
+  padding: 8.5px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: #555;
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  width: 15%;
+  white-space: nowrap;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+input {
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: 100%;
+  height: 40px;
+  font-family: NiveauGrotesk;
+  margin-bottom: 0;
+  border: 1px solid #ccc;
+  margin: 0;
+  padding-inline-start: 10px;
+  min-width: 12rem;
+}
+
+.except-prefix {
+  input {
+    min-width: 12rem !important;
+    border-radius: 3px !important;
+  }
+}
+
+.prefix input {
+  border-radius: 0px 4px 4px 0px;
+}
+.prefix .input-group-addon {
+  border-right: 0;
+  border-radius: 4px 0px 0px 4px;
+  font-size: 18px;
+  font-family: "NiveauGroteskBold";
+  color: #495a64;
+}
+
+.input-group-addon.suffix {
+  border-radius: 0px 4px 4px 0px;
+  border-left: 0;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  border-collapse: separate;
+}
+
+// ----------------------- For checkbox
+.container {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: "NiveauGrotesk";
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-left: 4rem;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 7px;
+  left: 0px;
+  height: 14px;
+  width: 14px;
+  background-color: #c6cbd4;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.close-dial-button {
+  font-family: NiveauGroteskBold;
+  background: rgba(0, 61, 122, 1);
+  color: #fff;
+  width: 200px;
+  height: 55px;
+  font-size: 24px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.close-dial-button.other {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.other-payment-option {
+  .close-button {
+    float: right;
+    top: -10px;
+    right: -15px;
+  }
+  ::ng-deep .icon-outside .close-button {
+    float: right;
+    top: -52px;
+    right: -52px;
+  }
+  .visa-img {
+    width: 73px;
+    height: 46px;
+  }
+  .for-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgba(119, 136, 147, 1);
+    font-family: NiveauGrotesk;
+    font-size: 20px;
+    margin-bottom: 15px;
+    .visa-img {
+      height: 49px;
+      width: 73px;
+      margin-left: 0;
+    }
+    .visa-img-merchant {
+      img {
+      height: 49px;
+      width: 73px;
+      margin-left: 0;
+      }
+    }
+    p {
+      color: rgba(73, 90, 100, 1);
+      font-family: "NiveauGroteskBold";
+      margin-bottom: 0px;
+    }
+  }
+  h3 {
+    font-size: 23px;
+    font-family: NiveauGroteskBold;
+    color: $pdp-font-color;
+  }
+  .for-padding {
+    padding: 30px 45px 20px;
+  }
+  ::ng-deep .merchantParagraph {
+    .for-padding {
+      padding: 30px 45px 20px;
+    } 
+    h3 {
+      font-size: 23px;
+      font-family: NiveauGroteskBold;
+      color: $pdp-font-color;
+    }
+    .inner-data {
+      display: flex;
+      margin-top: 1.5rem;
+      line-height: 1.2;
+      color: $pdp-font-color;
+      p {
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-family: NiveauGrotesk;
+      }
+    }
+    .for-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: rgba(119, 136, 147, 1);
+      font-family: NiveauGrotesk;
+      font-size: 20px;
+      margin-bottom: 15px;
+      .visa-img-merchant {
+        img {
+        height: 49px;
+        width: 73px;
+        margin-left: 0;
+        }
+      }
+      p {
+        color: rgba(73, 90, 100, 1);
+        font-family: "NiveauGroteskBold";
+        margin-bottom: 0px;
+      }
+    }
+    @media screen and (max-width: $mobileScreenPotrait){
+      .for-padding {
+        padding: 0 !important;
+      }
+      h3 {
+        font-size: var(--fontsize20);
+        color: $pdp-font-color;
+      }
+      .inner-data {
+        margin: 1rem 0;
+        width: 100%;
+        p {
+          font-size: var(--fontsize16);
+        }
+      }
+      .card-details-segment {
+        margin-top: 0px !important;
+        padding-left: 10px;
+      }
+    .for-info {
+      font-size: var(--fontsize18);
+      color: $pdp-font-color;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      .visa-img-merchant {
+        img {
+        width: 58px;
+        height: 36px;
+        padding-bottom: 0;
+        }
+      }
+      p {
+        margin-bottom: 0;
+      }
+    } 
+    }
+  }
+
+  .inner-data {
+    display: flex;
+    margin-top: 1.5rem;
+    line-height: 1.2;
+    color: $pdp-font-color;
+    img {
+      width: 51px;
+    }
+    .Bpay {
+      margin-left: 20px;
+    }
+    p {
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-family: NiveauGrotesk;
+      span {
+        font-size: 20px;
+        font-family: NiveauGroteskBold;
+      }
+    }
+    .link {
+      text-decoration: underline;
+      color: rgba(0, 175, 226, 1);
+      cursor: pointer;
+    }
+  }
+  .inner-data.other {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    p {
+      margin-bottom: 5px;
+    }
+  }
+
+  .title-head {
+    font-size: 20px !important;
+    font-family: NiveauGroteskBold !important;
+  }
+
+  .separation {
+    margin: 3rem 0 0 20px;
+    display: block;
+    .spacing-separator {
+      margin-bottom: 10px;
+    }
+    p {
+      font-family: NiveauGrotesk;
+    }
+  }
+}
+
+::ng-deep .merchant-fees-dialog {
+  mat-dialog-container {
+    margin-top: 0rem !important;
+  }
+}
+
+::ng-deep .other-payment-dialog {
+  mat-dialog-container {
+    margin-top: 0rem !important;
+  }
+}
+
+// for 150%
+@media screen and (max-width: 1400px) and (min-width: 901px) {
+  ::ng-deep .merchant-fees-dialog {
+    mat-dialog-container {
+      margin-top: 0 !important;
+    }
+  }
+  ::ng-deep .other-payment-dialog {
+    mat-dialog-container {
+      margin-top: 0rem !important;
+      transform: scale(0.8) !important;
+      overflow: hidden;
+    }
+  }
+}
+
+// for 125%
+
+@media screen and (max-width: 1600px) and (min-width: 1401px) {
+  ::ng-deep .merchant-fees-dialog {
+    mat-dialog-container {
+      margin-top: 0rem !important;
+    }
+  }
+  ::ng-deep .other-payment-dialog {
+    mat-dialog-container {
+      margin-top: 0rem !important;
+      max-height: 47rem;
+      overflow: hidden;
+    }
+  }
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+  .for-padding {
+    padding: 0 !important;
+  }
+  .other-payment-option {
+    .close-button {
+      top: -10px;
+      right: -15px;
+      color: $pdp-font-color;
+      &:focus {
+        background-color: $white-color;
+      }
+    }
+    .close-button.cdk-focused {
+      background-color: $white-color !important;
+    }
+    h3 {
+      font-size: var(--fontsize20);
+      color: $pdp-font-color;
+    }
+    .inner-data {
+      margin: 1rem 0;
+      width: 100%;
+      p {
+        font-size: var(--fontsize16);
+      }
+      .Bpay {
+        margin-left: 10px;
+        color: $pdp-font-color;
+        p,
+        .link {
+          font-size: var(--fontsize16);
+          margin-bottom: 0px;
+        }
+        .p-val {
+          font-size: var(--fontsize16);
+        }
+        .title-head {
+          font-size: var(--fontsize20) !important;
+        }
+        .spacing-separator {
+          margin-bottom: 10px;
+          line-height: 1;
+        }
+      }
+      .separation {
+        margin: 30px 0 0 10px;
+        color: $pdp-font-color;
+        p {
+          font-size: var(--fontsize18);
+          margin-bottom: 0px;
+        }
+        .p-val {
+          font-size: var(--fontsize16);
+        }
+        .title-head {
+          font-size: var(--fontsize20) !important;
+          margin-bottom: 2px;
+        }
+        .spacing-separator {
+          margin-bottom: 10px;
+        }
+      }
+      img {
+        width: 50px;
+        height: 73px;
+      }
+    }
+    .inner-data.other {
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+    .card-details-segment {
+      margin-top: 0px !important;
+      padding-left: 10px;
+    }
+    .for-info {
+      font-size: var(--fontsize18);
+      color: $pdp-font-color;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      .visa-img {
+        width: 58px;
+        height: 36px;
+        padding-bottom: 0;
+      }
+      .visa-img-merchant {
+        img {
+        width: 58px;
+        height: 36px;
+        padding-bottom: 0;
+        }
+      }
+      p {
+        margin-bottom: 0;
+      }
+    }
+    .close-dial-button {
+      height: var(--buttonHeight60);
+      font-size: var(--fontsize22);
+      border-radius: 6px;
+      width: 45%;
+      margin-top: 20px;
+      margin-bottom: 0px;
+    }
+    .close-dial-button.other {
+      margin-top: 20px;
+      margin-bottom: 0px;
+    }
+  }
+}
+
+@media screen and (min-width: $Largescreen-1600) {
+  .payment-iframe {
+    height: 225px !important; 
+  }
+}
+
+@media screen and (max-width: $Largescreen-1600) {
+  .payment-iframe {
+    height: 270px !important;
+  }
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+  .input-group {
+    display: table;
+  }
+  .input-group-addon {
+    padding: 6px 12px;
+    width: 1%;
+  }
+  .payment-iframe {
+    height: 390px !important;
+  }
+  .accountPayments {
+    .dashboardHeading {
+      font-size: var(--fontsize24);
+      margin: 0;
+      padding: 0;
+    }
+    .leftNavigation {
+      max-width: 100%;
+      margin: 0;
+      .left-right
+      {
+        margin: 0;
+      }
+    }
+    .paymentsData {
+      max-width: 100%;
+      margin-top: 0;
+      .cardView {
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        .cardHeading {
+          margin-bottom: 13px;
+          .due-lable {
+            font-size: var(--fontsize24);
+            margin-bottom: 4px;
+          }
+        }
+        .paymentDueContent {
+          span {
+            line-height: 21px;
+            margin-bottom: 0;
+            label,
+            p {
+              font-size: var(--fontsize18);
+            }
+          }
+        }
+      }
+      .custom-card {
+        border-radius: 5px;
+        margin: 0 0 15px 0;
+        .title {
+          padding: 7px 10px 10px;
+          h2 {
+            font-size: var(--fontsize20) !important;
+          }
+        }
+        .paymentsDue {
+          .cardView {
+            margin: 0;
+            .payment-option-section {
+              .card-seperation {
+                ::ng-deep .mat-radio-button {
+                  margin-bottom: 25px;
+                }
+              }
+            }
+          }
+        }
+        .cardHeading {
+          font-size: var(--fontsize18) !important;
+          margin-bottom: 3rem;
+          label {
+            margin-bottom: 5px;
+          }
+        }
+        ::ng-deep .mat-radio-label {
+          margin-bottom: 0;
+        }
+        ::ng-deep .mat-radio-label-content {
+          font-size: var(--fontsize17);
+          padding: 0;
+        }
+        ::ng-deep .mat-radio-outer-circle {
+          width: 15px;
+          height: 15px;
+          top: 2px;
+        }
+        ::ng-deep .mat-radio-inner-circle {
+          width: 15px;
+          height: 15px;
+          top: 2px;
+        }
+        .prefix {
+          width: 50%;
+          .input-group-addon {
+            background-color: #f1f3f5;
+          }
+          input {
+            height: 35px;
+            font-size: var(--fontsize16);
+            min-width: 100%;
+            border-left: 0;
+            &::placeholder {
+              font-size: var(--fontsize14);
+            }
+          }
+        }
+        .except-prefix {
+          width: 50%;
+          span {
+            padding: 0px 16px;
+            visibility: hidden;
+            display: none;
+          }
+          input {
+            height: 35px;
+            min-width: 100% !important;
+            font-size: var(--fontsize16);
+            border: 1px solid #ccc;
+          }
+        }
+        .min-card {
+          min-height: auto;
+        }
+        .secure-mob,
+        .visa-mob,
+        .master-mob,
+        .card-visa-img,
+        .lock-img {
+          width: auto;
+          height: auto;
+        }
+        .accountRightCard {
+          padding: 0;
+          padding-left: 0 !important;
+          .cardView {
+            .cardHeading {
+              margin-bottom: 1rem;
+            }
+          }
+          .card-details {
+            font-size: var(--fontsize18);
+          }
+        }
+        .save-card {
+          margin-bottom: 1rem;
+          .container {
+            font-size: var(--fontsize18);
+            margin-left: 2rem;
+            margin-bottom: 0;
+            .checkmark {
+              top: 5px;
+            }
+          }
+          .pay-button-disable {
+            background-color: $blue-color;
+            height: 28px;
+            width: 100px;
+            border-radius: 2px;
+            font-size: var(--fontsize18);
+            opacity: 0.5;
+          }
+          .pay-button {
+            background-color: $blue-color;
+            height: 28px;
+            width: 100px;
+            border-radius: 2px;
+            font-size: var(--fontsize18);
+           }
+        }
+        .total-outstanding {
+          margin-bottom: 2rem;
+        }
+
+        .card-seperation {
+          margin-bottom: 0px;
+        }
+        .new-card-separation {
+          margin-bottom: 0;
+        }
+        .bottom-title {
+          padding: 0 10px 10px;
+          .for-link {
+            font-size: var(--fontsize18);
+          }
+        }
+      }
+      .onlinePaymentHistory {
+        .cardView {
+          border-radius: 2px;
+          .online-pay {
+            font-size: var(--fontsize20);
+            margin-bottom: 5px;
+          }
+        }
+      }
+      .paymentHistoryContent {
+        .paymentHistorycontainer {
+          padding: 0;
+          margin-left: 0;
+          .paymentHistoryRow {
+            .payment-history.label {
+              font-family: 'NiveauGrotesk';
+              font-size: var(--fontsize18);
+              color: $pdp-font-color;
+              line-height: 1.5;
+            }
+            .payment-history.data {
+              font-family: 'NiveauGroteskBold';
+              font-size: var(--fontsize18);
+              color: $pdp-font-color;
+              text-align: right;
+              line-height: 1.5;
+            }
+            .viewDetails {
+              font-family: 'NiveauGroteskBold';
+              font-size: var(--fontsize18);
+              color: $anchor-color;
+              text-decoration: underline;
+              text-align: right;
+              margin: 5px 0px 15px;
+              display: flex;
+              justify-content: flex-end;
+              span {
+                justify-content: flex-end;
+              }
+            }
+            .inner-table-data {
+              padding: 5px 10px;
+              margin: 0 15px;
+              .table-inner-row {
+                margin-bottom: 16px;
+                margin: 0 0 16px 0;
+              }
+              .cardHeading {
+                padding: 0;
+                .table-inner-title {
+                  font-family: 'NiveauGrotesk';
+                  font-size: var(--fontsize20);
+                  color: $pdp-font-color;
+                  line-height: 1.5;
+                  margin-bottom: 5px;
+                  display: flex;
+                  align-items: center;
+                }
+              }
+              .left-title {
+                font-family: 'NiveauGrotesk';
+                font-size: var(--fontsize18);
+                color: $pdp-font-color;
+                line-height: 1.5;  
+                padding: 0;
+              }
+              .right-value {
+                font-family: 'NiveauGroteskBold';
+                font-size: var(--fontsize18);
+                color: $pdp-font-color;
+                text-align: right;
+                line-height: 1.5;
+                overflow-y: scroll;
+                white-space: nowrap;
+                padding: 0;
+                margin: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

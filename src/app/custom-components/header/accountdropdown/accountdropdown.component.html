@@ -1,0 +1,142 @@
+<!-- <ng-container *ngIf="selectedName$ | async as selectedAccount"> -->
+<div class="bgView" *ngIf="isOpen" (click)="onDropdownClick()"></div>
+<div (window:resize)="onResize($event)" class="container row mr-0 pr-0 pl-0">
+  <b class="footer-heading">FIND A STORE</b>
+  <div class="hamburger" *ngIf="isMobile">
+    <img *ngIf="isMobile" class="hamburgerIcon" src="../../../../assets/images/Hamburger_icon_white.png"
+      (click)="openMobileMenu(mobileMenu)">
+  </div>
+  <div class="dropdownData col-lg-12">
+    <div class="col-lg-12 m-accountIcon pr-0">
+      <ng-container *ngIf="!(isLoading$ | async)">
+        <!-- <div class="m-userName" *ngIf="isMobile">
+                    <span>Hi {{userFirstName}}</span>
+                </div>
+                <span class="m-userDetail" *ngIf="isMobile">
+                    <a routerLink="/user-profile" (click)="mobileCloseMenu()">User Details</a>
+                </span> -->
+                
+                <div class="nav-item account dropdown d-flex align-items-center justify-content-center align-middle">
+                    <div class="icon">
+                        <img class="user-icon" src="../../../../assets/images/Icon metro-users.svg">
+                    </div>
+                    <button class="nav-link" id="navbarDropdownMenuLink2" role="button" data-bs-toggle="dropdown" matTooltipPosition="below" aria-expanded="false" [matTooltip]="!isOpen ? 'Select another account' : null" matTooltipClass="tooltip-color" aria-label="Select another account"
+                        (click)="onDropdownClick()">
+                            <ng-container *ngIf="selectedName$ | async as selectedAccount">
+                        <span class="mr-2 selectedText lo_sensitive">{{ selectedAccount }}</span>
+                    </ng-container>
+                        <div class="m-display-inline m-arrow">
+                            <img src="../../../../assets/images/Icon ionic-ios-arrow-down.svg" [ngClass]="{'invert':isOpen && isMobile}" />
+                        </div>
+
+        <div class="nav-item account dropdown d-flex align-items-center justify-content-center align-middle">
+          <div class="icon">
+            <img class="user-icon" src="../../../../assets/images/Icon metro-users.svg">
+          </div>
+          <button class="nav-link" id="navbarDropdownMenuLink2" role="button" data-bs-toggle="dropdown"
+            matTooltipPosition="below" aria-expanded="false" [matTooltip]="!isOpen ? 'Select another account' : null"
+            matTooltipClass="tooltip-color" aria-label="Select another account" (click)="onDropdownClick()">
+            <ng-container *ngIf="selectedName$ | async as selectedAccount">
+              <span class="mr-2 selectedText">{{ selectedAccount }}</span>
+            </ng-container>
+            <div class="m-display-inline m-arrow">
+              <img src="../../../../assets/images/Icon ionic-ios-arrow-down.svg"
+                [ngClass]="{'invert':isOpen && isMobile}" />
+            </div>
+
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink2">
+                        <ng-container *ngFor="let parent of accountList; let i = index">
+                            <li class="pl-3 pr-3" (click)="changeAccount(i, content, parent)" [ngClass]="{'selected':parent.checked}">
+                                <div class="sortOption">
+                                    <!-- <div *ngIf="parent.selected? parent.selected: parent.isPrimaryAccount? parent.isPrimaryAccount: false" class="primaryAccount-tick"></div> -->
+                                    <ng-container *ngIf="selectedName$ | async as selectedAccount">
+                                        <div *ngIf="parent.selected == true" class="primaryAccount-tick"></div>
+                                    </ng-container>
+                                    <label class="form-check-label lo_sensitive" [name]="i">
+                                        {{ parent.name }} {{parent.uid}}
+                                    </label>
+                                </div>
+                            </li>
+                            <ng-container *ngIf="parent.children && parent.children.length > 0">
+                                <li class="pl-3 pr-3" *ngFor="let child of parent.children; let j = index" (click)="changeChildAccount(j, content, parent)" [ngClass]="{'selected':parent.checked}">
+                                    <ng-container *ngIf="selectedName$ | async as selectedAccount">
+                                        <div *ngIf="child.selected == true" class="primaryAccount-tick child"></div>
+                                    </ng-container>
+                                    <div class="sortOption child">
+                                        <label class="form-check-label lo_sensitive" [name]="j">
+                                                {{ child.name }}
+                                            </label>
+                                    </div>
+                                </li>
+                            </ng-container>
+                        </ng-container>
+                    </ul>
+                </div>
+
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink2">
+            <ng-container *ngFor="let parent of accountList; let i = index">
+              <li class="pl-3 pr-3" (click)="changeAccount(i, content, parent)" [ngClass]="{'selected':parent.checked}">
+                <div class="sortOption">
+                  <!-- <div *ngIf="parent.selected? parent.selected: parent.isPrimaryAccount? parent.isPrimaryAccount: false" class="primaryAccount-tick"></div> -->
+                  <ng-container *ngIf="selectedName$ | async as selectedAccount">
+                    <div *ngIf="parent.selected == true" class="primaryAccount-tick"></div>
+                  </ng-container>
+                  <label class="form-check-label" [name]="i">
+                    {{ parent.name }} {{ parent.uid }}
+                  </label>
+                </div>
+              </li>
+              <ng-container *ngIf="parent.children && parent.children.length > 0">
+                <li class="pl-3 pr-3" *ngFor="let child of parent.children; let j = index"
+                  (click)="changeChildAccount(j, content, parent)" [ngClass]="{'selected':parent.checked}">
+                  <ng-container *ngIf="selectedName$ | async as selectedAccount">
+                    <div *ngIf="child.selected == true" class="primaryAccount-tick child"></div>
+                  </ng-container>
+                  <div class="sortOption child">
+                    <label class="form-check-label" [name]="j">
+                      {{ child.name }}
+                    </label>
+                  </div>
+                </li>
+              </ng-container>
+            </ng-container>
+          </ul>
+        </div>
+
+        <div class="nav-item location dropdown d-flex align-items-center justify-content-center align-middle">
+          <div class="icon">
+            <img class="user-icon" src="../../../../assets/images/Icon material-edit-location.svg">
+          </div>
+          <button class="nav-link" id="navbarDropdownMenuLink2" matTooltipPosition="below" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false" matTooltip="Change your branch"
+            matTooltipClass="tooltip-dropdown-color" aria-label="Change your branch" (click)="openFindStore(data)">
+            <span class="mr-2 selectedText">{{selectedLocationName}}</span>
+            <div class="m-display-inline m-arrow location">
+              <img src="../../../../assets/images/Icon metro-my-location.svg"
+                [ngClass]="{'invert':isOpen && isMobile}" />
+            </div>
+          </button>
+        </div>
+        <div class="contactNumber">
+          <span class="icon"><img src="../../../assets/images/Icon awesome-white-phone-alt.svg" /></span>
+          <span class="contactNum"><a (click)="phoneNumberClicked()" href="tel:{{phoneNumber}}">
+              {{phoneNumber}}</a></span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<!-- </ng-container> -->
+<ng-template #content let-modal>
+  <app-switch-account-confirmation-popup (switchAccount)="switchAccount($event)">
+  </app-switch-account-confirmation-popup>
+</ng-template>
+
+<ng-template #data let-modal class="findStorePopup">
+  <app-find-store></app-find-store>
+</ng-template>
+
+<ng-template #mobileMenu let-modal>
+  <app-mobile-menu-popup [selectedLocationName]="selectedLocationName" [selectedName$]="selectedName$"
+    [homeBranchData]="homeBranchData" [accountList]="accountList" [phoneNumber]="phoneNumber"></app-mobile-menu-popup>
+</ng-template>

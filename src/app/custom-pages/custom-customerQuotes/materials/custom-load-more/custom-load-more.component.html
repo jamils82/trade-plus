@@ -1,0 +1,9 @@
+
+<div class="load-more-section" *ngIf="paginationData != ''">
+    <button type="button" *ngIf="(currentPaginationData != paginationData) && (paginationData != '' && paginationData.totalResults > paginationData.pageSize*(paginationData.currentPage+1))" class="btn btn-cancel load-more-btn" (click)="loadMoreProducts($event,paginationData.currentPage)">{{quoteConstants.loadMoreBtn}}</button>
+    <div *ngIf="(currentPaginationData == paginationData) && (paginationData != '' && paginationData.totalResults > paginationData.pageSize*(paginationData.currentPage+1))" class="btn btn-cancel load-more-btn" disabled>
+        <!-- <div class="loading-wrapper" ><div class="loader-more one"></div><div class="loader-more two"></div><div class="loader-more three"></div><div class="loader-more four"></div></div> -->
+        <div class="customerQuoteloading addtoQuoteLoader loading-wrapper "></div>
+    </div>
+    <p class="pagination-details">{{quoteConstants.loadMoreMessagePart1}}<span class="viewed-products">{{paginationData.totalResults > (paginationData.pageSize*(paginationData.currentPage+1)) ? paginationData.pageSize*(paginationData.currentPage+1) : paginationData.totalResults}}</span> of <span class="total-products">{{paginationData.totalResults}}</span>{{quoteConstants.loadMoreMessagePart2}}</p>
+</div>

@@ -1,0 +1,136 @@
+
+
+<div class="product-list-wrapper {{productType}}-list-section" *ngIf="productType == 'materials'">
+    <div *ngIf="product?.product?.images && (product?.product?.images).length !== 0">
+        <div class="image-wrapper">
+            <img  src={{product.product.images[0].url}}>
+        </div>
+    </div>
+    <div *ngIf="!product.product.images || (product.product.images).length==0 " class="image-wrapper">
+        <img src={{quoteConstants.noImage}}>
+        
+    </div>
+        <div class="product-details-wrapper">
+            <div class="product-details">
+                <div *ngIf='product?.product?.name !=null'class="product-name">
+                    {{(product?.product?.name?.length>110)? (product?.product?.name | slice:0:110)+'...':(product?.product?.name)}}
+                </div>
+                <div class="sku-section">
+                    <span>
+                        <span *ngIf="product?.product?.customQuoteProduct ==true && product.product?.marketingDescription !=null && product.price != 'POA'" [ngClass]="product.product?.marketingDescription==''? 'mr-0':'desc-name mr-0'">
+                            {{(product?.product?.marketingDescription?.length>110)? (product?.product?.marketingDescription | slice:0:110)+'...':(product?.product?.marketingDescription)}}
+                        </span>
+                        <!-- <span *ngIf="product?.product?.customQuoteProduct ==true && product?.product?.marketingDescription !=null && product?.product?.marketingDescription != '' && product.price != 'POA'" class="lineforPrice">|</span> -->
+                        <span *ngIf="product?.product?.customQuoteProduct != true && product?.customProductFlag !=true && product?.product?.code !=null && product?.product?.code != '' && product?.price != 'POA'">
+                            {{quoteConstants.itemCode}} {{product?.product?.code}}
+                        </span>
+                        <span *ngIf="product?.product?.price?.formattedValue !=null && product?.product?.price?.formattedValue != '$0.00' && product.price != 'POA'" class="base-price">
+                            <span *ngIf="product?.product?.price?.formattedValue && (product?.product?.customQuoteProduct != true || product?.product?.marketingDescription !== '')" class="lineforPrice">|</span> {{product.product.price.formattedValue}}
+                             <span *ngIf="product?.product?.price?.formattedValue !=null && product.price != 'POA'" class="mr-0">  {{product?.product?.unit}}</span>
+                             <!-- <span *ngIf='product?.unit !="" && product?.customProductFlag ==true' class="mr-0"> / {{product.unit}}</span> -->
+                        </span>
+                        <!-- <span *ngIf="product?.product?.m2Price?.formattedValue !== '$0.00' && product?.product?.customQuoteProduct !=true && product?.price != 'POA'" class="retail-price">
+                            <span class="lineforPrice">|</span>RRP {{product?.product?.m2Price?.formattedValue}}
+                        </span> -->
+                        <span *ngIf="product.price != undefined && product.price == 'POA'"><span class="price">POA</span></span>
+                        <span *ngIf="product?.m2Price && product.price == 'POA'" class="retail-price">POA</span>
+                    </span>
+                </div>
+
+                <!-- <div class="timber-section" *ngIf="product.product.timberProductFlag==true && product.product.sellOrderMultiple > 0">
+                    <span>
+                        {{updateQtyEntries?.product?.code==product?.product?.code?updateQtyEntries.selectedConfiguration[0].quantity:product.selectedConfiguration[0].quantity}}
+                         @ {{product.product.sellOrderMultiple}} {{product.product.unitCode}}
+                    </span>
+                    <span class="total-length">
+                        {{quoteConstants.totalLength}}
+                        {{((updateQtyEntries?.product?.code==product?.product?.code?updateQtyEntries.selectedConfiguration[0].quantity:product.selectedConfiguration[0].quantity)
+                        * product.product.sellOrderMultiple) | number:'.2'}} {{product.product.unitCode}}
+                    </span>
+                </div> -->
+            </div>
+            <div class="qty-price-removeProducts">
+                <div class="total-qty-price">
+                    <div class="qty-section">
+                        <button type="button" class="unit-minus minus-icon qtyBtn" 
+                        *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'"
+                        (click)="updateQty(quantity,'',product.product.uomFormat,'-')"
+                        >-</button>
+                        <input type="text" id="input-field" class="unit-count qtyBtn" #quantity
+                        (keypress)="checkQty($event,product.product)" 
+                        (change)="qtyChange($event,product.product)" 
+                        (focus)="qtyFocus($event)"
+                        (blur)="qtyBlur($event)"
+                        (keyup)="qtyKeyup($event)"
+                        (paste)="onPaste($event)"
+                        [disabled]="quotesService.quoteStatus == 'WON' || quotesService.quoteStatus == 'LOST'"
+                        value="{{product.quantity}}">
+                        <button type="button" *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'" class="unit-plus plus-icon qtyBtn"
+                         (click)="updateQty(quantity,'',product.product.uomFormat,'+')"
+                         >+</button>
+                    </div>
+                    <!-- <div class="total-price" >
+                       <span *ngIf="responseloader==false"> {{updateQtyEntries?.product?.code==product?.product?.code?updateQtyEntries?.totalPrice?.formattedValue:product?.totalPrice?.formattedValue}}</span>
+                    </div> -->
+                    <!-- <div *ngIf="responseloader" class="loading-wrapper"><div class="loader-more one"></div><div class="loader-more two"></div><div class="loader-more three"></div><div class="loader-more four"></div></div> -->
+                    <div *ngIf="responseloader" class="customerQuoteloading cusomterMaterialLoader loading-wrapper "></div>
+
+                </div>
+                <div class="remove-product" *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'" (click)="deleteProduct(product)">
+                    <img src="assets/images/remove-icon.svg" />
+                </div>
+            </div>
+       </div>
+
+</div>
+
+
+
+<div class="product-list-wrapper {{productType}}-product-list" *ngIf="productType == 'search' ">
+    <div *ngIf="product.images">
+        <div class="image-wrapper">
+            <img src={{product.images[0].url}}>
+        </div>
+        <!-- <div  class="image-wrapper">
+            <img src='../../../../../assets/images/quoteimagenotfound.svg'>
+            
+        </div> -->
+    </div>
+    <div *ngIf="!product.images">
+        <!-- <div class="image-wrapper">
+            <img src={{product.images[0].url}}>
+        </div> -->
+        <div  class="image-wrapper">
+            <img src='../../../../../assets/images/quoteimagenotfound.svg'>
+            
+        </div>
+    </div>
+    <!-- <div *ngIf="!product.images" class="image-wrapper">
+    </div> -->
+        <div class="product-details-wrapper">
+            <div class="product-details">
+                <div class="product-name">
+                    {{(product.name.length>110)? (product.name | slice:0:110)+'...':(product.name)}}
+                </div>
+                <div class="sku-section search-SKU">
+                    <span>{{quoteConstants.itemCode}} {{product.code}}</span>
+                    <span *ngIf="product.price != undefined && product.price != 'POA'"><span class="price searchPrice"> | {{product.price.formattedValue}}</span> <span class="unit-text">{{product.unit}}</span></span>
+                    <!-- <span *ngIf="product?.m2Price && product.price != 'POA'" class="retail-price">{{quoteConstants.retailPriceLabel}} {{product.m2Price.formattedValue}}</span> -->
+                    <span *ngIf="product.price != undefined && product.price == 'POA'"><span class="price searchPrice">POA</span></span>
+                    <span *ngIf="product?.m2Price && product.price == 'POA'" class="retail-price">{{quoteConstants.retailPriceLabel}} POA</span>
+                </div>
+                <!-- <div class="timber-section" *ngIf="product.timberProductFlag==true && product.sellOrderMultiple > 0">
+                    <span>{{quantity.value}} @ {{product.sellOrderMultiple}} {{product.unitCode}}</span>
+                    <span class="total-length">{{quoteConstants.totalLength}} {{(quantity.value * product.sellOrderMultiple) | number:'.2' }} {{product.unitCode}}</span>
+                </div> -->
+            </div>
+            <div class="total-qty-price">
+                <div class="qty-section">
+                    <button type="button" class="unit-minus minus-icon" (click)="updateQty(quantity,addtoquotebtn,product.uomFormat,'-')">-</button>
+                    <input type="text" class="unit-count" #quantity value='1' (keypress)="checkQty($event,product)" (change)="quantity.value = quantity.value">
+                    <button type="button" class="unit-plus plus-icon" (click)="updateQty(quantity,addtoquotebtn,product.uomFormat,'+')">+</button>
+                </div>
+                <button type="button" class="addtoQuote btn btn-blue" #addtoquotebtn [disabled]="product?.price == undefined && product.price == 'POA'" (click)="addProductToQuote($event,product,quantity.value)">{{quoteConstants.addToQuoteBtn}}</button>
+            </div>
+       </div>
+</div>

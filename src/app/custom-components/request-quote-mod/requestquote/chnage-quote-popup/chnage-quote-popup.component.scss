@@ -1,0 +1,131 @@
+@import "../../../../shared/styles/variables.scss";
+
+.underline {
+    text-decoration: underline;
+    cursor: pointer;
+}
+::ng-deep .modal-content {
+    color: #545859;
+  //  border-radius: 5px;
+   // border: 3rem solid rgba(84, 88, 89, 0.7);
+}
+.btn {
+    background-color: #545859;
+    // font-size: var(--fontsize24);
+    text-transform: uppercase;
+    color: #FFF;
+    width: 12rem;
+}
+
+.btngrp{
+    padding: 20px 0;
+}
+
+.modal-body {
+    padding: 27px 60px;
+    font-family: 'NiveauGrotesk';
+    .row-content {
+        .description {
+            padding: 0;
+        }
+    }
+}
+.confirmBtn {
+    float:right;
+    background-color: #003D7A;
+    color:#ffffff;
+    padding: 3px 20px;
+    outline: none;
+    border: 1px solid #003D7A;
+    border-radius: 5px;
+    font-weight: bold;
+    min-height: var(--buttonHeight60);
+    font-size: var(--fontsize24);
+    width: 150px;
+}
+
+.cancelBtn {
+    background-color: #E0E1E2;
+    color: #495A64;
+    padding: 3px 20px;
+    outline: none;
+    border: 1px solid #E0E1E2;
+    border-radius: 5px;
+    font-weight: bold;
+    min-height: var(--buttonHeight60);
+    font-size: var(--fontsize24);
+    width: 150px;
+}
+
+.heading-container.container {
+    border-bottom: none;
+    width: 100%;
+    padding: 0;
+    .row {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+
+.desc {
+    font-size: var(--fontsize20);
+    text-align: center;
+}
+.pageHeading {
+    font-weight: bolder;
+   color: #495A64;
+   font-size: var(--fontsize24);
+   font-family: 'NiveauGrotesk';
+   text-align: center;
+   padding: 0px;
+
+}
+.close-icon {
+    cursor: pointer;
+    float: right;
+    .cls-icon {
+        cursor: pointer;
+        color: #778893;
+        width: 18px;
+        height: 18px;
+        margin-right: 5px;
+        margin-top: 15px;
+    }
+  }
+
+@media screen and (max-width: $mobileScreenPotrait) {
+
+    ::ng-deep .modal-backdrop {
+        width: 100%;
+        height: 100%;
+    }
+    .close-icon {
+        .cls-icon {
+            width: 15px;
+            height: 15px;
+            margin-right: 0;
+        }
+    }
+    .heading {
+        margin-top: -20px;
+    }
+    .modal-body {
+        padding: 20px;
+        .desc {
+            font-size: var(--fontsize18);
+        }
+        .btngrp {
+            button {
+                width: 47%;
+            }
+        }
+    }
+    .btn {
+        max-width: 6rem;
+        height: auto;
+    }
+}
+
+

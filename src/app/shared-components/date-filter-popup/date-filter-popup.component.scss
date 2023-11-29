@@ -1,0 +1,134 @@
+@import '../../shared/styles/variables.scss';
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+
+.custom-day.range,
+.custom-day:hover {
+    background-color: rgb(2, 117, 216);
+    color: white;
+    border-radius: 50%;
+}
+
+.custom-day.faded {
+    border-radius: 0%;
+    background-color: #9CA7B21D;
+    color: black;
+}
+
+::ng-deep .ngb-dp-day {
+    height: 2rem !important;
+    width: 2rem !important;
+    margin: 1rem auto !important;
+}
+
+::ng-deep .ngb-dp-weekday {
+    width: 4rem !important;
+    font-family: 'NiveauGroteskBold';
+}
+
+::ng-deep ngb-datepicker {
+    min-width: 100%;
+    border: 0 !important;
+    // width: 500px;
+}
+
+::ng-deep .ngb-dp-months {
+    height: 24rem;
+}
+
+::ng-deep ngb-datepicker-navigation {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+::ng-deep .ngb-dp-arrow-btn {
+    font-size: 0.7rem !important;
+}
+
+::ng-deep .ngb-dp-arrow-btn:focus {
+    font-size: 0.7rem !important;
+    border: 0;
+}
+
+::ng-deep .btn:focus {
+    box-shadow: 0 transparent !important;
+}
+
+::ng-deep .ngb-dp-navigation-chevron {
+    margin-bottom: 0.2rem;
+}
+
+::ng-deep .btn-link:hover {
+    color: black !important;
+}
+
+.row.buttons {
+    padding: 16px 26px 19px 26px;
+    background: #9CA7B224;
+    .btn {
+        font-size: 1.1rem;
+        font-family: 'NiveauGroteskBold';
+        padding: 5px 34px;
+        height: 45px;
+    }
+}
+
+.confirmBtn {
+    float: right;
+    background-color: #003D7A;
+    color: #ffffff;
+    outline: none;
+    border: 1px solid #003D7A;
+    border-radius: 5px;
+    font-weight: bold;
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+}
+
+.btngrp {
+    padding: 0;
+}
+
+.cancelBtn {
+    background-color: #E0E1E2;
+    color: #495A64;
+    outline: none;
+    border: 1px solid #E0E1E2;
+    border-radius: 5px;
+    font-weight: bold;
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+}
+
+::ng-deep .btn {
+    &:focus {
+        color: $pdp-font-color;
+        box-shadow: 0 0 0 transparent;
+    }
+    &:hover {
+        color: $pdp-font-color;
+        box-shadow: 0 0 0 transparent;
+    }
+}
+
+::ng-deep .custom-select {
+    &:focus {
+        color: $pdp-font-color;
+        box-shadow: 0 0 0 transparent;
+    }
+}
+
+::ng-deep .btn:hover {
+    color: white !important;
+}

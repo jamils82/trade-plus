@@ -1,0 +1,106 @@
+@import "../../shared/styles/variables.scss";
+@media screen and (min-width: $Largescreen-1600) {
+  :root {
+    --fontsize12: 0.75rem;
+    --fontsize14: 0.875rem;
+    --fontsize16: 1rem;
+    --fontsize17: 1.063rem;
+    --fontsize17-5: 1.1rem;
+    --fontsize18: 1.125rem;
+    --fontsize18-4: 1.5rem;
+    --fontsize20: 1.25rem;
+    --fontsize21: 1.313rem;
+    --fontsize22: 1.375rem;
+    --fontsize23: 1.438rem;
+    --fontsize24: 1.5rem;
+    --fontsize26: 1.625rem;
+    --fontsize28: 1.75rem;
+    --fontsize30: 1.625rem;
+    --fontsize32: 2rem;
+    --fontsize34: 2.125rem;
+    --fontsize36: 2rem;
+    --fontsize40: 2.25rem;
+    --buttonHeight45: 2.813rem;
+    --buttonHeight60: 2.813rem;
+    --buttonHeight80: 5rem;
+    --buttonWidth84: 5.25rem;
+    --gridHeight72: 4.5rem;
+    --gridHeight74: 4.625rem;
+    --perPageDropdownWidth: 5.469rem;
+    --perPageDropdownHeight: 3.125rem;
+    --addToCartImgWidth21: 1.313rem;
+    --addToCartImgHeight21: 1.313rem;
+    --addToListImgWidth30: 1.875rem;
+    --addToListImgHeight21: 1.313rem;
+  }
+}
+
+@media screen and (max-width: $Largescreen-1600) and (min-width: $ipadScreen-768) {
+  :root {
+    --fontsize12: 0.5rem;
+    --fontsize14: 0.625rem;
+    --fontsize16: 0.75rem;
+    --fontsize17: 0.90rem;
+    --fontsize17-5: 1rem;
+    --fontsize18: 0.875rem;
+    --fontsize20: 1rem;
+    --fontsize21: 1.063rem;
+    --fontsize22: 1.125rem;
+    --fontsize23: 1.188rem;
+    --fontsize24: 1rem;
+    --fontsize28: 1.5rem;
+    --fontsize30: 1.25rem;
+    --fontsize32: 1.75rem;
+    --fontsize34: 1.875rem;
+    --fontsize36: 1.625rem;
+    --fontsize40: 2rem;
+    --buttonHeight60: 2.5rem;
+    --buttonHeight80: 3.75rem;
+    --buttonWidth84: 4.063rem;
+    --gridHeight72: 3.375rem;
+    --gridHeight74: 3.5rem;
+    --perPageDropdownWidth: 4.469rem;
+    --perPageDropdownHeight: 2.125rem;
+    --addToCartImgWidth21: 1.125rem;
+    --addToCartImgHeight21: 1.125rem;
+    --addToListImgWidth30: 1.625rem;
+    --addToListImgHeight21: 1.125rem;
+  }
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+  :root {
+    --fontsize12: 0.5rem;
+    --fontsize14: 0.625rem;
+    --fontsize15: 0.7rem;
+    --fontsize16: 0.75rem;
+    --fontsize16-5: 0.77rem;
+    --fontsize17: 0.90rem;
+    --fontsize17-5: 1rem;
+    --fontsize18: 0.875rem;
+    --fontsize19: 0.938rem;
+    --fontsize20: 1rem;
+    --fontsize21: 1.063rem;
+    --fontsize22: 1.125rem;
+    --fontsize23: 1.188rem;
+    --fontsize24: 1rem;
+    --fontsize26: 1.25rem;
+    --fontsize28: 1.5rem;
+    --fontsize30: 1.25rem;
+    --fontsize32: 1.75rem;
+    --fontsize34: 1.875rem;
+    --fontsize36: 1.625rem;
+    --fontsize40: 2rem;
+    --buttonHeight60: 2.5rem;
+    --buttonHeight80: 3.75rem;
+    --buttonWidth84: 4.063rem;
+    --gridHeight72: 3.375rem;
+    --gridHeight74: 3.5rem;
+    --perPageDropdownWidth: 4.469rem;
+    --perPageDropdownHeight: 2.125rem;
+    --addToCartImgWidth21: 1.125rem;
+    --addToCartImgHeight21: 1.125rem;
+    --addToListImgWidth30: 1.625rem;
+    --addToListImgHeight21: 1.125rem;
+  }
+}

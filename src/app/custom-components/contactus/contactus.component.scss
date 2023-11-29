@@ -1,0 +1,129 @@
+@import "../../shared/styles/variables.scss";
+.text-white {
+    z-index: 1;
+}
+
+.menuItemContainer ul {
+    width: 19rem;
+    border: 0px;
+    margin-top: -0.2rem !important;
+    transform: translate(-60.3%, 47px) !important;
+    li {
+        margin-left: 1.2rem;
+        margin-right: 1.2rem;
+        @include font-MyriadReg();
+        color: $dark-grey;
+    }
+}
+
+.contactIcon {
+    margin-right: 7px;
+}
+
+.nav-link {
+    a {
+        color: $white-color;
+    }
+    &.show {
+        background-color: white;
+        i {
+            color: white;
+        }
+        a {
+            color: $dark-grey;
+        }
+        & .fa-question-circle:before {
+            color: $dark-grey;
+        }
+    }
+}
+
+@media screen and(max-width: $screenMedium-1024) {
+    .dropdown {
+        &.show {
+            color: $dark-grey;
+        }
+        a {
+            color: $dark-grey;
+            text-decoration: none;
+        }
+    }
+    .menuItemContainer {
+        &.align-middle {
+            align-items: left;
+        }
+        &.justify-content-center {
+            justify-content: left !important;
+        }
+        #navbarDropdownMenuLink2 {
+            padding-left: 0;
+            a {
+                margin-left: 0 !important;
+            }
+        }
+    }
+    .menuItemContainer ul {
+        transform: translate(-15.3%, 30px) !important;
+        width: 10rem;
+        li {
+            margin-left: 1.5rem;
+            margin-right: 0rem;
+        }
+    }
+}
+
+@media screen and(max-width:$m991) {
+    .menuItemContainer {
+        .m-display-inline {
+            display: inline;
+        }
+        .m-arrow {
+            position: relative;
+            top: 0;
+            left: 6.4rem;
+            img {
+                &.invert {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+        .mt-sm-1 {
+            margin-top: 0.8rem !important;
+        }
+        ul {
+            hr {
+                &.list-bottom-line {
+                    width: 17rem;
+                    position: absolute;
+                }
+            }
+        }
+    }
+    .contact-us-bottom {
+        position: relative;
+        right: 1.4rem;
+    }
+}
+
+@media screen and(max-width:$m991) {
+    .menuItemContainer {
+        ul {
+            inset: 0px auto 0px 0px !important;
+            box-shadow: none;
+        }
+    }
+    .menuItemContainer #navbarDropdownMenuLink2 {
+        a {
+            min-width: 14.7rem;
+        }
+    }
+}
+
+@media screen and(max-width:$mobileScreenPotrait) {
+    .contactCSRForm .modal-dialog .modal-header {
+        height: auto !important;
+    }
+    .contactCSRForm .modal-dialog .modal-head {
+        padding: 1.3rem 0 0rem 3.1rem;
+    }
+}

@@ -1,0 +1,2784 @@
+/* You can add global styles to this file, and also import other style files */
+
+$styleVersion: 4;
+@import "~@spartacus/styles/index";
+@import "./app/shared/styles/header.scss";
+@import "./app/shared/styles/Footer.scss";
+@import "./app/shared/styles/variables.scss";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./app/shared/styles/fontSize.scss";
+main {
+  background-color: $main-section-background-color;
+}
+
+body {
+  background-color: #e8eff7 !important;
+}
+.TLAuthLandingPageTemplate
+ {
+  background: #fff;
+  // background: url("./assets/images/landing_page_bg.jpg") no-repeat center
+  //   center fixed;
+  width: 100%;
+  background-size: cover;
+  overflow-y: hidden;
+  main {
+    background: #fff;
+    // background: url("./assets/images/landing_page_bg.jpg") no-repeat center
+    // center fixed;
+    width: 100%;
+    background-size: cover;
+    overflow-y: hidden;
+  }
+}
+.custom-container {
+  width: 87%;
+  margin: auto;
+}
+.createAccount {
+  background: url("./assets/images/landing_page_bg.jpg") no-repeat center
+    center fixed;
+  width: 100%;
+  background-size: cover;
+  overflow-y: auto;
+  main {
+    background: url("./assets/images/landing_page_bg.jpg") no-repeat center
+    center fixed;
+    width: 100%;
+    background-size: cover;
+   }
+}
+.form-control:focus,
+.ng-select-focused,
+:focus,
+input:focus {
+  outline: none !important;
+}
+
+main {
+  max-width: 1920px;
+  width: 100%;
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+cx-page-layout.footer {
+  background-color: $blue-color !important;
+  .Footer {
+    max-width: 1920px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    cursor: pointer;
+    position: relative;
+  }
+}
+
+cx-global-message div {
+  position: sticky;
+  display: none;
+  top: 0;
+  z-index: 2;
+}
+
+cx-login {
+  display: none;
+}
+
+cx-global-message {
+  display: none;
+}
+
+.Section3A app-home-mainsection {
+  // flex-basis: 33.333333%;
+  width: 27%;
+  flex: none;
+  padding-right: 1.35rem;
+  padding-left: 1.35rem;
+  padding-bottom: 0.7rem;
+  padding-top: 1rem;
+  .landingTiles {
+    cx-media {
+      width: 100%;
+    }
+  }
+}
+
+.Section7A {
+  width: 100%;
+  display: inline-flex;
+  margin-top: 1.7rem;
+  padding: 0 10.7% 0.7rem;
+  img {
+    width: 1920px;
+    border-radius: 10px;
+  }
+  app-home-mainsection {
+    // flex: none;
+    .landingTiles {
+      cx-media {
+        width: 100%;
+        img {
+          border-radius: 10px;
+          // opacity: 0.8;
+        }
+      }
+      .triangle.arrowUp {
+        display: none;
+      }
+    }
+  }
+}
+
+.Section4A {
+  width: 100%;
+  display: inline-flex;
+  padding: 1rem 10.7% 0.7rem 10.7%;
+  app-home-mainsection {
+    // flex: none;
+    .landingTiles {
+      cx-media {
+        width: 100%;
+        img {
+          border-radius: 10px;
+          // opacity: 0.3;
+        }
+      }
+      .triangle.arrowUp {
+        display: none;
+      }
+    }
+  }
+}
+
+.Section5A {
+  width: 25%;
+  display: inline-flex;
+  flex-direction: column;
+  padding: 1rem 10px 100px 10.7%;
+  app-home-mainsection {
+    // flex: none;
+    .landingTiles {
+      cx-media {
+        width: 100%;
+        img {
+          border-radius: 10px;
+          // opacity: 0.3;
+          // max-height: 469px;
+          // height: 469px;
+        }
+      }
+      .triangle.arrowUp {
+        display: none;
+      }
+    }
+  }
+}
+
+.mat-chip-ripple {
+  position: relative !important;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 8% !important;
+  margin: 0;
+  padding: 0;
+}
+
+.appTradePopup {
+  .modal-lg {
+      min-width: 320px !important;
+      max-width: 320px !important;
+      margin: 44px auto !important;
+      min-height: 23px;
+      max-height: inherit;
+      .modal-content {
+        border-radius: 7px !important;
+        background-color: transparent;
+      }
+  }
+  app-apptradepopup {
+    background-color: #fff;
+  }
+}
+
+.staticMessageText {
+  font-weight: bold;
+  margin-top: 1.5rem;
+  font-family: "NiveauGroteskBold";
+}
+
+.mylistStaticMessage {
+  margin-top: 0;
+}
+
+app-custom-my-quotes {
+  .mat-chip-ripple {
+    position: relative !important;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 0% !important;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.Section5B {
+  width: 75%;
+  padding:  1rem 10.7% 100px 10px;
+  margin-bottom: 2%;
+  float: right;
+  display: inline-flex;
+  app-home-mainsection {
+    // flex: none;
+    .landingTiles {
+      cx-media {
+        width: 100%;
+        img {
+          border-radius: 10px;
+          // opacity: 0.3;
+          // max-height: 469px;
+          // height: 469px; 
+        }
+      }
+      .triangle.arrowUp {
+        display: none;
+      }
+    }
+  }
+}
+.customerQuoteloading {
+  position: fixed;
+  z-index: 9999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.customerQuoteloading:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  // width: 100%;
+  // height: 100%;
+  // background: radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+  // background: -webkit-radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+  }
+  .customerQuoteloading:not(:required) {
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+  }
+  .customerQuoteloading:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 10px;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+    -webkit-animation: spinner 150ms infinite linear;
+    -moz-animation: spinner 150ms infinite linear;
+    -ms-animation: spinner 150ms infinite linear;
+    -o-animation: spinner 150ms infinite linear;
+    animation: spinner 150ms infinite linear;
+    border-radius: 0.5em;
+    -webkit-box-shadow: rgba(189, 195, 199, 0.75) 1.5em 0 0 0, rgba(189, 195, 199, 0.75) 1.1em 1.1em 0 0, rgba(189, 195, 199, 0.75) 0 1.5em 0 0, rgba(189, 195, 199, 0.75) -1.1em 1.1em 0 0, rgba(189, 195, 199, 0.75) -1.5em 0 0 0, rgba(189, 195, 199, 0.75) -1.1em -1.1em 0 0, rgba(189, 195, 199, 0.75) 0 -1.5em 0 0, rgba(189, 195, 199, 0.75) 1.1em -1.1em 0 0;
+    box-shadow: rgba(189, 195, 199, 0.75) 1.5em 0 0 0, rgba(189, 195, 199, 0.75) 1.1em 1.1em 0 0, rgba(189, 195, 199, 0.75) 0 1.5em 0 0, rgba(189, 195, 199, 0.75) -1.1em 1.1em 0 0, rgba(189, 195, 199, 0.75) -1.5em 0 0 0, rgba(189, 195, 199, 0.75) -1.1em -1.1em 0 0, rgba(189, 195, 199, 0.75) 0 -1.5em 0 0, rgba(189, 195, 199, 0.75) 1.1em -1.1em 0 0;
+    }
+
+    .customerQuoteloading.cusomterMaterialLoader:not(:required):after {
+      font-size: 7px;
+    }
+    
+.pagination-orders-pagecss{
+  .mat-paginator-page-size-select{
+    width: 75px;
+    background-color: #fff;
+  }
+  .mat-paginator-page-size .mat-select-trigger {
+    font-family: NiveauGrotesk;
+    color: #778893 !important;
+  }
+  .mat-paginator-page-size.ng-star-inserted .mat-paginator-page-size-select .mat-form-field-infix {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .mat-select-value-text{
+    font-size: var(--fontsize24);
+  }
+}
+.OrderChekoutTemplate,
+.OrderConfirmationPageTemplate,
+.MultiStepCheckoutSummaryPageTemplate {
+  .customer-service
+  {
+    position: absolute;
+    padding: 0px !important;
+  }
+  .header-content
+  {
+    right: 0rem !important;
+  }
+}
+@media screen and (max-width: $Largescreen-1440) {
+  .Section5A {
+    img 
+    {
+      max-height: 360px !important;
+      height: 360px  !important;
+    }
+  }
+  .Section5B {
+    img 
+    {
+      max-height: 360px !important;
+      height: 360px  !important;
+    }
+  }
+}
+@media screen and (max-width: $mobileScreenPotrait) {
+  .createAccount {
+    overflow-y: auto;
+    background: none !important;
+  }
+  .createAccount main
+  {
+    background: none !important;
+    height: auto;
+  }
+  .createAccount .image-container
+  {
+    min-height: auto !important;
+  }
+  .createAccount cx-storefront {
+    min-height: auto !important;
+  }
+  .Section3A {
+    app-home-mainsection {
+      width: 100%;
+      padding-right: 1.5rem;
+      padding-bottom: 0.5rem;
+      padding-top: 1rem;
+      padding-left: 1.5rem;
+    }
+  }
+  .Section1 {
+    margin: 1rem 1.5rem 0rem 1.5rem;
+    border-bottom: 1px solid #ccd0d6;
+  }
+  .Section4A {
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+  }
+  .Section5A {
+    padding: 0rem 0.5rem 2rem 1.5rem;
+  }
+  .Section5B {
+    padding: 0rem 1.5rem 2rem 0.5rem;
+  }
+}
+
+.materialProductsListItem {
+  app-custom-product-list-item:nth-child(even) .materials-list-section {
+    background-color: #F3F4F4;
+    border-top: none;
+  }
+  app-custom-product-list-item:nth-child(n+2) .materials-list-section {
+    border-top: none;
+  }
+}
+
+main .ProductDetailsPageTemplate {
+  padding-top: 50px;
+}
+
+.ProductDetailsPageTemplate .Tabs {
+  margin-bottom: 4rem;
+}
+.ProductDetailsPageTemplate .Summary {
+  min-width: 86.5%;
+  background-color: $white-color;
+  margin-bottom: 0px !important;
+  padding-bottom: 4em;
+  padding-top: 2em;
+  cx-product-images cx-media {
+    display: flex;
+    justify-content: center;
+  }
+  cx-product-images cx-media img {
+    max-width: 515px;
+    max-height: 515px !important;
+    max-height: 100%;
+    transform: scale(1);
+    object-fit: unset;
+  }
+  
+  @media screen and (max-width: $Largescreen-1600) and (min-width: $ipadScreen-768) {
+    cx-product-images cx-media img {
+      max-width: 515px;
+      max-height: 515px !important;
+      max-height: 100%;
+      transform: scale(1);
+      object-fit: unset;
+    }
+  }
+  cx-product-images cx-carousel cx-media img {
+    max-width: 100%;
+    max-height: 100%;
+    transform: scale(1);
+    object-fit: unset;
+  }
+  cx-product-images cx-carousel {
+    justify-content: center;
+  }
+  cx-product-images
+    cx-carousel
+    .carousel-panel
+    .slides
+    .slide.active
+    .item.active
+    .is-initialized {
+    border-color: transparent;
+  }
+  cx-product-images
+    cx-carousel
+    .carousel-panel
+    .slides
+    .slide.active
+    .item.active
+    .is-initialized:hover {
+    border-color: #707070;
+  }
+  cx-product-images
+    cx-carousel
+    .carousel-panel
+    .slides
+    .slide.active
+    .item.active
+    .is-initialized.is-active {
+    border-color: #707070;
+    border-radius: 3px;
+  }
+  cx-product-images cx-carousel .indicators {
+    display: none !important;
+  }
+  cx-star-rating {
+    cx-icon {
+      &:first-child {
+        background: linear-gradient(
+          calc(var(--star-rating-dir, 1) * 90deg),
+          $pdp-font-color 0%,
+          $pdp-font-color calc((var(--star-fill, 0) - 1 + 1) * 100%),
+          transparent calc((var(--star-fill, 0) - 1 + 1) * 100%)
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 12px;
+      }
+      &:nth-child(2) {
+        background: linear-gradient(
+          calc(var(--star-rating-dir, 1) * 90deg),
+          $pdp-font-color 0%,
+          $pdp-font-color calc((var(--star-fill, 0) - 2 + 1) * 100%),
+          transparent calc((var(--star-fill, 0) - 2 + 1) * 100%)
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 12px;
+      }
+      &:nth-child(3) {
+        background: linear-gradient(
+          calc(var(--star-rating-dir, 1) * 90deg),
+          $pdp-font-color 0%,
+          $pdp-font-color calc((var(--star-fill, 0) - 3 + 1) * 100%),
+          transparent calc((var(--star-fill, 0) - 3 + 1) * 100%)
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 12px;
+      }
+      &:nth-child(4) {
+        background: linear-gradient(
+          calc(var(--star-rating-dir, 1) * 90deg),
+          $pdp-font-color 0%,
+          $pdp-font-color calc((var(--star-fill, 0) - 4 + 1) * 100%),
+          transparent calc((var(--star-fill, 0) - 4 + 1) * 100%)
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 12px;
+      }
+      &:last-child {
+        background: linear-gradient(
+          calc(var(--star-rating-dir, 1) * 90deg),
+          $pdp-font-color 0%,
+          $pdp-font-color calc((var(--star-fill, 0) - 5 + 1) * 100%),
+          transparent calc((var(--star-fill, 0) - 5 + 1) * 100%)
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 12px;
+      }
+    }
+  }
+  cx-item-counter {
+    background-color: $quantity-button-color;
+    color: $pdp-font-color;
+    height: 60px;
+    button {
+      font-size: var(--fontsize40);
+      padding: 10px 15px 0 15px;
+      color: $pdp-font-color;
+      line-height: 0;
+      min-width: 65px;
+      &:hover {
+        color: $pdp-font-color;
+      }
+      &:disabled {
+        color: $pdp-font-color;
+        opacity: 0.5;
+      }
+    }
+    input {
+      font-family: "NiveauGroteskBold";
+      color: $pdp-font-color;
+      min-height: 58px;
+      min-width: 100px;
+      font-size: var(--fontsize24);
+    }
+  }
+  @media screen and (max-width: $Largescreen-1600) and (min-width: $ipadScreen-768) {
+    cx-item-counter {
+      background-color: $quantity-button-color;
+      color: $pdp-font-color;
+      height: 45px;
+      button {
+        font-size: var(--fontsize40);
+        padding: 0 10px;
+        color: $pdp-font-color;
+        line-height: 0;
+        min-width: 55px;
+        &:hover {
+          color: $pdp-font-color;
+        }
+        &:disabled {
+          color: $pdp-font-color;
+          opacity: 0.5;
+        }
+      }
+      input {
+        font-family: "NiveauGroteskBold";
+        color: $pdp-font-color;
+        min-height: 43px;
+        min-width: 100px;
+        font-size: var(--fontsize24);
+      }
+    }
+  }
+}
+
+.modal-backdrop {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media screen and (max-width: $Largescreen-1600) and (min-width: $ipadScreen-768) {
+  .appScaleLevel {
+    zoom: 85%;
+    // -moz-transform: scale(0.85);
+    transform-origin: 0 0;
+    // .landingTiles a div {
+    //     padding: 4% 18% 4% 4% !important;
+    //     font-size: 1.1rem !important;
+    // }
+    .cdk-overlay-pane[style*="font-size: 13px;"] {
+      transform: translateX(0px) translateY(-90px) !important;
+    }
+  }
+  // @-moz-document url-prefix() {
+  //     .appScaleLevel {
+  //         width: 117%;
+  //         height: 100%;
+  //         app-create-account {
+  //             .image-container {
+  //                 .container {
+  //                     padding-top: 10em;
+  //                 }
+  //             }
+  //         }
+  //     }
+  // }
+}
+
+.TeamManagementPageTemplate {
+  min-height: 100% !important;
+}
+
+cx-storefront main .landingTiles cx-media img {
+  width: 100%;
+  // max-height: 282px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+ngb-modal-window.branch .modal-dialog {
+  width: 65%;
+  display: table-cell;
+  padding-top: 150px;
+}
+
+@media screen and (max-width: $Largescreen-1600) {
+  ngb-modal-window.branch .modal-dialog {
+    width: 81%;
+    display: table-cell;
+    padding-top: 150px;
+  }
+}
+
+ngb-modal-window.accountSwitch .modal-dialog {
+  max-width: 650px;
+  padding-top: 115px;
+  .modal-content {
+    border-radius: 5px;
+  }
+}
+
+ngb-modal-window.ChnageQuotePopup .modal-dialog {
+  max-width: 650px;
+  padding-top: 115px;
+  .modal-content {
+    border-radius: 5px;
+  }
+}
+
+ngb-modal-window.deleteList .modal-dialog {
+  max-width: 650px;
+  padding-top: 115px;
+  .modal-content {
+    border-radius: 5px;
+  }
+}
+ngb-modal-window.savePreferenceEmail,
+ngb-modal-window.myobPopup,
+ngb-modal-window.xeroConnectPopup {
+  .modal-dialog {
+    max-width: 880px !important;
+    padding-top: 0px;
+    .modal-content {
+      border-radius: 2px;
+    }
+  }
+}
+
+ngb-modal-window.addList,
+ngb-modal-window.editListName {
+  .modal-dialog {
+    max-width: 880px !important;
+    .modal-content {
+      position: absolute;
+      top: 120px;
+      border-radius: 2px;
+    }
+  }
+}
+
+app-find-store {
+  min-height: 350px;
+}
+main {
+  .TLMyQuotesPageTemplate,
+  .SearchResultsGridPageTemplate,
+  .ProductGridPageTemplate {
+    position: relative;
+  }
+}
+cx-media.is-missing {
+  img {
+    display: none;
+  }
+}
+.ProductGridPageTemplate header cx-media,.SearchResultsGridPageTemplate header cx-media
+{
+  display: block;
+}
+.ProductGridPageTemplate,
+.SearchResultsGridPageTemplate {
+  display: inline-flex;
+  width: 100%;
+  max-width: 100% !important;
+  .ProductLeftRefinements {
+    max-width: 18% !important;
+    padding-top: 0px;
+    padding-inline-end: 15px;
+    padding-bottom: 15px;
+    padding-inline-start: 15px;
+  }
+  .ProductGridSlot,
+  .SearchResultsGridSlot {
+    display: block;
+    max-width: 73.5%;
+    .cx-page-section {
+      padding-top: 0;
+    }
+    cx-item-counter {
+      background-color: $quantity-button-color;
+      border: 0.5px solid $quantity-button-color;
+      color: $pdp-font-color;
+      height: 39px;
+      button {
+        // font-size: 30px;
+        font-size: var(--fontsize28);
+        padding: 15px 15px 0 15px;
+        padding: 0px;
+        color: $pdp-font-color;
+        line-height: 0;
+        &:hover {
+          color: $pdp-font-color;
+        }
+        &:disabled {
+          color: $pdp-font-color;
+          opacity: 0.5;
+        }
+      }
+      input {
+        font-family: "NiveauGroteskBold";
+        color: $pdp-font-color;
+        font-size: var(--fontsize20);
+      }
+    }
+    cx-pagination {
+      a {
+        width: 29px;
+        height: 29px;
+        border: 0px;
+        color: #003d7a;
+        font-family: "NiveauGrotesk";
+        font-size: var(--fontsize16);
+      }
+      a.start,
+      a.previous {
+        position: relative;
+        margin-right: 8px;
+        &::before {
+          content: "\2196";
+          position: absolute;
+          background-color: #e8eff7;
+          transform: rotate(315deg);
+          font-weight: bold;
+          font-size: var(--fontsize24);
+        }
+        &:hover {
+          color: #f4f4f4;
+          &::before {
+            background-color: transparent;
+            color: #003d7a;
+          }
+        }
+      }
+      a.end,
+      a.next {
+        margin-left: 8px;
+        position: relative;
+        &::before {
+          content: "\2196";
+          position: absolute;
+          background-color: #e8eff7;
+          transform: rotate(135deg);
+          font-weight: bold;
+          font-size: var(--fontsize24);
+        }
+        &:hover {
+          color: #f4f4f4;
+          &::before {
+            background-color: transparent;
+            color: #003d7a;
+          }
+        }
+      }
+      a.disabled {
+        color: #778893;
+      }
+      a.current {
+        background-color: #545859;
+        border-radius: 2px;
+        border-color: #545859;
+        color: $white-color;
+      }
+    }
+  }
+  cx-sorting {
+    width: 100%;
+    .ng-select .ng-select-container,
+    .ng-select.ng-select-single .ng-select-container {
+      padding: 0px;
+      line-height: 0px;
+      min-height: var(--buttonHeight60);
+    }
+  }
+  cx-media {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  cx-media.is-missing {
+    img {
+      display: none;
+    }
+  }
+}
+
+.ProductLeftRefinements {
+  margin-right: 30px;
+  margin-left: 20px;
+  cx-facet {
+    button.heading {
+      color: $pdp-font-color;
+      font-family: "NiveauGroteskBold";
+      font-size: var(--fontsize20);
+      text-transform: capitalize;
+      text-align: left;
+      padding-right: 20px;
+      position: relative;
+      margin: 2rem 0 0.4rem 0;
+      &:hover,
+      &:focus {
+        color: $pdp-font-color;
+      }
+      .collapse-icon {
+        // position: relative;
+        position: absolute;
+        right: 0;
+        &::before {
+          // content: ">";
+          // font: var(--fontsize24) Consolas, monospace;
+          // transform: rotate(90deg);
+          // right: 0;
+          // left: 0px;
+          // bottom: 0px;
+          // padding-left: 0;
+          // padding-top: 0;
+          // width: 0;
+          // position: absolute;
+          // color: #778893;
+          // border-radius: 2px;
+          // pointer-events: none;
+          // font-weight: 300;
+          // height: 16px;
+          // font-size: 2rem;
+          content: "";
+          background-image: url("./assets/images/Icon\ ionic-ios-arrow-down\ \(3\).svg");
+          background-repeat: no-repeat;
+          background-size: 15px;
+          background-position: center;
+          transform: rotate(0deg);
+          left: -25px;
+          width: 30px;
+          position: absolute;
+          font-weight: 300;
+          height: 15px;
+          top: -5px;
+        }
+      }
+      .expand-icon {
+        // position: relative;
+        position: absolute;
+        right: 0;
+        &::before {
+          content: "";
+          background-image: url("./assets/images/Icon\ ionic-ios-arrow-down\ \(3\).svg");
+          background-repeat: no-repeat;
+          background-size: 15px;
+          background-position: center;
+          transform: rotate(180deg);
+          left: -25px;
+          width: 30px;
+          position: absolute;
+          font-weight: 300;
+          height: 15px;
+          top: -5px;
+        }
+      }
+    }
+    @media screen and (max-width: $Largescreen-1600) and (min-width: $ipadScreen-768) {
+      button.heading {
+        margin: 1rem 0 0.4rem 0;
+      }
+    }
+    a {
+      color: $pdp-font-color;
+      font-family: "NiveauGrotesk";
+      font-size: var(--fontsize18);
+      align-items: center;
+      text-transform: capitalize;
+      &::first-letter,
+      &::first-line {
+        text-transform: capitalize;
+      }
+      &:focus,
+      &:hover {
+        color: $pdp-font-color !important;
+      }
+      &::before {
+        content: "" !important;
+        width: 14px !important;
+        background-color: #c6cbd4 !important;
+        border: 1px solid #c6cbd4 !important;
+        // margin-top: 4px !important;
+        height: 14px !important;
+        font-size: 12px !important;
+        border-radius: 0px !important;
+        margin-right: 8px !important;
+      }
+    }
+    a.value.selected {
+      &::before {
+        background-color: $blue-color !important;
+        border: 1px solid $blue-color !important;
+      }
+    }
+    .more .cx-action-link {
+      color: $blue-color;
+      font-family: "NiveauGrotesk";
+      font-size: var(--fontsize16);
+    }
+  }
+}
+
+app-custom-plp-grid-item {
+  padding: 0 10px;
+  .row.plp-grid .plp-grid-image-col cx-media {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+@media screen and(max-width: $ScreenMedium-1300) {
+  ngb-modal-window .modal-dialog {
+    width: 85%;
+  }
+}
+
+@media screen and(max-width: $screenMedium-1200) {
+  ngb-modal-window.branch .modal-dialog {
+    width: 100%;
+    display: table-cell;
+    padding-top: 115px;
+  }
+}
+
+@media screen and(max-width: $mobileScreen) {
+  ngb-modal-window.branch .modal-dialog {
+    .modal-content {
+      width: 90%;
+    }
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.ProductLeftRefinements {
+  display: block;
+}
+
+.payment-success,
+.payment-failure {
+  margin-top: 1rem;
+  display: block;
+  font-size: 0.87rem;
+}
+
+.EmptyPageTemplate,
+.TLAuthLandingPageTemplate {
+  // min-height: auto !important;
+  header,
+  .PreHeader,
+  .SiteLogin {
+    background-color: transparent;
+    height: auto;
+    box-shadow: none;
+    display: none;
+  }
+}
+
+iframe {
+  body {
+    background-color: transparent !important;
+  }
+}
+
+// pagination styles
+.custom-paginator-container {
+  justify-content: flex-end;
+  .mat-paginator-range-label {
+    margin: 0 4px 0 0 !important;
+    color: #495a64 !important;
+  }
+}
+
+.custom-paginator-counter {
+  white-space: nowrap;
+  margin: 0px 4px 0px 10px !important;
+}
+
+.custom-paginator-page {
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  margin: 0.4em;
+  font-size: 14px;
+  min-width: 24px;
+  width: auto;
+  min-height: 24px;
+  max-height: 24px;
+  padding: 1px 6px;
+}
+
+.custom-paginator-page-enabled {
+  color: #003d7a !important;
+  background: transparent;
+  cursor: pointer;
+  &:hover {
+    background-color: #dfe3e6;
+  }
+}
+
+.custom-paginator-page-disabled {
+  background-color: #495a64 !important;
+  color: #fff;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  display: none !important;
+}
+
+.mat-paginator-page-size-label {
+  margin: 0 33px !important;
+  font-family: NiveauGrotesk !important;
+}
+
+.custom-paginator-arrow-disabled {
+  color: #dfe3e6;
+}
+
+.custom-paginator-arrow-enabled {
+  color: #003d7a;
+}
+
+.mat-paginator-page-size.ng-star-inserted {
+  order: 2;
+  margin-right: 0;
+  .mat-paginator-page-size-select {
+    margin: 0 0 0 5px;
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+  }
+}
+
+.mat-paginator-outer-container .mat-paginator-container {
+  justify-content: space-between;
+  padding: 0 25px !important;
+}
+
+.my_statements {
+  .mat-paginator-outer-container .mat-paginator-container {
+    padding: 0 !important;
+  }
+}
+
+.mat-paginator-page-size.ng-star-inserted
+  .mat-paginator-page-size-select
+  .mat-form-field-infix {
+  border: 1px solid #77889380;
+  text-align: center;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  height: 0px !important;
+}
+
+.mat-paginator,
+.mat-paginator-page-size .mat-select-trigger {
+  color: #000;
+  font-size: var(--fontsize18);
+}
+
+.mat-paginator-navigation-previous:before,
+.mat-paginator-navigation-next:before {
+  font-size: 1.6rem !important;
+}
+
+.myListSlot {
+  .product-list-image cx-media{
+    min-height: 86px;
+  }
+ 
+  .product-list-image,
+  .poduct-list-details {
+    position: relative;
+    left: -17px;
+  }
+}
+
+cx-sorting {
+  .ng-select.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+    border-color: #d3d6db;
+    box-shadow: 0 0 0 transparent !important;
+  }
+  ng-select {
+    width: 128%;
+    font-size: var(--fontsize20);
+    font-family: "NiveauGrotesk";
+    .ng-value-label {
+      position: absolute;
+    }
+    .ng-arrow-wrapper {
+      padding-right: 40px !important;
+      margin-top: -5px;
+      .ng-arrow {
+        border-style: solid !important;
+        border-right: 2px solid #778893 !important;
+        border-bottom: 2px solid #778893 !important;
+        transform: rotate(45deg) !important;
+        width: 13px !important;
+        height: 13px !important;
+        border-width: 0px 3px 3px 0px !important;
+        border-top-right-radius: 1px;
+        border-bottom-left-radius: 1px;
+      }
+    }
+  }
+}
+
+.mat-menu-content .mat-focus-indicator.mat-menu-item {
+  line-height: 0;
+  height: 35px;
+  // padding: 0 0px 0 10px;
+  color: #000;
+}
+
+.mat-menu-panel {
+  border-radius: 0px !important;
+}
+
+.mat-menu-submenu-icon {
+  border-style: solid !important;
+  border-right: 2px solid #778893 !important;
+  border-bottom: 2px solid #778893 !important;
+  transform: rotate(315deg) !important;
+  width: 8px !important;
+  height: 8px !important;
+  border-width: 0px 3px 3px 0px !important;
+  border-top-right-radius: 1px;
+  border-bottom-left-radius: 1px;
+  top: 42% !important;
+  polygon {
+    display: none;
+  }
+}
+
+.mat-menu-content .mat-focus-indicator.mat-menu-item-submenu-trigger {
+  padding-right: 32px;
+}
+
+.mat-menu-content .mat-focus-indicator.mat-menu-item a {
+  color: #000;
+  text-decoration: none;
+}
+
+cx-page-layout.CartPageTemplate .TopContent {
+  --cx-flex-basis: 72% !important;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.MYListPageTemplate,
+.TPQuickOrderPageTemplate,.RequestQuoteTemplate {
+  cx-item-counter {
+    background-color: $quantity-button-color;
+    border: 0.5px solid $quantity-button-color;
+    color: $pdp-font-color;
+    height: 39px;
+    button {
+      font-size: var(--fontsize28);
+      padding: 0px;
+      color: $pdp-font-color;
+      line-height: 0;
+      &:hover {
+        color: $pdp-font-color;
+      }
+      &:disabled {
+        color: $pdp-font-color;
+        opacity: 0.5;
+      }
+    }
+    input {
+      font-family: "NiveauGroteskBold";
+      color: $pdp-font-color;
+      // width: 40px;
+      font-size: var(--fontsize20);
+    }
+  }
+}
+
+.pac-container {
+  display: none !important;
+}
+
+.CartPageTemplate {
+  font-family: "NiveauGrotesk";
+  cx-cart-coupon {
+    display: none;
+  }
+  .modal-content {
+    width: 70%;
+    border-radius: 10px;
+  }
+  .EmptyCartMiddleContent {
+    text-align: center;
+    color: $pdp-font-color;
+    cx-paragraph {
+      h2 {
+        font-family: "NiveauGroteskBold";
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+    }
+  }
+}
+
+ngb-modal-window.addFromListpopup .modal-dialog {
+  min-width: 945px !important;
+  padding-top: 30px;
+  .modal-content {
+    border-radius: 5px;
+  }
+}
+
+ngb-modal-window.addListpopup .modal-dialog ,ngb-modal-window.addListpopup .addFromMyListpopup {
+  min-width: 945px !important;
+  padding-top: 115px;
+  .modal-content {
+    border-radius: 5px;
+  }
+}
+
+ngb-modal-window.in-stock-availability .modal-dialog {
+  min-width: 925px !important;
+  padding-top: 120px;
+  .modal-content {
+    border-radius: 5px;
+  }
+}
+
+ngb-modal-window.editmember .modal-dialog,
+ngb-modal-window.addmember .modal-dialog {
+  min-width: 945px !important;
+  padding-top: 120px;
+  .modal-content {
+    border-radius: 5px;
+    .input-group {
+      width: 80%;
+    }
+    .input-group-append {
+      width: 20%;
+    }
+  }
+}
+
+mat-dialog-container {
+  position: relative;
+}
+
+.warningMessagePopup .modal-dialog {
+  min-width: 650px !important;
+  padding-top: 85px;
+}
+
+.datePickerPopup .modal-dialog {
+  max-width: 944px !important;
+  padding-top: 85px;
+}
+
+.delivery-accordion .mat-expansion-panel-header.contact-delivery-header {
+  height: 40px !important;
+}
+
+.delivery-accordion
+  .mat-expansion-panel-header.contact-delivery-header
+  .mat-content {
+  display: block;
+}
+
+.delivery-accordion .contact-details-content {
+  border: 1px solid #e0e1e2;
+  border-radius: 2px;
+  opacity: 1;
+  padding: 20px 0;
+  margin-top: 20px;
+  display: block;
+  .edit-icon {
+    background: transparent url("./assets/icons/edit-icon.svg") 0% 0% no-repeat
+      padding-box;
+    display: block;
+    background-size: 75px 20px;
+    height: 100%;
+    background-position: right;
+    cursor: pointer;
+    position: relative;
+  }
+  .edit-content {
+    padding: 20px;
+    font-family: "NiveauGrotesk";
+    color: $pdp-font-color;
+    .content-name {
+      font-family: "NiveauGroteskBold";
+    }
+  }
+}
+
+.child-accordion-expand .mat-expansion-panel-header {
+  height: 40px !important;
+}
+
+#address-combo input.e-input {
+  height: 40px !important;
+}
+
+.mat-dialog-content {
+  padding: 15px 24px !important;
+}
+
+button.calendar, button.calendar:active {
+  opacity: 1;
+  display: block;
+  background: url(./assets/images/ic_calender.svg) no-repeat;
+  background-size: 20px 20px;
+  background-position: center; 
+  border-width: thin;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 0;
+  border: 1px solid #77889380;
+  border-left-width: 0px;
+}
+
+.input-group .custom-date-button .btn-outline-secondary:not(:disabled):not(.disabled):active,
+.input-group .custom-date-button .btn-outline-secondary:not(:disabled):not(.disabled):hover,
+.input-group .custom-date-button .btn-outline-secondary:not(:disabled):not(.disabled):focus,
+.input-group .custom-date-button .btn-outline-secondary:not(:disabled):not(.disabled):active:focus {
+  box-shadow: none;
+  background-color: transparent;
+  border: 1px solid #77889380;
+  border-left-width: 0px;
+}
+
+.mat-checkbox .mat-checkbox-ripple {
+  display: none !important;
+}
+// .custom-acc-select .mat-select-trigger {
+//   display: block !important;
+//   .mat-select-arrow-wrapper {
+//     transform: translateY(10%) !important;
+//     top: -25px;
+//     position: relative;
+//     right: -10px;
+//     .mat-select-arrow {
+//       background: #F1F3F5 url("./assets/icons/arrow-down.svg") no-repeat center;
+//       width: 18px;
+//       height: 18px;
+//       border-left: 0px solid transparent;
+//       border-right: 0px solid transparent;
+//       border-top: 0px solid;
+//       margin: 0px;
+//       padding: 26px;
+//       position: relative;
+//     }
+//   }
+// }
+.mat-tooltip {
+  font-family: "NiveauGroteskBold" !important;
+  font-size: 13px;
+  padding: 7px;
+  color: #495a64 !important;
+  //   text-transform: capitalize !important;
+  background: #ffffff 0% 0% no-repeat padding-box !important;
+  box-shadow: 0px 3px 6px #00000029 !important;
+  opacity: 1;
+}
+
+.custom-option-text .mat-option-text {
+  border-bottom: 4px solid #f8f8f8;
+}
+
+.form-control[type="text"]:focus,
+.form-control:focus {
+  background: transparent;
+}
+
+.OrderChekoutTemplate,
+.OrderConfirmationPageTemplate,
+.MultiStepCheckoutSummaryPageTemplate {
+  .miniCartStyle,
+  .settings,
+  .NavigationBar,
+  app-accountdropdown,
+  app-custombreadcrub,
+  cx-searchbox {
+    display: none !important;
+  }
+
+
+  app-topaccount .menuItemContainer {
+    position: fixed;
+    top: 4rem !important;
+    right: 8rem !important;
+  }
+  .customer-service {
+    right: 9.5rem !important;
+    //top: 3.7rem !important;
+    top:2.2rem !important;
+  }
+  cx-media {
+    margin-bottom: 0px;
+    margin-top: -7%;
+  }
+  .SiteLogo cx-banner cx-generic-link a {
+    left: 8rem;
+  }
+  cx-breadcrumb {
+    margin-left: 6.8rem;
+  }
+}
+
+.success-message-selector {
+  width: 100%;
+}
+
+a .disabled {
+  color: #495a64 !important;
+}
+
+.cdk-global-overlay-wrapper {
+  align-items: flex-start !important;
+  padding-top: 150px !important;
+}
+app-invoices-and-adjustments
+{
+  app-ngb-date-rangepicker
+  {
+    .input-group input
+    {
+      width:100% !important;
+      font-size: var(--fontsize14) !important;
+    }
+  }
+}
+app-add-member-pop-up{
+  app-ngb-date-rangepicker {
+    ngb-datepicker{
+        .ngb-dp-months{
+            .ngb-dp-day.disabled{
+                color: #c3c3c3 !important;
+            }
+        }
+    }
+  }
+} 
+
+.ProductGridPageTemplate app-custombreadcrub span:nth-child(n+2) {
+  pointer-events: none;
+  a {
+    text-decoration: auto;
+  }
+}
+
+@media screen and (min-width: $Largescreen-1440) {
+  cx-product-images {
+    width: 89%;
+  }
+}
+@media screen and (max-width: $Largescreen-1600) and (min-width: $ipadScreen-768) {
+  app-invoices-and-adjustments
+  {
+    app-ngb-date-rangepicker
+    {
+      .input-group input
+      {
+        width:100% !important;
+        font-size: var(--fontsize16) !important;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $Largescreen-1600) {
+  .cdk-overlay-pane.pay-now-dialog {
+    width: 596px !important;
+    height: 282px !important;
+  }
+}
+
+@media screen and (max-width: $Largescreen-1600) {
+  .cdk-overlay-pane.pay-now-dialog {
+    width: 692px !important;
+    height: 325px !important;
+  }
+}
+@media screen and (max-width: $mobileScreenPotrait) {
+  .OrderChekoutTemplate,
+  .OrderConfirmationPageTemplate,
+  .MultiStepCheckoutSummaryPageTemplate {
+    .search-button
+    {
+      display: none !important;
+    }
+  }
+  .Section4A {
+  app-home-mainsection {
+    .landingTiles {
+        cx-media {
+          img {
+            border-radius: 5px;
+          }
+        }
+      }
+    }
+  }
+  .Section5A {
+    app-home-mainsection {
+      .landingTiles {
+          cx-media {
+            img {
+              border-radius: 5px;
+            }
+          }
+        }
+      }
+    }
+    .Section5B {
+      app-home-mainsection {
+        .landingTiles {
+            cx-media {
+              img {
+                border-radius: 5px;
+              }
+            }
+          }
+        }
+      }
+
+  app-custom-order-deleveries app-ngb-date-rangepicker #flyout-example .form-group.quotes {
+    min-height: 35px !important;
+  }
+  app-custom-ordercheckout 
+  {
+  .delivery-accordion .contact-details-content .edit-icon
+  {
+    background-size: auto !important;
+    right: -9px !important;
+  }
+  .delivery-accordion .contact-details-content .edit-content
+  {
+    padding: 12px;
+  }
+}
+  app-custom-facet-list {
+    top: 0; 
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex !important;
+    transition: background-color .3s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000080;
+    z-index: 100;
+    position: fixed;
+    .inner {
+      width: 95vw;
+      height: 95%;
+      background-color: var(--cx-color-background);
+      transition: transform .3s ease-in-out;
+      max-height: 100vh;
+      overflow: scroll;
+      padding-top: 0;
+      padding-inline-end: 10px;
+      padding-bottom: 10px;
+      padding-inline-start: 10px;
+    }
+  }
+  app-custom-my-quotes #flyout-example .form-group input {
+    height: 34px;
+  }
+  app-custom-my-quotes app-ngb-date-rangepicker #flyout-example .form-group.quotes {
+    min-height: 35px!important;
+  }
+  app-custom-my-quotes .form-group.quotes button.calendar,
+  #track-mat-card button.calendar
+  {
+    background-size: 16px 16px;
+    right: -5px;
+  }
+  app-invoices-and-adjustments
+  {
+    app-ngb-date-rangepicker
+    {
+      .input-group input
+      {
+        height: 35px !important;
+        font-size: var(--fontsize18) !important;
+      }
+    }
+  } 
+  app-invoices-and-adjustments button.calendar
+  {
+    background-size: 16px 16px;
+    right: -5px;
+  }
+  app-statements
+  {
+    app-ngb-date-rangepicker
+    {
+      .input-group input
+      {
+        height: 35px !important;
+      }
+    }
+  } 
+  app-statements button.calendar
+  {
+    background-size: 16px 16px;
+    right: -5px;
+  }
+  ngb-modal-window
+  {
+    app-ngb-date-rangepicker {
+      .input-group-append 
+      {
+        .btn.calendar 
+        {
+          .calendar-icon
+          {
+            opacity: 0 !important;
+          }
+        }
+      }
+    }
+  }
+  app-invoices-and-adjustments app-ngb-date-rangepicker #flyout-example .form-group.quotes {
+    min-height: 35px!important;
+  }
+  .MYListPageTemplate cx-item-counter
+  {
+    height:30px;
+  }
+  .MYListPageTemplate cx-item-counter button
+  {
+    font-size: var(--fontsize26);
+  }
+  .MYListPageTemplate cx-item-counter:not(.readonly) input
+  {
+    padding: 12px 0px;
+  }
+  
+  app-price-files .form-check input+.form-check-label
+  {
+    font-size: 13px;
+  }
+  cx-storefront main .Section3A .landingTiles cx-media img {
+    border-radius: 5px;
+    height: auto;
+  }
+  cx-storefront main .Section7A {
+    display: none; 
+    padding: 20px 4% 10px 4%;
+    .landingTiles cx-media img {
+      height: auto;
+    } 
+  }
+
+  cx-storefront main .Section3A app-home-mainsection {
+    padding: 1rem 4% .5rem;
+  }
+  
+  cx-storefront main .Section1 {
+    padding: 1rem 4% 0;
+  }
+  cx-storefront main .Section4A {
+    padding: 1.5rem 4% 1rem
+  }
+  cx-storefront main .Section5A {
+    padding: 0 .5rem 2rem 4%
+  }
+  cx-storefront main .Section5B {
+    padding: 0 4% 2rem .5rem;
+  }
+  cx-storefront main .Section4A .landingTiles cx-media img,
+  cx-storefront main .Section5A .landingTiles cx-media img,
+  cx-storefront main .Section5B .landingTiles cx-media img {
+    height: auto;
+  }
+  main .ProductDetailsPageTemplate {
+    padding-top: 20px !important;
+  }
+  .ProductDetailsPageTemplate .Summary {
+    min-width: 100%;
+    padding-top: 0;
+    padding-bottom: 3em;
+    cx-product-images cx-media {
+      margin-top: 40px;
+      img {
+      max-width: 350px;
+      }
+    }
+    cx-product-images
+      cx-carousel
+      .carousel-panel
+      .slides
+      .slide.active
+      .item.active
+      .is-initialized {
+      width: 75%;
+      height: 100%;
+    }
+    cx-item-counter {
+      height: 40px;
+      input {
+        min-height: 38px;
+        min-width: 60px;
+        font-size: var(--fontsize20);
+      }
+      button {
+        min-width: 50px;
+        font-size: var(--fontsize40);
+        padding: 0;
+      }
+    }
+  }
+
+    .ProductGridPageTemplate,
+    .SearchResultsGridPageTemplate {
+        display: inline-flex;
+        width: 100% !important;
+        max-width: 100% !important;
+        header {
+          position: relative !important;
+          z-index: 2;
+        }
+        .ProductLeftRefinements {
+            position: absolute;
+            right: 15px;
+            margin: 68px 0 !important;
+            padding: 0 !important;
+            max-width: 38% !important;
+            width: 100% !important;
+            z-index: 2;
+            cx-facet {
+              margin-bottom: 2rem;
+                button.heading {
+                margin: 0.4 0;
+              }
+              a {
+                font-size: var(--fontsize20);
+                padding: .75rem;
+              }
+              .more .cx-action-link {
+                font-size: var(--fontsize18);
+              }
+            }
+            .dialog-trigger {
+                max-height: 40px;
+                background-color: $white-color;
+                border: 1px solid #929EA6;
+                font-size: var(--fontsize18);
+                font-family: 'NiveauGrotesk';
+                border-radius: 2px;
+                color: $blue-color;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &:focus,
+                &:active {
+                    background-color: $white-color !important;
+                    border: 1px solid #929EA6 !important;
+                    color: $blue-color !important;
+                    box-shadow: 0 0 0 0rem !important;
+                }
+                .fa-filter {
+                    color: $blue-color;
+                    padding-right: 5px;
+                }
+            }
+        }
+        cx-sorting {
+            width: 65%;
+            ng-select {
+                width: 100%!important;
+                .ng-select-container {
+                    min-height: 35px;
+                    border-radius: 2px;
+                    line-height: 20px;
+                }
+                .ng-value-container {
+                  line-height: 20px;
+                }
+                .ng-arrow-wrapper {
+                    margin-top: -5px;
+                    padding-right: 30px !important;
+                }
+                .ng-value-label {
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  width: 60%;
+                  margin-top: -10px;
+                }
+            }
+        }
+        app-custom-plp-grid-item .row.plp-grid .plp-grid-image-col cx-media {
+          margin-top: 10px;
+        }
+    }
+    app-quick-order {
+        app-product-search {
+          position: relative;
+        }
+    }
+
+    .cdk-global-overlay-wrapper {
+      align-items: center !important;
+      padding-top: 0px !important;
+    }
+    .cdk-overlay-dark-backdrop {
+        background-color: #000;
+        opacity: 0.5 !important;
+    }
+    .cdk-overlay-pane.merchant-fees-dialog,
+    .cdk-overlay-pane.other-payment-dialog,
+    .cdk-overlay-pane.statement-dialog,
+    .cdk-overlay-pane.pay-now-dialog {
+        max-width: 92% !important;
+        width: 100% !important;
+        height: auto !important;
+        .mat-dialog-container {
+            margin-top: 0 !important;
+            padding: 1rem 1rem !important;
+        }
+        .material-icons {
+          font-size: var(--fontsize30) !important;
+        }
+    }
+
+    ngb-modal-window.deleteList .modal-dialog,
+    ngb-modal-window.addList .modal-dialog,
+    ngb-modal-window.editListName .modal-dialog,
+    ngb-modal-window.deletemember .modal-dialog,
+    ngb-modal-window.deleteCartItem .modal-dialog,
+    ngb-modal-window.warningMessagePopup .modal-dialog,
+    ngb-modal-window.xeroConnectPopup .modal-dialog,
+    ngb-modal-window.myobPopup .modal-dialog,
+    ngb-modal-window.savePreferenceEmail .modal-dialog,
+    ngb-modal-window.accountSwitch .modal-dialog,
+    ngb-modal-window.ChnageQuotePopup .modal-dialog,
+    ngb-modal-window.downloadFormat .modal-dialog  {
+        padding: 0 15px;
+        height: fit-content;
+        align-items: center;
+        display: grid;
+        min-width: 100% !important;
+        .modal-content {
+            width: 100% !important;
+            height: fit-content;
+            max-height: fit-content;
+            min-height: fit-content;
+            position: relative;
+            top: 0;
+            border-radius: 5px;
+        }
+    }
+
+  ngb-modal-window.addListpopup .modal-dialog,
+  ngb-modal-window.addFromMyListpopup .modal-dialog,
+  ngb-modal-window.addFromListpopup .modal-dialog,
+  ngb-modal-window.addmember .modal-dialog,
+  ngb-modal-window.filterPopupList .modal-dialog,
+  ngb-modal-window.minicartPopup .modal-dialog,
+  ngb-modal-window.in-stock-availability .modal-dialog,
+  ngb-modal-window.orderDeliveriesFilterPopup .modal-dialog,
+  ngb-modal-window.editmember .modal-dialog,
+  ngb-modal-window.filterPopupQuotes .modal-dialog,
+  ngb-modal-window.filterinvoices .modal-dialog,
+  ngb-modal-window.globalSearchPopup .modal-dialog
+  {
+    padding: 15px;
+    height: auto;
+    min-height: 100%;
+    align-items: center;
+    // display: grid;
+    min-width: 100% !important;
+    .modal-content {
+      height: auto;
+      min-height: 100%;
+    }
+  }
+  ngb-modal-window.mobile-menu .modal-dialog {
+    height: 100%;
+    .modal-content {
+      height: 100%;
+    }
+  }
+  ngb-modal-window.branch .modal-dialog {
+    padding: 15px;
+    display: block;
+    align-items: center;
+    width: 100% !important;
+    min-height: 100%;
+    .modal-content {
+      width: 100%;
+      min-height: 100%;
+      border-radius: 5px;
+      app-find-store {
+        height: 100%;
+      }
+    }
+  }
+  .myListSlot {
+    .product-list-image,
+    .poduct-list-details {
+        position: relative;
+        left: 0px !important;
+        top: -10px;
+    }
+}
+  
+  ngb-modal-window.addmember,
+  ngb-modal-window.editmember {
+    button.calendar
+    {
+      background-size: 16px 16px;
+      background-position: 70%;
+    }
+    .input-group
+    {
+      z-index: 99;
+    }
+    .modal-dialog .pageHeading {
+      margin-top: -38px;
+    }
+    .modal-body {
+      padding: 27px 0px;
+    }
+    .container {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .permissionsHeading {
+      margin-top: 20px !important;
+    }
+    .btn {
+      max-width: 10rem !important;
+    }
+    .row.buttons .btn {
+      padding: 3px 35px !important;
+    }
+    .abilityLabel {
+      white-space: break-spaces;
+    }
+    app-ngb-date-rangepicker .form-group {
+      display: inline-flex;
+      margin-bottom: 0px;
+    }
+    app-ngb-date-rangepicker .form-inline {
+      padding-left: 0px !important;
+      width:100%;
+      float: right;
+      border:1px solid #bbc3c9;
+    }
+    app-ngb-date-rangepicker .form-group
+    {
+      border:0px;
+    }
+    app-ngb-date-rangepicker .input-group input {
+      font-size: var(--fontsize16) !important;
+    }
+    .dateRangeLabel {
+      padding: 0px 0px 0px 32px !important;
+    }
+    .pdmob {
+      padding: 0px 15px 15px 25px !important;
+    }
+
+    .input-group-append .btn.calendar {
+      height: 35px !important;
+    }
+    /*.input-group-append .btn.calendar:hover
+    {
+      border: 1px solid #bbc3c9 !important;
+      border-right-width: 0px !important;
+      border-left-width: 0px !important;
+    }*/
+    .abilityCheckbox {
+      padding: 15px 0px 10px 10px !important;
+    }
+    .form-check.permissions {
+      margin-left: 0px !important;
+    }
+    .container {
+      max-width: 100% !important;
+    }
+
+    ngb-datepicker {
+      transform: translate(30px, 41px) !important;
+    }
+  }
+  ngb-datepicker {
+    transform: translate(30px, 41px) !important;
+  }
+  .product-list-image.my-list cx-media {
+     display: flex;
+     justify-content: center;
+     min-height: 86px;
+     img
+        {
+            max-width: 100%!important;
+            height: 140px;
+        }
+    }
+        .my_list.orderdelivery
+        {
+        #flyout-example.form-inline
+            {
+                padding-left: 0px !important;
+            }
+        #flyout-example{   
+            .input-group,.input-group-append
+            {
+                display: inline-flex !important;
+            }
+            input[name="datepicker"] {
+                background-color: transparent;
+            }
+            .form-group
+            {
+                margin-bottom: 0.75rem;
+            }
+        
+        }
+        }
+        .product-list-quantity cx-item-counter:not(.readonly)
+        {
+            border-radius: 2px;
+        }
+       ngb-modal-window.addmember app-ngb-date-rangepicker 
+       {
+      
+       form-control:disabled, .form-control[readonly]
+       {
+           background-color: $white-color;
+           
+       }
+       }
+       ngb-modal-window.editmember app-ngb-date-rangepicker 
+       {
+       form-control:disabled, .form-control[readonly]
+       {
+           background-color: $white-color;
+         
+       }
+       }
+//   .product-list-image cx-media {
+//     display: flex;
+//     justify-content: center;
+//   }
+//   .product-list-image cx-media img {
+//     max-width: 200px !important;
+//   }
+  .TLMyQuotesPageTemplate,.orderdelivery {
+    ngb-datepicker .ngb-dp-months {
+      display: inline !important;
+    }
+    ngb-datepicker {
+      transform: translate(-50px, 35px) !important;
+    }
+  }
+  .ProductGridSlot,
+  .SearchResultsGridSlot {
+    max-width: 100% !important;
+    cx-item-counter {
+      button {
+          min-width: 50px !important;
+      }
+      input {
+          max-width: 53px !important;
+            }
+        }
+    }
+    ngb-modal-window.addmember, ngb-modal-window.editmember
+    {
+      app-ngb-date-rangepicker {
+       .input-group input:disabled{
+        color:$placeholder-color !important;
+      }
+    }
+    }
+    app-statements app-ngb-date-rangepicker #flyout-example .form-group.quotes {
+        min-height: 35px!important;
+    }
+    .modal.downloadFormat .close 
+    {
+        font-size: 30px !important;
+        color: $pdp-font-color;
+    }
+    .mobileGlobalSearch.searchbox
+    {
+        height: 38px !important;
+        border: 1px solid #c8c9c7;
+        border-radius: 2px;
+        .searchBox-input
+        {
+            min-height: 35px !important;
+        }
+        .search
+        {
+            min-height: 35px !important;
+        }
+    }
+.ProductGridPageTemplate,
+.SearchResultsGridPageTemplate 
+{
+     header 
+     {
+       top:-18px !important;
+     }
+}
+.Section5A img, .Section5B img {
+  max-height: 150px !important;
+  height: auto !important;
+}
+}
+@media screen and (max-width: $smallmobileScreenPotrait568) {
+  .OrderChekoutTemplate,
+.OrderConfirmationPageTemplate,
+.MultiStepCheckoutSummaryPageTemplate {
+  app-custombreadcrub{
+    display: none !important;
+  }
+}
+  ngb-datepicker {
+    transform: translate(50px, 41px) !important;
+  }
+  ngb-datepicker .ngb-dp-months {
+    display: inline !important;
+  }
+  ngb-modal-window.addmember,
+  ngb-modal-window.editmember {
+    ngb-datepicker .ngb-dp-months {
+      display: inline !important;
+    }
+    ngb-datepicker {
+      transform: translate(50px, 41px) !important;
+    }
+  }
+  ngb-modal-window.addmember, ngb-modal-window.editmember
+  {
+    app-ngb-date-rangepicker {
+    .form-group
+    {
+       height: 35px;
+    }
+    .input-group
+    {
+        input{
+            height: 32px !important;
+        }
+    }
+    .input-group-append
+    {
+         align-items: center;
+        .btn.calendar 
+        {
+            .calendar-icon {
+                width: 16px !important;
+                height: 16px !important;
+                margin-bottom: 8px !important;
+                opacity: 0 !important;
+            }
+        }
+    }
+    
+  }
+  }
+  ngb-modal-window.addmember .row.buttons .btn
+  {
+    padding:0px !important;
+    width:100%;
+    max-width: 43% !important;
+  }
+  ngb-modal-window.editmember .row.buttons .btn
+  {
+    padding:0px !important;
+    width:100%;
+    max-width: 43% !important;
+  }
+  .OrderChekoutTemplate,
+  .OrderConfirmationPageTemplate,
+  .MultiStepCheckoutSummaryPageTemplate {
+    .NavigationBar,
+    app-accountdropdown,
+    cx-searchbox {
+      display: block !important;
+    }
+   
+  }
+  .Section5A img, .Section5B img {
+    max-height: 100px !important;
+    height: auto !important;
+  }
+}
+
+@media screen and (max-width: $smallmobileScreenPotrait420) {
+  ngb-datepicker {
+    transform: translate(0px, 36px) !important;
+  }
+  ngb-modal-window.addmember,
+  ngb-modal-window.editmember {
+    app-ngb-date-rangepicker .input-group input {
+      font-size: var(--fontsize16) !important;
+    }
+  }
+  .orderdelivery app-ngb-date-rangepicker
+  {
+    .input-group 
+    {
+      input
+      {
+        font-size: var(--fontsize15) !important;
+        height: 35px !important;
+      }
+    }
+  }
+  app-statements app-ngb-date-rangepicker
+  {
+    .input-group 
+    {
+      input
+      {
+        font-size: var(--fontsize16) !important;
+      }
+    }
+    .input-group-append 
+    {
+      .btn.calendar:hover
+      {
+        background-color:transparent !important;
+      }
+    }
+  }
+}
+@media screen and (max-width: 370px) {
+  ngb-modal-window.addmember,
+  ngb-modal-window.editmember {
+    app-ngb-date-rangepicker .input-group input {
+      font-size: 11px !important;
+    }
+  }
+  app-statements app-ngb-date-rangepicker
+  {
+    .input-group 
+    {
+      input
+      {
+        font-size: var(--fontsize15) !important;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 920px) {
+  app-custom-orderconfirmation {
+    .delivery-box {
+      padding: 0px 0 0px 0px !important;
+    }
+    .cc-delivery-box {
+      padding: 30px 0 0 30px !important;
+    }
+  }
+
+  app-custom-order-summary {
+    .delivery-box {
+      padding: 0 !important;
+    }
+    .cc-delivery-box {
+      padding: 0 !important;
+    }
+  }
+}
+
+// .TLMyStockNewPageTemplate app-custombreadcrub{
+//   min-width: 58%;
+//   .newFormat{
+//     margin-left: -10px !important;
+//   }
+// }
+// .TLMyStockNewPageTemplate .newFormat .row{
+// margin-left: -10px !important;
+// }
+
+//////////////////////////////////////////////////////////// FAQ Page Styling - Start ////////////////////////////////////////////////////
+.ContentPage1Template {
+  // max-width: 100% !important;
+  // padding: 0 15px !important;
+  // padding-inline-end: 0 !important;
+  // padding-inline-start: 0 !important;
+  // margin: 0 !important;
+  // .Section1 {
+  //   cx-paragraph {
+  //     p { 
+        .containers {
+          width: 87%;
+          margin: auto;
+        }
+        .font-weight-bold{
+          font-weight: 700;
+        }
+        .contentBlock{
+          font-size: var(--fontsize16);
+          font-family: 'NiveauGrotesk';
+          a {
+            font-family: 'NiveauGroteskBold';
+            color: $anchor-color;
+            text-decoration: underline;
+            &:hover {
+              color: $anchor-color;
+              text-decoration: underline;  
+            }
+          }
+        }
+        .deliveryContent{
+          margin-bottom: 25px;
+        }
+        .contentHeading{
+          font-family: 'NiveauGroteskBold';
+          font-size: var(--fontsize16);
+          margin-bottom: 5px;
+        
+        }
+        .accordion-button {
+          position: relative;
+          background: white;
+          &:after {
+            content: "";
+            background-image: url("./assets/images/Icon\ ionic-ios-arrow-down\ \(2\).svg");
+            background-repeat: no-repeat;
+            background-size: 15px;
+            background-position: center;
+            transform: rotate(0deg);
+            right: 0px;
+            width: 48px;
+            top: 0;
+            position: absolute;
+            height: 48px;
+            background-color: transparent;
+            border: 0px;
+            border-left: 0;
+          }
+        }
+        .accordion-button.collapsed {
+          position: relative;
+          background: white;
+          &:after {
+            content: "";
+            background-image: url("./assets/images/Icon\ ionic-ios-arrow-down\ \(2\).svg");
+            background-repeat: no-repeat;
+            background-size: 15px;
+            background-position: center;
+            transform: rotate(180deg);
+            right: 0px;
+            width: 48px;
+            top: 0;
+            position: absolute;
+            height: 48px;
+            background-color: transparent;
+            border: 0px;
+            border-left: 0;
+          }
+        }
+        ul.list{
+          margin: 8px 0 0 0;
+          padding-left: 20px;
+          &.deliveryMethods{
+            li{
+              font-weight: 700;
+            }
+          }
+          
+        }
+        .close-icon {
+            cursor: pointer;
+            right: 0;
+            position: absolute;
+            top: 0;
+        }
+        .cls-icon {
+            cursor: pointer;
+            color: $pdp-font-color;
+            width: 18px;
+            height: 18px;
+        }
+        .cls-btn {
+            text-align: right;
+        }
+        .cls-btn i.fa.fa-times {
+            color: #b5bec3;
+        }
+        .margclear
+        {
+            margin-top: 25px;
+        }
+        .margfilter
+        {
+            margin-top: 15px;
+        }
+        
+        
+        .tab {
+            width: 100%;
+            color: white;
+            overflow: hidden;
+            padding: 0px 10px 0px 15px;
+            margin-bottom: 20px;
+        }
+        .tab-label.child::after{
+         display: none;
+        }
+        
+        .tab-label {
+            display: flex;
+            justify-content: flex-start;
+            position: relative;
+            padding: 15px 3rem;
+            margin-bottom: 0px;
+            color:$pdp-font-color;
+            font-weight: bold;
+            cursor: pointer;
+            background: white;
+           /* Icon */
+        }
+        .tab-label::after {
+            content: "";
+          position: absolute;
+          top: 40%;
+          right: 2.5em;
+            border: solid $blue-color;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 3px;
+            transform: rotate(-135deg);
+            -webkit-transform: rotate(-135deg);
+            width: 12px;
+            height: 12px;
+            text-align: center;
+            // transition: all 0.35s;
+        }
+        .innerCheckbox::after {
+           content: none;
+        }
+        .innerCheckbox,.innerCheckbox:hover  {
+           background: none;
+           padding: 0em;
+        }
+        
+        .heading {
+         margin-left: 0em;
+         width: 100%;
+         text-align: left;
+         padding-top: 5px;
+         padding-bottom: 5px;
+         display: flex;
+         flex-direction: column;
+          .row {
+            display: block !important;
+          }
+        }
+        
+        .heading1
+        {
+         font-size: var(--fontsize20);
+        //  overflow: hidden;
+        //  text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 90%;
+         white-space: nowrap;
+         width: 100%;
+         font-family: 'NiveauGroteskBold';
+        }
+        
+        .clrflt{
+            color:$anchor-color;
+            text-decoration: underline;
+            font-family: 'NiveauGroteskBold';
+        }
+        .pageHeading
+        {
+          font-weight: bolder;
+          color: #495A64;
+          font-size: var(--fontsize40);
+          font-family: "NiveauGroteskbold";
+          margin-top: 40px;
+          margin-bottom: 20px;
+          text-transform: uppercase;
+        }
+        .tab-content {
+        
+            padding:0px 3rem 0.1rem 3rem;
+            color: $pdp-font-color;
+            background: white;
+            // transition: all 0.35s;
+            //display: none;
+        }
+        .tab-label.odd {
+            background: #f1f3f5;
+        }
+        .tab-label.even {
+            background: #fff;
+        }
+        input.accordion-checkbox {
+            display: none;
+        }
+        
+        input:checked + .tab-label.odd {
+            background: #f1f3f5;
+        }
+        input:checked + .tab-label.even {
+            background: #fff;
+        }
+        // input:not(:checked) + .tab-label {
+        //        border-bottom: 1px solid $filter-border-color;
+        // }
+        input:checked + .tab-label::after {
+            top: 34%;
+            transform: rotate(45deg);
+        }
+        input:checked ~ .tab-content {
+            max-height: 0;
+            padding: 0px 1.5em;
+            border-top: 0;
+        }
+        input:checked ~ .inner-tab-content {
+            max-height: 0;
+            padding: 0px 1.5em;
+        }
+        
+        input[type=checkbox]
+        {
+            margin-top: .18rem !important;
+            margin-inline-start: -1.8rem !important;
+        }
+        
+        .marbtm
+        {
+            margin-bottom: 50px;
+        }
+        
+        @media screen and (max-width:$mobileScreenPotrait) and (min-width:$smallmobileScreenPotrait568) {
+            .container
+            {
+                max-width:100% !important;
+            }
+           
+        }
+        @media screen and (max-width:$mobileScreenPotrait) {
+          .tab-label {
+            padding: 15px 1rem;
+            &::after {
+              right: 1.5em;
+            }
+          }
+          .pageHeading
+          {
+            font-size: var(--fontsize21);
+            margin-top: 20px;
+          }
+          .clrflt
+          {
+            font-size: var(--fontsize19);
+          }
+          .heading {
+            .row {
+              display: flex !important;
+            }
+          }
+          .heading1{
+            font-size: var(--fontsize20);
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 90%;
+          }
+          .tab-content {
+            padding: 0 1rem .1rem;
+          }
+
+          .contentHeading{
+            font-size: var(--fontsize18);
+          }
+          .contentBlock{
+            font-size: 12px;
+          }
+        }
+  //     }
+  //   }
+  // }
+}
+
+.Footer  cx-paragraph:first-of-type{
+  margin-left: 23%;
+}
+.addMarkupSec .modal-content{
+  width: 678px;
+  margin: 0 auto;
+
+}
+.addMarkupSec .modal-body{
+  padding: 0 30px 52px !important;
+
+}
+.createQuotePopup .modal-body h1{
+  color: #495A60 !important;
+  padding-bottom: 10px;
+}
+.MultiStepCheckoutSummaryPageTemplate .dropdown-menu-end li:nth-child(2) {display: none !important;}
+
+
+
+.MultiStepCheckoutSummaryPageTemplate .dropdown-menu-end li:nth-child(2) {
+  display: none !important;
+}
+
+.OrderConfirmationPageTemplate .dropdown-menu-end li:nth-child(2) {
+  display: none !important;
+}
+
+.colorRed button {
+  background-color: #E4D4D6;
+  border:  #DF4A5E;
+  color: #973937;
+}
+.colorRed input {
+  color: #973937;
+}
+// invoicePage datepicker code
+
+.md-drppicker{width: 650px !important;}
+.md-drppicker .clear svg{display: none;}
+
+
+.md-drppicker .ranges ul li button.active,.md-drppicker td.active, .md-drppicker td.active:hover{background-color: #3987C5 !important; color: #fff !important;}
+.md-drppicker .calendar td span, .md-drppicker .calendar th span,.md-drppicker .calendar td, .md-drppicker .calendar th,.md-drppicker .ranges ul li button{color: #000 !important;}
+.md-drppicker td.active span{color: #fff !important;}
+.md-drppicker .btn{
+  background: #003d7a !important;
+  border-radius: 3px !important;
+    text-transform: capitalize !important;
+    line-height: 30px !important;
+    padding: 0 15px !important;
+    font-size: 14px !important;
+}
+.md-drppicker .buttons_input button.clear{
+  background: #d2dae3 !important;
+  color: #545859 !important;
+  width: auto;
+  height: auto;
+  border: none;
+  font-family: "NiveauGroteskBold" !important;
+  font-size: var(--fontsize18) !important;
+  margin-right: 10px;
+}
+.md-drppicker.ltr.show-ranges{top: 55px !important;}
+.md-drppicker.ltr .ranges{
+    width: 23%;
+    border-right: 1px solid #ccc;
+}
+.md-drppicker.ltr .calendar.right{margin-bottom: 54px;}
+.buttons_input{
+    border-top: 1px solid #ccc;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    padding: 10px 30px 10px 10px;
+}
+.md-drppicker .btn{font-family: NiveauGroteskBold!important;}
+// .md-drppicker .buttons{display: none;}
+
+// invoicePage datepicker code
+
+
+// ngb-modal-window.shared-error-message .modal-dialog{
+//   .modal-content{
+//     width: 64%;
+//   }
+// }
+
+.shared-error-message {
+      .modal-content {
+        width: 64%;
+        margin: auto;
+      }
+
+}
+@media screen and (max-width:$mobileScreenPotrait) {
+  .Footer  cx-paragraph:first-of-type{
+    margin-left: 0px;
+  }
+  .Footer cx-paragraph:first-of-type p {
+    margin-top: 6rem!important;
+  }
+  .custom_logo_c img {
+    position: absolute;
+    left: -12px;
+    width: 100%;
+}
+.mat-paginator-page-size .mat-paginator-page-size-label{
+  margin: 0 4px!important;
+}
+.my_statements .mat-paginator-outer-container .mat-paginator-container{
+  justify-content: center !important;
+}
+}
+
+//////////////////////////////////////////////////////////// FAQ Page Styling - End ////////////////////////////////////////////////////

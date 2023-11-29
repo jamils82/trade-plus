@@ -1,0 +1,161 @@
+@import '../../../shared/styles/variables.scss';
+
+.editName-popUp {
+    .close-btn-row {
+        .close-btn-col {
+            text-align: right;
+            top: 5px;
+            .close-btn-icon {
+                cursor: pointer;
+                color: #495A64;
+                width: 15px;
+                height: 15px;
+            }
+        }
+    }
+
+    .heading-row {
+        padding: 20px 50px 50px;
+        .heading-col {
+            .heading-label {
+                font-size: var(--fontsize24);
+                font-family: 'NiveauGroteskBold';
+                color: $pdp-font-color;
+            }
+        }
+    }
+
+    .edit-name-row {
+        padding: 0px 50px 5px;
+        .edit-name-col {
+            .edit-name-label {
+                font-size: var(--fontsize18);
+                font-family: 'NiveauGrotesk';
+                color: $pdp-font-color;
+                font-weight: 100;
+            }
+        }
+    }
+
+    .edit-name-input-row {
+        padding: 0px 50px 60px;
+        .edit-name-input-col {
+            .edit-name-input {
+                font-size: var(--fontsize20);
+                font-family: 'NiveauGrotesk';
+                color: $pdp-font-color;
+                height: var(--buttonHeight60);
+                width: 100%;
+                padding: 10px;
+                outline: none;
+                border: 1px solid #77889380;
+                padding-left: 33px;
+            }
+            .edit-name-input.ng-invalid.ng-touched {
+                border-color: #77889380;
+            }
+        }
+    }
+
+    .buttons-row {
+        padding: 0px 50px 40px;
+        .cancel-button-col {
+            .btn.cancel-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: var(--fontsize24);
+                font-family: 'NiveauGroteskBold';
+                border: 1px solid #77889380;
+                background-color: #77889380;
+                color: $pdp-font-color;
+                border-radius: 4px;
+                min-height: var(--buttonHeight60);
+                width: 144px;
+                &:focus {
+                    box-shadow: 0 0 0 transparent;
+                  }
+            }
+        }
+        .save-button-col {
+            text-align: right;
+            display: flex;
+            justify-content: end;
+            .btn.save-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: var(--fontsize24);
+                font-family: 'NiveauGroteskBold';
+                border: 1px solid $blue-color;
+                background-color: $blue-color;
+                color: $white-color;
+                border-radius: 8px;
+                min-height: var(--buttonHeight60);
+                width: 230px;
+                &:focus {
+                    box-shadow: 0 0 0 transparent;
+                  }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    .container.editName-popUp {
+        max-width: 100%;
+        .close-btn-row {
+            z-index: 1;
+            .close-btn-col {
+                z-index: 1;
+                .close-btn-icon {
+                    margin-top: 15px;
+                    margin-right: 10px;
+                    z-index: 1;
+                }
+            }
+        }
+        .heading-row {
+            padding: 0;
+            .heading-col {
+                .heading-label {
+                    font-size: var(--fontsize22);
+                    margin-top: -15px;
+                }
+            }
+        }
+        .edit-name-row {
+            padding: 25px 0 0 0;
+            .edit-name-col {
+                .edit-name-label {
+                    font-size: var(--fontsize24);
+                    font-family: 'NiveauGroteskBold';
+                }
+            }
+        }
+        .edit-name-input-row {
+            padding: 10px 0;
+        }
+        .buttons-row {
+            padding: 20px 0;
+            .save-button-col {
+                .btn.save-btn {
+                    width: 100%;
+                    border-radius: 5px;
+                    max-height: var(--buttonHeight60);
+                    font-size: var(--fontsize22);
+                    border: 0;
+                }
+            }
+            .cancel-button-col {
+                .btn.cancel-btn {
+                    width: 100%;
+                    border-radius: 5px;
+                    max-height: var(--buttonHeight60);
+                    font-size: var(--fontsize22);
+                    border: 0;
+                }
+            }
+        }
+    }
+}

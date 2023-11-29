@@ -1,0 +1,216 @@
+<div class="wrapper-review container">
+  <div class="loading-quotes" *ngIf="!(isLoading$ | async)">Loading&#8230;</div>
+  <h1 class="review-quote-heading">{{sharedDatas?.jobName}}</h1>
+  <div class="row-container lo_sensitive">
+    <div class="left-job-details">
+      <div class="name-sec">
+        <div class="rowJob">
+          <div class="job-sec">
+            <h2 class="job-name">{{sharedDatas?.jobName}}</h2>
+          </div>
+          <div class="edit-sec">
+            <label (click)="openModal()"
+              *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'" class="edit-icon">
+              <img src="assets/images/Icon material-edit_quotes.png" alt="Edit" />
+            </label>
+          </div>
+        </div>
+        <div class="datesection">
+          <div class="date-sec">
+            <label>{{labelData.createdDate}}</label>
+          </div>
+          <div class="date-value-sec">
+            <label class="date">{{sharedDatas?.creationTime}}</label>
+          </div>
+        </div>
+        <p class="job-loc">
+          <img src="assets/images/LocationIcon_Pin.svg" alt="Location" />
+          <label>{{sharedDatas?.jobAddress?.formattedAddress}} </label>
+        </p>
+      </div>
+      <div class="quotes-container">
+        <div class="scope-work">
+          <label class="job-title">{{labelData.reviewScopeOfWork}}</label>
+          <span class="scope-desc" *ngIf="sharedDatas?.scopeOfWork"><pre>{{sharedDatas?.scopeOfWork}}</pre></span>
+          <!-- <p class="scope-desc">
+            {{sharedDatas?.scopeOfWork}}
+          </p> -->
+        </div>
+      </div>
+
+      <div class="quotes-container">
+        <div class="customer-details">
+          <label class="cust-title">{{labelData.customerDetailReview}}</label>
+          <table aria-describedby="Customer Details" role="presentation">
+            <tr>
+              <td>{{labelData.names}}</td>
+              <td class="consumer-value">{{sharedDatas?.consumerAddress?.firstName}}</td>
+            </tr>
+            <tr>
+              <td>{{labelData.phone}}</td>
+              <td class="consumer-value">{{sharedDatas?.consumerAddress?.phone}}</td>
+            </tr>
+            <tr>
+              <td>{{labelData.email}}</td>
+              <td class="consumer-value">{{sharedDatas?.consumerAddress?.email}}</td>
+            </tr>
+            <tr>
+              <td>{{labelData.address}}</td>
+              <td class="consumer-value">{{sharedDatas?.consumerAddress?.formattedAddress}} </td>
+            </tr>
+          </table>
+        </div>
+        <div class="customer-price">
+          <label class="cust-title">{{labelData.customerPrice}}</label>
+          <table aria-describedby="Customer Price" role="presentation" class="custPrice">
+            <tr>
+              <td>{{labelData.materialIncMarkup}}</td>
+              <td class="consumer-value">${{(sharedDatas?.markupPrice.value +
+                sharedDatas?.materialPrice.value) | number:'.2'}}</td>
+              <td>&nbsp;</td>
+              <td>
+                <span (click)="openMaterial('')"
+                  *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'"
+                  class="edit-material edit-icon">
+                  <img src="assets/images/Icon material-edit_quotes.png" alt="Edit" />
+                </span>
+              </td>
+            </tr>
+            <tr class="small-text">
+              <td>{{labelData.rrp}}</td>
+              <td class="consumer-value text-pos">${{rrpValue | number:'.2'}}</td>
+              <td>&nbsp;</td>
+              <td colspan=""></td>
+            </tr>
+            <tr>
+              <td>{{labelData.labourOtherCost}}</td>
+              <td class="consumer-value">${{labourCostData | number:'.2'}}</td>
+              <td>&nbsp;</td>
+              <td>
+                <span (click)="openLabourCost()"
+                  *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'"
+                  class="edit-material edit-icon"><img src="assets/images/Icon material-edit_quotes.png"
+                    alt="Edit" /></span>
+              </td>
+            </tr>
+            <tr>
+              <td>{{labelData.gst}} {{GST}}% :</td>
+              <td class="consumer-value text-pos">${{sharedDatas?.totalTax.value | number:'.2'}} </td>
+              <td>&nbsp;</td>
+              <td></td>
+            </tr>
+            <tr class="text-bold">
+              <td>{{labelData.totalCustPriceSmall}}</td>
+              <td #totalValue class="consumer-value text-pos">
+                ${{sharedDatas?.totalPriceWithTax.value | number:'.2'}} </td>
+              <td>&nbsp;</td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+        <div class="customer-price markup">
+          <table aria-describedby="Markup Details" role="presentation">
+            <tr>
+              <td>{{labelData.markUpPrice}} ({{sharedDatas?.markupPercentage}}%)</td>
+              <td class="consumer-value">{{sharedDatas?.markupPrice.formattedValue}}</td>
+              <td>&nbsp;</td>
+              <td>
+                <span (click)="openMarkup()"
+                  *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'"
+                  class="edit-material edit-icon"><img src="assets/images/Icon material-edit_quotes.png"
+                    alt="Edit" /></span>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- <div class="totalPrice col-md-12 text-right">
+          <div class="totPrice">{{labelData.totalCustPrice}}
+            <span class="gstUp"> (incl. GST) </span>&nbsp;&nbsp;{{sharedDatas?.totalPriceWithTax.value | number:'.2'}}
+          </div>
+        </div> -->
+        <div class="finalPrice">
+          <table aria-describedby="Markup Details" role="presentation">
+            <tr>
+              <td>
+                <span class="totPrice">{{labelData.totalCustPrice}}</span><span class="gstUp"> (excl. GST)</span>
+                <span class="consumerValue">&nbsp;&nbsp;${{((sharedDatas?.totalPriceWithTax.value) - (sharedDatas?.totalTax.value)) | number:'.2'}}</span>
+              </td>
+            </tr>
+            <!-- <tr>
+              <td class="consumerValue">${{sharedDatas?.totalPriceWithTax.value | number:'.2'}}</td>
+            </tr> -->
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-material">
+      <div class="quotes-container">
+        <div class="container-sec">
+          <h1>
+            {{MaterialsLabel.materialReview}}
+            <label (click)="openMaterial('')"
+              *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'"
+              class="edit-material edit-icon"><img src="assets/images/Icon material-edit_quotes.png"
+                alt="Edit" /></label>
+          </h1>
+          <div class="lineMark"></div>
+          <!-- <p class="sub-heading">{{labelData.byStageOfBuildLbl}}</p> -->
+          <ng-container *ngIf="productResultData != undefined">
+            <ngb-accordion [closeOthers]="true" class="material-section-accordion">
+              <ngb-panel *ngFor="let product of productResultData">
+                <div class="product-wrapper">
+                  <div *ngFor="let productImage of product.product.images">
+                    <div class="product-img" *ngIf='productImage.format=="cartIcon"'>
+                      <img src={{productImage.url}} alt="productImage.altText" />
+                    </div>
+                  </div>
+                  <div class="product-img" *ngIf="!product.product.images || (product.product.images).length==0 ">
+                    <span>
+                      <img *ngIf="product?.customProductFlag !=true" src={{quoteConstants.noImage}} alt="No Image" />
+                    </span>
+                  </div>
+                  <div class="product-detail">
+                    <div class="title" *ngIf='product.product?.name !=null'>
+                      {{(product.product.name.length>110)? (product.product.name |
+                      slice:0:110)+'...':(product.product.name)}}
+                    </div>
+
+                    <div class="timber-sec">{{product.product?.unitCode}}
+                      <div class="leftItems">
+                        <span class="sku-sec"
+                          *ngIf="!product.customProductFlag && product?.product?.customQuoteProduct != true">
+                          {{quoteConstants.sku}} {{product.product.code}}
+                        </span>
+                        <div class="sku-sec" *ngIf="product?.product?.customQuoteProduct == true">
+                          {{product?.product?.marketingDescription}}
+                        </div>
+                        <span class="pipe"
+                          *ngIf="product?.product?.customQuoteProduct != true || product?.product?.marketingDescription !== ''">|</span>
+                        <span class="timber" *ngIf='product.product?.unitCode !=null'>
+                          <label>{{product.product?.price.formattedValue }} </label>
+                          <label *ngIf="product.product.unit != ''">/ {{product.product.unit}}</label>
+                        </span>
+                        <span class="rrp-sec">
+                          <label *ngIf='product?.price !="" && product?.customProductFlag !=true'>
+                            {{quoteConstants.price}} {{product.product?.price.formattedValue}} {{product.product?.unit}}
+                          </label>
+                        </span>
+                      </div>
+                      <div class="rightItems">
+                        <span class="qty-sec">Qty: {{product.quantity}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ngb-panel>
+            </ngb-accordion>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="previewBtn">
+    <button type="button" class="btn btn-blue" (click)="openViewPage()">{{labelData.previewButton}}</button>
+  </div>
+</div>

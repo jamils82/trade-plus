@@ -1,0 +1,29 @@
+@import '../../../../shared/styles/variables.scss';
+
+@media (min-width: 992px) {
+.inner h4 {
+    display: none;
+}
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    h4 {
+        padding: 15px 0 5px 0;
+        color: $pdp-font-color;
+        font-family: 'NiveauGroteskBold';
+        font-size: var(--fontsize22);    
+    }
+    .clearAll {
+        text-align: right;
+        padding: 0;
+        a {
+            color: $anchor-color;
+            font-family: 'NiveauGroteskBold';
+            font-size: var(--fontsize20);
+            text-decoration: underline;
+            &:hover {
+                color: $anchor-color;
+            }
+        }
+    }
+}

@@ -1,0 +1,44 @@
+<div class=" modal-header modal-head container">
+    <button type="button" class="close" aria-label="Close" (click)="openModalCancelPopup()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body ">
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <h2 class="heading">{{materialValues?.markupPercentage ? addEditProduct.editMaterialMarkup : addEditProduct.addMaterialMarkup}}</h2>
+        <form [formGroup]="addMarkupForm" class="addMarkupSec">
+          <div class="form-group quantity-sec">
+            <label for="quantity">{{addEditProduct.markUp}} </label>
+            <div class="input-wrap">
+              <div class="quantity-input">
+                <button class="decriment" (click)="decriment()">-</button>
+                <input type="text" tabindex="5" (keypress)="numberOnlyFormat($event)" class="quantity" (blur)="addPercent()" [attr.maxlength]=quantityMaxLength id="quantity" formControlName="markup" #markupPrice>
+                <button class="incriment" (click)="incriment()">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="productName">{{addEditProduct.materialCost}}</label>
+            <div class="cost">${{totalValue | number:'.2'}}</div>
+          </div>
+          <div class="form-group">
+            <label for="price">{{addEditProduct.markUpPrice}}</label>
+            <div class="price">${{markupPrices | number:'.2'}}</div>
+          </div>
+          <div class="form-group">
+            <label for="descriptionNote" class="editTotalLabel">{{addEditProduct.materialTotal}} </label>
+            <div class="total-value">${{materialTotal | number:'.2'}}</div>
+          </div>
+          <div class="btn-wrapper editmarkupBtn">
+            <button type="button" tabindex="6" class="btn btn-cancel" aria-label="Close" (click)="openModalCancelPopup()">
+              {{labelData.cancel}}
+            </button>
+            <button (click)="addMarkupPrice()" tabindex="7" class="btn btn-blue add-quote" [disabled]="disabledBtn">
+              {{materialValues?.markupPercentage ? addEditProduct.update : addEditProduct.add}}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

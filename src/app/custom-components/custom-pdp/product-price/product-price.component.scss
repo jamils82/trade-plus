@@ -1,0 +1,381 @@
+@import '../../../shared/styles/variables.scss';
+.price-section {
+    font-family: "NiveauGrotesk";
+    display: inline-flex;
+    margin-top: 0px;
+    color: $pdp-font-color;
+    width: 100%;
+    min-height: 63px;
+    justify-content: center;
+    .price {
+        background-color: #FFD500;
+        border-right: 1px solid #FFD500;
+        .price-value {
+            font-size: 16px;
+            overflow-wrap: break-word;
+        }
+    }
+    .retailPrice {
+        background-color: $white-color;
+        border: 1px solid #77889380;
+        .price-value {
+            font-size: 14px;
+            padding: 3px 0px 0px 0px;
+            overflow-wrap: break-word;
+        }
+    }
+    .price,
+    .retailPrice {
+        padding: 15px 10px 15px 10px;
+        width: max-content;
+        line-height: normal;
+        .price-heading {
+            font-size: 0.6rem;
+        }
+        .price-value {
+            font-family: "NiveauGroteskBold";
+            .EA {
+                font-size: 0.5rem;
+            }
+        }
+        .price-gst-section {
+            font-size: 0.5rem;
+        }
+    }
+    .pdp.price,
+    .pdp.retailPrice {
+        padding: 15px 40px 15px 20px;
+        .price-heading,
+        .price-gst-section {
+            font-size: var(--fontsize18);
+        }
+    }
+    @media screen and (max-width: $Largescreen-1600) and (min-width: $ipadScreen-768) {
+        .pdp.price,
+        .pdp.retailPrice {
+            padding: 10px 30px 10px 15px;
+        }
+    }
+    .pdp.price {
+        .price-value {
+            font-size: var(--fontsize30);
+            .EA {
+                font-size: var(--fontsize20);
+            }
+        }
+    }
+    .pdp.retailPrice {
+        color: #778893;
+        .price-value {
+            font-size: var(--fontsize24);
+            padding-bottom: 5px;
+            .EA {
+                font-size: var(--fontsize20);
+            }
+        }
+    }
+}
+
+.price-section.plpList {
+    font-family: "NiveauGrotesk";
+    display: inline-flex;
+    margin-top: 10px;
+    color: $pdp-font-color;
+    width: 100%;
+    justify-content: center;
+    .price {
+        background-color: #FFD500;
+        border-right: 1px solid #FFD500;
+        .price-value {
+            font-size: var(--fontsize24);
+            overflow-wrap: break-word;
+        }
+    }
+    .retailPrice {
+        color: #778893;
+        background-color: $white-color;
+        border: 1px solid #77889380;
+        .price-value {
+            font-size: var(--fontsize20);
+            padding: 3px 0px 0px 0px;
+            overflow-wrap: break-word;
+        }
+    }
+    .price,
+    .retailPrice {
+        padding: 15px 10px;
+        width: max-content;
+        line-height: normal;
+        .price-heading {
+            font-size: var(--fontsize14);
+        }
+        .price-value {
+            font-family: "NiveauGroteskBold";
+            .EA {
+                font-size: var(--fontsize14);
+            }
+        }
+        .price-gst-section {
+            font-size: var(--fontsize14);
+        }
+    }
+}
+
+.price-section.plpGrid {
+    // margin-top: 20px;
+    // width: 90%;
+    // justify-content: flex-start;
+    // text-align: left;
+    // .price,
+    // .retailPrice {
+    //     padding: 5px 0px 5px 15px;
+    // }
+    font-family: "NiveauGrotesk";
+    display: inline-flex;
+    margin: 20px 0;
+    color: $pdp-font-color;
+    width: 90%;
+    justify-content: center;
+    .price {
+        background-color: #FFD500;
+        border-right: 1px solid #FFD500;
+        .price-value {
+            font-size: var(--fontsize21);
+            overflow-wrap: break-word;
+        }
+    }
+    .retailPrice {
+        color: #778893;
+        background-color: $white-color;
+        border: 1px solid #77889380;
+        .price-value {
+            font-size: var(--fontsize16);
+            padding: 3px 0px 0px 0px;
+            overflow-wrap: break-word;
+        }
+    }
+    .price,
+    .retailPrice {
+        padding: 5px 10px;
+        width: max-content;
+        line-height: normal;
+        .price-heading {
+            font-size: var(--fontsize12);
+        }
+        .price-value {
+            font-family: "NiveauGroteskBold";
+            .EA {
+                font-size: var(--fontsize12);
+            }
+        }
+        .price-gst-section {
+            font-size: var(--fontsize12);
+        }
+    }
+}
+
+.price-section.editMyList {
+    margin-top: 0px;
+    .price,
+    .retailPrice {
+        .price-heading {
+            font-size: var(--fontsize14);
+        }
+        .price-gst-section {
+            font-size: var(--fontsize12);
+        }
+    }
+    .price {
+        .price-value {
+            font-size: var(--fontsize23);
+            .EA {
+                font-size: var(--fontsize16);
+            }
+        }
+    }
+    .retailPrice {
+        .price-value {
+            font-size: var(--fontsize20);
+            padding: 0px;
+            .EA {
+                font-size: var(--fontsize16);
+            }
+        }
+    }
+}
+
+.price-section.pdp {
+    justify-content: flex-start;
+}
+
+.price-section.cart {
+    margin-top: 4px;
+    min-width: 120px;
+    .price {
+        padding: 10px 30px 10px 10px;
+        width: -webkit-max-content;
+        min-width: max-content;
+        .price-heading {
+            font-size: 0.875rem;
+        }
+        .price-gst-section {
+            font-size: 0.875rem;
+        }
+        .price-value {
+            font-size: 1.25rem;
+        }
+        .price-value .EA {
+            font-size: 0.875rem;
+        }
+    }
+}
+
+@media screen and(max-width: $mobileScreenPotrait) {
+    .price-section.pdp .pdp.price,
+    .price-section.pdp .pdp.retailPrice{
+        padding: 10px 20px 10px 15px !important;
+        .price-gst-section {
+            font-size: var(--fontsize16) !important;            
+        }
+    }
+    .price-section.pdp .pdp.price .price-heading,
+    .price-section .pdp.retailPrice .price-heading {
+        font-size: var(--fontsize16) !important;
+    }
+    .price-section.pdp .price .price-value {
+        font-size: var(--fontsize22) !important;
+        span {
+            font-size: var(--fontsize16) !important;
+        }
+    }
+    .price-section.pdp .retailPrice .price-value {
+        font-size: var(--fontsize18) !important;
+        padding: 0 !important;
+        padding-bottom: 0 !important;
+        span {
+            font-size: var(--fontsize16) !important;
+        }
+    }
+    .container.input-icons {
+        padding: 0px !important;
+    }
+    .price-section.cart {
+        justify-content: flex-start;
+        .price {
+            padding: 10px 32px 10px 10px !important;
+            min-width: 176px !important;
+        }
+        .price-heading.cart {
+            font-size: var(--fontsize20) !important;
+        }
+        .price-gst-section.cart {
+            font-size: var(--fontsize18) !important;
+        }
+        .price-value.cart {
+            font-size: var(--fontsize26) !important;
+            span {
+                font-size: var(--fontsize20) !important;
+            }
+        }
+    }
+    .price-section.editMyList 
+    {
+        .price, .retailPrice 
+        {
+            width: 120px !important;
+            padding: 4px 0px 4px 10px;
+        } 
+     }
+    .price-section.editMyList 
+    {
+      justify-content: start;
+    }
+    .price-section.editMyList {
+        .price {
+            .price-heading {
+                font-size: var(--fontsize17);
+            }
+        }
+        .retailPrice {
+            .price-heading {
+                font-size: var(--fontsize17);
+            }
+        }
+    }
+    
+    
+    .price-section.editMyList 
+    {
+         .price
+         {
+            .price-value
+            {
+                .EA
+                {
+                    font-size: var(--fontsize18);
+                }
+            }
+         }
+         .retailPrice
+         {
+            .price-value
+            {
+                .EA
+                {
+                    font-size: var(--fontsize18);
+                }
+            }
+         }
+    }
+    .price-section.editMyList {
+        .price {
+            .price-gst-section {
+                font-size: var(--fontsize16);
+            }
+        }
+        .retailPrice {
+            .price-gst-section {
+                font-size: var(--fontsize16);
+            }
+        }
+    }
+
+    .price-section.plpGrid {
+        justify-content: flex-start;
+        margin: 10px 0px 5px 0px;
+        .price,
+        .retailPrice {
+            width: 115px;
+            padding: 10px 10px 10px 15px;
+            .price-heading {
+                font-size: var(--fontsize16);
+            }
+            .price-gst-section {
+                font-size: var(--fontsize14);
+            }
+            .price-value {
+                .EA {
+                    font-size: var(--fontsize18);
+                }
+            }
+        }
+        .retailPrice {
+            .price-value {
+                font-size: var(--fontsize18);
+                .EA {
+                    font-size: var(--fontsize16);
+                }
+            }
+        }
+    }
+    
+}
+@media screen  and (max-width:$smallmobileScreenPotrait360){
+    .price-section.editMyList 
+    {
+        .price, .retailPrice 
+        {
+            width: 115px !important;
+        } 
+     }
+}

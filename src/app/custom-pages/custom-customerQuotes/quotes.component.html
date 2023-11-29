@@ -1,0 +1,243 @@
+<div class="quotes-container container">
+    <div class="loading-quotes" *ngIf="isDataLoad">Loading&#8230;</div>
+    <div class="quotes-header">
+        <button *ngIf="!isMobile" (click)="openModal()" class="btn btn-blue btn-right">{{quoteConstants.createNewLabel}}</button>
+        <h1>{{quoteConstants.quotesLabel}}</h1>
+        <button *ngIf="isMobile" (click)="openModal()" class="btn btn-blue btn-right">{{quoteConstants.createNewLabel}}</button>
+        <!-- <div>
+            <p>Request a quote using the Search field, or add from My Lists or My Quotes. You will be notified
+                via SMS when your quote is available to view in your My Quotes page. </p>
+        </div> -->
+    </div>
+    <div class="quote-tab-header">
+        <ul>
+            <!-- <li [class.active]="QuotesService.currentTab=='NOTSENT'" (click)="QuotesService.currentTab = 'NOTSENT'">{{quoteConstants.quoteStatusInProgressLbl}} <span *ngIf="getQuoteListCount('NOTSENT') > 0">({{ getQuoteListCount('NOTSENT') }})</span></li>
+            <li [class.active]="QuotesService.currentTab=='PENDING'" (click)="QuotesService.currentTab = 'PENDING'">{ {quoteConstants.quoteStatusPendingLbl}} <span *ngIf="getQuoteListCount('PENDING') > 0">({{ getQuoteListCount('PENDING') }})</span></li>
+            <li [class.active]="QuotesService.currentTab=='WON'" (click)="QuotesService.currentTab = 'WON'">{{quoteConstants.quoteStatusWonLbl}} <span *ngIf="getQuoteListCount('WON') > 0">({{ getQuoteListCount('WON') }})</span></li>
+            <li [class.active]="QuotesService.currentTab=='LOST'" (click)="QuotesService.currentTab = 'LOST'">{{quoteConstants.quoteStatusLostLbl}} <span *ngIf="getQuoteListCount('LOST') > 0">({{ getQuoteListCount('LOST') }})</span></li> -->
+
+            <li [class.active]="QuotesService.currentTab=='NOTSENT'" 
+            (click)="QuotesService.currentTab = 'NOTSENT'; pageWiseRecord('NOTSENT', true)">
+                <span>{{quoteConstants.quoteStatusInProgressLbl}} </span> 
+                <span *ngIf="getQuoteListCount('NOTSENT') > 0">({{ getQuoteListCount('NOTSENT') }})</span>
+            </li>
+            <li [class.active]="QuotesService.currentTab=='PENDING'" 
+            (click)="QuotesService.currentTab = 'PENDING' ; pageWiseRecord('PENDING', true)">
+                <span>{{quoteConstants.quoteStatusPendingLbl}} </span>
+                <span *ngIf="getQuoteListCount('PENDING') > 0">({{ getQuoteListCount('PENDING') }})</span>
+            </li>
+            <li [class.active]="QuotesService.currentTab=='WON'" 
+            (click)="QuotesService.currentTab = 'WON'; pageWiseRecord('WON', true)">
+                <span>{{quoteConstants.quoteStatusWonLbl}} </span>
+                <span *ngIf="getQuoteListCount('WON') > 0">({{ getQuoteListCount('WON') }})</span>
+            </li>
+            <li [class.active]="QuotesService.currentTab=='LOST'" 
+            (click)="QuotesService.currentTab = 'LOST'; pageWiseRecord('LOST', true) ">
+                <span>{{quoteConstants.quoteStatusLostLbl}} </span>
+                <span *ngIf="getQuoteListCount('LOST') > 0">({{ getQuoteListCount('LOST') }})</span>
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="!Quote?.length && responseResult" class="emptyPage">
+      
+        <table>
+            <tr>
+                <td>
+                    <img width="150px" alt="No Quote" src="../../../assets/images/No_quotes.png"/>
+                    <br/>
+                    <h5>You have no customer quotes on the go</h5>
+                    <p>When you do, you'll be able to see them here</p>
+                </td>
+            </tr>
+        </table>
+
+        <br />
+    </div>
+
+    <div *ngIf="Quote?.length && dataService.showPage && responseResult" >
+        <ng-container *ngFor="let quote of itemsListNew">
+            <div class="quotes-list-item-container"  *ngIf="quote.jobName != undefined">
+                <div class="quotes-list-item" *ngIf="quote.status && quote.status == QuotesService.currentTab">
+                    <h1 class="lo_sensitive">{{quote.jobName}}</h1>
+                    <div class="menu-option" placement="right">
+                        
+                        <button class="icon-btn" matTooltipPosition="below" role="button" data-bs-toggle="dropdown" aria-expanded="false" matTooltip="Review quote" matTooltipClass="tooltip-edit-color" aria-label="Review quote"
+                        *ngIf="(getQuoteListCount('WON') > 0 || getQuoteListCount('LOST') > 0) &&
+                        (QuotesService.currentTab=='LOST' || QuotesService.currentTab=='WON')">
+                            <img src="../../../assets/images/Icon ionic-md-open.png" [routerLink]="['/quoteDetails',quote.code]" (click)="editQuoteClick(quote.jobName, 'onlyReview')" alt="Open" class="actionimg">
+                        </button>
+                        <button class="icon-btn" matTooltipPosition="below" role="button" data-bs-toggle="dropdown" aria-expanded="false" matTooltip="Edit quote" matTooltipClass="tooltip-edit-color" aria-label="Edit quote"
+                        *ngIf="(getQuoteListCount('PENDING') > 0 || getQuoteListCount('NOTSENT') > 0) &&
+                        (QuotesService.currentTab=='PENDING' || QuotesService.currentTab=='NOTSENT')">
+                            <img src="../../../assets/images/Icon material-edit_quotes.png"  [routerLink]="['/quoteDetails',quote.code]" (click)="editQuoteClick(quote.jobName, quote.code)" alt="Edit" class="actionimg">
+                        </button>
+                        <button class="icon-btn" 
+                            *ngIf="( getQuoteListCount('NOTSENT') > 0 ) && (QuotesService.currentTab=='NOTSENT')">
+                            <img src="../../../assets/images/Icon material-delete_quotes.png" alt="Delete"
+                            (click)="deleteQuote(quote.code,quote.jobName)" class="actionimg">
+                        </button>
+                    </div>
+                    <p class="job-address lo_sensitive" *ngIf="quote.jobAddress?.formattedAddress?.length">
+                        <span>{{quoteConstants.jobAddressLabel}}: {{quote.jobAddress.formattedAddress}}</span>
+                    </p>
+                    <div class="notes-wrapper">
+                            <span>Created on: <span class="notes-wrapper-date"> {{quote.creationTime | date: 'dd/MM/yyyy'}}</span></span>
+                    </div>
+                    <div class="won-lost">
+
+                        <div class="pending-wrap" *ngIf="quote.status == 'PENDING'">
+              
+                          <span> Mark quote as:</span>
+                          <button
+                            *ngIf="quote.status == 'PENDING'"
+                            class="btn lost-btn btn-right ml-3"
+                            (click)="changeQuoteStatus(quote.code, quote.jobName, 'lost')">{{quoteConstants.quoteStatusLostLbl}}</button>
+                          <button
+                            class="btn won-btn btn-right ml-3"
+                            (click)="changeQuoteStatus(quote.code, quote.jobName, 'won')">{{quoteConstants.quoteStatusWonLbl}}</button>
+                        </div>
+                        <button class="btn single-won-btn btn-right ml-3" *ngIf="quote.status == 'WON'">{{quoteConstants.quoteStatusWonLbl}}</button>
+                        <button class="btn single-lost-btn  btn-right ml-3" *ngIf="quote.status == 'LOST'">{{quoteConstants.quoteStatusLostLbl}}</button>
+                      </div>
+                </div>   
+            </div>            
+        </ng-container>
+        <ng-container *ngIf="false">
+            <div class="quotes-list-item" *ngIf="quote.status && quote.status == QuotesService.currentTab">
+                <h1 class="lo_sensitive">{{quote.jobName}}</h1>
+                <div class="menu-option" placement="right">
+                    <button class="icon-btn" 
+                    *ngIf="(getQuoteListCount('WON') > 0 || getQuoteListCount('LOST') > 0) &&
+                    (QuotesService.currentTab=='LOST' || QuotesService.currentTab=='WON')"> 
+                        <img src="../../../assets/images/Icon ionic-md-open.png" [routerLink]="['/quoteDetails',quote.code]" (click)="editQuoteClick(quote.jobName)" alt="Open" class="actionimg">
+                    </button>
+                    <button class="icon-btn"
+                    *ngIf="(getQuoteListCount('PENDING') > 0 || getQuoteListCount('NOTSENT') > 0) &&
+                    (QuotesService.currentTab=='PENDING' || QuotesService.currentTab=='NOTSENT')">
+                        <img src="../../../assets/images/Icon material-edit_quotes.png"  [routerLink]="['/quoteDetails',quote.code]" (click)="editQuoteClick(quote.jobName)" alt="Edit" class="actionimg">
+                    </button>
+                   
+                </div>
+                <p class="job-address lo_sensitive" *ngIf="quote.jobAddress?.formattedAddress?.length">
+                    <span>{{quoteConstants.jobAddressLabel}}: {{quote.jobAddress.formattedAddress}}</span>
+                </p>
+                <div class="notes-wrapper">
+                        <span>Created on: <span class="notes-wrapper-date">{{quote.creationTime | date: 'dd.MM.yy'}}</span></span> 
+                </div>
+                <div class="won-lost">
+                    <div class="pending-wrap" *ngIf="quote.status == 'PENDING'">
+                      <span> Mark quote as:</span>
+                      <button
+                      *ngIf="quote.status == 'PENDING'"
+                      class="btn lost-btn btn-right ml-3"
+                      (click)="changeQuoteStatus(quote.code, quote.jobName, 'lost')">{{quoteConstants.quoteStatusLostLbl}}</button>
+                      <button
+                        class="btn won-btn btn-right ml-3"
+                        (click)="changeQuoteStatus(quote.code, quote.jobName, 'won')">{{quoteConstants.quoteStatusWonLbl}}</button>
+                    </div>
+                    <button class="btn single-won-btn btn-right ml-3" *ngIf="quote.status == 'WON'">{{quoteConstants.quoteStatusWonLbl}}</button>
+                    <button class="btn single-lost-btn  btn-right ml-3" *ngIf="quote.status == 'LOST'">{{quoteConstants.quoteStatusLostLbl}}</button>
+                  </div>
+            </div>               
+        </ng-container>
+
+
+        <div *ngIf="getQuoteListCount('NOTSENT') == 0 && QuotesService.currentTab=='NOTSENT'"
+            class="emptyPage">
+            <table>
+                <tr>
+                    <td>
+                        <img width="150px" alt="No Quote" src="../../../assets/images/No_quotes.png"/>
+                        <br/>
+                        <h5>You have no customer quotes on the go</h5>
+                        <p>When you do, you'll be able to see them here</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div *ngIf="getQuoteListCount('PENDING') == 0 && QuotesService.currentTab=='PENDING'"
+            class="emptyPage">
+            <table>
+                <tr>
+                    <td>
+                        <img width="150px" alt="No Quote" src="../../../assets/images/No_quotes.png"/>
+                        <br/>
+                        <h5>You have no customer quotes on the go</h5>
+                        <p>When you do, you'll be able to see them here</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div *ngIf="getQuoteListCount('WON') == 0 && QuotesService.currentTab=='WON'" class="emptyPage">
+            <table>
+                <tr>
+                    <td>
+                        <img width="150px" alt="No Quote" src="../../../assets/images/No_quotes.png"/>
+                        <br/>
+                        <h5>You have no customer quotes on the go</h5>
+                        <p>When you do, you'll be able to see them here</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div *ngIf="getQuoteListCount('LOST') == 0 && QuotesService.currentTab=='LOST'" class="emptyPage">
+           <table>
+            <tr>
+                <td>
+                    <img width="150px" alt="No Quote" src="../../../assets/images/No_quotes.png"/>
+                    <br/>
+                    <h5>You have no customer quotes on the go</h5>
+                    <p>When you do, you'll be able to see them here</p>
+                </td>
+            </tr>
+        </table>
+        </div>
+        <div class="cx-sorting bottom">
+            <div class="pagination-row row">
+                <div class="col-md-4 pagination" [class.invisible]="paginationModel.totalPages <=1">                    
+                    <span class="page" >Page</span>
+                    <div class="cx-pagination">
+                        <cx-pagination [pagination]="paginationModel" queryparam="currentPage"
+                            (viewPageEvent)="pageChange($event, tabStatus)" [defaultPage]="1"></cx-pagination>
+                    </div>
+                </div>
+                <div class="col-md-8 result-per-page" onch>
+                    Results per page
+                    <div class="selectdiv">
+                        <label>
+                            <select (change)="perPageChange($event.target.value)">
+                                <option [selected]="pageSize == '12'">12</option>
+                                <option [selected]="pageSize == '24'">24</option>
+                                <option [selected]="pageSize == '36'">36</option>
+                            </select>
+                        </label>
+                    </div>
+        
+                </div>
+            </div>
+            <div class="marview mobiledel" *ngIf="viewMoreVisible && isMobile">
+                <button class="view-more" (click)="viewMoreClick($event)">View More</button>
+            </div>
+        
+        </div>
+    </div>
+    <!-- <div *ngIf="!Quote?.length && responseResult" class="no-result">
+        <table>
+            <tr>
+                <td>
+                    <img width="150px" alt="No Quote" src="../../../assets/images/No_quotes.png"/>
+                    <br/>
+                    <h5>You have no customer quotes on the go</h5>
+                    <p>When you do, you'll be able to see them here</p>
+                </td>
+            </tr>
+        </table>
+    </div> -->
+</div>
+<ng-template #contentModel let-modal>
+    <app-company-details-popup [form]="form" (companySettingsSubmit)='companySettingsSubmit()'
+        [noCompanyData]="noCompanyData" [companyProfileData]="companyProfileData"
+        *ngIf="companyProfileData!=undefined && editCompanyProfilebtn ==false"></app-company-details-popup>
+    <app-company-details-popup [form]="form" (companySettingsSubmit)='companySettingsSubmit()'
+        [noCompanyData]="noCompanyData" *ngIf="editCompanyProfilebtn"></app-company-details-popup>
+</ng-template>

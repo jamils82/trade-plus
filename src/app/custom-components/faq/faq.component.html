@@ -1,0 +1,22 @@
+<div class="containers">
+    <div class="row">
+        <div class="col-10">
+            <h2 class="pageHeading">FREQUENTLY ASKED QUESTIONS</h2>
+        </div>
+    </div>
+    <div class="row marbtm">
+        <div *ngFor="let data of faqArray" class="col-12 tab">
+            <input type="checkbox" class="accordion-checkbox" name="radioCheck" id={{data.uid}} checked="true">
+            <label class="tab-label checkbox-inline" for={{data.uid}}>
+                <div class="heading">
+                    <div class="row">
+                        <span class="heading1 col-md-3">{{data.name}}</span>
+                    </div>
+                </div>
+            </label>
+            <div class="tab-content inner-tab-content">
+                <p [innerHTML]="data?.content"></p>
+            </div>
+        </div>
+    </div>
+</div>

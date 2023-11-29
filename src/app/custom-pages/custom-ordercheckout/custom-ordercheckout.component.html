@@ -1,0 +1,953 @@
+<!-- content section -->
+<div class="container-page">
+    <div class="loading" *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+    <div class="success-message-container" *ngIf="successInd$ | async">
+        <div class="success-container">
+            <img class="tick-icon" src="../../../assets/images/Icon ionic-ios-checkmark-circle-outline.svg">
+            <div class="success-message">{{infoMessage}}<span class="close-btn" (click)="closeSuccessMsg()"><i
+                        class="fa fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="failure-message-container" *ngIf="errorInd">
+        <div class="failure-container">
+            <!-- <img class="tick-icon" src="../../../assets/images/Icon ionic-ios-checkmark-circle-outline.svg"> -->
+            <div class="error-message">{{infoMessage}}<span class="close-btn" (click)="closeSuccessMsg()"><i
+                        class="fa fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="top-checkout">
+        <div>
+            <h3 class="checkout font-bold custom-checkout-h3">CHECKOUT</h3>
+            <p class="para-custom">If you need to make changes to this order, please return to the Cart.</p>
+        </div>
+        <!-- <div class="cart-button-style"> -->
+        <button *ngIf="previousUrl == '/cart'"  mat-button class="back_button font-bold custom-back-btn" (click)="backClick()" cdkFocusInitial>Back to
+            Cart
+        </button>
+        <!-- </div> -->
+
+         <!-- <div class="cart-button-style"> -->
+            <button *ngIf="url == 'quotesPage'"  mat-button class="back_button font-bold custom-back-btn" (click)="backQuoteClick()" cdkFocusInitial>Back to My Quotes
+            </button>
+            <!-- </div> -->
+
+         
+
+         
+    </div>
+
+    <div class="row content-row">
+        <!-- <ejs-timepicker format="hh:mm a" id='timepicker1' #testTime [(value)]='ccVal' [min]="ccminTime"
+            [allowEdit]="false" [max]="ccmaxTime" (click)="timeClick1($event, testTime)" style="width: 75%;">
+        </ejs-timepicker> -->
+
+        <div class="col-sm-7">
+            <div>
+                <mat-card class="custom-mat-card">
+                    <mat-card-header style="text-align: center; justify-content: center;">
+                        <div class="card-title cus-title-margin-card">
+                            <mat-card-title class="font-bold">Select an Option</mat-card-title>
+                        </div>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="card-container" >
+                            <mat-card class="matlft" style="padding-right: 30px;">
+                                <mat-card-content class="box-container">
+                                    <div class="delivery-box" [ngClass]="isDeliveryBox ? ACTIVE_ITEM : ''"
+                                        (click)="selectBox(true)">
+                                        <img class="delivery-img" src="./../assets/icons/delivery.svg" />
+                                        <ng-template [ngIf]="isDeliveryBox">
+                                            <img class="check-square-del" src="./../assets/icons/check-square.svg" />
+                                            <!-- <mat-checkbox class="active-checkbox" style="transform: scale(2.0);" [(ngModel)]="isDeliveryBox">
+                                            </mat-checkbox> -->
+                                        </ng-template>
+                                    </div>
+                                    <div>
+                                        <mat-card-title>Delivery</mat-card-title>
+                                        <mat-card-subtitle>We deliver right to</mat-card-subtitle>
+                                        <mat-card-subtitle>your door.</mat-card-subtitle>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+
+                            <mat-card class="matright" style="padding-left: 30px;">
+                                <mat-card-content class="box-container">
+                                    <div class="collect-box" [ngClass]="isDeliveryBox ? '' : ACTIVE_ITEM"
+                                        (click)="selectBox(false)">
+                                        <img class="pickup-img" src="./../assets/icons/pickup.svg" />
+                                        <ng-template [ngIf]="!isDeliveryBox">
+                                            <img class="check-square-cc" src="./../assets/icons/check-square.svg" />
+                                            <!-- <mat-checkbox class="active-checkbox" style="transform: scale(2.0);" [(ngModel)]="!isDeliveryBox">
+                                            </mat-checkbox> -->
+                                        </ng-template>
+                                    </div>
+                                    <div>
+                                        <mat-card-title>Click & Collect</mat-card-title>
+                                        <mat-card-subtitle>Collect from your</mat-card-subtitle>
+                                        <mat-card-subtitle>nearest branch.</mat-card-subtitle>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="details-card">
+                <mat-card style="padding: 50px 80px;">
+                    <mat-card-content>
+                        <ng-container [ngTemplateOutlet]="isDeliveryBox ? delivery_Template : click_collect_Template"
+                            [ngTemplateOutletContext]="{ $implicit: true }"></ng-container>
+                    </mat-card-content>
+                    <mat-card-actions>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            <div class="row save_button_row" *ngIf="!checkedBox">
+                <div class='col-sm-6'>
+                    <!-- <button mat-button (click)="backClick()" class="cancel_button font-bold">Back</button> -->
+                </div>
+                <div class='col-sm-6'>
+                    <div *ngIf="isDeliveryBox">
+                        <button *ngIf="orderRefDel != '' && isAgree == true  && isDisabled== false;else disabledBtn;"
+                            mat-button class="save_button font-bold" [disabled]="isDisabled"
+                            (click)="save_continue_Del()" cdkFocusInitial>
+                            Save & Review</button>
+                        <ng-template #disabledBtn>
+                            <button mat-button class="disabled_save_button font-bold" cdkFocusInitial>
+                                Save & Review</button>
+                        </ng-template>
+                    </div>
+
+                    <div *ngIf="!isDeliveryBox">
+                        <button *ngIf="orderRefCC != '' && isDisabled== false  && isAgree == true && isDisabled== false;else disabledBtn1;" mat-button
+                            class="save_button cus-btn-width font-bold" [disabled]="isDisabled"
+                            (click)="save_continue_CC()" cdkFocusInitial>
+                            Save & Review</button>
+                            <ng-template #disabledBtn1>
+                                <button mat-button class="disabled_save_button font-bold" cdkFocusInitial>
+                                    Save & Review</button>
+                            </ng-template>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="brder"></div>
+                </div>
+            </div>
+
+           <!-- New Submit & Review button after coming from My Quotes page-->
+            <div class="row save_button_row" *ngIf="checkedBox">
+                <div class='col-sm-6'>
+                    <!-- <button mat-button (click)="backClick()" class="cancel_button font-bold">Back</button> -->
+                </div>
+                <div class='col-sm-6'>
+                    <div *ngIf="isDeliveryBox">
+                        <button *ngIf="orderRefDel != ''"   mat-button
+                            class="save_button cus-btn-width font-bold" 
+                            (click)="save_continue_Del_Quote()" cdkFocusInitial>
+                            Save & Review
+                        </button>
+                    </div>
+                    <div *ngIf="!isDeliveryBox">
+                        <button *ngIf="orderRefCC != '' " mat-button
+                            class="save_button cus-btn-width font-bold" 
+                            (click)="save_continue_CC()" cdkFocusInitial>
+                            Save & Review
+                        </button>
+                    </div>
+                    
+                </div>
+                <div class="col-12">
+                    <div class="brder"></div>
+                </div>
+            </div>
+            <!-- End of new code -->
+            <!-- <button class="save-button" (click)="save_continue()">Save & Continue</button> -->
+        </div>
+        <div class="col-sm-1 custom-col-sm-1"></div>
+        <div class="col-sm-4 custom-col-sm-4">
+            <mat-card class="cart_summary custom-card-size"
+                [ngClass]="isDeliveryBox ? 'custom-card-del-size' : 'custom-card-cc-size' ">
+                <mat-card-content>
+                    <div mat-subheader class="list-head">
+                        <img src="../../../assets/images/cart-shopping-fast.svg" class="fas fa-shopping-cart"> &nbsp;
+                        <span class="cart-size">Cart Summary </span> <span class='sub-item' style="font-weight: 100;">
+                            {{cartDataObj?.totalUnitCount > 1 ? cartDataObj?.totalUnitCount + ' items' :
+                            cartDataObj?.totalUnitCount + ' item'}}</span>
+                        <span (click)="mobAccIcon = !mobAccIcon" class="mobile-accordion">
+                            <img *ngIf="!mobAccIcon" src="../../../assets/icons/acc-down.svg" class="acc-up-mob-icon">
+                            <img *ngIf="mobAccIcon" src="../../../assets/icons/acc-up.svg" class="acc-bottom-mob-icon">
+
+                        </span>
+
+                    </div>
+                    <mat-list class="items for-mob-items"
+                        [ngStyle]="{'display': mobAccIcon == true ? 'block' : 'none' }">
+                        <mat-list-item *ngFor="let cart of cartItemsData" style="margin-bottom: 1.563rem;">
+                            <div class="row" style="width: 100%;">
+                                <div class="cart-img">
+                                    <div *ngIf="previousUrl == '/cart'">
+                                        <cx-media [container]="cart?.product?.images?.PRIMARY" format="thumbnail"
+                                            role="presentation"></cx-media>
+                                        </div>
+    
+                                        <div *ngIf="url == 'quotesPage'">
+                                            <!-- <img [src]="cart.product?.images[0]?.url ? cart.product?.images[0]?.url : '../../../../assets/images/placeholder.png'" alt="cart Icon" style="width: 100%" /> -->
+                                        </div>
+                                     
+                                    <!-- <img [src]="cart.product?.images?.PRIMARY?.cartIcon.url" alt="cart Icon" /> -->
+                                </div>
+                                <div class="col-sm-7 cartProductName">
+                                    <div mat-line class='list-content' title={{cart.product?.name}}>
+                                        {{cart.product?.name}}
+                                    </div>
+                                    <div mat-line class="list_itemCode"> <span class="list_itemCode">Item Code :
+                                            {{cart.product?.code}}</span> </div>
+                                </div>
+                                <div class="check_qty">
+                                    Qty {{cart?.quantity}}
+                                </div> 
+                                <div class="col-sm-3 price_container" style="margin: auto;">
+                                    <div class="price total-gst-css">{{cart?.totalPrice ?
+                                        cart?.totalPrice?.formattedValue: '' }} </div>
+                                </div>
+                            </div>
+                        </mat-list-item>
+                        <hr>
+                    </mat-list>
+                </mat-card-content>
+                <mat-card-actions class="total">
+                    <mat-list class="for-list-top-border">
+                        <mat-list-item>
+                            <div mat-line class='list-content'
+                                style="font-size: 18px !important;padding-left: 0 !important;">
+                                <span class="total-gst-css mob-tot">Total<span class="sub_total_excl_gst">&nbsp;(excl.
+                                        GST)</span> </span>
+                            </div>
+                            <div class="price sub-total-css finaltotal-gst-css"> {{ cartDataObj?.subTotal ?
+                                cartDataObj?.subTotal?.formattedValue : ''}}</div>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <div mat-line class='list-content'
+                                style="font-size: 18px !important;padding-left: 0 !important;">
+                                <span class="total-incl-gst-css mob-tot">GST </span>
+                            </div>
+                            <div class="price sub-total-css finaltotal-incl-gst-css"> {{ cartDataObj?.totalTax ?
+                                cartDataObj?.totalTax?.formattedValue : ''}}</div>
+                        </mat-list-item>
+                        <hr>
+                        <mat-list-item>
+                            <div mat-line class='list-content'
+                            style="font-size: 18px !important;padding-left: 0 !important;">
+                            <span class="total-with-gst-css mob-tot">Total<span class="sub_total_excl_gst">&nbsp;(incl.
+                                    GST)</span> </span>
+                        </div>
+                            <div class="price sub-total-css finaltotal-with-gst-css"> {{ cartDataObj?.totalPriceWithTax ?
+                                cartDataObj?.totalPriceWithTax?.formattedValue : ''}}</div>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<!-- Templates -->
+<ng-template #delivery_Template let-data>
+    <div class="expand-header">
+        <div class="expand-title for-top-space">Delivery Details</div>
+        <p class="marker require-size" style="margin-bottom: 0;"><span class="marker">*</span>Required Fields</p>
+    </div>
+    <mat-accordion id="orderref-acc" class="delivery-accordion child-accordion-expand" multi>
+        <mat-expansion-panel class="job-reference-panel" [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title> 1. Job Reference</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="form-container for-mob" style="display: flex;">
+                <label for="joborder" class="form-label job-ref">Order / Job Ref.  <span class="marker">*</span></label>
+                <input type="text" class="form-control joborder-input lo_sensitive" [(ngModel)]="orderRefDel"
+                    (keypress)="alphaNumericsOnly($event)" placeholder="Enter Order number or Job Reference" required >
+            </div>
+
+          
+
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="isFirstAccDel" (opened)="onOpen()">
+            <mat-expansion-panel-header (click)="isFirstAccDel = isFirstAccDel ? false : true">
+                <mat-panel-title> 2. Date & Time</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class='date-time-title sms-notify'>The date and time below is the earliest available.</div>
+            <div class="form-container for-mob" style="display: flex;">
+                <label for="date" class="form-label job-ref">Date <span class="marker">*</span></label>
+                <form class="form-inline cus-width ngb-date-form">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <!-- <mat-form-field>
+                                <input class="form-control cus-width date-input" matInput [matDatepicker]="picker" 
+                                [(ngModel)]="dateInputValue" [min]="dateInputValue" (dateChange)="datechange($event,isDeliveryBox)"/>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field> -->
+
+                            <input class="form-control cus-width date-input" id="date" name="txtDate" tabindex="-1"
+                                onkeydown="return false" placeholder="dd-mm-yyyy" ngbDatepicker #ngDate="ngbDatepicker"
+                                [(ngModel)]="dateInputValue" (dateSelect)="datechange($event,isDeliveryBox)"
+                                [minDate]="ngbMinDate" container="body" required
+                                [markDisabled]="deliveryDisableDates" />
+                            <div class="input-group-append custom-date-button">
+                                <button class="btn btn-outline-secondary calendar" (click)="ngDate.toggle()"
+                                    type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="form-container for-mob" style="display: flex;">
+                <!-- {{setHours(minTime, maxTime, false,dateInputValue)}} -->
+                <label for="time" class="form-label job-ref">Time <span class="marker">*</span></label>
+                <ejs-timepicker format="hh:mm a" id='timepicker' #deliverTimeObj [showClearButton]="false"
+                    [(value)]='deliverTime' [min]="minTime" [allowEdit]="false" [max]="maxTime"
+                    (click)="timeClick($event, deliverTimeObj)" style="width: 75%;"
+                    (change)="checkoutData.requestedTime = deliverTimeObj?.getText()"></ejs-timepicker>
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel id="newAddrSection" [expanded]="isSecondAccDel" *ngIf="!checkedBox">
+            <mat-expansion-panel-header (click)="isSecondAccDel = isSecondAccDel ? false : true">
+                <mat-panel-title>3. Select Your Delivery Address Preference
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-accordion class="address-child-accordion" multi>
+                <mat-expansion-panel class="" [expanded]="isExpandedAccPanel" [hideToggle]="true">
+                    <mat-expansion-panel-header (click)="isExpandedAccPanel = !isExpandedAccPanel">
+                        <mat-panel-title> <img class="circle-header-icon"
+                                [src]="isExpandedAccPanel ? 'assets/icons/minus-circle.svg' : 'assets/icons/plus-circle.svg'" />
+                            <span class="expand-title-content">Job Account Address</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="form-container for-mob" style="display: flex;">
+                        <label for="jobaccount" style="margin-top: 1.7%;" class="form-label job-ref">Job Account
+                        </label>
+                        <form class="form-job" style="width: 100%">
+                            <div class="selectdiv">
+                                <label style="margin: 0 0 0 1.125rem;" class="jobinput">
+                                    <select id="deliverySelectJobAccount"
+                                        class="form-select drop-down-field custom-job-selct" #jobAccountAddr
+                                        [(ngModel)]="selectedAddressDel" [disabled]="checkoutData?.jobAccounts == 'No job accounts available'"
+                                        (change)="jobAccountAddress($event.target.value,'del')"
+                                        placeholder="Select Job Account Number" aria-label="Default select example">
+                                        <option value="undefined" disabled selected hidden>
+                                            Select Job Account Number 
+                                        </option>
+                                        <option *ngFor="let jobData of checkoutData && checkoutData?.jobAccounts"
+                                            [data-value]="jobData" [value]="jobData">
+                                            {{jobData.split('|')[1]}}</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel class="" [hideToggle]="true" [expanded]="isExpandedRecPanel">
+                    <mat-expansion-panel-header (click)="isExpandedRecPanel = !isExpandedRecPanel">
+                        <mat-panel-title><img class="circle-header-icon"
+                                [src]="isExpandedRecPanel ? 'assets/icons/minus-circle.svg' : 'assets/icons/plus-circle.svg'" /><span
+                                class="expand-title-content">Most Recent Addresses</span></mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div>
+                        <ng-template
+                            [ngIf]="!(checkoutData && checkoutData?.mostRecentAddress && checkoutData?.mostRecentAddress.length > 0)">
+                            <span>No recent customer address available.</span>
+                        </ng-template>
+                        <mat-radio-group aria-labelledby="example-radio-group-label"  [(ngModel)]="selectedAddressDel"
+                            class="example-radio-group radio-btn-size lo_sensitive"
+                            (change)="onAccountChange($event.value, 'recAcc')">
+                            <mat-radio-button [checked]="false" #forRadiobtn 
+                                *ngFor="let address of checkoutData && checkoutData?.mostRecentAddress"
+                                [value]="address" (change)="selectedAddressDel=address || isExpandedRecPanel">
+                                {{address.split('|')[1]}}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel [hideToggle]="true" [expanded]="isExpandedAddPanel">
+                    <mat-expansion-panel-header (click)="isExpandedAddPanel = !isExpandedAddPanel">
+                        <mat-panel-title><img class="circle-header-icon"
+                                [src]="isExpandedAddPanel ? 'assets/icons/minus-circle.svg' : 'assets/icons/plus-circle.svg'" /><span
+                                class="expand-title-content">Add New Address</span></mat-panel-title>
+                    </mat-expansion-panel-header>
+					<div class="form-container for-mob" id="addrScroll" style="display: flex;" *ngIf="!isAddAddressManual">
+                        <form class="form-address" style="width: 100%">
+							<div class="form-container for-mob" style="display: flex;">
+								<label for="jobaccount" class="form-label job-ref">Address<span class="marker">*</span></label>
+								<input id="auto-input-ele" type="text" class="form-control"
+									placeholder="Start typing your address" [matAutocomplete]="autoAddr"
+									(input)="coreLogicSearch($event)" />
+							</div>
+                            <mat-autocomplete #autoAddr="matAutocomplete" (optionSelected)="autocompleteChange($event)">
+                                <mat-option class="custom-option-loader" disabled *ngIf="isLoader">
+                                    <div class="custom-loader"></div>
+                                </mat-option>
+                                <mat-option class="custom-option-text" disabled *ngIf="tempOptionDisabled">
+                                    No Search Results Found
+                                </mat-option>
+                                <mat-option class="custom-option-text" *ngFor="let street of filteredStreet"
+                                    [value]="street.suggestion" [data-value]="street">
+                                    {{street.suggestion}}
+                                </mat-option>
+                                <mat-option class="address-manual">
+                                    <span class="footer-item">
+                                        <button mat-stroked-button color="primary"
+                                            (click)="addAddressManual($event)">Add Address Manually</button>
+                                    </span>
+                                </mat-option>
+                            </mat-autocomplete>
+                        </form>
+                    </div>
+                    <ng-template [ngIf]="isAddAddressManual">
+                        <form #editForm="ngForm">
+                            <div class="form-container for-mob" style="display: flex;">
+                                <label for="lotNumber" class="form-label job-ref">Street/Lot Number<span
+                                        class="marker">*</span></label>
+                                <input type="text" class="form-control lo_sensitive" [(ngModel)]="manualAddressData.lotNumber"
+                                    id="lotNumber" name="lotNumber" #lotNumber="ngModel"
+                                    [ngClass]="{ 'is-invalid': editForm.submitted && lotNumber.invalid }"
+                                    placeholder="Street/Lot Number" required maxlength="40">
+                            </div>
+                            <div class="form-container for-mob" style="display: flex;">
+                                <label for="streetName" class="form-label job-ref">Street Name<span
+                                        class="marker">*</span></label>
+                                <input type="text" class="form-control lo_sensitive" id="streetName" name="streetName"
+                                    #streetName="ngModel" [(ngModel)]="manualAddressData.streetName"
+                                    placeholder="Street Name" maxlength="40"
+                                    [ngClass]="{ 'is-invalid': editForm.submitted && streetName.invalid }" required>
+                            </div>
+                            <div class="form-container for-mob" style="display: flex;">
+                                <label for="streetType" class="form-label job-ref">Street Type<span
+                                        class="marker">*</span></label>
+                                <div class="selectdiv" style="width: 100%;margin-left: 3.4%;">
+                                    <select id="streetSelect2" name="streetSelect2" #streetSelect2="ngModel"
+                                        class="form-select drop-down-field custom-job-selct select-place-holder lo_sensitive"
+                                        aria-label="Default select example" aria-placeholder="e.g. Road, Street"
+                                        placeholder="e.g. Road, Street" [(ngModel)]="manualAddressData.streetType"
+                                        [ngClass]="{ 'is-invalid': editForm.submitted && streetSelect2.invalid }"
+                                        required>
+                                        <option value="undefined" disabled selected hidden
+                                            style="display: block !important;">
+                                            e.g. Road, Street</option>
+                                        <option *ngFor="let data of streetTypeData" [value]="data.code">
+                                            {{ data.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-container for-mob" style="display: flex;">
+                                <label for="crossStreet" class="form-label job-ref">Cross Street</label>
+                                <input type="text" class="form-control lo_sensitive" id="crossStreet"
+                                    [(ngModel)]="manualAddressData.crossStreet"
+                                    placeholder="e.g. Cnr Allan Street (optional)" maxlength="40">
+                            </div>
+                            <div class="form-container for-mob" style="display: flex;">
+                                <label for="Suburb" class="form-label job-ref">Suburb, City<span
+                                        class="marker">*</span></label>
+                                <input type="text" class="form-control lo_sensitive" id="Suburb"
+                                    [(ngModel)]="manualAddressData.suburb" placeholder="Enter Suburb, City"
+                                    maxlength="25" required name="suburb" #suburb="ngModel"
+                                    [ngClass]="{ 'is-invalid': editForm.submitted && suburb.invalid }" />
+                            </div>
+                            <div class="form-container for-mob" style="display: flex;">
+                                <label for="Postcode" class="form-label job-ref">Postcode<span
+                                        class="marker">*</span></label>
+                                <input type="text" class="form-control lo_sensitive" id="Postcode" name="postcode"
+                                    #postcode="ngModel" [(ngModel)]="manualAddressData.postCode"
+                                    placeholder="Enter Postcode" (keypress)="numberOnly($event,'PostCode')"
+                                    maxlength="12" required
+                                    [ngClass]="{ 'is-invalid': editForm.submitted && postcode.invalid }">
+                            </div>
+                            <div class="form-container for-mob" style="display: flex;">
+                                <label for="State" class="form-label job-ref">State<span class="marker">*</span></label>
+                                <div class="selectdiv" style="width: 100%;margin-left: 3.4%;">
+                                    <select id="stateSelect" #stateRef name="stateSelect" #stateSelect="ngModel"
+                                        class="form-select drop-down-field custom-job-selct select-place-holder"
+                                        aria-label="Default select example" [(ngModel)]="selectState"
+                                        [ngClass]="{ 'is-invalid': editForm.submitted && stateSelect.invalid }"
+                                        required>
+                                        <option value="undefined" disabled selected hidden>
+                                            Choose State</option>
+                                        <option *ngFor="let data of stateList" [value]="data.isocode">
+                                            {{ data.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class='col-sm-12'>
+                                    <button type="submit" mat-button class="save_button add_button font-bold"
+                                        cdkFocusInitial style="margin-top: 10px !important;"
+                                        (click)="addManualAddress(stateRef, editForm)">Add</button>
+                                </div>
+                            </div>
+                        </form>
+                    </ng-template>
+                </mat-expansion-panel>
+            </mat-accordion>
+            <div class='address-title confirm-text for-bold'>Confirmed Delivery Address </div>
+            <div class="form-container">
+                <div class="form-control lo_sensitive" placeholder="Confirmed Address" readonly id="address" maxlength="40" required
+                    #isAddrSelectedOrNot
+                    style="height: 49px;resize: initial;width: 100% !important;overflow-y: auto;">
+                    {{selectedAddressDel?.split('|')[1] || selectedAddressDel || address}}</div>
+            </div>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel id="newAddrSection" [expanded]="isSecondAccDel" *ngIf="checkedBox">
+            <mat-expansion-panel-header (click)="isSecondAccDel = isSecondAccDel ? false : true">
+                <mat-panel-title>3. Select Your Delivery Address Preference
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-accordion class="address-child-accordion" multi>
+                <mat-expansion-panel class="" [expanded]="isExpandedAccPanel" [hideToggle]="true">
+                    <mat-expansion-panel-header (click)="isExpandedAccPanel = !isExpandedAccPanel">
+                        <mat-panel-title> <img class="circle-header-icon"
+                                [src]="isExpandedAccPanel ? 'assets/icons/minus-circle.svg' : 'assets/icons/plus-circle.svg'" />
+                            <span class="expand-title-content">Job Account Address</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="form-container for-mob" style="display: flex;">
+                        <label for="jobaccount" style="margin-top: 1.7%;" class="form-label job-ref">Job Account
+                        </label>
+                        <form class="form-job" style="width: 100%">
+                            <div class="selectdiv">
+                                <label style="margin: 0 0 0 1.125rem;" class="jobinput">
+                                    <select id="deliverySelectJobAccount"
+                                        class="form-select drop-down-field custom-job-selct" #jobAccountAddr
+                                        [(ngModel)]="selectedAddressDel" [disabled]="checkoutData?.jobAccounts == 'No job accounts available' || isDisabled "
+                                        (change)="jobAccountAddress($event.target.value,'del')"
+                                        placeholder="Select Job Account Number" aria-label="Default select example">
+                                        <option value="undefined" disabled selected hidden>
+                                            Select Job Account Number 
+                                        </option>
+                                        <option *ngFor="let jobData of checkoutData && checkoutData?.jobAccounts"
+                                            [data-value]="jobData" [value]="jobData">
+                                            {{jobData.split('|')[1]}}</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel class="" [hideToggle]="true" [expanded]="isExpandedRecPanel">
+                    <mat-expansion-panel-header (click)="isExpandedRecPanel = !isExpandedRecPanel">
+                        <mat-panel-title><img class="circle-header-icon"
+                                [src]="isExpandedRecPanel ? 'assets/icons/minus-circle.svg' : 'assets/icons/plus-circle.svg'" /><span
+                                class="expand-title-content">Most Recent Addresses</span></mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div>
+                        <ng-template
+                            [ngIf]="!(checkoutData && checkoutData?.mostRecentAddress && checkoutData?.mostRecentAddress.length > 0)">
+                            <span>No recent customer address available.</span>
+                        </ng-template>
+                        <mat-radio-group aria-labelledby="example-radio-group-label"  [(ngModel)]="selectedAddressDel"
+                            class="example-radio-group radio-btn-size"
+                            (change)="onAccountChange($event.value, 'recAcc')" [disabled]=" isDisabled ">
+                            <mat-radio-button [checked]="false" #forRadiobtn 
+                                *ngFor="let address of checkoutData && checkoutData?.mostRecentAddress"
+                                [value]="address" (change)="selectedAddressDel=address || isExpandedRecPanel">
+                                {{address.split('|')[1]}}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel [hideToggle]="true" [expanded]="isExpandedAddPanel">
+                    <mat-expansion-panel-header (click)="isExpandedAddPanel = !isExpandedAddPanel">
+                        <mat-panel-title><img class="circle-header-icon"
+                                [src]="isExpandedAddPanel ? 'assets/icons/minus-circle.svg' : 'assets/icons/plus-circle.svg'" /><span
+                                class="expand-title-content">Add New Address</span></mat-panel-title>
+                    </mat-expansion-panel-header>
+					<div class="form-container for-mob" id="addrScroll" style="display: flex;" *ngIf="!isAddAddressManual">
+                        <form class="form-address" style="width: 100%">
+							<div class="form-container for-mob" style="display: flex;">
+								<label for="jobaccount" class="form-label job-ref">Address<span class="marker">*</span></label>
+								<input id="auto-input-ele" type="text" class="form-control" 
+									placeholder="Start typing your address" [matAutocomplete]="autoAddr"
+									(input)="coreLogicSearch($event)" [disabled]=" isDisabled " />
+							</div>
+                            <mat-autocomplete #autoAddr="matAutocomplete" (optionSelected)="autocompleteChange($event)">
+                                <mat-option class="custom-option-loader" disabled *ngIf="isLoader">
+                                    <div class="custom-loader"></div>
+                                </mat-option>
+                                <mat-option class="custom-option-text" disabled *ngIf="tempOptionDisabled">
+                                    No Search Results Found
+                                </mat-option>
+                                <mat-option class="custom-option-text" *ngFor="let street of filteredStreet"
+                                    [value]="street.suggestion" [data-value]="street">
+                                    {{street.suggestion}}
+                                </mat-option>
+                                <mat-option class="address-manual">
+                                    <span class="footer-item">
+                                        <button mat-stroked-button color="primary"
+                                            (click)="addAddressManual($event)">Add Address Manually</button>
+                                    </span>
+                                </mat-option>
+                            </mat-autocomplete>
+                        </form>
+                    </div>
+                    <ng-template [ngIf]="isAddAddressManual">
+                        <form #editForm="ngForm">
+                            <div class="form-container for-mob" style="display: flex;">
+                                <label for="lotNumber" class="form-label job-ref">Street/Lot Number<span
+                                        class="marker">*</span></label>
+                                <input type="text" class="form-control" [(ngModel)]="manualAddressData.lotNumber"
+                                    id="lotNumber" name="lotNumber" #lotNumber="ngModel"
+                                    [ngClass]="{ 'is-invalid': editForm.submitted && lotNumber.invalid }"
+                                    placeholder="Street/Lot Number" required maxlength="40">
+                            </div>
+                            <div class="form-container for-mob" style="display: flex;">
+                                <label for="streetName" class="form-label job-ref">Street Name<span
+                                        class="marker">*</span></label>
+                                <input type="text" class="form-control" id="streetName" name="streetName"
+                                    #streetName="ngModel" [(ngModel)]="manualAddressData.streetName"
+                                    placeholder="Street Name" maxlength="40"
+                                    [ngClass]="{ 'is-invalid': editForm.submitted && streetName.invalid }" required>
+                            </div>
+                            <div class="form-container for-mob" style="display: flex;">
+                                <label for="streetType" class="form-label job-ref">Street Type<span
+                                        class="marker">*</span></label>
+                                <div class="selectdiv" style="width: 100%;margin-left: 3.4%;">
+                                    <select id="streetSelect2" name="streetSelect2" #streetSelect2="ngModel"
+                                        class="form-select drop-down-field custom-job-selct select-place-holder"
+                                        aria-label="Default select example" aria-placeholder="e.g. Road, Street"
+                                        placeholder="e.g. Road, Street" [(ngModel)]="manualAddressData.streetType"
+                                        [ngClass]="{ 'is-invalid': editForm.submitted && streetSelect2.invalid }"
+                                        required>
+                                        <option value="undefined" disabled selected hidden
+                                            style="display: block !important;">
+                                            e.g. Road, Street</option>
+                                        <option *ngFor="let data of streetTypeData" [value]="data.code">
+                                            {{ data.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-container for-mob" style="display: flex;">
+                                <label for="crossStreet" class="form-label job-ref">Cross Street</label>
+                                <input type="text" class="form-control" id="crossStreet"
+                                    [(ngModel)]="manualAddressData.crossStreet"
+                                    placeholder="e.g. Cnr Allan Street (optional)" maxlength="40">
+                            </div>
+                            <div class="form-container for-mob" style="display: flex;">
+                                <label for="Suburb" class="form-label job-ref">Suburb, City<span
+                                        class="marker">*</span></label>
+                                <input type="text" class="form-control" id="Suburb"
+                                    [(ngModel)]="manualAddressData.suburb" placeholder="Enter Suburb, City"
+                                    maxlength="25" required name="suburb" #suburb="ngModel"
+                                    [ngClass]="{ 'is-invalid': editForm.submitted && suburb.invalid }" />
+                            </div>
+                            <div class="form-container for-mob" style="display: flex;">
+                                <label for="Postcode" class="form-label job-ref">Postcode<span
+                                        class="marker">*</span></label>
+                                <input type="text" class="form-control" id="Postcode" name="postcode"
+                                    #postcode="ngModel" [(ngModel)]="manualAddressData.postCode"
+                                    placeholder="Enter Postcode" (keypress)="numberOnly($event,'PostCode')"
+                                    maxlength="12" required
+                                    [ngClass]="{ 'is-invalid': editForm.submitted && postcode.invalid }">
+                            </div>
+                            <div class="form-container for-mob" style="display: flex;">
+                                <label for="State" class="form-label job-ref">State<span class="marker">*</span></label>
+                                <div class="selectdiv" style="width: 100%;margin-left: 3.4%;">
+                                    <select id="stateSelect" #stateRef name="stateSelect" #stateSelect="ngModel"
+                                        class="form-select drop-down-field custom-job-selct select-place-holder"
+                                        aria-label="Default select example" [(ngModel)]="selectState"
+                                        [ngClass]="{ 'is-invalid': editForm.submitted && stateSelect.invalid }"
+                                        required>
+                                        <option value="undefined" disabled selected hidden>
+                                            Choose State</option>
+                                        <option *ngFor="let data of stateList" [value]="data.isocode">
+                                            {{ data.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class='col-sm-12'>
+                                    <button type="submit" mat-button class="save_button add_button font-bold"
+                                        cdkFocusInitial style="margin-top: 10px !important;"
+                                        (click)="addManualAddress(stateRef, editForm)">Add</button>
+                                </div>
+                            </div>
+                        </form>
+                    </ng-template>
+                </mat-expansion-panel>
+            </mat-accordion>
+            <div class='address-title confirm-text for-bold'>Confirmed Delivery Address </div>
+            <div class="form-container">
+                <div class="form-control" placeholder="Confirmed Address" readonly id="address" maxlength="40" required
+                    #isAddrSelectedOrNot
+                    style="height: 49px;resize: initial;width: 100% !important;overflow-y: auto;">
+                    {{selectedAddressDel?.split('|')[1] || selectedAddressDel || address}}</div>
+            </div>
+
+        </mat-expansion-panel>
+        
+        <mat-expansion-panel [expanded]="isThirdAccDel">
+            <mat-expansion-panel-header id="delivery-header" class="contact-delivery-header"
+                (click)="isThirdAccDel = isThirdAccDel ? false : true">
+                <mat-panel-title class="marbtm">4. Contact Details</mat-panel-title>
+                <mat-panel-description *ngIf="isThirdAccDel">
+                    <span class="custom-sms-notify">SMS Notification will be sent once the order is placed.</span>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p class="p-override">Contact Details<span class="marker">*</span></p>
+            <div class="contact-details-content">
+                <div class="row lo_sensitive">
+                    <div class="col-sm-10">
+                        <span class="edit-content"><span class="content-name">{{contactDetails?.firstName + " " +
+                                contactDetails?.lastName || ''}}</span>{{ " | " + contactDetails?.mobile.substring(0, 3)
+                            + " " + contactDetails?.mobile.substring(3, 7) + " " + contactDetails?.mobile.substring(7,
+                            contactDetails?.mobile.length)
+                            || ''}}</span>
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="edit-icon" #tooltip="matTooltip" matTooltip="Edit Contact Details"
+                            (click)="openDialog('contactList_Template')"></span>
+                    </div>
+                </div>
+
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="isFourthAccDel" [expanded]="true">
+            <mat-expansion-panel-header (click)="isFourthAccDel = isFourthAccDel ? false : true">
+                <mat-panel-title> 5. Delivery Instructions
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
+                <textarea [(ngModel)]="delInstructionsDel" class="form-control custom-textarea lo_sensitive"
+                    style="width: 100% !important;" id="Instructions"
+                    placeholder="Provide any specific delivery instructions (40-character limit)" required
+                    maxlength="40"></textarea>
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="isFifthAccDel">
+            <mat-expansion-panel-header (click)="isFifthAccDel = isFifthAccDel ? false : true">
+                <mat-panel-title> 6. Delivery Fees & Charges
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class=".sms-notify delivery_fees desk">
+                <div>I understand delivery fees will be added to my invoice as follows:
+                </div>
+                <ul style="padding-left: 14px;">
+                    <li>Standard delivery fee: $20.00 (incl. GST)</li>
+                    <li>Non-standard delivery fee: $50.00 (incl. GST) - applicable in the following circumstances:</li>
+
+                    <ul>
+                        <li>Deliveries outside normal branch delivery areas</li>
+                        <li>Urgent deliveries (for immediate and express deliveries)</li>
+                        <li>Two-person deliveries (if additional staff are required for heavy or bulky items)</li>
+                    </ul>
+
+                    <li>Additional fees may also apply for orders requiring a crane, special access crafts (barges/ferries etc) or items sent direct from suppliers.</li>
+                </ul>
+                
+              
+            </div>
+            <div class=".sms-notify delivery_fees mob">
+                <div>I understand delivery fees will be added to my invoice as follows:
+                </div>
+                <ul style="padding-left: 14px;">
+                    <li>Standard delivery fee: $20.00 (incl. GST)</li>
+                    <li>Non-standard delivery fee: $50.00 (incl. GST) - applicable in the following circumstances:</li>
+
+                    <ul>
+                        <li>Deliveries outside normal branch delivery areas</li>
+                        <li>Urgent deliveries (for immediate and express deliveries)</li>
+                        <li>Two-person deliveries (if additional staff are required for heavy or bulky items)</li>
+                    </ul>
+
+                    <li>Additional fees may also apply for orders requiring a crane, special access crafts (barges/ferries etc) or items sent direct from suppliers.</li>
+                </ul>
+               
+            </div>
+            <div class="radio-group-fees mat-radio-custom-yn" style="padding-top: 10px;">
+                <mat-radio-group>
+                    <mat-radio-button [checked]="isAgree" (change)="isAgree = true;" value="yes"><span
+                            class="delivery_fees"><b>Yes,</b> I
+                            agree.</span>
+                    </mat-radio-button>
+                    <mat-radio-button [checked]="!isAgree" (change)="isAgree = false;"><span
+                            class="delivery_fees"><b>No,</b> I'll Click & Collect
+                            instead.</span>
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</ng-template>
+
+<ng-template #click_collect_Template let-data>
+    <div class="expand-header">
+        <div class="expand-title">Click & Collect Details</div>
+        <p class="marker require-size" style="margin-bottom: 0;"><span class="marker">*</span>Required Fields</p>
+    </div>
+    <mat-accordion id="orderref-acc" class="delivery-accordion child-accordion-expand" multi>
+        <mat-expansion-panel class="job-reference-panel" [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title> 1. Job Reference</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="form-container for-mob" style="display: flex;">
+                <label for="joborder" class="form-label job-ref">Order / Job Ref. <span class="marker">*</span></label>
+                <input type="text" class="form-control joborder-input lo_sensitive" [(ngModel)]="orderRefCC"
+                    placeholder="Enter Order number or Job Reference" required>
+            </div>
+            <div class="form-container for-mob" style="display: flex;">
+                <label for="jobaccount" class="form-label job-ref" style="margin-top: 1.6%;">Job Account </label>
+                <form class="form-job" style="width: 100%">
+                    <div class="selectdiv">
+                        <label class="for-cc-job-lable">
+                            <select class="form-select drop-down-field custom-job-selct" id="ccSelectJobAccount"
+                                [(ngModel)]="selectedAddressCC" [disabled]="checkoutData?.jobAccounts == 'No job accounts available' || 'isDisabled'" (change)="jobAccountAddress($event.target.value,'cc')"
+                                aria-label="Default select example">
+                                <option value="undefined" disabled selected hidden>Select Job Account Number</option>
+                                <option *ngFor="let jobData of checkoutData && checkoutData.jobAccounts"
+                                    [data-value]="jobData" [value]="jobData">
+                                    {{jobData.split('|')[1]}}</option>
+                            </select>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="isFirstAccCC" (opened)="onOpen()">
+            <mat-expansion-panel-header (click)="isFirstAccCC = isFirstAccCC ? false : true">
+                <mat-panel-title> 2. Date & Time</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class='date-time-title sms-notify'>The date and time below is the earliest available.</div>
+            <div class="form-container for-mob" style="display: flex;">
+                <label for="date" class="form-label job-ref">Date <span class="marker">*</span></label>
+                <form class="form-inline cus-width ngb-date-form">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control cus-width date-input" id="date1" tabindex="-1" name="txtDate"
+                                onkeydown="return false" placeholder="dd-mm-yyyy" ngbDatepicker #ngdate="ngbDatepicker"
+                                [minDate]="ngbMinDate" [(ngModel)]="dateInputValue" [markDisabled]="ccDisableDates"
+                                (dateSelect)="datechange($event,isDeliveryBox)" container="body" required />
+                            <div class="input-group-append custom-date-button">
+                                <button class="btn btn-outline-secondary calendar" (click)="ngdate.toggle()"
+                                    type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="form-container for-mob" style="display: flex;">
+                <!-- {{setHours(minTime, maxTime, true,dateInputValue)}} -->
+                <label for="time" class="form-label job-ref">Time <span class="marker">*</span></label>
+                <ejs-timepicker format="hh:mm a" id='collecttimepicker' [showClearButton]="false" #collectTimeObj
+                    [(value)]='collectTime' [min]="minTime" [allowEdit]="false" [max]="maxTime"
+                    (click)="timeClick($event, collectTimeObj)" style="width: 75%;"
+                    (change)="checkoutData.requestedTime = collectTimeObj?.getText()">
+                </ejs-timepicker>
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel id="newAddrSection" [expanded]="isSecondAccCC">
+            <mat-expansion-panel-header (click)="isSecondAccCC = isSecondAccCC ? false : true">
+                <mat-panel-title>3. Location
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class='address-title for-bold for-font-bold'>Branch Details <span class="marker">*</span>
+                <a style="justify-content:right" [ngClass]="{'disableBranch' : !selectboxval } ">
+                    <span class="add_contact" (click)="openDialog('deliveryAddress_Template')">Change
+                        Branch</span></a>
+            </div>
+            <div class="branch-container">
+                <mat-card-title class='address-title' style="margin-bottom: 0;padding-bottom: 5px;">
+                    {{ tempBranchListData?.name }}</mat-card-title>
+                <mat-card-subtitle>{{ tempBranchListData?.address?.formattedAddress }}</mat-card-subtitle>
+                <!-- <mat-card-subtitle>Phone: +{{ contactNumber(tempBranchListData?.address.phone) }} -->
+                <!-- </mat-card-subtitle> -->
+                <a class='branch-link' style="color: #00AFE2;text-decoration: underline;cursor: pointer;"
+                    (click)="isViewOrLessToggle()"> {{ isViewOrLess ? 'View Less' : 'View More' }}</a>
+                <div class="branch-hour-container" *ngIf="isViewOrLess">
+                    <mat-card-title class='address-title'>Opening Hours</mat-card-title>
+                    <mat-card-subtitle
+                        *ngFor="let data of tempBranchListData?.buOpeningSchedule[0]?.weekDayOpeningList">
+                        <span class="hour-label-left">{{ data?.weekDay }}</span>
+                        <span
+                            *ngIf="data?.openingTime?.formattedHour || data?.closingTime?.formattedHour">{{data?.openingTime?.formattedHour}}
+                            - {{data?.closingTime?.formattedHour}}</span>
+                        <span style="color: #973937"
+                            *ngIf="!data?.openingTime?.formattedHour && !data?.closingTime?.formattedHour">Closed</span>
+                    </mat-card-subtitle>
+                </div>
+            </div>
+        </mat-expansion-panel>
+        <!-- <mat-expansion-panel id="newAddrSection" [expanded]="isSecondAccCC" *ngIf="!selectboxval">
+            <mat-expansion-panel-header (click)="isSecondAccCC = isSecondAccCC ? false : true">
+                <mat-panel-title>3. Location
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class='address-title for-bold for-font-bold'>Branch Details <span class="marker">*</span>
+                <a style="justify-content:right" >
+                    <span class="add_contact" (click)="openDialog('deliveryAddress_Template')" >Change
+                        Branch</span></a>
+            </div>
+            <div class="branch-container">
+                <mat-card-title class='address-title' style="margin-bottom: 0;padding-bottom: 5px;">
+                    {{ tempBranchListData?.name }}</mat-card-title>
+                <mat-card-subtitle>{{ tempBranchListData?.address?.formattedAddress }}</mat-card-subtitle>
+               
+                <a class='branch-link' style="color: #00AFE2;text-decoration: underline;cursor: pointer;"
+                    (click)="isViewOrLessToggle()"> {{ isViewOrLess ? 'View Less' : 'View More' }}</a>
+                <div class="branch-hour-container" *ngIf="isViewOrLess">
+                    <mat-card-title class='address-title'>Opening Hours</mat-card-title>
+                    <mat-card-subtitle
+                        *ngFor="let data of tempBranchListData?.buOpeningSchedule[0]?.weekDayOpeningList">
+                        <span class="hour-label-left">{{ data?.weekDay }}</span>
+                        <span
+                            *ngIf="data?.openingTime?.formattedHour || data?.closingTime?.formattedHour">{{data?.openingTime?.formattedHour}}
+                            - {{data?.closingTime?.formattedHour}}</span>
+                        <span style="color: #973937"
+                            *ngIf="!data?.openingTime?.formattedHour && !data?.closingTime?.formattedHour">Closed</span>
+                    </mat-card-subtitle>
+                </div>
+            </div>
+        </mat-expansion-panel> -->
+        <mat-expansion-panel [expanded]="isThirdAccCC">
+            <mat-expansion-panel-header id="delivery-header" (click)="isThirdAccCC = isThirdAccCC ? false : true"
+                [class]="isDeliveryBox ? 'contact-delivery-header' : 'contact-collect-header'">
+                <mat-panel-title class="marbtm"> 4. Contact Details </mat-panel-title>
+                <mat-panel-description *ngIf="isThirdAccCC">
+                    <span class="custom-sms-notify">SMS Notification will be sent once the order is placed.</span>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p class="p-override">Contact Details<span class="marker">*</span></p>
+            <div class="contact-details-content">
+                <div class="row lo_sensitive">
+                    <div class="col-sm-10">
+                        <span class="edit-content"><span class="content-name">{{contactDetails?.firstName + " " +
+                                contactDetails?.lastName || ''}}</span>{{ " | " + contactDetails?.mobile.substring(0, 3)
+                            + " " + contactDetails?.mobile.substring(3, 7) + " " + contactDetails?.mobile.substring(7,
+                            contactDetails?.mobile.length)
+                            || ''}}</span>
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="edit-icon" #tooltip="matTooltip" matTooltip="Edit Contact Details"
+                            (click)="openDialog('contactList_Template')"></span>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="isFourthAccCC">
+            <mat-expansion-panel-header (click)="isFourthAccCC = isFourthAccCC ? false : true">
+                <mat-panel-title> 5. Additional Instructions
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
+                <textarea [(ngModel)]="delInstructionsCC" class="form-control" style="width: 100% !important;"
+                    id="Instructions"
+                    placeholder="Please provide any other information if required (40-character limit)" required
+                    maxlength="40"></textarea>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</ng-template>

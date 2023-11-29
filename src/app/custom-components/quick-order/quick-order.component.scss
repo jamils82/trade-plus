@@ -1,0 +1,630 @@
+@import '../../shared/styles/variables.scss';
+
+/* Absolute Center Spinner */
+
+.loading {
+    position: fixed;
+    z-index: 9999;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+
+/* Transparent Overlay */
+
+.loading:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+    background: -webkit-radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+}
+
+
+/* :not(:required) hides these rules from IE9 and below */
+
+.loading:not(:required) {
+    /* hide "loading..." text */
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+.loading:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 10px;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+    -webkit-animation: spinner 150ms infinite linear;
+    -moz-animation: spinner 150ms infinite linear;
+    -ms-animation: spinner 150ms infinite linear;
+    -o-animation: spinner 150ms infinite linear;
+    animation: spinner 150ms infinite linear;
+    border-radius: 0.5em;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+    box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+}
+
+
+/* Animation */
+
+@-webkit-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.quick-order-container {
+    padding-top: 3rem;
+    min-width: 88%;
+    .quick-order-heading-row {
+        .quick-order-heading-col {
+            font-size: var(--fontsize40);
+            font-family: 'NiveauGroteskBold';
+            color: $pdp-font-color;
+        }
+        .quick-order-heading-label {
+            font-size: var(--fontsize18);
+            font-family: 'NiveauGrotesk';
+            color: $pdp-font-color;
+        }
+    }
+}
+
+.failure-message-container {
+    width: 60%;
+    margin: 0 auto 15px auto;
+}
+
+.failure-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid $failure-border-color;
+    background-color: $failure-background-color;
+    color: #973937;
+    font-family: 'NiveauGrotesk';
+    padding: 10px;
+    font-size: 12px;
+}
+
+.restrict-product {
+    color: red;
+}
+
+.tick-icon,
+.alert-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.alert-message {
+    line-height: 1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 6px;
+}
+
+.error-message {
+    font-size: var(--fontsize18);
+}
+
+table {
+    padding-top: 3rem;
+    border-collapse: separate;
+    border-spacing: 0 1em;
+    margin-bottom: 0px;
+    thead {
+        line-height: 1;
+    }
+}
+
+.table-heading {
+    th {
+        text-align: left;
+        font-size: var(--fontsize20);
+        text-transform: capitalize;
+        font-family: 'NiveauGroteskBold';
+        color: #495A64;
+        padding-bottom: 0;
+        span {
+            font-family: 'NiveauGrotesk';
+            font-size: var(--fontsize18);
+            text-transform: none;
+            font-weight: 300;
+        }
+    }
+    th:first-child {
+        padding-left: 0;
+    }
+    th:last-child {
+        color: #00AFE2;
+        cursor: pointer;
+        text-decoration: underline;
+        text-align: right;
+        padding-right: 0;
+    }
+}
+
+tbody tr {
+    background-color: $white-color;
+    td {
+        font-size: var(--fontsize18);
+        font-family: 'NiveauGrotesk';
+        color: #495A64;
+        padding: 0.75rem;
+        min-height: var(--buttonHeight60);
+        .fa-trash {
+            width: 18px;
+            height: 23px;
+            // font-size: 1.2rem;
+            float: right;
+            color: #778893;
+            cursor: pointer;
+        }
+    }
+    td:nth-child(1) {
+        padding: 0;
+        border-right: 1.3rem solid #E8EFF7;
+        -webkit-background-clip: padding;
+        -moz-background-clip: padding;
+        background-clip: padding-box;
+    }
+    .price-col {
+        color: #495A64;
+        font-family: 'NiveauGroteskBold';
+        font-size: var(--fontsize24);
+        span {
+            font-family: 'NiveauGrotesk';
+            font-size: var(--fontsize20);
+        }
+    }
+    .description {
+        display: flex;
+        align-items: left;
+        flex-direction: column;
+        line-height: 1;
+        justify-content: center;
+        .productName {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.1;
+            font-family: 'NiveauGroteskBold';
+            font-size: var(--fontsize24);
+            width: 90%;
+            margin-bottom: 2px;
+        }
+        .product-details {
+            .itemCode {
+                font-family: 'NiveauGrotesk';
+                font-size: var(--fontsize18);
+            }
+        }
+    }
+    .instock.availability {
+        color: $stock-label-color;
+        font-family: 'NiveauGroteskBold';
+        font-size: var(--fontsize18);
+    }
+    .outOfStock.availability {
+        color: $orange-color;
+        font-family: 'NiveauGroteskBold';
+        font-size: var(--fontsize18);
+    }
+    .POA.availability {
+        color: $anchor-color !important;
+        font-family: 'NiveauGroteskBold';
+        font-size: var(--fontsize18);
+    }
+}
+
+.addRowsLabel {
+    color: $anchor-color;
+    font-family: 'NiveauGroteskBold';
+    font-size: var(--fontsize20);
+    text-decoration: underline;
+    width: fit-content;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    padding: 0;
+}
+
+.subtotal {
+    display: flex;
+    align-items: center;
+    .subtotalLabel {
+        color: $pdp-font-color;
+        font-size: var(--fontsize20);
+        font-family: 'NiveauGrotesk';
+        margin-right: 5rem;
+    }
+    .subtotalValue {
+        color: $pdp-font-color;
+        font-size: var(--fontsize28);
+        font-family: 'NiveauGroteskBold';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span {
+            color: $pdp-font-color;
+            font-size: var(--fontsize20);
+            font-family: 'NiveauGrotesk';
+            font-weight: 100;
+            margin-bottom: 5px;
+            margin-left: 10px;
+        }
+    }
+}
+
+.row.addAllToCart {
+    justify-content: flex-end;
+    .addAllToCart {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .wishlist-btn {
+        display: flex;
+        position: relative;
+        app-add-to-list-view {
+            width: 100%;
+        }
+        img {
+            position: absolute;
+            top: 15px;
+            left: 15%;
+            width: 15px;
+            height: 15px;
+            z-index: 1;
+        }
+        .wishlist {
+            background-color: $anchor-color;
+            border: 1px solid $anchor-color;
+            color: $white-color;
+            font-family: "NiveauGroteskBold";
+            font-size: 1.1rem;
+            height: 40px;
+            border-radius: 8px;
+            text-transform: none;
+            &:focus {
+                box-shadow: 0 0 0 transparent;
+            }
+        }
+    }
+    .addToCart-btn {
+        display: flex;
+        position: relative;
+        cursor: pointer;
+        width: 307px;
+        img {
+            margin-right: 20px;
+            width: var(--addToCartImgWidth21);
+            height: var(--addToCartImgHeight21);
+            z-index: 1;
+        }
+        .addToCart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $blue-color;
+            border: 1px solid $blue-color;
+            font-family: "NiveauGroteskBold";
+            font-size: var(--fontsize24);
+            color: $white-color;
+            min-height: var(--buttonHeight60);
+            border-radius: 8px;
+            text-transform: none;
+            &:focus {
+                box-shadow: 0 0 0 transparent;
+            }
+        }
+    }
+}
+
+.sticky-bottom {
+    position: sticky;
+    padding: 50px 0;
+    bottom: 0;
+    background-color: #E8EFF7;
+}
+.searchtooltip
+{
+    position: relative;
+}
+
+tbody tr:first-child .searchtooltip .tooltiptext {
+    visibility: hidden;
+    width: 100%;
+    background-color: $white-color;
+    color:black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+   left: 0px;
+   top: 54px;
+    position: absolute;
+    z-index: 1;
+    font-size: var(--fontsize14);
+    border-radius: 7px;
+    margin: 4px 0px;
+   box-shadow: 0px 16px 16px #0000003d;
+    font-family: 'NiveauGroteskBold';
+  }
+
+  tbody tr:first-child .searchtooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+  tbody tr:not(:first-child) .searchtooltip .tooltiptext {
+      display: none;
+  }
+ 
+@media screen and (max-width:$Largescreen-1440) {
+    tbody tr:first-child .searchtooltip .tooltiptext {
+        top:50px;
+    }
+}
+@media screen and (max-width: $mobileScreenPotrait) {
+    .quick-order-container {
+        min-width: 100%;
+        padding-top: 0rem;
+        .quick-order-heading-row {
+            .quick-order-heading-col {
+                font-size: var(--fontsize20);
+                padding: 10px 15px 5px 15px;
+            }
+            .quick-order-heading-label {
+                font-size: var(--fontsize16);
+            }
+        }
+    }
+    .searchBox-label {
+        padding-top: 1.5rem;
+        font-family: 'NiveauGroteskBold';
+        color: $pdp-font-color;
+        padding-bottom: 10px;
+    }
+    .mobile-container {
+        background: #fff;
+        margin-top: 10px;
+        padding: 10px;
+        font-family: 'NiveauGrotesk';
+        color: $pdp-font-color;
+        .brand-label,
+        .item-details,
+        .availability-label,
+        .quantity-label,
+        .myPrice-label,
+        .productName {
+            font-family: 'NiveauGroteskBold';
+            color: $pdp-font-color;
+            font-size: var(--fontsize18);
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+        }
+        .item-details {
+            padding-bottom: 5px;
+        }
+        .productName {
+            font-size: var(--fontsize20);
+        }
+        .itemCode {
+            font-size: var(--fontsize18);
+        }
+        .myPrice-label {
+            padding-bottom: 15px;
+            span {
+                font-family: 'NiveauGrotesk';
+                font-size: var(--fontsize16);
+            }
+        }
+        .price-col {
+            font-family: 'NiveauGroteskBold';
+            span {
+                font-family: 'NiveauGrotesk';
+            }
+        }
+        .del-icon,
+        .name,
+        .availability,
+        .price-col,
+        .quantity {
+            text-align: right;
+            font-size: var(--fontsize18);
+            line-height: 1.5;
+        }
+        .del-icon {
+            img {
+                width: 18px;
+                height: 18px;
+            }
+        }
+        .brand-label,
+        .name {
+            padding-top: 10px;
+        }
+        .description {
+            padding-left: 0;
+            padding-right: 0;
+            margin: 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #D1D5D8;
+            line-height: 1;
+        }
+        .instock.availability {
+            color: $stock-label-color;
+            font-family: 'NiveauGroteskBold';
+        }
+        .outOfStock.availability {
+            color: $orange-color;
+            font-family: 'NiveauGroteskBold';
+        }
+    }
+    .row.addAllToCart {
+        flex-wrap: nowrap;
+    }
+    .subtotal {
+        justify-content: space-between;
+        padding: 1rem 15px;
+        .subtotalLabel {
+            font-size: var(--fontsize18);
+          
+        }
+        .subtotalValue {
+            font-size: var(--fontsize26);
+            span {
+                font-size: var(--fontsize18);
+                margin-bottom: 0px;
+            }
+        }
+    }
+    .sticky-bottom {
+        padding: 0 0 50px 0;
+    }
+    .addRows {
+        padding-left: 0;
+        margin: 0 15px;
+        padding-right: 0;
+        padding-bottom: 1.5rem;
+        padding-top: 15px;
+        border-bottom: 1px solid #D1D5D8;
+    }
+    .row.addAllToCart .addToCart-btn {
+        width: 100%;
+    }
+    .clearAll-div {
+        position: relative;
+        .clearAll {
+            position: absolute;
+            right: 0;
+            top: 25px;
+            color: #00AFE2;
+            text-decoration: underline;
+            font-family: 'NiveauGroteskBold';
+        }
+    }
+    .row.addAllToCart .addToCart-btn .addToCart {
+        border-radius: 2px;
+        max-height: var(--buttonHeight60);
+        img {
+            margin-right: 5px;
+        }
+    }
+}
+
+@media (min-width: 1100px) and (max-width: 1380px){
+    .price-col{
+        text-align: right;
+        padding-right: 50px !important;
+    }
+
+}
+
+@media (min-width: 1401px) and (max-width: 1600px){
+    .price-col{
+        text-align: right;
+        padding-right: 50px !important;
+    }
+
+}
+
+
+@media (min-width: 1601px) and (max-width: 1700px){
+    .price-col{
+        text-align: right;
+        padding-right: 50px !important;
+    }
+
+}
+
+
+@media (min-width: 1800px) and (max-width: 9550px){
+
+.price-col{
+    text-align: right;
+    padding-right: 50px !important;
+}
+
+}

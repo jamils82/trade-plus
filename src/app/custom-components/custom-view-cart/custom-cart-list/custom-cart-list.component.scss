@@ -1,0 +1,54 @@
+@import '../../../shared/styles/variables.scss';
+
+.item-list:nth-child(odd) {
+    background-color: #F6F6F6 !important;
+}
+
+.item-list :nth-child(even) {
+    background-color: #FFFFFF !important;
+}
+
+.reject {
+    border: 1px solid red;
+    background: rgba(255,0,0,0.1);
+}
+
+@media screen and (max-width:$mobileScreenPotrait) {
+    .cx-item-list-row.even {
+        background-color: $white-color;
+    }
+    .cx-item-list-row.odd {
+        background-color: #EFF0F0;
+    }
+    .view-more
+    {
+        background-color:$white-color !important;
+        color:$pdp-font-color !important;  
+        border:1px solid $pdp-font-color;
+        width:100%;
+        border-radius: 25px !important;
+        padding: 5px 0px;
+        margin-top: 20px;
+        font-size: var(--fontsize20)!important;
+        font-family: 'NiveauGroteskBold';
+    }
+}
+
+@media screen and (max-width:$smallmobileScreenPotrait568) {
+    .view-more
+    {
+        font-size: var(--fontsize18)!important;
+    }
+}
+@media screen and (max-width:$smallmobileScreenPotrait420) {
+    .view-more
+    {
+        font-size: var(--fontsize18)!important;
+    }
+}
+@media screen and (max-width:$smallmobileScreenPotrait360) {
+    .view-more
+    {
+        font-size: var(--fontsize18)!important;
+    }
+}

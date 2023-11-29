@@ -1,0 +1,26 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.fbu.tradelink",
+      "sha256_cert_fingerprints": [
+        "82:0B:12:DE:6D:19:99:3B:D3:8F:94:B5:DF:14:5F:26:B3:9B:82:47:13:AB:CB:F0:48:8F:CD:1B:C0:13:E7:2A"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.fbu.tradelink",
+      "sha256_cert_fingerprints": [
+        "8D:B7:D4:63:E2:B0:FC:4E:A4:62:56:B5:E0:F8:F4:23:A3:56:7D:F8:C9:EC:CB:B7:B5:63:88:D7:EF:07:18:29"
+      ]
+    }
+  }
+]

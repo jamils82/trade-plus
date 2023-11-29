@@ -1,0 +1,31 @@
+<div class="editName-popUp container">
+    <div class="close-btn-row row">
+        <div class="close-btn-col col-md-12">
+            <img (click)="closePopUp()" class="close-btn-icon fa fa-times" src='../../../../assets/images/close-icon.PNG'>
+            <!-- <i  class="close-btn-icon fa fa-times"></i> -->
+        </div>
+    </div>
+    <div class="heading-row row">
+        <div class="heading-col col-md-12">
+            <div class="heading-label">EDIT LIST NAME</div>
+        </div>
+    </div>
+    <div class="edit-name-row row">
+        <div class="edit-name-col col-md-12">
+            <div class="edit-name-label">List Name</div>
+        </div>
+    </div>
+    <div class="edit-name-input-row row">
+        <div class="edit-name-input-col col-md-12">
+            <input type="text" class="edit-name-input" (keyup)="myListName($event)" value={{listName}}>
+        </div>
+    </div>
+    <div class="buttons-row row">
+        <div class="cancel-button-col col-6 col-md-6">
+            <button class="btn cancel-btn" (click)="closePopUp()">Cancel</button>
+        </div>
+        <div class="save-button-col col-6 col-md-6">
+            <button class="btn save-btn" (click)="onSave()">Save</button>
+        </div>
+    </div>
+</div>

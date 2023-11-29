@@ -1,0 +1,555 @@
+@import '../../../shared/styles/variables.scss';
+* {
+    margin: 0;
+    padding: 0;
+}
+
+// .loader {
+//     display: none;
+//     top: 50%;
+//     left: 50%;
+//     z-index: 1;
+//     padding-left: 50%;
+//     position: sticky;
+//     transform: translate(-50%, -50%);
+// }
+
+// .loading {
+//     border: 2px solid #ccc;
+//     width: 60px;
+//     height: 60px;
+//     border-radius: 50%;
+//     border-top-color: red;
+//     border-left-color: red;
+//     animation: spin 1s infinite ease-in;
+// }
+
+// @keyframes spin {
+//     0% {
+//         transform: rotate(0deg);
+//     }
+//     100% {
+//         transform: rotate(360deg);
+//     }
+// }
+
+.loading {
+    position: fixed;
+    z-index: 9999;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  
+  
+  /* Transparent Overlay */
+  
+  .loading:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+    background: -webkit-radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+  }
+  
+  
+  /* :not(:required) hides these rules from IE9 and below */
+  
+  .loading:not(:required) {
+    /* hide "loading..." text */
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+  }
+  
+  .loading:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 10px;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+    -webkit-animation: spinner 150ms infinite linear;
+    -moz-animation: spinner 150ms infinite linear;
+    -ms-animation: spinner 150ms infinite linear;
+    -o-animation: spinner 150ms infinite linear;
+    animation: spinner 150ms infinite linear;
+    border-radius: 0.5em;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+    box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+  }
+
+  /* Animation */
+
+@-webkit-keyframes spinner {
+  0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes spinner {
+  0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes spinner {
+  0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+.POAColor {
+    color: $anchor-color !important;
+}
+
+.addToCartDisable {
+    color: red;
+    font-family: 'NiveauGrotesk';
+    font-size: 18px;
+}
+
+.addToCartDisableCheck {
+    color: red;
+    font-family: 'NiveauGrotesk';
+    font-size: 20px;
+    margin-top: 20px;
+}
+  
+.quantity {
+    display: flex;
+    margin: 20px 0px;
+    align-items: center;
+    .quantity-label {
+        font-family: "NiveauGrotesk";
+        font-size: var(--fontsize24);
+        color: $pdp-font-color;
+        padding-right: 10px;
+    }
+    .quantity-label.plpList {
+        font-family: "NiveauGrotesk";
+        font-size: var(--fontsize20);
+        color: $pdp-font-color;
+        padding-right: 10px;
+    }
+    .quantity-label.plpGrid {
+        font-family: "NiveauGrotesk";
+        font-size: var(--fontsize20);
+        color: $pdp-font-color;
+        padding-right: 10px;
+    }
+}
+
+.info {
+    .stock-label {
+        font-family: "NiveauGroteskBold";
+        font-size: var(--fontsize24);
+        padding-right: 5px;
+        color: $stock-label-color;
+    }
+    .stock-label.availableToOrderColor {
+        color: $orange-color;
+    }
+    .delivery-pickup {
+        font-family: "NiveauGrotesk";
+        padding-right: 23px;
+        padding-left: 23px;
+        color: $pdp-font-color;
+        font-size: var(--fontsize20);
+    }
+    .check-stock {
+        cursor: pointer;
+        font-family: "NiveauGroteskBold";
+        font-size: var(--fontsize20);
+        color: $anchor-color;
+        text-decoration: underline;
+    }
+    .check-stock.pdp {
+        padding-left: 10px;
+    }
+}
+
+.info.plpList {
+    position: absolute;
+    left: 10px;
+    bottom: 16px;
+    line-height: 1;
+    .stock-label {
+        font-family: "NiveauGroteskBold";
+        font-size: var(--fontsize24);
+        padding-right: 5px;
+        color: $stock-label-color;
+    }
+    .stock-label.availableToOrderColor {
+        color: $orange-color;
+    }
+    .delivery-pickup {
+        font-family: "NiveauGrotesk";
+        padding-right: 23px;
+        color: $pdp-font-color;
+        font-size: var(--fontsize18);
+    }
+    .check-stock {
+        cursor: pointer;
+        font-family: "NiveauGroteskBold";
+        font-size: var(--fontsize20);
+        color: $anchor-color;
+        text-decoration: underline;
+    }
+}
+
+.info.plpGrid {
+    .stock-label {
+        font-family: "NiveauGroteskBold";
+        font-size: var(--fontsize24);
+        padding-right: 5px;
+        color: $stock-label-color;
+    }
+    .stock-label.availableToOrderColor {
+        color: $orange-color;
+    }
+    .delivery-pickup {
+        font-family: "NiveauGrotesk";
+        padding-right: 10px;
+        color: $pdp-font-color;
+        font-size: var(--fontsize18);
+    }
+}
+
+.buttons {
+    display: flex;
+    align-items: flex-end;
+    margin: 20px 0px;
+    .pdpAddToList {
+        display: flex;
+        width: 307px;
+    }
+    .wishlist-btn {
+        display: flex;
+        position: relative;
+        width: 37%;
+        padding-right: 20px;
+        img {
+            position: absolute;
+            top: 13px;
+            left: 19%;
+            width: 15px;
+            height: 15px;
+        }
+        .wishlist {
+            background-color: $anchor-color;
+            border: 1px solid $anchor-color;
+            color: $white-color;
+            font-family: "NiveauGroteskBold";
+            font-size: 1rem;
+            height: 40px;
+            border-radius: 8px;
+            text-transform: none;
+            &:focus {
+                box-shadow: 0 0 0 transparent;
+            }
+        }
+    }
+    .addToCart-btn.pdp {
+        display: flex;
+        position: relative;
+        width: 307px;
+        cursor: pointer;
+        img {
+            width: var(--addToCartImgWidth21);
+            height: var(--addToCartImgHeight21);
+            margin-right: 20px;
+        }
+        .addToCart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $blue-color;
+            border: 1px solid $blue-color;
+            font-family: "NiveauGroteskBold";
+            font-size: var(--fontsize24);
+            color: $white-color;
+            min-height: var(--buttonHeight60);
+            border-radius: 8px;
+            text-transform: none;
+            &:focus {
+                box-shadow: 0 0 0 transparent;
+            }
+        }
+    }
+}
+
+.buttons.pdp {
+    margin: 40px 0px 50px 0;
+}
+
+.buttons.plpList {
+    display: flex;
+    align-items: flex-end;
+    margin: 20px 0px 10px 0px;
+    .wishlist-btn.plpList {
+        width: 67px;
+        padding-right: 0;
+        app-add-to-list-view {
+            width: 100%;
+        }
+        img {
+            position: absolute;
+            top: 9px;
+            width: 15px;
+            height: 15px;
+        }
+        .wishlist.plpList {
+            background-color: $anchor-color;
+            border: 1px solid $anchor-color;
+            color: $white-color;
+            font-family: "NiveauGroteskBold";
+            font-size: 1rem;
+            height: 30px;
+            min-width: 0;
+            border-radius: 3px;
+            text-transform: none;
+        }
+    }
+    .addToCart-btn.plpList {
+        display: flex;
+        position: relative;
+        width: 196px;
+        cursor: pointer;
+        img {
+            width: 18px;
+            height: 18px;
+            margin-right: 20px;
+        }
+        .addToCart.plpList {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $blue-color;
+            border: 1px solid $blue-color;
+            font-family: "NiveauGroteskBold";
+            font-size: var(--fontsize20);
+            color: $white-color;
+            min-height: 46px;
+            padding-left: 0;
+            border-radius: 10px;
+            text-transform: none;
+            &:focus {
+                box-shadow: 0 0 0 transparent;
+            }
+        }
+    }
+}
+
+.buttons.plpGrid {
+    display: flex;
+    align-items: flex-end;
+    margin: 10px 0px;
+    .wishlist-btn.plpGrid {
+        width: 67px;
+        padding-right: 0;
+        app-add-to-list-view {
+            width: 100%;
+        }
+        img {
+            position: absolute;
+            top: 9px;
+            width: 15px;
+            height: 15px;
+        }
+        .wishlist.plpGrid {
+            background-color: $anchor-color;
+            border: 1px solid $anchor-color;
+            color: $white-color;
+            font-family: "NiveauGroteskBold";
+            font-size: 1rem;
+            height: 30px;
+            min-width: 0;
+            border-radius: 3px;
+            text-transform: none;
+        }
+    }
+    .addToCart-btn.plpGrid {
+        display: flex;
+        position: relative;
+        width: 100%;
+        cursor: pointer;
+        padding-left: 20px;
+        img {
+            width: var(--addToCartImgWidth21);
+            height: var(--addToCartImgHeight21);
+            margin-right: 20px;
+        }
+        .addToCart.plpGrid {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $blue-color;
+            border: 1px solid $blue-color;
+            font-family: "NiveauGroteskBold";
+            font-size: var(--fontsize24);
+            color: $white-color;
+            min-height: var(--buttonHeight60);
+            padding-left: 0;
+            border-radius: 10px;
+            text-transform: none;
+            &:focus {
+                box-shadow: 0 0 0 transparent;
+            }
+        }
+    }
+}
+
+.quantity.pdp {
+    margin: 50px 0px 25px 0px;
+}
+
+.quantity.plpList {
+    margin: 10px 0 30px 0px;
+}
+
+.quantity.plpGrid {
+    margin: 10px 0px;
+}
+
+.quantity.quickOrder {
+    margin: 0;
+}
+
+.buttons.plpList.plpGrid {
+    margin: 10px 0px;
+}
+
+@media screen and (max-width: $screenMedium-1024) {
+    .buttons {
+        .wishlist-btn {
+            img {
+                left: 18%;
+            }
+        }
+        .addToCart-btn {
+            img {
+                left: 22%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $mobileScreenPotrait-768) {
+    .buttons {
+        .wishlist-btn {
+            img {
+                left: 28%;
+            }
+        }
+        .addToCart-btn {
+            img {
+                left: 31%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $mobileScreenPotrait) {
+    .addToCartDisable {
+        font-size: 14px;
+    }
+    .addToCartDisableCheck {
+        margin-top: 0;
+        font-size: 16px;
+    }
+    .quantity.pdp {
+        margin: 25px 0 15px 0;
+        .quantity-label {
+            font-size: var(--fontsize23);
+        }
+    }
+    .info .check-stock {
+        display: block;
+        padding-left: 0 !important;
+    }
+    .info {
+        font-size: var(--fontsize26);
+        .delivery-pickup {
+            font-size: var(--fontsize18);
+        }
+    }
+    .buttons.pdp {
+        margin: 15px 0 0 0;
+        app-add-to-list-view {
+            width: 50%;
+        }
+        .addToCart-btn.pdp {
+            width: 50%;
+            .addToCart {
+                max-height: 35px;
+                border-radius: 2px;
+                img {
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+    .info.plpGrid {
+        .stock-label {
+            font-size: var(--fontsize18);
+        }
+    }
+    .buttons.plpGrid {
+        .wishlist-btn.plpGrid {
+            width: 25%;
+        }
+        .addToCart-btn.plpGrid {
+            width: 75%;
+            padding-left: 10px;
+            .addToCart.plpGrid {
+                max-height: var(--buttonHeight60);
+                border-radius: 2px;
+            }
+        }
+    }
+}

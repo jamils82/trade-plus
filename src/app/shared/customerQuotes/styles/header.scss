@@ -1,0 +1,200 @@
+@import "../styles/variables.scss";
+cx-storefront {
+    header {
+        background-color: $white-color;
+        box-shadow: 0px 0px 4px 2px $header-gray;
+        position: sticky;
+        top: 0;
+        z-index: 3;
+        background: url(../../../assets/images/bgColorImg.png), #fff;
+        background-size: 100% 25% !important;
+        background-repeat: no-repeat;
+        z-index: 99;
+        cx-banner cx-media img {
+            margin-top: 0.5rem;
+            margin-bottom: 0.9rem;
+        }
+        select {
+            margin-top: 42px;
+            border: 1px solid #c8c9c7;
+            border-radius: 0.25rem;
+            color: #979797;
+            height: 2.0625rem;
+            width: 12.7rem;
+            cursor: pointer;
+            option {
+                cursor: pointer;
+            }
+        }
+        label {
+            display: inline-flex;
+        }
+        .SiteContext {
+            color: $white-color;
+            z-index: 1;
+            &:after {
+                border-top: none;
+            }
+        }
+        .menuItemContainer {
+            min-width: 3rem;
+            height: 2.7rem;
+            font-size: $font-size-1;
+            ul {
+                box-shadow: $box-shadow-grey 0rem 6px 4px 0px;
+                li .contact-us-info a {
+                    text-decoration: underline;
+                }
+                li a {
+                    color: $header-menu-a-font-color;
+                    &:active {
+                        color: $header-menu-a-font-color;
+                        background-color: $white-color;
+                    }
+                }
+            }
+        }
+    }
+    cx-paragraph {
+        width: max-content;
+        p {
+            text-align: center;
+            margin: auto;
+            font-size: $font-size-1;
+        }
+    }
+    .NavigationBar {
+        position: absolute;
+        left: 9.2%;
+        bottom: 4%;
+        margin-left: 1.5%;
+        min-height: auto !important;
+        cx-link {
+            padding-left: 1.8rem;
+            a {
+                color: $grey-color;
+                font-size: 0.9375rem;
+            }
+            a:hover {
+                text-decoration: none;
+            }
+        }
+    }
+}
+@media screen and(max-width: $Largescreen-1760) {
+    cx-storefront {
+        .NavigationBar {
+            left: 10%;
+        }
+    }
+}
+@media screen and(max-width: $Largescreen-1600) {
+    cx-storefront {
+        .NavigationBar {
+            left: 11%;
+        }
+    }
+}
+@media screen and(max-width: $Largescreen-1440) {
+    cx-storefront {
+        .NavigationBar {
+            left: 12%;
+        }
+    }
+}
+@media screen and(max-width: $ScreenMedium-1300) {
+    cx-storefront {
+        .NavigationBar {
+            left: 13%;
+        }
+    }
+}
+
+@media screen and(max-width: $screenMedium-1200) {
+    cx-storefront {
+        header {
+            input {
+                width: 18rem;
+            }
+        }
+        .NavigationBar {
+            left: 14%;
+        }
+    }
+}
+@media screen and(max-width: $screenMedium-1024) {
+    cx-storefront {
+        .NavigationBar {
+            left: 15%;
+        }
+    }
+}
+
+$screenMedium-1200: "1200px";
+
+@media screen and(max-width: $ipadScreen-768) {
+    cx-storefront header input {
+        width: 11rem;
+    }
+}
+
+@media screen and(max-width: $m991) {
+    cx-storefront cx-page-layout.LandingPage2Template cx-page-slot.Section1 {
+        margin-top: 1rem;
+    }
+    header {
+        .header {
+            .SiteLogo {
+                top: 1.5rem;
+            }
+            .SiteContext {
+                background-color: transparent;
+                position: absolute;
+                top: -7px;
+                padding-left: 0 !important;
+            }
+            .SiteLinks {
+                background-color: transparent;
+                position: absolute;
+                top: -0.2rem;
+                right: 2rem;
+                display: flex;
+            }
+        }
+    }
+}
+
+@media screen and(max-width: $mobileScreenPotrait) {
+    cx-storefront header .header .SiteLogo {
+        padding: 0 0 1rem 0;
+        width: 24vw;
+    }
+    header {
+        .header {
+            .SiteContext {
+                padding-left: 0.7rem;
+                padding-top: 0.7rem;
+            }
+        }
+    }
+    cx-storefront cx-paragraph p {
+        font-size: 0.78rem;
+    }
+    cx-storefront header label {
+        word-break: break-all;
+        width: 16rem;
+    }
+    cx-storefront header .menuItemContainer ul {
+        box-shadow: none;
+    }
+}
+
+@media screen and(max-width: $smallmobileScreenPotrait) {
+    cx-storefront cx-paragraph p {
+        font-size: 0.67rem;
+    }
+    cx-storefront header cx-banner cx-media img {
+        width: 6rem;
+        height: auto;
+    }
+}

@@ -1,0 +1,57 @@
+<div class="cardDetail">
+    <div class="row">
+        <app-shared-success-message [successInd$]="successInd$" class="success-message-selector" [infoMessage]="infoMessage"></app-shared-success-message>
+    </div>
+
+
+    <ng-container *ngIf="cart$ | async as cart">
+
+
+        <ng-container *ngIf="entries$ | async as entries">
+            <div *ngIf="cart.totalItems > 0" class="cart-details-wrapper">
+                <div class="row mt-40 ml-0 mr-0">
+                    <div class="col-6 p-0">
+                        <h4 class="heading">
+                            CART <span class="cart-total-display">{{cart.totalUnitCount}} {{cart.totalUnitCount == '1' ? 'item' : 'items'}} in the cart
+                 </span>
+
+                        </h4>
+                    </div>
+                    <div *ngIf="isMobile" class="clearCart-col col-6 p-0">
+                        <span class="clearCart" (click)="clearCart()">Clear Cart</span>
+                    </div>
+                    <div *ngIf="!isMobile" class="col-6 p-0 position-right">
+                        <app-add-to-list-view [product]="cart.totalItems" (successMessageEmitter)="successMessageEmitter()" [screenName]="'cartScreen'"></app-add-to-list-view>
+                        <button (click)="openAddFromList(data)" class="add-from-list"> <img src="../../../assets/images/Icon material-playlist-add.svg" class="addlist"> Add from My Lists </button>
+                    </div>
+                    <div *ngIf="isMobile" class="col-12 p-0 position-right">
+                        <app-add-to-list-view [product]="cart.totalItems" (successMessageEmitter)="successMessageEmitter()" [screenName]="'cartScreen'"></app-add-to-list-view>
+                        <button (click)="openAddFromList(data)" class="add-from-list"> <img src="../../../assets/images/Icon material-playlist-add.svg" class="addlist"> Add from My Lists </button>
+                    </div>
+                </div>
+                <div class="cart-list mt-40">
+                    <app-custom-cart-list [items]="entries" [cartIsLoading]="!(cartLoaded$ | async)" [promotionLocation]="promotionLocation" [options]="{
+                    isSaveForLater: false,
+                    optionalBtn: saveForLaterBtn
+                    }"></app-custom-cart-list>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+
+    <ng-template let-ctx #saveForLaterBtn>
+        <div *ngIf="selectiveCartEnabled" class="col-md-3 col-lg-3 col-xl-3 cx-sfl-btn">
+            <button class="link cx-action-link" [disabled]="ctx.loading" (click)="saveForLater(ctx.item)" type="button">
+      {{ 'saveForLaterItems.saveForLater' | cxTranslate }}
+    </button>
+        </div>
+    </ng-template>
+    <ng-template #noItemsScreen>
+        <p>No Record found</p>
+    </ng-template>
+
+</div>
+
+<ng-template #data let-modal>
+    <app-add-from-list></app-add-from-list>
+</ng-template>

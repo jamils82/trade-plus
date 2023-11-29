@@ -1,0 +1,55 @@
+$grey-color: #545859;
+$black-color: #000;
+$white-color: #fff;
+$medium-gray: #d8d9de;
+$placeholder-grey: #999999;
+$dark-grey: #666666;
+$red-color: #ef3e33;
+$error-text-red-color: #ff4100;
+$header-gray: #0000004b;
+$heading-grey1: #ecebea;
+$font-size-1: 1rem;
+$header-menu-icon-width: 4.5rem;
+$header-menu-a-font-color: #696969;
+$size-08: 0.8rem;
+$heading-grey: #ecebea;
+$box-shadow-grey: #888888;
+$breadcrumb-grey: #4e4e4e;
+$disabled-grey: #c8c9c7;
+$background-grey: #545859d9;
+$heading-dark-grey: #595959;
+@font-face {
+    font-family: "MyriadReg";
+    src: url("../../../assets/fonts/MYRIADPRO-REGULAR.woff") format("woff");
+}
+
+/* Mixins*/
+
+@mixin font-MyriadReg() {
+    font-family: "MyriadReg";
+}
+
+@mixin font-Arial() {
+    font-family: "Arial";
+}
+
+.searchformfld .label {
+    color: $grey-color;
+}
+
+/* Media quires resolution screen sizes*/
+
+$ExtraLargeScreen-1920: "1920px";
+$Largescreen-1760: "1760px";
+$Largescreen-1700: "1700px";
+$Largescreen-1600: "1600px";
+$Largescreen-1440: "1440px";
+$ScreenMedium-1300: "1300px";
+$screenMedium-1200: "1200px";
+$screenMedium-1024: "1024px";
+$ipadScreen-768: "901px";
+$mobileScreen: "900px";
+$m991: "991px";
+$mobileScreenPotrait: "767px";
+$smallmobileScreenPotrait360: "360px";
+$smallmobileScreenPotrait: "330px";

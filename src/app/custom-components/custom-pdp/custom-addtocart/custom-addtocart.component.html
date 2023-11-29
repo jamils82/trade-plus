@@ -1,0 +1,141 @@
+<!-- <div class="loader">
+    <div class="loading"></div>
+</div> -->
+
+<form *ngIf="productCode && !plpList && !plpGrid && !quickOrder" [formGroup]="addToCartForm"
+    (keydown.enter)="$event.preventDefault()" (submit)="addToCart()">
+    <!-- <div class="loading " *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div> -->
+    <div class="quantity pdp" *ngIf="showQuantity">
+        <label class="quantity-label">{{ 'addToCart.quantity' | cxTranslate }}</label>
+        <cx-item-counter [max]="999" [control]="addToCartForm.get('quantity')"></cx-item-counter>
+    </div>
+    <span class="info">
+        <span *ngIf="showInventory$ | async">{{ getInventory() }}</span>
+        <span style="padding-right: 0px;" *ngIf="product?.price?.formattedValue != 'POA' && product?.stock?.stockLevel > 0" class="stock-label">
+            {{product?.stock?.stockLevel }}
+        </span>
+        <span *ngIf="!showEmptyPrice && !product?.addToCartDisabled" class="stock-label"
+            [ngClass]=" product?.price?.formattedValue == 'POA' || product?.price?.formattedValue == '$0.00'  ? 'POAColor' : hasStock ? 'instockColor' : 'availableToOrderColor'">
+            {{product?.price?.formattedValue == 'POA' || product?.price?.formattedValue == '$0.00' ? 'POA' : 
+            (product?.stock?.leadTimeDays >= 1 && product?.stock?.stockLevel == 0 ) ? (product?.stock?.leadTimeDays == 1 ? (product?.stock?.leadTimeDays + ' Day Lead time') : (product?.stock?.leadTimeDays + ' Days Lead time')) :  
+            ((product?.stock?.leadTimeDays == 0 || product?.stock?.leadTimeDays == '' || product?.stock?.leadTimeDays == undefined) && product?.stock?.stockLevel == 0) ? 'Available to order': (hasStock && product?.stock?.leadTimeDays == undefined) ? ('addToCart.inStock' | cxTranslate) : ((product?.stock?.stockLevel < 0 && product?.stock?.leadTimeDays == undefined) || (product?.stock?.stockLevel < 0)) ? 'Available to order' : ''}}</span>
+        <span *ngIf="!showEmptyPrice && !product?.addToCartDisabled" class="delivery-pickup">Delivery | Click & Collect </span>
+        <a *ngIf="!showEmptyPrice && !product?.addToCartDisabled" (click)="stockInOtherBranches(content)" class="check-stock pdp">Check stock in other
+            branches</a>
+    </span>
+    <div class="addToCartDisableCheck" *ngIf="product?.addToCartDisabled">Product now obsolete. Cannot be added to the Cart.</div>
+
+    <div class="buttons pdp">
+        <app-add-to-list-view [product]="product" [isPOAProduct]="product?.price?.formattedValue == 'POA'  || product?.price?.formattedValue == '$0.00'" class="pdpAddToList"
+            (successMessageEmitter)="successMessageEmitter()" [quantity]="quantity" [productCode]="productCode"
+            [screenName]="'pdpScreen'"></app-add-to-list-view>
+        <!-- <div class="wishlist-btn">
+            <img src="../../../../assets/images/Icon material-playlist-add.svg" (click)="addSingleItemToList()">
+            <button class="btn btn-block wishlist" type="button" [disabled]="quantity <= 0" (click)="addSingleItemToList()">
+          Add to List
+        </button>
+        </div> -->
+
+
+        <div class="addToCart-btn pdp">
+            <button (click)="pdpLoader()" class="btn btn-block addToCart" type="submit"
+                [disabled]="quantity <= 0 || product?.price?.formattedValue == 'POA' || product?.price?.formattedValue == '$0.00' || product.addToCartDisabled == true ">
+                <img src="../../../../assets/images/Icon material-shopping-cart.svg">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+</form>
+
+
+<form *ngIf="productCode && plpList" [formGroup]="addToCartForm" (keydown.enter)="$event.preventDefault()"
+    (submit)="addToCart()">
+
+    <div class="quantity plpList" *ngIf="showQuantity">
+        <label class="quantity-label plpList">{{ 'addToCart.quantity' | cxTranslate }}</label>
+        <cx-item-counter [max]="999" [control]="addToCartForm.get('quantity')"></cx-item-counter>
+    </div>
+
+    <span class="info plpList">
+        <span *ngIf="showInventory$ | async">{{ getInventory() }}</span>
+        <span style="padding-right: 0px;" *ngIf="product?.price?.formattedValue != 'POA' && product?.stock?.stockLevel > 0" class="stock-label">
+            {{product?.stock?.stockLevel }}
+        </span>
+        <span *ngIf="!showEmptyPrice && !product?.addToCartDisabled" class="stock-label"
+            [ngClass]="product?.price?.formattedValue == 'POA' || product?.price?.formattedValue == '$0.00'  ? 'POAColor' : (hasStock) ? 'instockColor' : 'availableToOrderColor'">
+            {{product?.price?.formattedValue == 'POA' || product?.price?.formattedValue == '$0.00' ? 'POA' : 
+            (product?.stock?.leadTimeDays >= 1 && product?.stock?.stockLevel == 0) ? (product?.stock?.leadTimeDays == 1 ? (product?.stock?.leadTimeDays + ' Day Lead time') : (product?.stock?.leadTimeDays + ' Days Lead time')) :  
+            ((product?.stock?.leadTimeDays == 0 || product?.stock?.leadTimeDays == '' || product?.stock?.leadTimeDays == undefined) && product?.stock?.stockLevel == 0) ? 'Available to order': (hasStock && product?.stock?.leadTimeDays == undefined) ? ('addToCart.inStock' | cxTranslate) : ((product?.stock?.stockLevel < 0 && product?.stock?.leadTimeDays == undefined) || (product?.stock?.stockLevel < 0)) ? 'Available to order' : ''}}</span>
+        <span *ngIf="!showEmptyPrice && !product?.addToCartDisabled" class="delivery-pickup">Delivery | Click & Collect </span>
+        <div class="addToCartDisable" *ngIf="product?.addToCartDisabled">
+            <span>Product now obsolete. Cannot be added to the Cart.</span>
+        </div>
+    </span>
+
+    <div class="buttons plpList">
+        <div class="wishlist-btn plpList">
+            <app-add-to-list-view [product]="product" [isPOAProduct]="product?.price?.formattedValue == 'POA' || product?.price?.formattedValue == '$0.00'"
+                (successMessageEmitter)="successMessageEmitter()" [product]="product" [quantity]="quantity"
+                [screenName]="'plpListScreenSingleItem'"></app-add-to-list-view>
+        </div>
+
+        <div class="addToCart-btn plpList">
+            <button (click)="plpLoader()" class="btn btn-block addToCart plpList" type="submit"
+                [disabled]="quantity <= 0 || product?.price?.formattedValue == 'POA' || product?.price?.formattedValue == '$0.00' || product.addToCartDisabled == true">
+                <img class="plpList" src="../../../../assets/images/Icon material-shopping-cart.svg">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+</form>
+
+<form *ngIf="productCode && plpGrid" [formGroup]="addToCartForm" (keydown.enter)="$event.preventDefault()"
+    (submit)="addToCart()">
+
+    <div class="quantity plpGrid" *ngIf="showQuantity">
+        <label class="quantity-label plpGrid">{{ 'addToCart.quantity' | cxTranslate }}</label>
+        <cx-item-counter [max]="999" [control]="addToCartForm.get('quantity')"></cx-item-counter>
+    </div>
+
+    <span class="info plpGrid">
+        <span *ngIf="showInventory$ | async">{{ getInventory() }}</span>
+        <span style="padding-right: 0px;" *ngIf="product?.price?.formattedValue != 'POA' && product?.stock?.stockLevel > 0" class="stock-label">
+            {{product?.stock?.stockLevel }}
+        </span>
+        <span *ngIf="!showEmptyPrice && !product?.addToCartDisabled" class="stock-label"
+            [ngClass]="product?.price?.formattedValue == 'POA' || product?.price?.formattedValue == '$0.00'  ? 'POAColor' : hasStock ? 'instockColor' : 'availableToOrderColor'">
+            {{product?.price?.formattedValue == 'POA' || product?.price?.formattedValue == '$0.00' ? 'POA' : 
+            (product?.stock?.leadTimeDays >= 1 && product?.stock?.stockLevel == 0) ? (product?.stock?.leadTimeDays == 1 ? (product?.stock?.leadTimeDays + ' Day Lead time') : (product?.stock?.leadTimeDays + ' Days Lead time')) :  
+            ((product?.stock?.leadTimeDays == 0 || product?.stock?.leadTimeDays == '' || product?.stock?.leadTimeDays == undefined) && product?.stock?.stockLevel == 0) ? 'Available to order': (hasStock && product?.stock?.leadTimeDays == undefined) ? ('addToCart.inStock' | cxTranslate) : ((product?.stock?.stockLevel < 0 && product?.stock?.leadTimeDays == undefined) || (product?.stock?.stockLevel < 0)) ? 'Available to order' : ''}}</span>
+        <span *ngIf="!showEmptyPrice && !product?.addToCartDisabled" class="delivery-pickup">Delivery | Click & Collect </span>
+    </span>
+
+    <div class="buttons plpGrid">
+        <div class="wishlist-btn plpGrid">
+            <app-add-to-list-view [product]="product" [isPOAProduct]="product?.price?.formattedValue == 'POA' || product?.price?.formattedValue == '$0.00'"
+                (successMessageEmitter)="successMessageEmitter()" [product]="product" [quantity]="quantity"
+                [screenName]="'plpGridScreenSingleItem'"></app-add-to-list-view>
+        </div>
+
+        <div class="addToCart-btn plpGrid">
+            <button (click)="plpLoader()" class="btn btn-block addToCart plpGrid" type="submit"
+                [disabled]="quantity <= 0 || product?.price?.formattedValue == 'POA' || product?.price?.formattedValue == '$0.00' || product.addToCartDisabled == true">
+                <img class="plpGrid" src="../../../../assets/images/Icon material-shopping-cart.svg">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+    <div class="addToCartDisable" *ngIf="product?.addToCartDisabled">
+        <span>Product now obsolete. Cannot be added to the Cart.</span>
+    </div>
+</form>
+
+<form *ngIf="quickOrder" [formGroup]="addToCartForm" (keydown.enter)="$event.preventDefault()" (submit)="addToCart()">
+    <div class="quantity quickOrder" *ngIf="showQuantity">
+        <cx-item-counter [max]="999" [control]="addToCartForm.get('quantity')"></cx-item-counter>
+    </div>
+</form>
+
+<ng-template #content let-modal>
+    <app-in-stock-availability [productCode]="product.code"></app-in-stock-availability>
+</ng-template>

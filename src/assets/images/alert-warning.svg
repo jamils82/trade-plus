@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="21px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>ant-design:exclamation-circle-filled</title>
+    <desc>Created with Sketch.</desc>
+    <g id="0.3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="categories-off" transform="translate(-408.000000, -153.000000)" fill-rule="nonzero">
+            <g id="Group" transform="translate(379.000000, 134.000000)">
+                <g id="ant-design:exclamation-circle-filled" transform="translate(26.000000, 18.000000)">
+                    <g id="Icon" transform="translate(3.000000, 1.000000)" fill="#CC362C">
+                        <path d="M14,0 C6.26875,0 0,6.26875 0,14 C0,21.73125 6.26875,28 14,28 C21.73125,28 28,21.73125 28,14 C28,6.26875 21.73125,0 14,0 Z M13,7.25 C13,7.1125 13.1125,7 13.25,7 L14.75,7 C14.8875,7 15,7.1125 15,7.25 L15,15.75 C15,15.8875 14.8875,16 14.75,16 L13.25,16 C13.1125,16 13,15.8875 13,15.75 L13,7.25 Z M14,21 C13.183504,20.9833325 12.5303077,20.3166661 12.5303077,19.5 C12.5303077,18.6833339 13.183504,18.0166675 14,18 C14.816496,18.0166675 15.4696923,18.6833339 15.4696923,19.5 C15.4696923,20.3166661 14.816496,20.9833325 14,21 L14,21 Z" id="Icon-Shape"></path>
+                    </g>
+                    <rect id="ViewBox" x="0" y="0" width="32" height="32"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

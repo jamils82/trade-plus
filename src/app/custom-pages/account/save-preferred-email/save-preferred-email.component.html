@@ -1,0 +1,24 @@
+<div class="editName-popUp container">
+    <div class="close-btn-row row">
+        <div class="close-btn-col col-md-12">
+            <button type="button" class="close" aria-label="Close" (click)="closePopup('cross')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+    </div>
+    <div class="more-information-row row">
+        <div class="more-information-col col-md-12">
+            <div class="more-information-label">
+                Please save your current changes
+            </div>
+        </div>
+    </div>
+    <div class="buttons-row row">
+        <div class="cancel-button-col col-md-6 col-sm-6 col-6">
+            <button class="btn cancel-btn" (click)="closePopup('No')">No</button>
+        </div>
+        <div class="save-button-col col-md-6 col-sm-6 col-6">
+            <button class="btn save-btn" (click)="saveEmail(true)">Yes</button>
+        </div>
+    </div>
+</div>

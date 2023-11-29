@@ -1,0 +1,230 @@
+<div *ngIf="!isMobile">
+  <div class="my_statements">
+    <div class="">
+      <div class="row topHeading">
+        <div class="heading-row row">
+          <div class="col-md-9 heading">
+            DOWNLOAD FORMATS
+          </div>
+          <div class="col-md-3 desk-new-btn">
+            <button type="button" class="btn confirmBtn" (click)="createNewBtn()">Create New</button>
+          </div>
+          <!-- <div class="col-md-3 update-preference">
+                    <button class="update-preference-button"> Update Preferences </button>
+                </div> -->
+          <br />
+        </div>
+        <div class="col-md-3 custom-width-navigation" style="margin-top: 7rem;">
+          <div>
+            <app-account-left-nav [selectedTab]="'download'"></app-account-left-nav>
+          </div>
+        </div>
+        <div class="col-md-9 custom-width-grid">
+          <div class="row searchbox-row" style="flex-direction: row-reverse;justify-content: space-between;">
+            <div class="date-div flex-display cus-padding-right"></div>
+            <div class="search-div">
+              <label class="searchbox">
+                <input autocomplete="off" aria-describedby="initialDescription" #searchKey
+                  class="form-control border-search" aria-controls="results" aria-autocomplete="both"
+                  placeholder="Search Format Title" aria-label="Search" (keyup)="doFilter($event.target.value)">
+                <mat-icon class="search">search</mat-icon>
+              </label>
+            </div>
+          </div>
+          <div>
+            <!-- <table 
+              mat-table 
+              matSortActive="Format Title" 
+              matSortDirection="desc" 
+              [dataSource]="dataSource" 
+              (matSortChange)="sortTable($event)" 
+              matSort>
+              <ng-container matColumnDef="Format Title">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 50%;"> Format Title</th>
+                <td mat-cell *matCellDef="let element"> {{element.Format_Title}} </td>
+              </ng-container>
+              <ng-container matColumnDef="Format">
+                <th class="position-relative" mat-header-cell *matHeaderCellDef mat-sort-header style="width: 30%;">
+                  Format
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.Format }} </td>
+              </ng-container>
+              <ng-container matColumnDef="Format Type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Format Type </th>
+                <td mat-cell *matCellDef="let element">{{element.Format_type }} </td>
+              </ng-container>
+              <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef> </th>
+                <td mat-cell *matCellDef="let element">
+                  <img class="edit" (click)="editInvoice(element)" src="../../../../assets/images/Icon material-edit_quotes.png" />
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef> </th>
+                <td mat-cell *matCellDef="let element">
+                  <img class="delete" *ngIf="element.fileType !== 'Price'" (click)="deleteElement(del, element)" src="../../../../assets/images/Icon material-delete_quotes.png" />
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns "></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
+
+            </table>
+            <table class="noDataTable">
+              <tr *ngIf="dataSource?.filteredData && dataSource?.filteredData?.length == 0">
+                <td style="text-align: center;" [attr.colspan]="displayedColumns.length">
+                  No Records Found!
+                </td>
+              </tr>
+            </table> -->
+            <table mat-table matSortActive="Format Title" [dataSource]="dataSource" (matSortChange)="sortTable($event)"
+              matSort aria-describedby="">
+
+              <!-- Format Title Column -->
+              <ng-container matColumnDef="Format Title">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 50%;"
+                  (click)="alphaNumericSort($event)"> Format Title
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{element.title}} </td>
+              </ng-container>
+
+              <!-- Format Column -->
+              <ng-container matColumnDef="Format">
+                <th class="position-relative" mat-header-cell *matHeaderCellDef mat-sort-header style="width: 30%;">
+                  Format
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.fileFormat }} </td>
+              </ng-container>
+              <!-- Format type Column -->
+              <ng-container matColumnDef="Format Type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Format Type </th>
+                <td mat-cell *matCellDef="let element">
+                  {{element.fileType }} </td>
+              </ng-container>
+              <!-- Edit Column -->
+              <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef> </th>
+                <td mat-cell *matCellDef="let element">
+                  <img *ngIf="element.associateTradeAccount != 'DEFAULT'" class="edit" (click)="editInvoice(element)"
+                    src="../../../../assets/images/Icon material-edit_quotes.png" />
+                </td>
+              </ng-container>
+              <!-- Delete Column -->
+              <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef> </th>
+                <td mat-cell *matCellDef="let element">
+                  <img class="delete" *ngIf="element.fileType !== 'PRICE' && element.associateTradeAccount != 'DEFAULT'" (click)="deleteElement(del, element)"
+                    src="../../../../assets/images/Icon material-delete_quotes.png" />
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns "></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns; ">
+              </tr>
+
+            </table>
+            <table class="noDataTable" aria-describedby="">
+              <th style="display: none;"></th>
+              <tr *ngIf="dataSource?.filteredData && dataSource?.filteredData?.length == 0">
+                <td style="text-align: center;" [attr.colspan]="displayedColumns.length">
+                  No Records Found!
+                </td>
+              </tr>
+            </table>
+
+            <mat-paginator appPagination [length]="testPaginator.length " [pageSizeOptions]="[12, 24, 36] "
+              [pageSize]="testPaginator.pageSize " [pageIndex]="testPaginator.pageIndex " [hidePageSize]="false "
+              (page)="pageEvent($event)">
+            </mat-paginator>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="loading " *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+</div>
+<div *ngIf="isMobile">
+  <div class="container">
+    <div class="">
+      <div class="row">
+        <div class="heading-row row">
+          <div class="col-md-9 heading">
+            DOWNLOAD FORMATS
+          </div>
+          <div class="col-md-3 mob-new-btn">
+            <button type="button" class="btn confirmBtn" (click)="createNewBtn()">Create New</button>
+          </div>
+
+          <br />
+        </div>
+        <div class="col-md-3 custom-width-navigation" style="margin-top: 7rem;">
+          <div>
+            <app-account-left-nav [selectedTab]="'download'"></app-account-left-nav>
+          </div>
+        </div>
+        <div class="col-md-9 custom-width-grid">
+          <div class="row searchbox-row" style="flex-direction: row-reverse;justify-content: space-between;">
+            <div class="date-div flex-display cus-padding-right">
+
+            </div>
+            <div class="search-div">
+              <label class="searchbox">
+                <input autocomplete="off" aria-describedby="initialDescription" #searchKey
+                  class="form-control border-search" aria-controls="results" aria-autocomplete="both"
+                  placeholder="Search Format Title" aria-label="Search" (keyup)="doFilter($event.target.value)">
+                <mat-icon class="search">search</mat-icon>
+              </label>
+            </div>
+          </div>
+          <div *ngFor="let data of mobData" class="background-list">
+            <div class="row">
+              <div class="col-12">
+                <h2 class="headmob">Format Title : {{data.title}}</h2>
+                <hr class="marginhr" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <h4 class="leftlist">Format</h4>
+              </div>
+              <div class="col-6">
+                <h4 class="text-right rightlist">{{data.fileFormat}}</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <h4 class="leftlist">Format Type</h4>
+              </div>
+              <div class="col-6">
+                <h4 class="text-right rightlist">{{data.fileType}}</h4>
+              </div>
+            </div>
+            <div class="row m-icons">
+              <!-- Edit Column -->
+              <img class="edit m-editIcon" (click)="editInvoice(data)"
+                src="../../../../assets/images/Icon material-edit_quotes.png" />
+              <!-- Delete Column -->
+              <img class="delete m-delete" *ngIf="data.fileType !== 'PRICE'" (click)="deleteElement(del, data)"
+                src="../../../../assets/images/Icon material-delete_quotes.png" />
+            </div>
+          </div>
+          <div *ngIf="isMobile && viewMoreVisible">
+            <button class="view-more" (click)="viewMoreClick()">View More</button>
+          </div>
+          <table class="noDataTable">
+            <tr *ngIf="dataSource?.filteredData && dataSource?.filteredData?.length == 0">
+              <td style="text-align: center;" [attr.colspan]="displayedColumns.length">
+                No Records Found!
+              </td>
+            </tr>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #del let-modal>
+  <app-delete-popup [data]="currentItem" [downloadFormatData]="currentItem"></app-delete-popup>
+</ng-template>

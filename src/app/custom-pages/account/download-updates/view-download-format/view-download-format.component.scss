@@ -1,0 +1,166 @@
+@import "../../../../shared/styles/variables.scss";
+.download_format_list{
+    list-style: none;
+    padding: 0px;
+    margin-left: 15px;
+    margin-bottom: 24px;
+}
+
+.format-download-modal{
+    .modal-header{
+        border-bottom: none;
+        .modal-title{
+            font-size: var(--fontsize20);
+            font-family: "NiveauGroteskBold";
+            color: #495A64;
+            margin-top: 10px;
+            margin-left: 24px;
+        }
+    }
+
+    .modal-body{
+        padding-top: 18px;
+        .download_format_list{
+            .list-value{
+                color: #495A64;
+                font-family: "NiveauGroteskBold";
+                font-size: var(--fontsize18);
+            }
+            .list-key{
+                display: inline-block;
+                width: 125px;
+                font-family: "NiveauGrotesk";
+            }
+        }
+        .sub-heading{
+            font-size: var(--fontsize20);
+            font-family: "NiveauGroteskBold";
+            color: #495A64;
+            margin-left: 15px;
+            margin-bottom: 4px;
+        }
+        .download_file_list{
+            list-style: none;
+            padding: 0px;
+            margin-left: 15px;
+            .heading_Rows{
+                font-family: "NiveauGrotesk";
+            }
+            li{
+                padding-top: 3px;
+                padding-bottom: 3px;
+            }
+            .list-attr{
+                color: #00AFE2;
+                font-family: "NiveauGroteskBold";
+                font-size: var(--fontsize18);
+                text-decoration: underline;
+            }
+        }
+    }
+    .modal-footer{
+        border-top: none ;
+        padding-bottom: 38px;
+        .btn-dark-close{
+            border-radius: 4px;
+            background-color: #77889380;
+            font-family: "NiveauGroteskBold";
+            margin: auto;
+            color: #495A64;
+            width: 145px;
+            height: 60px;
+        }
+    }
+}
+.mob
+{
+    display:none;
+}
+.goBack-css{
+    text-transform: none !important;
+}
+@media screen and (max-width:$mobileScreenPotrait) {
+.format-download-modal
+{
+    .modal-header 
+    {
+        .modal-title
+        {
+            margin-left: 5px !important;
+            margin-top: 0px;
+            font-size: var(--fontsize19) !important;
+        }
+    }
+    .modal-body
+    {
+        padding: 0px 5px;
+        .download_file_list
+        {
+            li 
+            {
+                font-size: var(--fontsize18);
+            }
+            .list-attr
+            {
+                word-break: break-all;
+            }
+        }
+    }
+} 
+
+.mob
+{
+    display:block;
+}
+.desk
+{
+    display: none;
+}
+.rightlist
+{
+    font-size: var(--fontsize18);
+    font-family: 'NiveauGroteskBold';
+    color: $pdp-font-color;
+    span{
+        font-family: 'NiveauGrotesk';
+    }
+   p
+   {
+       display: inline;
+   }
+}
+
+.leftlist
+{
+    font-size: var(--fontsize18);
+    font-family: 'NiveauGrotesk';
+    color: $pdp-font-color;
+}
+li.row 
+{
+    width:100%;
+}
+.note{
+    line-height: 1.3;
+  }
+  .txt-indent
+  {
+      text-indent: -10px;
+      padding-left: 10px;
+  }
+  .format-download-modal 
+  {
+    .modal-footer 
+    {
+        .btn-dark-close
+        {
+            border-radius: 5px;
+            width: 135px;
+            height: 48px;
+            max-height: 40px;
+            min-width: 40px;
+            padding: 5px 12px;
+        }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+<div class="product-notice-wrapper" *ngIf="noticeAlertVisible">
+  <div class="container">
+    <div class="product-notice-alert">
+      <a href="/product-notices" class="product-notice-link" target="_blank">Product Notice:  </a>
+      <span>Recall Notice for Products Containing Button Batteries and Westinghouse WHG638BC / WHG958BC Cooktops</span>
+    </div>
+  </div>
+  <span class="close-notice-alert" (click)="hideNoticeAlert()">x</span>
+</div>

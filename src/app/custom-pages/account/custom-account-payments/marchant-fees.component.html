@@ -1,0 +1,33 @@
+<div class="other-payment-option">
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon"></mat-icon>
+    </button>
+    <!-- <div class="for-padding">
+        <h3>MERCHANT FEES</h3>
+        <div class="inner-data">
+            <p>
+                Some payment options are subject to fees. The merchant fee amount will be automatically calculated for
+                you.
+            </p>
+        </div>
+        <div class="card-details-segment" style="margin-top: 40px;">
+            <div class="for-info">
+                <div class="visa-img-merchant">
+                    <img src="assets/images/visa.png" alt=""> &nbsp;&nbsp; Visa
+                </div>
+                <p>0.0 %</p>
+            </div>
+            <div class="for-info">
+                <div class="visa-img-merchant">
+                    <img src="assets/images/master-card.svg" alt=""> &nbsp;&nbsp; Mastercard
+                </div>
+                <p>0.0 %</p>
+            </div>
+
+        </div>
+    </div> -->
+    <div class="merchantParagraph" [innerHtml]="popUpData?.content"></div>
+    <div class="close-segment" style="text-align: center;">
+        <button class="close-dial-button" (click)="close()">Close</button>
+    </div>
+</div>

@@ -1,0 +1,409 @@
+
+<div class="loading" *ngIf="dataShow |async">Loading&#8230;</div>
+<div  class="quick-order-container container" *ngIf="dataShow">
+    <div class="row">
+        <app-shared-success-message [successInd$]="successInd$" class="success-message-selector" [infoMessage]="infoMessage"></app-shared-success-message>
+    </div>
+
+    <div class="failure-message-container" *ngIf="errorInd">
+        <div class="failure-container">
+            <div class="error-message">Sorry, we are unable to add POA products to a Quick Order. Please add another or
+                contact your branch <span class="close-btn" (click)="error = false"><i class="fa fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="quick-order-heading-row row">
+        <div class="quick-order-heading-col col-md-12">
+            <div class="heading-name">
+                QUOTE REQUEST FORM
+            </div>
+        </div>
+        <div class="quick-order-heading-label col-md-12">
+            <div class="heading-label">
+                Request a quote using the Search field, or add from My Lists or My Quotes. You will be notified via SMS when your quote is available to view in your My Quotes page.
+            </div>
+           
+        </div>
+    </div>
+   
+    <table *ngIf="!isMobile" class="table">
+        <thead>
+            <tr class="table-heading">
+
+                <th width="20%">Search</th>
+                <!-- <th width="20%">rowIndex</th> -->
+                <th width="8%">Brand</th>
+                <th width="27%">Item Details</th>
+                <th width="12%">Availability</th>
+                <ng-container *ngIf="isPricingPermission">
+                    <th width="13%">My Price<span> (excl. GST)</span></th>
+                </ng-container>
+                <th width="10%">Quantity</th>
+                <th width="7%" (click)="deleteAllMember(del)">Clear All</th>
+            </tr>
+        </thead>
+    </table>
+    <table *ngIf="!isMobile" class="table" [ngClass]="{table_cu_h : rowCount > 20}" style="padding-top: 0px;margin-top: -15px;" >
+        <tbody>
+            <!-- <tr *ngFor="let row of rows; let i=index"></tr> -->
+            <tr  *ngFor="let row of rowsProduct$ | async; let i=index" (click)="searchRowHander(i)">
+              
+                <td width="20%" (click)="searchRowHander(i)">
+                    <div class="searchtooltip">
+                      
+                        <app-product-search [fromPage]="true" [config]="searchConfig"
+                            [quickOrderIndex]="quickOrderIndex" [screenMode]="screenMode"
+                            (prodCodecallBack)="prodCodecallBack($event)" [selectedCode]="row?.productCode">
+                        </app-product-search>
+                        <!-- <span class="tooltiptext">Add "QUOTATION MARKS" around multiple words to narrow your search
+                        </span> -->
+                    </div>
+                </td>
+                <!-- <td title="{{row?.brand}}" class="name"> {{i}} </td> -->
+                <td width="8%" title="{{row?.brand}}" class="name"> {{row?.brand ? row?.brand : 'Non-exclusive'}} </td>
+                <td title="{{row?.details}}" class="description">
+                    <span class="productName">{{row?.details}}</span>
+                    <div class="product-details">
+                        <span class="itemCode">{{row?.productDetails}}</span>
+                    </div>
+                    <div class="restrict-product" *ngIf="row?.addToCartDisabled == true">Product now obsolete. Cannot be added to the Cart.</div>
+                </td>
+                <td title="{{row?.stock}}" *ngIf="row?.stock.includes('In stock')" class="instock availability"> {{row?.stock}}
+                </td>
+                <td title="{{row?.stock}}" *ngIf="row?.stock == 'Available to order'" class="outOfStock availability">
+                    {{row?.stock}} </td>
+                <!-- <td title=" {{row?.stock}}" *ngIf="row?.stock == 'Low stock'" class="POA availability">
+                    {{row?.stock}} </td> -->
+                <td title=" {{row?.stock}}" *ngIf="row?.stock == 'POA'" class="POA availability">
+                    {{row?.stock}} </td>
+                <td title="{{row?.stock}}" *ngIf="row?.stock != 'Available to order' && (!row?.stock.includes('In stock')) && row?.stock != 'Low stock' && row?.stock != 'POA'" class="outOfStock availability">
+                    {{row?.stock}}</td>
+                <ng-container *ngIf="isPricingPermission">
+                    <td style="text-align:center;" width="13%" *ngIf="row.fommatedprice" title="{{row?.fommatedprice}}" class="price-col">
+                        {{row?.dollar}}{{row?.fommatedprice | number: '1.2-2'}} <span>{{row?.unit}}</span> </td>
+                    <td style="text-align:center;" width="13%" *ngIf="!row.fommatedprice" title="{{row?.fommatedprice}}" class="price-col">--</td>
+                </ng-container>
+                <td width="10%">
+                    <!-- <app-custom-addtocart [showQuantity]="true" [quickOrder]="true"></app-custom-addtocart>  -->
+
+                    <app-custom-itemcounter (quantityHandler)="quantityHandler($event)" [rowIndex]="i">
+                    </app-custom-itemcounter>
+
+
+
+
+                </td>
+                <td width="7%">
+                    <img src="../../../assets/images/Icon material-delete.svg" class="fas fa-trash"
+                        *ngIf="row?.productCode" (click)="deleteMember(del,i)">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Mobile Screen *********************************************************************  -->
+    <div *ngIf="isMobile" class="isMobile">
+        <div class="clearAll-div">
+            <span class="clearAll" (click)="deleteAllMember(del)">Clear All</span>
+        </div>
+        <div *ngFor="let row of rowsProduct$ | async; let i=index" (click)="searchRowHander(i)">
+            <div class="searchBox-label">Search</div>
+            <div class="searchBox" (click)="searchRowHander(i)">
+                <app-product-search [fromPage]="true" [config]="searchConfig" [quickOrderIndex]="quickOrderIndex"
+                    [screenMode]="screenMode" (prodCodecallBack)="prodCodecallBack($event)"
+                    [selectedCode]="row?.productCode"></app-product-search>
+            </div>
+            <div class="mobile-container">
+                <div class="row">
+                    <div class="item-details col-6 col-md-6 col-lg-6 col-sm-6 ">
+                        Item Details
+                    </div>
+                    <div class="del-icon col-6 col-md-6 col-lg-6 col-sm-6">
+                        <img src="../../../assets/images/Icon material-delete.svg" class="fas fa-trash"
+                            *ngIf="row?.productCode" (click)="deleteMember(del,i)">
+                    </div>
+                    <div class="col-md-12 description">
+                        <span class="productName">{{row?.details}}</span>
+                        <div class="product-details">
+                            <span class="itemCode">Item Code : {{row?.itemCode}} | Supplier Code :
+                                {{row?.supplierCode}}</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-6 col-lg-6 col-sm-6 brand-label">
+                        Brand
+                    </div>
+                    <div class="col-6 col-md-6 col-lg-6 col-sm-6 name">
+                        {{row?.brand ? row?.brand : 'Non-exclusive'}}
+                    </div>
+                    <div class="col-6 col-md-6 col-lg-6 col-sm-6 availability-label">
+                        Availability
+                    </div>
+                    <div title="{{row?.stock}}" *ngIf="row?.stock == 'In stock'"
+                        class="col-6 col-md-6 col-lg-6 col-sm-6 instock availability"> {{row?.stock}} </div>
+                    <div title="{{row?.stock}}" *ngIf="row?.stock != 'In stock'"
+                        class="col-6 col-md-6 col-lg-6 col-sm-6 outOfStock availability"> {{row?.stock}} </div>
+                    <div class="col-6 col-md-6 col-lg-6 col-sm-6 myPrice-label">
+                        My Price<span> (excl. GST)</span>
+                    </div>
+                    <!-- <div class="col-6 col-md-6 col-lg-6 col-sm-6 name"> -->
+                    <div *ngIf="row.fommatedprice" title="{{row?.fommatedprice}}"
+                        class="col-6 col-md-6 col-lg-6 col-sm-6 price-col"> {{row?.dollar}}{{row?.fommatedprice |
+                        number: '1.2-2'}} <span>{{row?.unit}}</span> </div>
+                    <div *ngIf="!row.fommatedprice" title="{{row?.fommatedprice}}"
+                        class="col-6 col-md-6 col-lg-6 col-sm-6 price-col">-- --</div>
+                    <!-- </div> -->
+                    <div class="col-6 col-md-6 col-lg-6 col-sm-6 quantity-label">
+                        Quantity
+                    </div>
+                    <div class="col-6 col-md-6 col-lg-6 col-sm-6 quantity">
+                        <app-custom-itemcounter (quantityHandler)="quantityHandler($event)" [rowIndex]="i">
+                        </app-custom-itemcounter>
+                    </div>
+                    <div class="col-12 restrict-product" *ngIf="row?.addToCartDisabled == true">Product now obsolete. Cannot be added to the Cart.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Screen *********************************************************************  -->
+    <div class="row">
+        <div class="addRows col-md-12">
+            <button class="addRowsLabel" [disabled]="rowCount < 25 ? false:true"
+                (click)="intiallizeQuickOrderForm(1)">{{addRowLabel}}</button>
+        </div>
+    </div>
+
+<!-- =================== WN31 ========================================== -->
+
+<div class="order_comment_container">
+
+<div class="row">
+<div class="order_bx col-md-5 col-sm-12 ability">
+<label for="">Quote Reference <sup class="mand_star">*</sup></label>
+<input type="text" id="JobReference" placeholder="Enter quote reference" [(ngModel)]="jobReference" class="form-control ng-invalid date_auto" required>
+
+<div class="row">
+<div class="col-md-7 col-7">
+    <label for="">Quote Delivery Address <sup class="mand_star">*</sup></label>
+</div>
+<div class="col-md-5 col-5 abilityCheckbox">
+    <div class="form-check d-flex">
+        <label class="switch">
+            <div class="sliderTickLeft"></div>
+            <div class="sliderTick"></div>
+            <input type="checkbox" [ngModel]="checked" [checked]="checked" type="checkbox" (change) = "checkClicked(checked)"/>
+            <span class="slider round"></span>
+         </label>
+        <span style="padding-left: 10px;">Click & Collect</span>
+    </div>
+    <!-- </div> -->
+</div>
+</div>
+<p>Please enter a delivery address. This address will be transferred to the Delivery Checkout page upon acceptance of this quote. If you would prefer to collect these items, from the branch selected above, please check the 'Click & Collect' button above.</p>
+
+<input id="auto-input-ele" [ngClass]="{'ngvalid1' : submitQuoterevised }"
+  *ngIf="isaddress" type="text" [disabled]="checked" class="form-control date_auto ng-invalid" required [(ngModel)]="selectedAddressDel || selectedAddressDel?.split('|')[1]"
+                                placeholder="Please enter a delivery address" [matAutocomplete]="autoAddr" 
+                                (input)="coreLogicSearch($event)"  value="{{selectedAddressDel?.split('|')[1] || selectedAddressDel}}"/>  
+
+                                <mat-autocomplete #autoAddr="matAutocomplete" (optionSelected)="autocompleteChange($event)">
+                                    <mat-option class="custom-option-loader" disabled *ngIf="isLoader">
+                                        <div class="custom-loader"></div>
+                                    </mat-option>
+                                    <mat-option class="custom-option-text" disabled *ngIf="tempOptionDisabled">
+                                        No Search Results Found
+                                    </mat-option>
+                                    <mat-option class="custom-option-text" *ngFor="let street of filteredStreet"
+                                        [value]="street.suggestion" [data-value]="street">
+                                        {{street.suggestion}}
+                                    </mat-option>
+                                    <mat-option class="address-manual">
+                                        <span class="footer-item">
+                                            <button mat-stroked-button color="primary"
+                                                (click)="addAddressManual($event)">Add Address Manually</button>
+                                        </span>
+                                    </mat-option>
+                                </mat-autocomplete>
+
+                                <ng-template [ngIf]="isAddAddressManual">
+                                    <form #editForm="ngForm" class="request-form col-12 col-md-12">
+                                        <div class="form-container for-mob" style="display: flex;">
+                                            <label for="lotNumber" class="form-label job-ref">Street/Lot Number<span
+                                                    class="marker">*</span></label>
+                                            <input type="text" class="form-control" [(ngModel)]="manualAddressData.lotNumber"
+                                                id="lotNumber" name="lotNumber" #lotNumber="ngModel"
+                                                [ngClass]="{ 'is-invalid': editForm.submitted && lotNumber.invalid }"
+                                                placeholder="Street/Lot Number" required maxlength="40">
+                                        </div>
+                                        <div class="form-container for-mob" style="display: flex;">
+                                            <label for="streetName" class="form-label job-ref">Street Name<span
+                                                    class="marker">*</span></label>
+                                            <input type="text" class="form-control" id="streetName" name="streetName"
+                                                #streetName="ngModel" [(ngModel)]="manualAddressData.streetName"
+                                                placeholder="Street Name" maxlength="40"
+                                                [ngClass]="{ 'is-invalid': editForm.submitted && streetName.invalid }" required>
+                                        </div>
+                                        <div class="form-container for-mob" style="display: flex;">
+                                            <label for="streetType" class="form-label job-ref">Street Type<span
+                                                    class="marker">*</span></label>
+                                            <div class="selectdiv" style="width: 100%;">
+                                                <select id="streetSelect2" name="streetSelect2" #streetSelect2="ngModel"
+                                                    class="form-select drop-down-field custom-job-selct select-place-holder"
+                                                    aria-label="Default select example" aria-placeholder="e.g. Road, Street"
+                                                    placeholder="e.g. Road, Street" [(ngModel)]="manualAddressData.streetType"
+                                                    [ngClass]="{ 'is-invalid': editForm.submitted && streetSelect2.invalid }"
+                                                    required> {{manualAddressData}}
+                                                    <option value="undefined" disabled selected hidden
+                                                        style="display: block !important;">
+                                                        e.g. Road, Street</option>
+                                                    <option *ngFor="let data of streetTypeData" [value]="data.code">
+                                                        {{ data.name }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-container for-mob" style="display: flex;">
+                                            <label for="crossStreet" class="form-label job-ref">Cross Street</label>
+                                            <input type="text" class="form-control" id="crossStreet"
+                                                [(ngModel)]="manualAddressData.crossStreet"
+                                                placeholder="e.g. Cnr Allan Street (optional)" maxlength="40">
+                                        </div>
+                                        <div class="form-container for-mob" style="display: flex;">
+                                            <label for="Suburb" class="form-label job-ref">Suburb, City<span
+                                                    class="marker">*</span></label>
+                                            <input type="text" class="form-control" id="Suburb"
+                                                [(ngModel)]="manualAddressData.suburb" placeholder="Enter Suburb, City"
+                                                maxlength="25" required name="suburb" #suburb="ngModel"
+                                                [ngClass]="{ 'is-invalid': editForm.submitted && suburb.invalid }" />
+                                        </div>
+                                        <div class="form-container for-mob" style="display: flex;">
+                                            <label for="Postcode" class="form-label job-ref">Postcode<span
+                                                    class="marker">*</span></label>
+                                            <input type="text" class="form-control" id="Postcode" name="postcode"
+                                                #postcode="ngModel" [(ngModel)]="manualAddressData.postCode"
+                                                placeholder="Enter Postcode" (keypress)="numberOnly($event,'PostCode')"
+                                                maxlength="12" required
+                                                [ngClass]="{ 'is-invalid': editForm.submitted && postcode.invalid }">
+                                        </div>
+                                        <div class="form-container for-mob" style="display: flex;">
+                                            <label for="State" class="form-label job-ref">State<span class="marker">*</span></label>
+                                            <div class="selectdiv" style="width: 100%;">
+                                                <select id="stateSelect" #stateRef name="stateSelect" #stateSelect="ngModel"
+                                                    class="form-select drop-down-field custom-job-selct select-place-holder"
+                                                    aria-label="Default select example" [(ngModel)]="selectState"
+                                                    [ngClass]="{ 'is-invalid': editForm.submitted && stateSelect.invalid }"
+                                                    required>
+                                                    <option value="undefined" disabled selected hidden>
+                                                        Choose State</option>
+                                                    <option *ngFor="let data of stateList" [value]="data.isocode">
+                                                        {{ data.name }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class='col-sm-12'>
+                                                <button type="submit" mat-button class="save_button add_button font-bold"
+                                                    cdkFocusInitial style="margin-top: 10px !important;"
+                                                    (click)="addManualAddress(stateRef, editForm)">Add</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </ng-template>
+
+</div>
+
+<div class="order_bx col-md-5 offset-md-2 col-sm-12">
+    <div class="row">
+   <label for="">Comments</label>
+<textarea name="" placeholder="Please add any comments or requests that may be relevant to this quote request." [(ngModel)]="comments" maxlength="40"></textarea>
+
+
+    </div>
+</div>
+</div>
+
+</div>
+
+<!-- =================== WN31 ========================================== -->
+    <div class="sticky-bottom row">
+        <div class="subtotal col-12 col-md-3 col-lg-3 col-sm-12">
+            <ng-container *ngIf="isPricingPermission">
+                <span class="subtotalLabel">Subtotal</span>
+                <div class="subtotalValue">${{formattedSubTotal | number: '1.2-2'}}<span> (excl. GST)</span></div>
+            </ng-container>
+        </div>
+        <div class="buttons col-12 col-md-9 col-lg-9 col-sm-12">
+            <!-- <app-add-to-list-view [screenName]="'quickOrderMultiItem'" [selectedItemCount]="selectedItemCount" ></app-add-to-list-view>  -->
+            <div class="row addAllToCart addAllToCart_re_f">
+                <div class="col-md-4 addAllToList">
+                    <div class="wishlist-btn addAllToList">
+                        <!-- <app-add-to-list-view [screenName]="'quickOrderMultiItem'"
+                            [selectedItemCount]="selectedItemCount"></app-add-to-list-view> -->
+                        <img class="addAllToList" src="../../../assets/images/Icon material-playlist-add.svg">
+                        <button (click)="openAddMyFromList(content)" class="btn btn-block wishlist addAllToList" type="button" >
+                            Add from My Lists
+        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4 addAllToList addfromquates">
+                    <div class="wishlist-btn addAllToList">
+                        <!-- <app-add-to-list-view [screenName]="'quickOrderMultiItem'"
+                            [selectedItemCount]="selectedItemCount"></app-add-to-list-view> -->
+                            <img class="addAllToList" src="../../../assets/images/Icon material-playlist-add.svg">
+                            <button (click)="openAddMyFromList(data)" class="btn btn-block wishlist addAllToList" type="button" >
+                                Add from My Quotes
+            </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4 addAllToCart">
+                    <div class="addToCart-btn addAllToCart">
+                        <button class="btn btn-block addToCart addAllToCart"  type="button" [disabled]="isDisabled || jobReference == ''  || txtValue "
+                            (click)="addAlltoCart()"> 
+                            <!-- <img class="addAllToCart" src="../../../assets/images/Icon material-shopping-cart.svg"> -->
+                            Submit Quote Request
+                        </button>
+                       
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="success-message-container" *ngIf="successInd" (click)="closeErrorMessage()">
+    <div class="success-container">
+        <img class="tick-icon" src="../../../assets/images/Icon ionic-ios-checkmark-circle-outline.svg">
+        <div class="success-message">{{infoMessage}}<span class="close-btn"><i
+                    class="fa fa-times"></i></span>
+        </div>
+    </div>
+</div>
+
+<div class="loading " *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+<ng-template #del let-modal>
+    <app-delete-popup [data]="currentItem" (clearAllData)="clearAll()" (afterDeleteResponse)="deleteSelRow($event)">
+    </app-delete-popup>
+</ng-template>
+
+<ng-template #content let-modal>
+    <app-add-from-mylist></app-add-from-mylist>
+</ng-template>
+
+<ng-template #data let-modal>
+    <app-add-from-myquotes></app-add-from-myquotes>
+</ng-template>
+
+<ng-template #quote let-modal>
+    <app-chnage-quote-popup></app-chnage-quote-popup>
+</ng-template>
+

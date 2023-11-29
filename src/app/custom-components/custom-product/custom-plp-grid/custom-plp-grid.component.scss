@@ -1,0 +1,188 @@
+@import '../../../shared/styles/variables.scss';
+
+::ng-deep .plp-grid .cx-product-image img {
+  max-width: 214px !important;
+  max-height: 214px !important;
+}
+
+.plp-grid {
+    margin: 0px 0px 20px 0px;
+    .plp-grid-image-col {
+        background-color: $white-color;
+        height: 210px;
+        input {
+            margin: 0;
+            z-index: 1;
+        }
+    }
+    .plp-grid-container-col {
+        padding: 20px;
+        background-color: $white-color;
+        display: flex;
+        flex-direction: column;
+        .product-details {
+            display: block;
+            padding: 0px 10px;
+            width: 100%;
+            .product-manufacturer {
+                font-size: var(--fontsize24);
+                color: #778893;
+                font-family: 'NiveauGrotesk';
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                min-height: 38px;
+                overflow: hidden;
+            }
+            .product-heading {
+                font-size: var(--fontsize24);
+                color: $pdp-font-color;
+                font-family: 'NiveauGroteskBold';
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                min-height: 30px;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .itemCode {
+                font-size: var(--fontsize18);
+                color: $pdp-font-color;
+                font-family: 'NiveauGrotesk';
+                line-height: 1;
+                min-height: 36px;
+            }
+        }
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+app-product-price,
+app-custom-addtocart {
+    padding: 0px 10px;
+    width: 100%;
+}
+
+///////////////////////////////////////// custom checkbox CSS - START ////////////////////////////////////////
+
+input.checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    top: 25px;
+    left: 15px;
+  }
+  .checkmark {
+    position: absolute;
+      top: 25px;
+      left: 15px;
+      height: 20px;
+      width: 20px;
+      background-color: $white-color;
+      border: 3px solid #778893;
+      border-radius: 4px;
+  }
+    
+  .checkmark.terms {
+    width: 18px;
+    height: 18px;
+    top: 4px;
+  }
+  
+  .checkmark.terms.disable {
+    opacity: 0.5;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .check-container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  .check-container:hover input ~ .checkmark.disable {
+    background-color: #fff;
+  }
+            
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .check-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .check-container .checkmark:after {
+    left: 4px;
+    top: 0px;
+    width: 6px;
+    height: 11px;
+    border: solid $pdp-font-color;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  
+  .check-container .checkmark.terms:after {
+    left: 6px;
+      top: 2px;
+      width: 5px;
+      height: 10px;
+  }
+  
+  ///////////////////////////////////////// custom checkbox CSS - END ////////////////////////////////////////
+
+  @media screen and (max-width: $mobileScreenPotrait) {
+    ::ng-deep .cx-product-image.plp-grid {
+      img {
+        max-height: 180px !important;
+        max-width: 180px !important;
+      }
+    }
+    .plp-grid {
+      margin: -10px 0 0 0;
+      .plp-grid-image-col {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        height: 180px;
+        input.checkbox,
+        .checkmark {
+          height: 16px;
+          width: 16px;
+          top: 10px;
+          left: 10px;
+          border-radius: 2px;
+          border: 2px solid #495a64;
+          &::after {
+            top: 1px;
+            width: 4px;
+            height: 8px;
+            border: solid #495a64;
+            border-width: 0px 2px 2px 0;
+          }
+        }
+      }
+      .plp-grid-container-col {
+        padding: 10px 0px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        .product-details {
+          .product-manufacturer {
+            font-size: var(--fontsize20);
+          }
+          .product-heading {
+            margin-bottom: 0px;
+            display: block;
+          }
+        }
+      }
+    }
+  }

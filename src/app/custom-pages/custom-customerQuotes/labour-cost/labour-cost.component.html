@@ -1,0 +1,223 @@
+<div class="quotes-container container-fluid">
+  <div class="container">
+    <div class="quotes-header">
+      <h1>{{quoteConstants.myQuoteLabel}}</h1>
+      <!-- <div>
+            <p>Request a quote using the Search field, or add from My Lists or My Quotes. You will be notified
+                via SMS when your quote is available to view in your My Quotes page. </p>
+        </div> -->
+    </div>
+  </div>
+  <div class="container-fluid labour">
+    <div class="loading-quotes" *ngIf="!(isLoading$ | async)">Loading&#8230;</div>
+    <div class="row-container">
+      <div class="sidebar">
+        <!-- <div class="sidebar"> -->
+        <a class="notSelectedTab" (click)="navigateToJobDetails()">{{MaterialsLabel?.jobDetails}}</a>
+        <a class="notSelectedTab" [routerLink]="['/quoteMaterials',jobDetails?.code]">{{MaterialsLabel?.materials}}</a>
+        <p class="selectedTab">
+          {{MaterialsLabel?.labourOtherCosts}}
+        </p>
+
+      </div>
+      <div class="container-second">
+        <div class="container-sec bottomMargin">
+          <!-- <div *ngIf="responseResult==false" class="loading-wrapper"><div class="loader-more one"></div><div class="loader-more two"></div><div class="loader-more three"></div><div class="loader-more four"></div></div> -->
+          <div class="headingAndButton">
+            <h2>Labour Costs</h2>
+            <div class="add-costs">
+              <ng-container *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'">
+                <a href="javascript:void(0);" (click)="addEditCostModal('Labour')">
+                  <span class="plus">+</span>
+                  <span class="btnText">
+                    Add Labour
+                  </span>
+                </a>
+              </ng-container>
+            </div>
+          </div>
+          <ng-container *ngFor="let cost of labourCost">
+            <div class="costList listHolder" *ngFor="let costEntries of cost.entries;let indexOfelement=index;">
+              <div class="titleLeft">
+                <h2 class="title">{{costEntries.name}}</h2>
+              </div>
+              <div class="titleRight">
+                <div class="list-right-section">
+                  <span class="total">{{costEntries.subTotal.value | currency:'':'symbol':'.2-2'}}</span>
+                  <span class="list-edit"
+                    *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'"><img
+                      src="../../../assets/images/Icon material-edit_quotes.png"
+                      (click)="addEditCostModal('Labour',indexOfelement)"></span>
+                  <span class="list-delete"
+                    *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'"><img
+                      (click)="deleteCost(costEntries)" src="assets/images/remove-icon.svg" /></span>
+                </div>
+              </div>
+              <div class="list-container">
+                <div class="list-left-section">
+                  <span class="list-lable hrs">{{costConstants.hours}}: {{costEntries.quantity}} |</span>
+                  <span class="list-lable change">{{costConstants.chargeRate}}: ${{costEntries.price}}</span>
+                  <br />
+                  <span class="list-note">{{costConstants.note}}: {{costEntries.notes}}</span>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <div class="subTotal">
+            <table>
+              <tr>
+                <td class="lblTot"><span class="totalCosts totalCosts_labour">Total Labour Costs</span><span>(excl. GST)   </span>
+                </td>
+                <td class="amountToto">
+                  <p>{{ labourCostTotal | currency:'':'symbol':'.2-2' }}</p>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="container-sec">
+          <!-- <div *ngIf="responseResult==false" class="loading-wrapper"><div class="loader-more one"></div><div class="loader-more two"></div><div class="loader-more three"></div><div class="loader-more four"></div></div> -->
+          <div class="headingAndButton">
+            <h2>Other Costs</h2>
+            <div class="add-costs">
+              <ng-container *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'">
+                <a href="javascript:void(0);" (click)="addEditCostModal('OtherCosts')">
+                  <span class="plus">+</span>
+                  <span class="btnText">
+                    Add Other
+                  </span>
+                </a>
+              </ng-container>
+            </div>
+          </div>
+          <ng-container *ngFor="let cost of labourOtherCost">
+            <div>
+              <div *ngIf="responseResult">
+                <div class="costList listHolder" *ngFor="let costEntries of cost.entries;let indexOfelement=index;">
+                  <div>
+                    <div class="titleLeft">
+                      <h2 class="title">{{costEntries.name}}</h2>
+                    </div>
+                    <div class="titleRight">
+                      <div class="list-right-section">
+                        <span class="total">{{costEntries.price | currency:'':'symbol':'.2-2'}}</span>
+                        <span class="list-edit"
+                          *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'"><img
+                            src="../../../assets/images/Icon material-edit_quotes.png"
+                            (click)="addEditCostModal('OtherCosts',indexOfelement)"></span>
+                        <span class="list-delete"
+                          *ngIf="quotesService.quoteStatus != 'WON' && quotesService.quoteStatus != 'LOST'"><img
+                            (click)="deleteCost(costEntries)" src="assets/images/remove-icon.svg" /></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-container">
+                    <div class="list-left-section">
+                      <span class="list-lable hrs">{{costConstants.hoursOther}}: ${{costEntries.quantity}} |</span>
+                      <span class="list-lable change">{{costConstants.chargeRateOther}}: ${{costEntries.price}}</span>
+                      <br />
+                      <span class="list-note">{{costConstants.note}}: {{costEntries.notes}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <div class="subTotal">
+            <table>
+              <tr>
+                <td class="lblTot"><span class="totalCosts">Total Other Costs </span><span> (excl. GST)</span>
+                </td>
+                <td class="amountToto">
+                  <p>{{ labourOtherCostTotal | currency:'':'symbol':'.2-2' }}</p>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="container-three">
+        <div class="costSummary">
+          <h1>Cost Summary</h1>
+        </div>
+        <div class="materialDataSection">
+          <div class="cost-summary">
+            <div class="cost-detail">
+              <table>
+                <ng-container>
+                  <tr >
+                    <td>Materials</td>
+                    <td>{{jobDetails?.materialPrice?.value| currency:'':'symbol':'.2-2'}}</td>
+                  </tr>
+                </ng-container>
+                <ng-container >
+                  <tr >
+                    <td>Mark-up ({{jobDetails?.markupPercentage}}%)</td>
+                    <td>{{jobDetails?.markupPrice?.value | currency:'':'symbol':'.2-2'}}</td>
+                  </tr>
+                </ng-container>
+                <ng-container *ngFor="let cost of labourCost">
+                  <tr *ngIf="cost.costType == 'Labour'">
+                    <td>Labour Costs</td>
+                    <td>{{cost.total.value | currency:'':'symbol':'.2-2'}}</td>
+                  </tr>
+                </ng-container>
+                <ng-container *ngFor="let otherCost of labourOtherCost">
+                  <tr *ngIf="otherCost.costType == 'OtherCosts'">
+                    <td>
+                      <p>Other Costs</p>
+                    </td>
+                    <td>
+                      <p>{{otherCost.total.value | currency:'':'symbol':'.2-2'}}</p>
+                    </td>
+                  </tr>
+                </ng-container>
+                <!-- <tr><td colspan="2">&nbsp;</td></tr> -->
+                <tr class="costSumTotal">
+                  <td>
+                    <p>Total Costs <span>(excl. GST)</span></p>
+                  </td>
+                  <td>
+                    <p>${{ (labourCostTotal + labourOtherCostTotal + jobDetails?.materialPrice?.value + jobDetails?.markupPrice?.value) | number:'.2'}}</p>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="cost-sub-total">
+              <!-- <span>{{MaterialsLabel.subTotal}}</span><span>${{(sharedDatas?.markupPrice?.value + sharedDatas?.materialPrice?.value) | number:'.2'}}</span> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="button_cls" *ngIf="editMode == false">
+    <button *ngIf="onlyReviewStatus != 'onlyReview'  " type="button" class="review-quote-btn btn-blue"
+      (click)="submitQuote()">
+      Create Quote
+    </button>
+    <!-- <button *ngIf="editMode"  type="button" class="review-quote-btn btn-blue" (click)="editQuote()" >
+        Update
+    </button> -->
+  </div>
+  <div class="button_cls" *ngIf="editMode == true">
+    
+    <button *ngIf="onlyReviewStatus != 'onlyReview'  " type="button" class="review-quote-btn btn-blue"
+      (click)="updateQuote()">
+      Review Quote
+    </button>
+    <button *ngIf="onlyReviewStatus != 'onlyReview'  " type="button" class="review-quote-btn btn-blue"
+      (click)="backToMaterial()" style="background-color: #77889380; color:#495A64;">
+      Return to Add Materials & Products
+    </button>
+    <!-- <button *ngIf="editMode"  type="button" class="review-quote-btn btn-blue" (click)="editQuote()" >
+        Update
+    </button> -->
+  </div>
+
+</div>
+<!-- <app-custom-sticky-footer *ngIf="totalPrice !=undefined" [totalPrice]='totalPrice'[labourFooterLabel]='labourFooterLabel'></app-custom-sticky-footer> -->

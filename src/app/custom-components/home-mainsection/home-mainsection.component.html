@@ -1,0 +1,16 @@
+<div *ngIf="component.data$ | async as data" class="landingTiles">
+    <ng-contianer *ngIf="component.uid == 'TradePlusHomepageDashboardBannerComponent' || component.uid == 'TradePlusHomepageProductsBannerComponent' || component.uid == 'TradePlusHomepageOrdersBannerComponent' || component.uid == 'TradePlusHomepageInvoicesBannerComponent' || component.uid == 'TradePlusHomepageJobsBannerComponent' || component.uid == 'TradePlusHomepageTeamBannerComponent'; else promotionalURL">
+        <a [routerLink]="data?.urlLink">
+            <cx-media [container]="data?.media"></cx-media>
+            <div class="triangle arrowUp">{{data?.media?.widescreen?.altText}}</div>
+        </a>
+    </ng-contianer>
+    <ng-template #promotionalURL>
+        <!-- <ng-contianer *ngIf="component.uid != 'TradePlusHomepageOfferBannerComponent' && component.uid != 'TradePlusHomepageCoronaBannerComponent' && component.uid != 'TradePlusHomepageTradePlusOffer1BannerComponent' && component.uid != 'TradePlusHomepageTradePlusOffer2BannerComponent'"> -->
+            <a href={{data?.urlLink}} target="_blank">
+                <cx-media [container]="data?.media"></cx-media>
+                <div class="triangle arrowUp">{{data?.media?.widescreen?.altText}}</div>
+            </a>
+        <!-- </ng-contianer> -->
+    </ng-template>
+</div>

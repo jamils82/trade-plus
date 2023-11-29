@@ -1,0 +1,95 @@
+<!--- don't remove below  code-->
+<div class="loading " *ngIf="commonService.showWaitCursor | async ">Loading&#8230;</div>
+<div class="newFormat newFormat-desk container">
+  <div class="row">
+  <div class="heading">ADD DOWNLOAD FORMAT</div>
+  <p class="staticMessageText mylistStaticMessage">Use this form to create invoice & credit formats that once downloaded, are ready for uploading into your chosen accounting and business management software.</p>
+
+</div>
+</div>
+<div class="container newFormat">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-container">
+    
+        <form class="mx-5" name="newFormatForm" [formGroup]="newFormatForm">
+          <div class="form-group row">
+            <label for="formatType" class="col-sm-2 col-form-label">Format Type</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="formatType" placeholder="Format Type" formControlName="formatType"
+                >
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="outputType" class="col-sm-2 col-form-label">Output Type</label>
+            <div class="col-sm-10">
+              <div class="selectdiv">
+                <label>
+                  <select class="form-control classic"  formControlName="outputType" id= "outputType">
+                    <!-- <ng-container > -->
+                      
+                    <option *ngFor="let obj of downloadFileFormat" [value]="obj.key"> 
+                      <span *ngIf="obj.key != 'CSV'">{{ obj.value }}</span> 
+                    </option>
+                  <!-- </ng-container> -->
+                    <!-- <option selected [ngValue]="2">Xml</option>
+                    <option [ngValue]="1">Flat</option>
+                    <option [ngValue]="0">Tiered</option> -->
+                  </select>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="Title" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control title"  placeholder="Title" formControlName="title" id="title"
+              [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+                                required>
+                                <span class="err-message"
+                                *ngIf="(newFormatForm.controls['title'].invalid && newFormatForm.controls['title'].dirty) || (newFormatForm.controls['title'].invalid  && newFormatForm.controls['title'].touched) ||
+                                (newFormatForm.controls['title'].invalid  && submitted)">You must enter a title at least five characters long. 
+                                </span>
+            </div>
+        
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Filename</label>
+            <div class="col-sm-10">
+  
+              <div class="input-group">
+                <div class="input-group-text flex-size-1">{{ b2bUnit + '_' }}</div>
+                <input type="text" class="form-control input-custom flex-size-2" id="fileName"
+                  placeholder="FileName" formControlName="fileName">
+                <div class="selectdiv flex-size-1" >
+                  <label>
+                    <select class="form-control classic" formControlName="ext" id="ext">
+                      
+                      <option *ngFor="let extension of fileExtension" [value]="extension.key">{{extension.value}} </option>
+                     
+                    </select>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="row buttons">
+            <div class="col-md-12 btngrp">
+              <button class="btn cancelBtn" (click)="backBtn()">
+                Cancel
+              </button>
+  
+              <button class="btn confirmBtn" (click)="createBtn()">
+                Save
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<!--- don't remove above code-->

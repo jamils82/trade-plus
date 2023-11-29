@@ -1,0 +1,31 @@
+@import "src/app/shared/styles/variables.scss";
+
+.product-notice-alert {
+    @include font-NiveauGrotesk;
+    font-size: 20px;
+    line-height: 25px;
+    .product-notice-link {
+        color: $anchor-color;
+        cursor: pointer;
+    }
+}
+.product-notice-wrapper {
+    position: relative;
+    transition: all .3s ease-in-out;
+    background-color: #e9e9e9;
+    padding: 25px 0;
+    .close-notice-alert {
+        position: absolute;
+        right: 17px;
+        top: 17px;
+        left: auto;
+        color: #4d5963;
+        transition: all .3s ease-in-out;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 18px;
+        &:hover {
+            color: #000;
+        }
+    }
+}

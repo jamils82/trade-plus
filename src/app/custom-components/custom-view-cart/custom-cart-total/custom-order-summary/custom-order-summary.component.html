@@ -1,0 +1,60 @@
+<div class="cx-summary-partials order-summary-total-detail" *ngIf="cart">
+    <div class="row">
+        <div class="col-8">
+            <p class="custom-text descripton-text">* All prices shown exclude GST </p>
+            <p class="descripton-text">* All information is subject to change without notice</p>
+        </div>
+
+        <div class="col-4">
+            <!--- commenting GST as confirmed by Business. Ticker No # TLBP-1732 ----->
+            <!-- <div class="cx-summary-row row">
+                <div class="col-6 ">
+                    <div class="cx-summary-label">
+                        Subtotal (excl. GST)
+                    </div>
+                </div>
+                <div class="col-6 cx-summary-amount">
+                    <div class="cx-summary-amount">
+                        {{ cart.subTotal?.formattedValue }}
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- <div class="cx-summary-row row" *ngIf="cart.net; else cartWithoutNet">
+                <div class="col-6 cx-summary-label">
+                    GST
+                </div>
+                <div class="col-6 cx-summary-amount">
+                    {{ cart.totalTax?.formattedValue }}
+                </div>
+            </div> -->
+            <!-- <div class="border-line"></div> -->
+            <div class="cx-summary-row row cx-summary-total">
+                <!--- commenting GST as confirmed by Business. Ticker No # TLBP-1732 ----->
+                <!-- <div class="col-6 cx-summary-label cart-summary-total-amount-label">
+                    {{ 'Total' }} <span class="total-cart-summary-gst">(incl. GST)</span>
+                </div> -->
+                <div class="col-6 cx-summary-label cart-summary-total-amount-label">
+                    {{ 'Total' }} <span class="total-cart-summary-gst excl-gst">(excl. GST)</span>
+                </div>
+                <div class="col-6 cx-summary-amount cart-summary-total-amount-value">
+                    {{ cart.totalPriceWithTax?.formattedValue }}
+                </div>
+            </div>
+            <div class="cx-summary-row row" *ngIf="cart.totalDiscounts?.value > 0">
+                {{ 'orderCost.discount' | cxTranslate }} {{ cart.totalDiscounts?.formattedValue }}
+            </div>
+
+        </div>
+    </div>
+    <ng-template #cartWithoutNet>
+        <div class="cx-summary-row row">
+            <div class="col-6 cx-summary-label">
+                GST
+            </div>
+            <div class="col-6 cx-summary-amount">
+                {{ cart.totalTax?.formattedValue }}
+            </div>
+        </div>
+    </ng-template>
+</div>

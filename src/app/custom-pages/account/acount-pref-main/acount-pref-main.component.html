@@ -1,0 +1,474 @@
+<div class="container-fluid">
+    <div class="success-message-container" *ngIf="successInd$ | async">
+        <div class="success-container">
+            <div class="success-message">
+                <span>{{infoMessage}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="failure-message-container" *ngIf="errorInd">
+        <div class="failure-container">
+            <!-- <img class="tick-icon" src="../../../assets/images/Icon ionic-ios-checkmark-circle-outline.svg"> -->
+            <div class="error-message">{{infoMessage}}<span class="close-btn" (click)="errorInd = false"><i
+                        class="fa fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="row heading header-section">
+        <!-- <div class="success-message-container" *ngIf="successInd$ | async">
+            <div class="success-container">
+                <div class="success-message">
+                    {{infoMessage}}
+                </div>
+            </div>
+        </div> -->
+        <div class="heading-row pref row">
+            <div class="preference-heading col-md-12">
+                <h1 class="pref-title">PREFERENCES </h1>
+            </div>
+        </div>
+
+
+        <div class="side-menu col-md-3 col-12">
+            <div class="menu-list">
+                <ul id="menu-items">
+                    <li [ngClass]="selectedTab == '1true' ? 'selectedTab':'notSelectedTab'"
+                        (click)="perfChangeHandler(1)">Statements</li>
+                    <li [ngClass]="selectedTab == '2true' ? 'selectedTab':'notSelectedTab'"
+                        (click)="perfChangeHandler(2)">Invoices & Adjustments</li>
+                    <li [ngClass]="selectedTab == '3true' ? 'selectedTab':'notSelectedTab'"
+                        (click)="perfChangeHandler(3)">Account Balance Alerts</li>
+                    <li [ngClass]="selectedTab == '4true' ? 'selectedTab':'notSelectedTab'"
+                        (click)="perfChangeHandler(4)">Communication Preferences</li>
+                    <li [ngClass]="selectedTab == '5true' ? 'selectedTab':'notSelectedTab'"
+                        (click)="perfChangeHandler(5)">Price Changes & Price Builds</li>
+                </ul>
+            </div>
+        </div>
+        <div class="pref-content col-md-9 col-12">
+            <div class="heading-row row">
+                <div class="preference-heading col-md-6">
+                    <!-- <h1 class="pref-title">PREFERENCES </h1> -->
+                </div>
+                <div class="save-button col-md-6 col-12">
+                    <button [ngClass]="isDisabled ? 'pref-save-disabled' : 'pref-save'" [disabled]="isDisabled" 
+                        (click)="savePreferencesSettings()">Save</button> 
+                </div>
+            </div>
+            <div class="content-section state">
+                <div class="loading-data" *ngIf="isDataLoad">Loading&#8230;</div>
+                <!-- Statement -->
+                <ng-container *ngIf="prefTypeNum==1">
+                    <h3 class="content-title">Statements</h3>
+                    <hr>
+                    <p class="btmstatement">Monthly statements are automatically emailed at the beginning of each month,
+                        for the month prior. Please list your preferred email address to receive your statements.</p>
+                    <h4 class="sub-heading">Options</h4>
+                    <div class="form-check custom-radio">
+                        <input class="form-check-input" type="radio" type="radio"
+                            [checked]="statementSendMethod == 'PRINT'" name="flexRadioDefault" id="printStatement"
+                            (change)="statementSendMethod == 'PRINT'; selectStatement('PRINT')">
+                        <label class="form-check-label" for="printStatement">
+                            Print Statement
+                        </label>
+                    </div>
+                    <div class="form-check custom-radio">
+                        <input class="form-check-input" type="radio" [checked]="statementSendMethod == 'EMAIL'"
+                            name="flexRadioDefault" id="emailStatement"
+                            (change)="statementSendMethod == 'EMAIL'; selectStatement('EMAIL')">
+                        <label class="form-check-label" for="emailStatement">
+                            Email Statement
+                        </label>
+                    </div>
+                    <h4 class="sub-heading subcomm" style="margin-top: 10px;">Preferred Email Address</h4>
+                    <div class="form-group">
+                        <div class="email-box col-sm-8 md-8">
+                            <!-- <input type="text" [value]="emailId" 
+                            (keyup)="statementEmail($event.target.value)" 
+                            class="form-control email-input"> -->
+                            <input type="text" [(ngModel)]="emailId" (ngModelChange)="emailChange($event)"
+                                placeholder="Enter Email Address" [disabled]="statementSendMethod == 'PRINT'"
+                                class="form-control email-input lo_sensitive">
+
+                            <!-- <span class="glyphicon glyphicon-ok form-control-feedback"></span> -->
+                            <img src="../../../../assets/images/Icon material-edit (grey).svg">
+                        </div>
+                        <div class="invalid-error" *ngIf="isEmailValid">Invalid Email address</div>
+                    </div>
+
+                </ng-container>
+                <!-- Invioce & adjustment -->
+                <ng-container *ngIf="prefTypeNum==2">
+                    <h3 class="content-title">Invoices & Adjustments</h3>
+                    <hr>
+                    <p>Invoices, credits and adjustments are automatically emailed. Please enter your preferred email
+                        address below. You can also print, email and link to your accounting software as required.</p>
+                    <h4 *ngIf="isEmailHide" class="sub-heading">Preferred Email Address</h4>
+                    <div *ngIf="isEmailHide" class="form-group">
+                        <div class="email-box col-md-8 col-sm-12 col-12 md-8">
+                            <input type="text" [(ngModel)]="invoiceEmail" (ngModelChange)="emailChange($event)"
+                                class="form-control email-input lo_sensitive">
+                            <!-- <span class="glyphicon glyphicon-ok form-control-feedback"></span> -->
+                            <img src="../../../../assets/images/Icon material-edit (grey).svg">
+                        </div>
+                        <div class="invalid-error" *ngIf="isEmailValid">Invalid Email address</div>
+                    </div>
+                    <div class="form-check custom-radio">
+                        <input [disabled]="connectionStatus == 'D'" [ngClass]="connectionStatus == 'D' ? 'disabled' : ''" class="form-check-input" [checked]="invoiceSelectedOption == 'PRINT'"
+                            (change)="accountingSoftwareClicked('PRINT')" type="radio" name="flexRadioDefault"
+                            id="print">
+                        <label [disabled]="connectionStatus == 'D'" [ngClass]="connectionStatus == 'D' ? 'disabled' : ''" class="form-check-label" for="print">
+                            Print
+                        </label>
+                    </div>
+                    <div class="form-check custom-radio">
+                        <input [disabled]="connectionStatus == 'D'" [ngClass]="connectionStatus == 'D' ? 'disabled' : ''" class="form-check-input" [checked]="invoiceSelectedOption == 'EMAIL'"
+                            (change)="accountingSoftwareClicked('EMAIL')" type="radio" name="flexRadioDefault"
+                            id="emailSingle">
+                        <label [disabled]="connectionStatus == 'D'" [ngClass]="connectionStatus == 'D' ? 'disabled' : ''" class="form-check-label" for="emailSingle">
+                            Email (One invoice per email)
+                        </label>
+                    </div>
+                    <div class="form-check custom-radio">
+                        <input [disabled]="connectionStatus == 'D'" [ngClass]="connectionStatus == 'D' ? 'disabled' : ''" class="form-check-input" [checked]="invoiceSelectedOption == 'EMAILMULTIPLE'"
+                            (change)="accountingSoftwareClicked('EMAILMULTIPLE')" type="radio" name="flexRadioDefault"
+                            id="emailMultiple">
+                        <label [disabled]="connectionStatus == 'D'" [ngClass]="connectionStatus == 'D' ? 'disabled' : ''" class="form-check-label" for="emailMultiple">
+                            Email (Multiple invoices per email)
+                        </label>
+                    </div>
+                    <div class="form-check custom-radio">
+                        <input  class="form-check-input"  [checked]="invoiceSelectedOption == 'accounting'"
+                            (change)="accountingSoftwareClicked('accounting')" type="radio" name="flexRadioDefault"
+                            id="accounting">
+                        <label class="form-check-label" for="accounting">
+                            Accounting Software e.g. Xero
+                        </label>
+                    </div>
+                    <div *ngIf="showAccountingSection" class="accountingSoftwareAccordionClicked">
+                        <div class="accountingSoftwareAccordion-container conotainer">
+                            <div class="fergus-row row">
+                                <div class="fergus-col col-md-12 col-12">
+                                    <div class="fergus-inner-row row">
+                                        <div class="fergus-inner-col-image col-md-2 col-sm-2 col-3">
+                                            <img class="fergus-img" src='../../../../assets/images/Fergos_icon.png'>
+                                        </div>
+                                        <div class="fergus-inner-col col-md-7 col-sm-10 col-9">
+                                            <div class="fergus-content">
+                                                All your invoices will be sent to Fergus. You will not receive any email
+                                                or paper invoices. Your invoices will be available in the Tradelink
+                                                portal and Fergus.
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="fergus-inner-col-button col-md-3 col-sm-10 col-9 offset-3 offset-md-0 offset-sm-2">
+                                            <button (click)="getAccountConnection()" *ngIf="showFergusRefreshButton"
+                                                class="myobRefreshButton">
+                                                <mat-icon>refresh</mat-icon>
+                                            </button>
+                                            <button (click)="connecttoFergusButton()"
+                                                [disabled]="showFergusRefreshButton || ((connectedAccSoftware != 'FERGUS') && (connectionStatus != 'A') && (connectedAccSoftware != undefined))"
+                                                class="fergus-button">{{FergusConnectLabel}} Fergus</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="myob-row row">
+                                <div class="myob-col col-md-12 col-12">
+                                    <div class="myob-inner-row row">
+                                        <div class="myob-inner-col-image col-md-2 col-sm-2 col-3">
+                                            <img class="myob-img" src='../../../../assets/images/MYOB_icon.png'>
+                                        </div>
+                                        <div class="myob-inner-col col-md-7 col-sm-10 col-9">
+                                            <div class="myob-content">
+                                                All your invoices will be sent to MYOB. You will not receive any email
+                                                or paper invoices. Your invoices will be available in the Tradelink
+                                                portal and MYOB.
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="myob-inner-col-button col-md-3 col-sm-10 col-9 offset-3 offset-md-0 offset-sm-2">
+                                            <button (click)="getAccountConnection()" *ngIf="showMyOBRefreshButton"
+                                                class="myobRefreshButton">
+                                                <mat-icon>refresh</mat-icon>
+                                            </button>
+                                            <button (click)="connectToMYOBButton()" [disabled]="showMyOBRefreshButton || ((connectedAccSoftware != 'MYOB') && (connectionStatus != 'A') && (connectedAccSoftware != undefined))"
+                                                class="myob-button">{{connectLabel}} MYOB</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="simPRO-row row">
+                                <div class="simPRO-col col-md-12 col-12">
+                                    <div class="simPRO-inner-row row">
+                                        <div class="simPRO-inner-col-image col-md-2 col-sm-2 col-3">
+                                            <img class="simPRO-img" src='../../../../assets/images/simPRO_icon.png'>
+                                        </div>
+                                        <div class="simPRO-inner-col col-md-7 col-sm-10 col-9">
+                                            <div class="simPRO-content">
+                                                All your invoices will be sent to simPRO. You will not receive any email
+                                                or paper invoices. Your invoices will be available in the Tradelink
+                                                portal and simPRO.
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="simPRO-inner-col-button col-md-3 col-sm-10 col-9 offset-3 offset-md-0 offset-sm-2">
+                                            <button (click)="simProClick()" class="simPRO-button">{{simPROchange}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="simPRO2-row row">
+                                <div class="simPRO2-col col-md-12">
+                                    <div class="simPRO2-inner-row row">
+                                        <div class="simPRO2-inner-col-image col-md-2 col-sm-2 col-3">
+                                        </div>
+                                        <div class="simPRO2-inner-col col-md-7 col-sm-10 col-9">
+                                            <div class="simPRO2-content">
+                                                You are also able to automatically sync your product catalog (with your
+                                                pricing) directly to your simPRO account. To enable catalog integration
+                                                with simPRO.
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="simPRO2-inner-col-button col-md-3 col-sm-10 col-9 offset-3 offset-md-0 offset-sm-2">
+                                            <a (click)="simProGuideClicked()" class="simPRO2-link">Help with Catalog
+                                                Integration</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="xero-row row">
+                                <div class="xero-col col-md-12 col-12">
+                                    <div class="xero-inner-row row">
+                                        <div class="xero-inner-col-image col-md-2 col-sm-2 col-3">
+                                            <img class="xero-img" src='../../../../assets/images/XERO_icon.png'>
+                                        </div>
+                                        <div class="xero-inner-col col-md-7 col-sm-10 col-9">
+                                            <div class="xero-content">
+                                                All your invoices will be sent to Xero. You will not receive any email
+                                                or paper invoices. Your invoices will be available in the Tradelink
+                                                portal and Xero.
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="xero-inner-col-button col-md-3 col-sm-10 col-9 offset-3 offset-md-0 offset-sm-2">
+                                            <button (click)="connectToXEROButton(xerocontent)"
+                                                class="xero-button" [disabled]="((connectedAccSoftware != 'XERO') && (connectionStatus != 'A') && (connectedAccSoftware != undefined))">{{XeroConnectLabel}} Xero</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--- Preferences is not in scope, confirmed by Business. Ticker No # TLBP-1735 ----->
+                    <!-- <h4 class="sub-heading default-download-format">Invoice Download Format</h4>
+                    <div class="selectdiv">
+                    <label>
+                        <select  class="form-select drop-down-field select_format" (change)="defaultDownloadFormatChange()"
+                            [(ngModel)]='selecteddefaultDownloadFormatItem' aria-label="Default select example">
+                            <option [ngValue]="null" [disabled]="true">Select Invoice Download Format</option>
+                            <option value="DEFAULT">Default Invoice Download Format</option>
+                            <option value="SIMPRO">SIMPRO Invoice Download Format</option>
+                            <option value="SMARTTRADE">SmartTrade Invoice Download Format</option>
+                        </select>
+                    </label>
+                    </div> -->
+                </ng-container>
+
+                <!-- Account Perfeence alert -->
+                <ng-container *ngIf="prefTypeNum==3">
+                    <h3 class="content-title">Account Balance Alerts</h3>
+                    <hr>
+                    <p>You will automatically receive email or SMS alerts when your account reaches its limit or is in
+                        arrears. Please advise your preferred mobile number and email address to receive these alerts.
+                    </p>
+                    <div class="form-check custom-radio">
+                        <input class="form-check-input" type="radio" [checked]="balanceSelectedOption == 'EMAIL'"
+                            (click)="updateMethod('EMAIL')" name="flexRadioDefault" id="emailAcc" checked>
+                        <label class="form-check-label" for="emailAcc">
+                            Email
+                        </label>
+                    </div>
+                    <h4 class="sub-heading subcomm" style="margin-top: 10px;">Preferred Email Address</h4>
+                    <div class="form-group">
+                        <div class="email-box col-md-8 col-sm-12 md-8">
+                            <!-- <input type="text" [value]="emailId" (keyup)="accountBalanceAlertEmail($event.target.value)" 
+                                class="form-control email-input"> -->
+                            <input type="text" [(ngModel)]="accountBalanceEmail" (ngModelChange)="emailChange($event)"
+                                placeholder="Enter Email Address" [disabled]="accountBalanceAlertMethod == 'SMS'"
+                                class="form-control email-input lo_sensitive">
+                            <!-- <span class="glyphicon glyphicon-ok form-control-feedback"></span> -->
+                            <img src="../../../../assets/images/Icon material-edit (grey).svg">
+
+                        </div>
+                        <div class="invalid-error" *ngIf="isEmailValid">Invalid Email address</div>
+                    </div>
+                    <div class="form-check custom-radio">
+                        <input class="form-check-input" [checked]="balanceSelectedOption == 'SMS'"
+                            (click)="updateMethod('SMS')" type="radio" name="flexRadioDefault" id="sms">
+                        <label class="form-check-label" for="sms">
+                            SMS
+                        </label>
+                    </div>
+                    <h4 class="sub-heading subcomm" style="margin-top: 10px;">Preferred Mobile Number</h4>
+                    <div class="form-group">
+                        <div class="phoneNumber-box col-md-8 col-sm-12 md-8">
+                            <label class="country-code">+61</label>
+                            <label class="static-value" >0</label>
+                            <input type="text" placeholder="Mobile Number" [(ngModel)]="accountBalancePhoneNo"
+                                class="form-control phoneNumber-input" (ngModelChange)="balanceNumber($event)"
+                                [disabled]="accountBalanceAlertMethod == 'EMAIL'">
+                            <!-- <span class="glyphicon glyphicon-ok form-control-feedback"></span> -->
+                            <img src="../../../../assets/images/Icon material-edit (grey).svg">
+                        </div>
+                        <div class="invalid-error" *ngIf="isPhonenoValid">Phone number must contain 10 digits, starting with 4 or 5.</div>
+                    </div>
+                </ng-container>
+
+                <!-- Communcation  -->
+                <ng-container *ngIf="prefTypeNum==4">
+                    <h3 class="content-title">Communication Preferences</h3>
+                    <hr>
+                    <p class="commpara">Stay in the know and receive information of all our upcoming promotions,
+                        competitions and exclusive offers. You can unsubscribe at any time.</p>
+                    <!-- <h4 class="sub-heading subcomm">Preferred Email Address</h4>
+                    <div class="form-group form-communication">
+                        <div class="email-box col-md-8 col-sm-12 md-8">
+                            <input placeholder="Enter Email Address" type="text" [(ngModel)]="communicationPrefEmail"
+                                (ngModelChange)="emailChange($event)" class="form-control email-input">
+                            <img src="../../../../assets/images/Icon material-edit (grey).svg">
+                        </div>
+                        <div class="invalid-error" *ngIf="isEmailValid">Invalid Email address</div>
+                    </div> -->
+                    <div class="form-check custom-radio unsubscribe">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="unsubscribe" [checked]="!subscribedFlag"
+                            (change)="subscribedFlag = !subscribedFlag; communicationPrefSub()">
+                        <label class="form-check-label" for="unsubscribe">
+                            Unsubscribe
+                        </label>
+                    </div>
+                    <div class="form-check custom-radio marsubscibe">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="subscribe" [checked]="subscribedFlag"
+                            (change)="subscribedFlag = !subscribedFlag; communicationPrefSub()">
+                        <label class="form-check-label" for="subscribe">
+                            Subscribe
+                        </label>
+                    </div>
+                </ng-container>
+
+                <!-- Price -->
+                <ng-container *ngIf="prefTypeNum==5">
+
+                    <h3 class="content-title schedule" style="margin-top: 10px;">Scheduled Monthly Price Build</h3>
+                    <hr>
+                    <p>Price changes will be updated on the 1st of each month.<br>An email will be sent advising when
+                        the new price file is available to be downloaded. You can change the email address or disable
+                        this function.
+                    </p>
+                    <h4 class="sub-heading pref-email-address">Preferred Email Address</h4>
+                    <div class="form-group email-btm">
+                        <div class="email-box col-md-8 col-sm-12 md-8">
+                            <input type="text" [(ngModel)]="scheduleMonthlyPrefEmail"
+                                (ngModelChange)="emailChange($event)" placeholder="Enter Email Address"
+                                class="form-control email-input lo_sensitive">
+                            <!-- <span class="glyphicon glyphicon-ok form-control-feedback"></span> -->
+                            <img src="../../../../assets/images/Icon material-edit (grey).svg">
+                        </div>
+                        <div class="invalid-error" *ngIf="isEmailValid">Invalid Email address</div>
+                    </div>
+                    <div class="form-check custom-radio">
+                        <input class="form-check-input" [checked]="!scheduleMonthlyNotificationFlag"
+                            name="priceBuilderItem" type="radio" name="monthlyPriceBuild"
+                            (change)="scheduleMonthlyNotificationFlag = !scheduleMonthlyNotificationFlag; monthlyPriceRadioBtn()"
+                            id="disable2">
+                        <label class="form-check-label" for="disable2">
+                            Disable
+                        </label>
+                    </div>
+                    <div class="form-check custom-radio enablebtm">
+                        <input class="form-check-input" [checked]="scheduleMonthlyNotificationFlag"
+                            name="priceBuilderItem" type="radio" name="monthlyPriceBuild"
+                            (change)="scheduleMonthlyNotificationFlag = !scheduleMonthlyNotificationFlag; monthlyPriceRadioBtn()"
+                            id="enable2">
+                        <label class="form-check-label" for="enable2">
+                            Enable
+                        </label>
+                    </div>
+                    <br>
+                    <h4 class="sub-heading">Item Filter</h4>
+                    <div class="form-check custom-radio">
+                        <input class="form-check-input" type="radio" [checked]="priceBuildOrderItemFlag"
+                            name="itemFilter-1" id="frequentOrder" (change)="priceBuildItemFlagRadioBtn(true)">
+                        <label class="form-check-label" for="frequentOrder">
+                            Frequently Ordered Items
+                        </label>
+                    </div>
+                    <div class="form-check custom-radio">
+                        <input class="form-check-input" type="radio" [checked]="priceBuildProductsFlag"
+                            name="itemFilter-1" id="branchProduct" (change)="branchProductChange(true)">
+                        <label class="form-check-label" for="branchProduct">
+                            My Branch Products
+                        </label>
+                    </div>
+
+                    <div class="form-check custom-radio">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="completePriceList"
+                            (change)="completePriceListFlagChange(true)" [checked]="myCompletePriceListFlag == true">
+                        <label class="form-check-label" for="completePriceList">
+                           Complete Price List
+                        </label>
+                    </div>
+
+
+                    <div class="form-check custom-radio">
+                        <input class="form-check-input" type="radio" [checked]="chooseFromMyList"
+                            (change)="chooseFromMylistFlagChange(true)" name="itemFilter-1" id="myList">
+                        <label class="form-check-label" for="myList">
+                            Choose From My Lists
+                        </label>
+                    </div>
+                    <div class="selectdiv" style="margin-top: 10px;">
+                        <label>
+                            <select class="form-select drop-down-field" (change)="myListChange()"
+                                [(ngModel)]='selectedListItem' aria-label="Default select example"
+                                [disabled]="isListDisable">
+                                <option [ngValue]="null" [disabled]="true">Select a List</option>
+                                <option *ngFor="let listName of myList" [value]="listName"> {{listName}} </option>
+                            </select>
+                        </label>
+                        <div *ngIf="!isListLoad" class="loading">Loading&#8230;</div>
+                    </div>
+                    <br>
+                    <h4 class="sub-heading">Format</h4>
+                    <p class="formattext">Select your preferred download price file format, if the default shown is
+                        unsuitable.
+                    </p>
+                    <div class="selectdiv marsubscibe">
+                        <label>
+                            <select class="form-select drop-down-field select_format" (change)="formatChange()"
+                                [(ngModel)]='selectedFormatItem' aria-label="Default select example">
+                                <option [ngValue]="null" [disabled]="true">Select Download Format</option>
+                                <option *ngFor="let format of downloadedFormats" [value]="format.code"> {{format.name}}
+                                </option>
+                            </select>
+                        </label>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #xerocontent let-modal>
+    <app-xero-connect-popup (statusEventEmitter)="connectionChanged($event)"></app-xero-connect-popup>
+</ng-template>
+
+<ng-template #emailmodal let-modal>
+    <app-save-preferred-email></app-save-preferred-email>
+</ng-template>
+
+<ng-template #myobcontent let-modal>
+    <app-myob-popup (statusEventEmitter)="MYOBconnectionChanged($event)"></app-myob-popup>
+</ng-template>

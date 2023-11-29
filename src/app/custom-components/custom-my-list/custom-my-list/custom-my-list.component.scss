@@ -1,0 +1,1133 @@
+@import "../../../shared/styles/variables.scss";
+::ng-deep .mat-sort-header-arrow {
+    color: #003d7a;
+}
+
+::ng-deep .mat-table th {
+    font-family: 'NiveauGroteskBold';
+}
+
+.mat-table td {
+    font-family: 'NiveauGrotesk';
+}
+
+.add-from-list {
+    background-color: #00AFE2 !important;
+    color: white;
+    border: 1px solid #00AFE2;
+    margin: 0;
+    border-radius: 5px;
+    font-family: 'NiveauGroteskBold';
+    opacity: 1;
+    font-size: var(--fontsize20) !important;
+    width: 100%;
+    height: var(--buttonHeight60) !important;
+}
+
+.addlist {
+    height: 14px;
+    width: 20px;
+    @media screen and (min-width: $Largescreen-1600) {
+        width: 27px;
+        height: 19px;
+    }
+}
+
+.my_list {
+    padding: 20px;
+    padding-bottom: 0;
+    table {
+        width: 100%;
+        margin-top: 50px;
+        th {
+            color: #495A64;
+            font-size: var(--fontsize20);
+            font-family: 'NiveauGroteskBold';
+        }
+        th.mat-header-cell,
+        td.mat-cell {
+            border: 0px;
+        }
+        td {
+            color: #495A64;
+            font-family: 'NiveauGrotesk';
+            font-size: var(--fontsize18);
+            a {
+                color: $pdp-font-color;
+                &:hover {
+                    text-decoration: none;
+                    color: $pdp-font-color;
+                }
+            }
+        }
+    }
+    .noDataTable {
+        margin-top: 0;
+        tr {
+            td {
+                color: #495A64;
+                font-family: 'NiveauGrotesk';
+                font-size: var(--fontsize16);
+                padding: var(--fontsize14);
+            }
+        }
+    }
+    .noDataAvailable {
+        margin-top: 50px;
+        tr {
+            td {
+                color: #495A64;
+                font-family: 'NiveauGrotesk';
+                font-size: var(--fontsize16);
+                padding: 12px;
+            }
+        }
+    }
+    h3 {
+        font-weight: 500;
+        font-size: var(--fontsize20);
+        color: darkblue;
+        margin: auto;
+    }
+    .container {
+        padding: 0;
+        min-width: 88%;
+    }
+    .col-lg {
+        margin: auto;
+    }
+    button {
+        background: #003D7A;
+        color: white;
+        border-radius: 7px;
+        font-size: var(--fontsize18);
+    }
+    mat-icon {
+        color: grey;
+    }
+}
+
+.fa-search,
+.search {
+    position: absolute;
+    right: 18px;
+    top: 21px;
+    color: #003d7a !important;
+    font-size: var(--fontsize22);
+    @media screen and (min-width: $Largescreen-1600) {
+        font-size: var(--fontsize24);
+        right: 20px;
+    }
+}
+
+.fa-search {
+    top: 11px;
+}
+
+::placeholder {
+    color: #778893;
+    opacity: 0.5;
+    /* Firefox */
+}
+
+.addList {
+    font-weight: 700;
+    padding: 0 38px;
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+}
+
+.heading {
+    font-weight: bolder;
+    color: #495A64;
+    margin-bottom: 20px;
+    font-size: var(--fontsize40);
+    font-family: "NiveauGroteskbold";
+}
+
+tr.mat-header-row {
+    height: var(--gridHeight74);
+    background-color: #fff !important;
+}
+
+tr.mat-row {
+    height: var(--gridHeight72);
+}
+
+tr:nth-child(odd) {
+    background-color: #e0e7ef;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.mat-standard-chip {
+    border-radius: 5px !important;
+}
+
+.mat-sort-header-arrow {
+    opacity: 1 !important;
+}
+
+@media screen and (min-width: $Largescreen-1600) {
+    .createMylistBtn {
+        padding-left: 4%;
+    }
+}
+
+.success-message-container,
+.failure-message-container {
+    width: 50%;
+    // display: none;
+    margin: 0 auto 15px auto;
+    @media screen and (min-width: $Largescreen-1600) {
+        margin: 20px auto 0 auto;
+        position: relative;
+        bottom: 25px;
+    }
+}
+
+.success-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #0B961B;
+    background-color: #0B961B1A;
+    color: #0B961B;
+    font-family: 'NiveauGrotesk';
+    padding: 12px;
+    font-size: var(--fontsize14);
+    @media screen and (min-width: $Largescreen-1600) {
+        padding: 21px 10px;
+        font-size: var(--fontsize16);
+    }
+}
+
+.failure-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid $failure-border-color;
+    background-color: $failure-background-color;
+    color: #973937;
+    font-family: 'NiveauGrotesk';
+    padding: 12px;
+    font-size: var(--fontsize14);
+    @media screen and (min-width: $Largescreen-1600) {
+        padding: 21px 10px;
+        font-size: var(--fontsize16);
+    }
+}
+
+.tick-icon,
+.alert-icon {
+    width: 28px;
+    height: 28px;
+    margin-right: 10px;
+}
+
+.alert-message {
+    line-height: 1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 12px;
+    .fa {
+        font-size: 19px;
+    }
+}
+
+.image-container {
+    background: url('https://auth0assets.blob.core.windows.net/assets/loginbg.jpg') no-repeat center center fixed;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+}
+
+.status {
+    justify-content: space-around;
+}
+
+::ng-deep .mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {
+    opacity: 1 !important;
+    transform: translateY(0px) !important;
+}
+
+ ::ng-deep .mat-sort-header-arrow {
+    color: #003d7a;
+}
+
+::ng-deep .mat-sort-header-arrow :focus :hover {
+    color: #003d7a;
+}
+
+::ng-deep .mat-select-value {
+    text-align: center;
+}
+
+
+/* Absolute Center Spinner */
+
+.loading {
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+
+/* Transparent Overlay */
+
+.loading:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+    background: -webkit-radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+}
+
+
+/* :not(:required) hides these rules from IE9 and below */
+
+.loading:not(:required) {
+    /* hide "loading..." text */
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+.loading:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 10px;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+    -webkit-animation: spinner 150ms infinite linear;
+    -moz-animation: spinner 150ms infinite linear;
+    -ms-animation: spinner 150ms infinite linear;
+    -o-animation: spinner 150ms infinite linear;
+    animation: spinner 150ms infinite linear;
+    border-radius: 0.5em;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+    box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+}
+
+
+/* Animation */
+
+@-webkit-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+::ng-deep .form-control {
+    font-family: NiveauGrotesk !important;
+}
+
+::ng-deep .mat-sort-header-stem {
+    height: 11px !important;
+    width: 2px !important;
+}
+
+::ng-deep .mat-sort-header-arrow {
+    height: 13px !important;
+    width: 1.5px !important;
+}
+
+::ng-deep .mat-sort-header-pointer-left {
+    width: 6px;
+    height: 1.5px !important;
+}
+
+::ng-deep .mat-sort-header-pointer-right {
+    width: 6px;
+    height: 1.5px !important;
+}
+
+::ng-deep .status-class .mat-sort-header-container .mat-sort-header-content {
+    margin-left: 20px !important;
+}
+
+mat-paginator {
+    margin-top: 20px;
+    background-color: #E8EFF7;
+    @media screen and (min-width: $Largescreen-1600) {
+        margin-bottom: 4.646rem;
+    }
+}
+
+::ng-deep .mat-form-field-flex {
+    background-color: $white-color;
+}
+
+::ng-deep .mat-paginator-navigation-previous {
+    svg {
+        color: transparent;
+        // display: none !important;
+    }
+    width: 25px !important;
+    margin-left: 10px !important;
+    color: $blue-color;
+    //   display: none !important;
+    &::before {
+        content: "↖";
+        position: absolute;
+        background-color: #E8EFF7;
+        transform: rotate(315deg);
+        font-weight: bold;
+        font-size: 1.3rem;
+        // width: 19px;
+    }
+}
+
+::ng-deep .mat-paginator-navigation-next {
+    margin-left: 8px !important;
+    width: 25px !important;
+    top: 1px !important;
+    color: $blue-color;
+    //  display: none !important;
+    &::before {
+        content: "↖";
+        position: absolute;
+        background-color: #E8EFF7;
+        transform: rotate(135deg);
+        font-weight: bold;
+        font-size: 1.3rem;
+        //  width: 19px;
+    }
+}
+
+::ng-deep .mat-paginator-page-size-label {
+    margin: 0 33px !important;
+    font-family: 'NiveauGrotesk' !important;
+    font-size: var(--fontsize18);
+    color: $pdp-font-color;
+}
+
+::ng-deep .mat-paginator,
+.mat-paginator-page-size .mat-select-trigger {
+    font-family: 'NiveauGrotesk';
+    font-size: 1rem;
+    color: $pdp-font-color;
+}
+
+::ng-deep .mat-paginator {
+    font-size: var(--fontsize18);
+}
+
+::ng-deep .mat-form-field {
+    line-height: 1.5;
+    min-width: var(--perPageDropdownWidth);
+    min-height: var(--perPageDropdownHeight);
+    width: var(--perPageDropdownWidth) !important;
+    height: var(--perPageDropdownHeight !important);
+}
+
+::ng-deep .mat-select-min-line {
+    font-size: var(--fontsize24);
+    font-family: 'NiveauGrotesk';
+    color: #778893;
+}
+
+::ng-deep .mat-icon-button {
+    font-family: 'NiveauGroteskBold';
+    height: 24px;
+    line-height: 27px;
+}
+
+::ng-deep .custom-paginator-page-disabled {
+    background-color: #495A64 !important;
+    color: white;
+}
+
+::ng-deep .mat-select-arrow {
+    background-image: url('../../../../assets/images/dropdown_Icon.svg');
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: bottom;
+    border-left: 10px solid transparent !important;
+    border-right: 15px solid transparent !important;
+    border-top: 12px solid transparent !important;
+    margin: 0px 6px;
+}
+
+.status-class {
+    justify-content: space-around;
+    position: relative;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.searchbox {
+    width: 100%;
+    float: right;
+    height: var(--buttonHeight60);
+    input {
+        height: 100%;
+        font-size: var(--fontsize20);
+        &::-webkit-input-placeholder {
+            color: #778893;
+            opacity: 0.5;
+        }
+        &:-moz-placeholder {
+            color: #778893;
+            opacity: 0.5;
+        }
+        &::-moz-placeholder {
+            color: #778893;
+            opacity: 0.5;
+        }
+        &:-ms-input-placeholder {
+            color: #778893;
+            opacity: 0.5;
+        }
+        @media screen and (min-width: $Largescreen-1600) {
+            padding-left: 23px;
+            width: 78%;
+            float: right;
+        }
+    }
+}
+
+.icon-btn {
+    background: transparent !important;
+    outline: none;
+    border: none !important;
+}
+
+.search_filter {
+    position: absolute;
+    color: #003d7a !important;
+    @media screen and (min-width: $Largescreen-1600) {
+        margin-top: 6px;
+        margin-left: -5px;
+    }
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    position: fixed;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    right: 0.4em;
+    // width: 140px;
+}
+
+.dropdown-content {
+    //  display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 100%;
+    right: 90%;
+}
+
+.dropdown-content a {
+    color: $pdp-font-color;
+    padding: 9px 1px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #DEDFDF;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 0.875rem;
+    .icon-margin {
+        display: flex;
+        margin-right: 8px;
+        align-items: center;
+        img {
+            width: 15px;
+            height: 15px;
+            @media screen and (min-width: $Largescreen-1600) {
+                width: auto;
+                height: auto;
+            }
+        }
+    }
+}
+
+.dropdown-content a.disabled {
+    opacity: 1;
+}
+
+.dropdown-contenttype input[type=checkbox] {
+    height: 14px;
+    width: 14px;
+    vertical-align: middle;
+    margin-inline-start: -1.5rem;
+}
+
+.dropdown-contenttype input[type=checkbox] :before {
+    content: '\2714';
+}
+
+.dropdown-contenttype {
+    //  display: none;
+    position: absolute;
+    margin-left: -60px !important;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 100%;
+}
+
+::ng-deep .dropdown-menu {
+    padding: 5px !important;
+}
+
+.dropdown-contenttype a {
+    color: #495A64;
+    padding: 7px 7px;
+    text-decoration: none;
+    display: flex;
+    border-bottom: 1px solid #DEDFDF;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: var(--fontsize14);
+    font-family: 'NiveauGrotesk';
+}
+
+.dropdown a:hover {
+    background-color: #f1f1f1
+}
+
+.show {
+    display: inline-block;
+}
+
+.threedots {
+    position: relative;
+}
+
+// multi select dropdown 
+.multiselect {
+    width: 200px;
+}
+
+.selectBox {
+    position: relative;
+}
+
+.selectBox select {
+    width: 100%;
+    font-weight: bold;
+}
+
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#checkboxes {
+    display: none;
+    border: 1px #dadada solid;
+}
+
+#checkboxes label {
+    display: block;
+}
+
+#checkboxes label:hover {
+    background-color: #1e90ff;
+}
+
+// btn group
+.deselect {
+    background-color: #fff !important;
+    color: #003D7A !important;
+}
+
+.btn-group {
+    top: 18px;
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+}
+
+.searchbox-bottom {
+    position: relative;
+    top: 8px;
+    margin-bottom: -10px;
+    @media screen and (min-width: $Largescreen-1600) {
+        top: 3px;
+    }
+}
+
+.btn-group .btn {
+    border-radius: 0px;
+    font-family: 'NiveauGroteskBold';
+    border-color: transparent;
+    background-color: #003D7A;
+    color: white;
+    padding-left: 3.7rem !important;
+    padding-right: 3.7rem !important;
+    @media screen and (min-width: $Largescreen-1600) {
+        padding-left: 4.001rem !important;
+        padding-right: 4rem !important;
+    }
+    height: var(--buttonHeight60);
+    max-height: var(--buttonHeight60);
+    .active {
+        background-color: #003D7A;
+        color: white;
+    }
+    &:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.vertical-align {
+    vertical-align: middle;
+    font-size: var(--fontsize22);
+    margin-right: 5px;
+}
+
+.my_list mat-icon {
+    cursor: pointer;
+}
+
+a.disabled {
+    color: gray;
+    cursor: not-allowed;
+}
+
+a {
+    cursor: pointer;
+}
+
+.pl-15 {
+    padding-left: 10px !important;
+    width: fit-content;
+}
+
+::ng-deep .mat-button-focus-overlay {
+    background: transparent !important;
+    outline: none !important;
+}
+
+.actionimg {
+    height: 1rem;
+    @media screen and (min-width: $Largescreen-1600) {
+        height: auto;
+    }
+}
+
+.edit.actionimg {
+    height: 1.3rem;
+    margin-top: 5px;
+    padding-right: 15px;
+    @media screen and (min-width: $Largescreen-1600) {
+        height: auto;
+    }
+}
+
+.flex-display {
+    display: flex !important;
+}
+
+.icon-margin {
+    margin-right: 8px;
+}
+
+::ng-deep input[type='checkbox']:before {
+    border: 2px solid #555555 !important;
+    border-radius: 3px !important;
+    background-color: white;
+}
+
+::ng-deep .custom-paginator-page {
+    font-weight: 500;
+    font-size: var(--fontsize16);
+    min-height: var(--fontsize28);
+    max-height: var(--fontsize28);
+    min-width: var(--fontsize28);
+}
+
+[hidden] {
+    display: none !important;
+}
+
+///////////////////////////////////////// custom checkbox CSS - START ////////////////////////////////////////
+input.checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 12px;
+    left: 35px;
+    height: 18px;
+    width: 18px;
+    background-color: $white-color;
+    border: 2px solid $pdp-font-color;
+    border-radius: 2px;
+}
+
+.list.checkmark {
+    position: absolute;
+    top: 4px;
+    left: -21px;
+    height: 14px;
+    width: 14px;
+    background-color: #C6CBD4;
+    border: 0px solid #495a64;
+    border-radius: 1px;
+}
+
+.checkmark.terms {
+    width: 18px;
+    height: 18px;
+    top: 4px;
+}
+
+.checkmark.terms.disable {
+    opacity: 0.5;
+}
+
+
+/* On mouse-over, add a grey background color */
+
+.check-container:hover input~.checkmark {
+    background-color: #C6CBD4;
+}
+
+.check-container:hover input~.checkmark.disable {
+    background-color: #C6CBD4;
+}
+
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+/* Show the checkmark when checked */
+
+.check-container input:checked~.checkmark:after {
+    display: block;
+}
+
+
+/* Style the checkmark/indicator */
+
+.check-container .checkmark:after {
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    position: relative;
+    height: 9px;
+    border: solid $pdp-font-color;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.check-container .checkmark.terms:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+}
+
+label.check-container {
+    position: relative;
+}
+
+///////////////////////////////////////// custom checkbox CSS - END ////////////////////////////////////////
+
+/* MYLIST MOBILE CSS START */
+.background-list
+{
+    background-color:$white-color;
+    margin: 15px 0px;
+    padding:0px 15px 10px;
+    border-radius: 5px;
+}
+.marginhr
+{
+    margin-top:0px;
+}
+.view-more
+{
+    background-color:$white-color !important;
+    color:$pdp-font-color !important;  
+    border:1px solid $pdp-font-color;
+    width:100%;
+    border-radius: 25px !important;
+    padding: 5px 0px;
+    margin-bottom: 60px;
+    font-size: var(--fontsize24)!important;
+    font-family: 'NiveauGroteskBold';
+    
+}
+.headmob
+{
+    font-size: var(--fontsize24)!important;
+    font-family: 'NiveauGroteskBold';
+    padding-top: 10px;
+    color:$pdp-font-color;
+}
+.leftlist
+{
+    font-size: var(--fontsize20)!important;
+    font-family: 'NiveauGrotesk' ;
+    color:$pdp-font-color;
+    line-height: 1;
+}
+.rightlist
+{
+    font-size: var(--fontsize20)!important;
+    font-family: 'NiveauGroteskBold' ;
+    color:$pdp-font-color;
+    line-height: 1;
+}
+.vertical-center
+{
+    align-items: center;
+}
+.filters
+{
+    background-color: $white-color !important;
+    width:100%;
+    color: $blue-color !important;
+    border: none;
+    margin-top: 15px;
+    font-size: var(--fontsize20)!important;
+    border-radius: 2px !important;
+    border: 1px solid $filter-order-color;
+}
+@media screen and (max-width: $mobileScreenPotrait) {
+    .success-message-container {
+        width: 100%;
+        .success-container {
+            border-radius: 4px;
+            .tick-icon {
+                width: 20px;
+                height: 20px;
+            }
+            .success-message {
+                font-size: var(--fontsize18);
+            }
+            .close-btn {
+                .fa {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+    .failure-message-container {
+        width: 100%;
+        .failure-container {
+            border-radius: 4px;
+            .tick-icon {
+                width: 20px;
+                height: 20px;
+            }
+            .error-message {
+                font-size: var(--fontsize18);
+            }
+            .close-btn {
+                .fa {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+.edit.actionimg,.actionimg{
+    height: 1.2rem;
+}
+.add-from-list
+{
+    font-size: var(--fontsize26)!important;
+}
+.my_list button
+{
+    font-size: var(--fontsize24);
+    height: 40px !important;
+    max-height:40px !important;
+    border-radius: 2px;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+}
+.heading
+{
+    font-size: var(--fontsize24);
+}
+.emptyList {
+    margin-top: 10px;
+    background-color: #e0e7ef;
+    font-family: 'NiveauGrotesk';
+    font-size: var(--fontsize18);
+    padding: 5px;
+    color: $pdp-font-color;
+}
+.my_list .container
+{
+     min-width: 100%;
+}
+.pl-15 {
+    padding-left: 8px!important;
+}
+.view-more
+{
+    font-size: var(--fontsize18)!important;
+}
+.addlist {
+    height: 20px;
+    width: 28px;
+}
+.btn-group
+{
+    .btn{
+        border-bottom: 1.3px solid $blue-color;
+    }
+}
+}
+@media screen and (max-width:$smallmobileScreenPotrait568) {
+    
+    .my_list .btn-group .btn
+    {
+        padding-left:0rem !important;
+        padding-right: 0rem !important;
+    }
+   
+}
+@media screen and (max-width:$smallmobileScreenPotrait420) {
+   .add-from-list{
+        font-size: var(--fontsize22)!important;
+    }
+    .my_list button
+    {
+        font-size: var(--fontsize18);
+    }
+}
+@media screen and (max-width:$smallmobileScreenPotrait360) {
+    
+    .leftlist,.rightlist
+    {
+       font-size: var(--fontsize18)!important;
+    }
+  
+}
+@media screen and (max-width:$smallmobileScreenPotrait) {
+    .edit.actionimg,.actionimg{
+        height: 1rem;
+    }
+}
+/* MYLIST MOBILE CSS END */

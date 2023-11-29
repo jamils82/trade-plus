@@ -1,0 +1,34 @@
+<!-- <div class="buttons plpList plpGrid"> -->
+<div *ngIf="screenName == 'plpListScreenSingleItem'" (click)="addSelectedItemToList(data)" class="wishlist-btn plpList">
+    <button class="btn btn-block wishlist plpList" [disabled]="isPOAProduct" type="button">
+        <img class="plpList" src="../../../assets/images/Icon material-playlist-add.svg">
+    </button>
+</div>
+<div *ngIf="screenName == 'plpGridScreenSingleItem'" (click)="addSelectedItemToList(data)" class="wishlist-btn plpGrid">
+    <button class="btn btn-block wishlist plpGrid" [disabled]="isPOAProduct" type="button">
+        <img class="plpGrid" src="../../../assets/images/Icon material-playlist-add.svg">
+    </button>
+</div>
+<!-- </div> -->
+<div *ngIf="screenName == 'plpScreenMultiItem' || screenName == 'quickOrderMultiItem'" class="addAllToCart">
+    <div [ngClass]="screenName == 'plpScreenMultiItem'? 'plp':'quickOrder'" class="wishlist-btn addAllToList">
+
+        <button class="btn btn-block wishlist addAllToList" type="button" [disabled]="selectedItemCount <= 0 || isPOAProduct" (click)="addSelectedItemToList(data)">
+            <img class="addAllToList" src="../../../assets/images/Icon material-playlist-add.svg">
+                      {{screenName == 'plpScreenMultiItem' ? "Add Selected To List" : "Add to List"}}
+                    </button>
+    </div>
+</div>
+<button *ngIf="screenName == 'cartScreen'" class="save-as-list" type="button" [disabled]="selectedItemCount <= 0 || isPOAProduct" (click)="addSelectedItemToList(data)">
+                     Save as List
+</button>
+<div *ngIf="screenName == 'pdpScreen'" class="wishlist-btn pdp">
+
+    <button class="btn btn-block wishlist" type="button" [disabled]="quantity <= 0 || quantity > maxQuantity || isPOAProduct" (click)="addSelectedItemToList(data)">
+        <img class="add-from-list-img" src="../../../../assets/images/Icon material-playlist-add.svg">
+        Add to List
+      </button>
+</div>
+<ng-template #data let-modal>
+    <app-add-to-list [screenName]="screenName"></app-add-to-list>
+</ng-template>

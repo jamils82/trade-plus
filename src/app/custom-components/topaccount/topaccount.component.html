@@ -1,0 +1,47 @@
+<!-- <div class="customer-service">
+    <img class="customer-service-icon" src="../../../assets/images/Icon ionic-ios-help-circle.svg">
+    <app-help-support></app-help-support>
+</div>
+<div class="settings">
+    <img class="settings-icon" src="../../../assets/images/Icon ionic-ios-settings.svg">
+</div> -->
+
+<div class="menuItemContainer d-flex align-items-center justify-content-center align-middle">
+    <div class="nav-item dropdown d-flex align-items-center justify-content-center align-middle lo_sensitive">
+
+        <a class="nav-link " id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" (click)="openDropdown()">
+            <img class="avatar-icon" src="../../../assets/images/Icon awesome-user-alt(white).svg">
+            <!-- <i class="fas fa-user"></i>  -->
+            <!-- <span title="{{ user.firstName }}" class="userName" *ngIf="user$ | async as user;">{{ user.firstName
+                }}</span> -->
+            <!-- <div class="m-display-inline m-arrow"> -->
+            <img class="dropdown-icon" src="../../../../assets/images/Icon ionic-ios-arrow-down.svg" />
+            <!-- </div> -->
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+            <!-- <div class="arrow-up"></div> -->
+            <!-- <li class="font-weight-bold d-flex">Hi <span *ngIf="user$ | async as user;">{{ user.firstName }}</span></li>
+            <li><a class="dropdown-item" routerLink="/user-profile">User Details</a></li> -->
+            <li style="cursor:context-menu"><a class="dropdown-item lo_sensitive"  *ngIf="user$ | async as user;"><img
+                        src="../../../assets/images/Icon-awesome-user-circle.svg">{{ user.firstName }}</a></li>
+                        <li><a class="dropdown-item settings" (click)="navigateToAccount()"><img class="settings-icon"
+                            src="../../../assets/images/Icon-ionic-ios-settings.svg">Settings</a></li>
+                            <li><a class="dropdown-item" (mouseover)="toggleHelp()"><img
+                                src="../../../assets/images/Icon-ionic-ios-help-circle.svg">Help?</a>
+                                <ul class="sub_menu_header" *ngIf="helpsetion">
+                                    <li>Customer Service:</li>
+                                    <li><span><img src="../../../assets/icons/Icon-awesome-phone-alt2x.png" alt=""></span>Phone: 1300 658 277</li>
+                                    <li><span><img src="../../../assets/icons/time-icon2x.png" alt=""></span>Email: support@tradelink.com.au</li>
+                                    <li><span><img src="../../../assets/icons/Icon-material-email2x.png" alt=""></span>Hours: Mon-Fri 8:30am-5:00pm AEST</li>
+                                    <li><a href="https://support.tradelink.com.au/s/contact-us" target="_blank" class="contact">Contact Us</a></li>
+                                    <span class="right_nav_icon"><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                                </ul>
+                            </li>
+                                <li><a class="dropdown-item" (click)="logout(content)"><img
+                                    src="../../../assets/images/Icon-feather-log-out.svg">Logout</a></li>
+        </ul>
+    </div>
+</div>
+<ng-template #content let-modal>
+    <iframe width="100%" height="100%" frameBorder="0" [src]="urlSafe"></iframe>
+</ng-template>

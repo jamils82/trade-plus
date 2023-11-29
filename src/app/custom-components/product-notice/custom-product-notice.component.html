@@ -1,0 +1,10 @@
+<div class="custom-container">
+  <h1 class="main-notice-heading mb-5 mt-5">Product Notices</h1>
+  <div class="notice-page-wrapper row">
+    <div class="notice-section col-lg-6 mb-5" *ngFor="let notice of productNoticePageData">
+      <p class="mb-3">Update: {{notice.modifiedTime | date: 'dd/MM/yyyy'}}</p>
+      <h2 class="notice-heading mb-5">{{notice.media.widescreen.altText}}</h2>
+      <img src="{{SITE_URL+notice.media.widescreen.url}}" alt="{{notice.media.widescreen.altText}}" />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+@import "../../shared/styles/fontSize.scss";
+
+h2 {
+  margin: 20px;
+  font-weight: 700;
+  color: #495a64;
+  opacity: 1;
+  font-size: var(--fontsize40);
+}
+
+.root {
+  padding: 40px 105px 140px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 920px) {
+  .root {
+    padding: 0;
+  }
+  h2{
+    font-size: 16px !important;
+    margin-top: 13px !important;
+    margin-bottom: 13px !important;
+    color: #495A64 !important;
+    margin-left: 8px;
+  }
+}

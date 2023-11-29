@@ -1,0 +1,69 @@
+<ng-container *ngIf="specification$ | async as spec">
+    <div class="container">
+      <table>
+        <tr>
+            <td  class="MSDS-td">
+              <h3 *ngIf="maintananceCareData">Maintanance Care</h3>
+              <div class="data" *ngFor="let data of maintananceCareData; let i=index">
+                <a target="_blank" href={{data}}>
+                <div class="box">
+                    <img src='../../../../../assets/images/Icon awesome-file-pdf.svg'>
+                    <span class="name">Maintenance Care_{{i + 1}}</span>
+                </div>
+            </a>
+          </div>
+            </td>
+            <td class="MSDS-td">
+              <h3 *ngIf="msdsData">MSDS</h3>
+              <div class="data" *ngFor="let data of msdsData; let i=index">
+                <a target="_blank" href={{data}}>
+                <div class="box">
+                    <img src='../../../../../assets/images/Icon awesome-file-pdf.svg'>
+                    <span class="name">MSDS_{{i+ 1}}</span>
+                </div>
+            </a>
+          </div>
+            </td>
+            <td class="MSDS-td">
+              <h3 *ngIf="welsCertificate">WELS Certificate</h3>
+              <div class="data"  *ngFor="let data of welsCertificate; let i=index">
+                <a target="_blank" href={{data}}>
+                <div class="box">
+                    <img src='../../../../../assets/images/Icon awesome-file-pdf.svg'>
+                    <span class="name">WELS Certificate_{{i+ 1}}</span>
+                </div>
+            </a>
+          </div>
+            </td>
+            <td class="MSDS-td">
+              <h3 *ngIf="ownersGuideDoc">Owners Guide Document</h3>
+              <div  *ngFor="let data of ownersGuideDoc; let i=index" class="data">
+                <a target="_blank" href={{data}}>
+                <div class="box">
+                    <img src='../../../../../assets/images/Icon awesome-file-pdf.svg'>
+                    <span class="name">Owners Guide_{{i+ 1}}</span>
+                </div>
+            </a>
+          </div>
+            </td>
+            <td class="MSDS-td">
+              <h3 *ngIf="technicalSpecificationDoc">Technical Specification Document</h3>
+              <div  *ngFor="let data of technicalSpecificationDoc; let i=index" class="data">
+                <a target="_blank" href={{data}}>
+                <div class="box">
+                    <img src='../../../../../assets/images/Icon awesome-file-pdf.svg'>
+                    <span class="name">Technical Specification_{{i+ 1}}</span>
+                </div>
+            </a>
+          </div>
+            </td>
+            <!-- <td *ngIf="spec?.maintenanceCare" class="key">Maintenance Care</td>
+            <td><a target="_blank" href={{spec?.maintenanceCare}}>{{ spec.maintenanceCare }}</a></td>
+          </tr>
+          <tr>
+            <td *ngIf="spec?.msds" class="key">MSDS</td>
+            <td ><a target="_blank" href={{spec?.msds}}>{{ spec.msds }}</a></td> -->
+          </tr>  
+      </table>
+    </div>
+  </ng-container>

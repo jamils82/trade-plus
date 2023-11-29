@@ -1,0 +1,24 @@
+<div class="modal-body ">
+    <div class="row-content">
+        <div class="col-md-12 close-pos">
+            <img (click)="close()" class="cls-icon fa fa-times" src='../../../../../assets/images/close-icon-mobile.PNG'>
+            <!-- <div class="cls-btn" (click)="close()"><i class="fa fa-times"></i></div> -->
+        </div>
+        <div class="col-md-12 heading">
+            <h3 class="pageHeading">QUANTITY ORDERED EXCEEDS STOCK LEVELS</h3>
+        </div>
+        <div class="col-md-12 pageHeading desc">
+            <p class="page-desc">Please note that some of the items you have ordered exceed stock availability.
+                The Qty column is highlighted in red of the relevant products.
+                The balance will be put on backorder for you. </p>
+        </div>
+        <div class="row buttons">
+            <div class="col-md-12">
+                <button class="btn confirmBtn" (click)="close()">
+                OK
+              </button>
+
+            </div>
+        </div>
+    </div>
+</div>
